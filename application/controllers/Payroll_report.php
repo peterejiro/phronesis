@@ -190,7 +190,7 @@ class Payroll_report extends CI_Controller
 
 					$data['emoluments'] = $this->salaries->view_emolument_sheet();
 
-					$this->load->view('payroll_report/emolument_sheets', $data);
+					$this->load->view('payroll_report/emolument_sheet', $data);
 
 				endif;
 
