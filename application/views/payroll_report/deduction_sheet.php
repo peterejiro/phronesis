@@ -77,9 +77,12 @@
 										<tbody>
 
 										<?php
+										if(!empty($deductions)):
 
 										$sn = 1;
 										$total = 0;
+
+
 
 											foreach($deductions as $deduction):
 													?>
@@ -109,7 +112,7 @@
 
 										</tr>
 
-
+											<?php endif; ?>
 										</tbody>
 
 									</table>
