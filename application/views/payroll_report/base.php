@@ -60,18 +60,20 @@
 									</a>
                                 </div>
 
-                                <div class="col-md-12 col-xl-3">
-                                    <div class="card mini-stat">
-                                        <div class="mini-stat-icon text-right">
-                                            <i class="mdi mdi-buffer"></i>
-                                        </div>
-                                        <div class="p-4">
-                                            <h6 class="text-uppercase mb-3">Number of Departments</h6>
+								<div class="col-md-12 col-xl-3">
+									<a href="<?php echo site_url('deduction'); ?>">
+										<div class="card mini-stat">
+											<div class="mini-stat-icon text-right">
+												<i class="mdi mdi-book-open"></i>
+											</div>
+											<div class="p-4">
+												<h6 class="text-uppercase mb-3">Deduction Report</h6>
 
-                                            <h4 class="mb-0"><?php //echo count($departments); ?><small class="ml-2"></small></h4>
-                                        </div>
-                                    </div>
-                                </div>
+												<h4 class="mb-0"><?php //echo count($employees); ?><small class="ml-2"> </small></h4>
+											</div>
+										</div>
+									</a>
+								</div>
 
                                 <div class="col-md-12 col-xl-3">
                                     <div class="card mini-stat">

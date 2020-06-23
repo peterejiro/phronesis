@@ -164,8 +164,7 @@
 																		<div class="custom-control custom-checkbox">
 																			<input type="checkbox" class="custom-control-input" <?php if($user_datum->configuration == 1) { echo "checked" ;} ?> value="1" name="configuration"  id="customCheck6" data-parsley-multiple="groups" data-parsley-mincheck="1">
 																			<label class="custom-control-label" for="customCheck6"> App Configuration </label>
-																		</div>
-																	</div>
+																		</div>																	</div>
 
 																	<div class="checkbox my-2">
 																		<div class="custom-control custom-checkbox">

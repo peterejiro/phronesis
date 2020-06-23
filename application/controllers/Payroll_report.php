@@ -262,4 +262,103 @@ class Payroll_report extends CI_Controller
 		endif;
 	}
 
+	public function deduction(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->payroll_configuration == 1):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+				$data['min_payroll_year'] = $this->salaries->view_min_payroll_year();
+				$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
+
+				$this->load->view('payroll_report/deduction_report', $data);
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+	}
+
+	public function deduction_report(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->payroll_configuration == 1):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+				$data['min_payroll_year'] = $this->salaries->view_min_payroll_year();
+
+				$month = $this->input->post('month');
+				$year = $this->input->post('year');
+				$payment_definition_id = $this->input->post('payment_type');
+
+
+				if((empty($month) || empty($year) || empty($payment_definition_id))):
+
+					redirect('error_404');
+
+				else:
+					$data['payment'] = $this->payroll_configurations->view_payment_definition($payment_definition_id);
+
+					$data['payroll_month'] = $month;
+					$data['payroll_year'] = $year;
+
+					$data['deductions'] = $this->salaries->get_sheet($month, $year, $payment_definition_id, 0);
+
+					//print_r($data['deductions']);
+
+					$this->load->view('payroll_report/deduction_sheet', $data);
+
+
+				endif;
+
+
+
+
+
+			//$query = $this->payroll_configurations->update_allowance($allowance_id, $allowance_array);
+
+
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+	}
+
 }

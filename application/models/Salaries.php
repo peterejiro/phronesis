@@ -174,5 +174,17 @@ class Salaries extends CI_Model
 		$this->dbforge->drop_column('emolument_report', $field_name);
 	}
 
+	public function get_sheet($payroll_month, $payroll_year, $payment_definition_id, $in_de){
+		$this->db->select('*');
+		$this->db->from('salary');
+		$this->db->join('employee', 'employee.employee_id = salary.salary_employee_id');
+		$this->db->join('payment_definition', 'payment_definition.payment_definition_id = salary.salary_payment_definition_id');
+		$this->db->where('salary.salary_pay_month', $payroll_month);
+		$this->db->where('salary.salary_pay_year', $payroll_year);
+		$this->db->where('payment_definition.payment_definition_type', $in_de);
+		$this->db->where('salary.salary_payment_definition_id', $payment_definition_id);
+		return $this->db->get()->result();
+	}
+
 
 }
