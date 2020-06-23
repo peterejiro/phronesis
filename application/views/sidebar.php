@@ -149,6 +149,20 @@
 					</li>
 				<?php } ?>
 
+				<?php if($payroll_configuration == 1){  ?>
+
+					<li class="has_sub">
+						<a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-settings"></i><span> Logs </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+						<ul class="list-unstyled">
+							<li><a href="<?php echo site_url('view_log') ?>">View Logs</a></li>
+
+
+
+
+						</ul>
+					</li>
+				<?php } ?>
+
 
 				<li>
 					<a href="<?php echo site_url('logout'); ?>" class="waves-effect waves-light"><i class="mdi mdi-power text-danger"></i><span> Logout </span> </a>

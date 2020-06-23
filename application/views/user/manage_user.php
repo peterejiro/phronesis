@@ -176,7 +176,7 @@
 
 																	<div class="checkbox my-2">
 																		<div class="custom-control custom-checkbox">
-																			<input type="checkbox" class="custom-control-input" <?php if($user_datum->hr_configuration == 1) { echo "checked" ;} ?>value="1" name="hr_configuration"  id="customCheck8" data-parsley-multiple="groups" data-parsley-mincheck="1">
+																			<input type="checkbox" class="custom-control-input" <?php if($user_datum->hr_configuration == 1) { echo "checked" ;} ?> value="1" name="hr_configuration"  id="customCheck8" data-parsley-multiple="groups" >
 																			<label class="custom-control-label" for="customCheck8"> HR Configuration </label>
 																		</div>
 																	</div>

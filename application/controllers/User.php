@@ -60,7 +60,8 @@ class User extends CI_Controller
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
 			$data['configuration'] = $permission->configuration;
-
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->user_management == 1):
 

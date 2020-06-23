@@ -1458,6 +1458,13 @@ class Payroll extends CI_Controller
 
 			if($query == true):
 
+				$log_array = array(
+					'log_user_id' => $this->users->get_user($username)->user_id,
+					'log_description' => "Ran Payroll Routine"
+				);
+
+				$this->logs->add_log($log_array);
+
 				$data['employees'] = $employees;
 				$data['payroll_month'] = $payroll_month;
 				$data['payroll_year'] = $payroll_year;
@@ -1646,6 +1653,12 @@ class Payroll extends CI_Controller
 						$query = $this->loans->undo_loan_repayment($payroll_month, $payroll_year);
 
 						if($query == true):
+							$log_array = array(
+								'log_user_id' => $this->users->get_user($username)->user_id,
+								'log_description' => "Undo Payroll Routine"
+							);
+
+							$this->logs->add_log($log_array);
 
 							$msg = array(
 								'msg'=> 'Action Successful',
@@ -1761,6 +1774,13 @@ class Payroll extends CI_Controller
 						$query = $this->salaries->approve_payroll($payroll_month, $payroll_year, $payroll_data);
 
 						if($query == true):
+
+							$log_array = array(
+								'log_user_id' => $this->users->get_user($username)->user_id,
+								'log_description' => "Approved Payroll Routine"
+							);
+
+							$this->logs->add_log($log_array);
 
 							$msg = array(
 								'msg'=> 'Action Successful',

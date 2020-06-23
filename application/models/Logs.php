@@ -16,4 +16,13 @@ class Logs extends CI_Model
 		$this->db->insert('logs', $log_data);
 		return true;
 	}
+
+	public function view_logs(){
+
+		$this->db->select('*');
+		$this->db->from('logs');
+		$this->db->join('user', 'user.user_id = logs.log_user_id');
+		$this->db->order_by('log_date', 'desc');
+		return  $this->db->get()->result();
+	}
 }

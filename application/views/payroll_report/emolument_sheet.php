@@ -67,8 +67,7 @@
 											<th>Employee Name</th>
 											<th>Department</th>
 											<th>Break Down</th>
-											<th>Total pay</th>
-											<th>Total Deduction</th>
+
 											<th>Net Pay </th>
 
 
@@ -95,7 +94,7 @@
 														<td> <?php echo $emolument->employee_first_name." ".$emolument->employee_last_name." ".$emolument->employee_other_name; ?></td>
 														<td> <?php echo $emolument->department_name; ?></td>
 
-														<td> <table>
+														<td> <table class="table table-striped table-bordered dt-responsive nowrap">
 																<thead>
 																<tr>
 																<th>Income</th>
@@ -151,9 +150,50 @@
 																		?></td>
 																</tr>
 
+
+
 																<?php
 																endif;
 																endforeach; ?>
+
+																<tr>
+																	<td>
+																		<b style="color: green;">
+																		<?php
+																		$gross_pay = 0;
+
+																		$salaries = $CI->salaries->get_employee_income($emolument->employee_id, $payroll_month, $payroll_year, 1);
+																		foreach ($salaries as $salary):
+																			$_gross_pay = $salary->salary_amount;
+
+																			$gross_pay = $gross_pay + $_gross_pay;
+																		endforeach;
+																		echo  "Total Income: ".number_format($gross_pay);
+
+
+																		?>
+																		</b>
+																	</td>
+
+																	<td>
+																		<b style="color: red;">
+																		<?php
+																		$total_deduction = 0;
+
+																		$salaries = $CI->salaries->get_employee_income($emolument->employee_id, $payroll_month, $payroll_year, 0);
+																		foreach ($salaries as $salary):
+																			$_total_deduction = $salary->salary_amount;
+
+																			$total_deduction = $total_deduction + $_total_deduction;
+																		endforeach;
+																		echo "Total Deduction: ". number_format($total_deduction);
+
+
+																		?>
+																		</b>
+																	</td>
+
+																</tr>
 
 																</tbody>
 
@@ -165,40 +205,8 @@
 
 
 
-														<td>
-															<?php
-															$gross_pay = 0;
-
-															$salaries = $CI->salaries->get_employee_income($emolument->employee_id, $payroll_month, $payroll_year, 1);
-															foreach ($salaries as $salary):
-																$_gross_pay = $salary->salary_amount;
-
-																$gross_pay = $gross_pay + $_gross_pay;
-															endforeach;
-															echo number_format($gross_pay);
 
 
-															?>
-
-
-														</td>
-														<td>
-															<?php
-															$total_deduction = 0;
-
-															$salaries = $CI->salaries->get_employee_income($emolument->employee_id, $payroll_month, $payroll_year, 0);
-															foreach ($salaries as $salary):
-																$_total_deduction = $salary->salary_amount;
-
-																$total_deduction = $total_deduction + $_total_deduction;
-															endforeach;
-															echo number_format($total_deduction);
-
-
-															?>
-
-
-														</td>
 
 														<td><?php echo number_format($gross_pay - $total_deduction); ?></td>
 

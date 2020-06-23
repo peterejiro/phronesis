@@ -119,7 +119,7 @@ class Salaries extends CI_Model
 		$this->db->where('salary.salary_employee_id', $employee_id);
 		$this->db->where('salary.salary_pay_month', $month);
 		$this->db->where('salary.salary_pay_year', $year);
-		//$this->db->where('salary.salary_confirmed', 1);
+		$this->db->where('salary.salary_confirmed', 1);
 		return $this->db->get()->result();
 
 	}
@@ -158,8 +158,7 @@ class Salaries extends CI_Model
 		$this->db->where('salary.salary_pay_month', $month);
 		$this->db->where('salary.salary_pay_year', $year);
 		$this->db->where('salary.salary_payment_definition_id', $payment_definition_id);
-
-		//$this->db->where('salary.salary_confirmed', 1);
+		$this->db->where('salary.salary_confirmed', 1);
 		return $this->db->get()->row();
 
 	}
