@@ -75,18 +75,20 @@
 									</a>
 								</div>
 
-                                <div class="col-md-12 col-xl-3">
-                                    <div class="card mini-stat">
-                                        <div class="mini-stat-icon text-right">
-                                            <i class="mdi mdi-tag-text-outline"></i>
-                                        </div>
-                                        <div class="p-4">
-                                            <h6 class="text-uppercase mb-3">Number of Users</h6>
+								<div class="col-md-12 col-xl-3">
+									<a href="<?php echo site_url('pay_order'); ?>">
+										<div class="card mini-stat">
+											<div class="mini-stat-icon text-right">
+												<i class="mdi mdi-book-open"></i>
+											</div>
+											<div class="p-4">
+												<h6 class="text-uppercase mb-3">Pay Order</h6>
 
-                                            <h4 class="mb-0"><?php //echo count($users); ?><small class="ml-2"></small></h4>
-                                        </div>
-                                    </div>
-                                </div>
+												<h4 class="mb-0"><?php //echo count($employees); ?><small class="ml-2"> </small></h4>
+											</div>
+										</div>
+									</a>
+								</div>
                                 <div class="col-md-12 col-xl-3">
                                     <div class="card mini-stat">
                                         <div class="mini-stat-icon text-right">

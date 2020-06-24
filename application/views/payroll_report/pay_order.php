@@ -38,7 +38,7 @@
 								<div class="float-right">
 
 								</div>
-								<h4 class="page-title">New Loan</h4>
+								<h4 class="page-title">Pay Order</h4>
 							</div>
 						</div>
 					</div>
@@ -50,49 +50,48 @@
 							<div class="card">
 								<div class="card-body">
 
-									<h4 class="mt-0 header-title"> Emolument Report</h4>
+									<h4 class="mt-0 header-title"> Pay Order</h4>
 
 
 									<br> <br> <br>
 
 
 									<div class="modal-content">
-									<form class="" method="post" action="<?php echo site_url('emolument_report'); ?>" id="loan_form">
+									<form class="" method="post" action="<?php echo site_url('pay_order_report'); ?>" id="loan_form">
 											<div class="modal-body">
 
 
 
+													<div class="form-group row">
 
-												<div class="form-group row">
+														<div class="col-sm-6">
+															<label>Start Year:</label>
 
-													<div class="col-sm-6">
-														<label>Start Year:</label>
+															<select class="select2 form-control mb-3 custom-select" id="start_year" required name="year" style="width: 100%; height:56px;">
+																<option value="0"> -- Select -- </option>
+																<option value="<?php echo $min_payroll_year[0]->salary_pay_year; ?>"> <?php echo $min_payroll_year[0]->salary_pay_year; ?> </option>
+														<?php
+														$_min_payroll_year = $min_payroll_year[0]->salary_pay_year;
+														$_year = date("Y");
+														$check = $_year - $_min_payroll_year;
+														if($check > 0):
+															$count = 1;
+																	while ($count <= $check):
+														?>
+																<option value="<?php echo $_min_payroll_year + $count; ?>"> <?php echo $_min_payroll_year + $count; ?> </option>
 
-														<select class="select2 form-control mb-3 custom-select" id="start_year" required name="year" style="width: 100%; height:56px;">
-															<option value="0"> -- Select -- </option>
-															<option value="<?php echo $min_payroll_year[0]->salary_pay_year; ?>"> <?php echo $min_payroll_year[0]->salary_pay_year; ?> </option>
 															<?php
-															$_min_payroll_year = $min_payroll_year[0]->salary_pay_year;
-															$_year = date("Y");
-															$check = $_year - $_min_payroll_year;
-															if($check > 0):
-																$count = 1;
-																while ($count <= $check):
-																	?>
-																	<option value="<?php echo $_min_payroll_year + $count; ?>"> <?php echo $_min_payroll_year + $count; ?> </option>
-
-																	<?php
 																	$count++;
-																endwhile;
+															endwhile;
 															endif; ?>
 
-														</select>
+															</select>
+
+														</div>
+
+
 
 													</div>
-
-
-
-												</div>
 
 												<div class="form-group row">
 
@@ -119,7 +118,6 @@
 
 
 												</div>
-
 
 
 

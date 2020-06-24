@@ -67,6 +67,7 @@
 
 										<tr>
 											<th>Name of Bank</th>
+											<th>Bank Code</th>
 											<th>Action</th>
 
 										</tr>
@@ -79,6 +80,7 @@
 										?>
 										<tr>
 											<td><?php echo $bank->bank_name; ?></td>
+											<td><?php echo $bank->bank_code; ?></td>
 											<td> <button type="button" class="btn btn-primary m-b-10 m-l-10 waves-effect waves-light" data-toggle="modal" data-target="#edit_bank<?php echo $bank->bank_id ?>">
 													<i class="mdi mdi-table-edit "></i>
 												</button>
@@ -114,6 +116,11 @@
 															<input type="text" class="form-control"  name="bank_name" required placeholder="Enter Name of Bank"/>
 														</div>
 
+													<div class="form-group">
+														<label>Bank Code:</label>
+														<input type="text" class="form-control"  name="bank_code" required placeholder="Enter Bank Code"/>
+													</div>
+
 
 													<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 
@@ -147,6 +154,10 @@
 															<input type="text" class="form-control"  name="bank_name" required value="<?php echo $bank->bank_name; ?>" placeholder="Enter Name of Bank"/>
 														</div>
 
+														<div class="form-group">
+															<label>Bank Code:</label>
+															<input type="text" class="form-control"  name="bank_code" value="<?php echo $bank->bank_code; ?>" required placeholder="Enter Bank Code"/>
+														</div>
 
 														<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 
