@@ -44,7 +44,7 @@ class Home extends CI_Controller
 
 			$this->load->view('index', $data);
 		else:
-			redirect('home/auth_login');
+			redirect('login');
 		endif;
 
 //		$user_data = array(
