@@ -312,7 +312,7 @@ class Employee extends CI_Controller
 	public function employee_upload_others(){
 
 		$config['upload_path'] = 'uploads/employee_others';
-		$config['allowed_types'] = 'gif|jpg|png|pdf';
+		$config['allowed_types'] = 'gif|jpg|jpeg|png|pdf';
 		$config['max_size'] = '8000000';
 		$config['max_width'] = '102452';
 		$config['max_height'] = '768555';

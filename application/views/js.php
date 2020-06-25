@@ -34,7 +34,7 @@
 
 			<script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
 
-<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/dropzonejs/min/dropzone.min.js"></script>-->
+			<script src="<?php echo base_url(); ?>assets/modules/dropzonejs/min/dropzone.min.js"></script>
 		<script src="<?php echo base_url(); ?>/assets/modules/dropzone/dist/dropzone.js"></script>
 
 			<script src="<?php echo base_url(); ?>assets/modules/jquery.sparkline.min.js"></script>
