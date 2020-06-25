@@ -11,8 +11,8 @@
 <!-- Begin page -->
 <div id="wrapper">
 
-	<script src="<?php echo base_url(); ?>/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-	<script src="<?php echo base_url(); ?>/assets/pages/sweet-alert.init.js"></script>
+	<script src="<?php echo base_url(); ?>/assets/modules/sweet-alert2/sweetalert2.min.js"></script>
+	<script src="<?php echo base_url(); ?>/assets/modules/sweet-alert2/sweet-alert.init.js"></script>
 
 
 	<script type="text/javascript">

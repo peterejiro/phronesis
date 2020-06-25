@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2020 at 09:34 AM
+-- Generation Time: Jun 24, 2020 at 03:22 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bank` (
   `bank_id` int(11) NOT NULL,
+  `bank_code` text NOT NULL,
   `bank_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -36,10 +37,10 @@ CREATE TABLE `bank` (
 -- Dumping data for table `bank`
 --
 
-INSERT INTO `bank` (`bank_id`, `bank_name`) VALUES
-(2, 'First Bank of Nigeria'),
-(6, 'Heritage Bank of Nigeria'),
-(7, 'GT Bank');
+INSERT INTO `bank` (`bank_id`, `bank_code`, `bank_name`) VALUES
+(2, '506', 'First Bank of Nigeria'),
+(6, '', 'Heritage Bank of Nigeria'),
+(7, '000013', 'GT Bank');
 
 -- --------------------------------------------------------
 
@@ -206,7 +207,8 @@ CREATE TABLE `loans` (
 --
 
 INSERT INTO `loans` (`loan_id`, `loan_employee_id`, `loan_payment_definition_id`, `loan_amount`, `loan_start_year`, `loan_start_month`, `loan_end_year`, `loan_end_month`, `loan_installments`, `loan_skip_year`, `loan_skip_month`, `loan_monthly_repayment`, `loan_balance`, `loan_status`) VALUES
-(3, 7, 5, 100000, 2020, 7, 2021, 3, 10, NULL, NULL, 10000, 90000, 0);
+(3, 7, 5, 100000, 2020, 7, 2020, 8, 10, NULL, NULL, 50000, 50000, 0),
+(4, 9, 5, 500000, 2020, 7, 2021, 4, 10, NULL, NULL, 50000, 500000, 0);
 
 -- --------------------------------------------------------
 
@@ -229,7 +231,7 @@ CREATE TABLE `loan_repayment` (
 --
 
 INSERT INTO `loan_repayment` (`loan_repayment_id`, `loan_repayment_loan_id`, `loan_repayment_amount`, `loan_repayment_type`, `loan_repayment_payroll_month`, `loan_repayment_payroll_year`, `loan_repayment_date`) VALUES
-(15, 3, 10000, 1, 6, 2020, '2020-06-22 14:56:38');
+(17, 3, 50000, 1, 6, 2020, '2020-06-24 11:36:47');
 
 -- --------------------------------------------------------
 
@@ -254,7 +256,9 @@ CREATE TABLE `loan_reschedule_log` (
 INSERT INTO `loan_reschedule_log` (`loan_log_id`, `loan_log_loan_id`, `loan_log_reschedule_type`, `loan_log_reschedule_amount`, `loan_log_loan_balance`, `loan_log_skip_month`, `loan_log_skip_year`) VALUES
 (1, 3, 0, NULL, 100000, 6, 2020),
 (2, 3, 1, 20000, 100000, NULL, NULL),
-(3, 3, 1, 10000, 100000, NULL, NULL);
+(3, 3, 1, 10000, 100000, NULL, NULL),
+(4, 3, 1, 10000, 90000, NULL, NULL),
+(5, 3, 1, 50000, 90000, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -333,7 +337,30 @@ INSERT INTO `logs` (`log_id`, `log_user_id`, `log_description`, `log_date`) VALU
 (39, '4', 'Updated Salary Allowance', '2020-06-22 14:39:06'),
 (40, '4', 'Added New Allowance', '2020-06-22 14:39:48'),
 (41, '4', 'Added New Employee', '2020-06-22 14:44:58'),
-(42, '4', 'Add Employee Salary Structure', '2020-06-22 14:47:37');
+(42, '4', 'Add Employee Salary Structure', '2020-06-22 14:47:37'),
+(43, '4', 'Logged In', '2020-06-23 08:48:49'),
+(44, '4', 'Ran Payroll Routine', '2020-06-23 11:26:02'),
+(45, '4', 'Approved Payroll Routine', '2020-06-23 11:26:10'),
+(46, '4', 'Logged Out', '2020-06-23 11:43:13'),
+(47, '4', 'Logged In', '2020-06-23 11:43:28'),
+(48, '4', 'Updated User', '2020-06-23 11:46:34'),
+(49, '5', 'Logged In', '2020-06-23 11:46:44'),
+(50, '5', 'Updated User', '2020-06-23 11:48:42'),
+(51, '5', 'Updated User', '2020-06-23 11:50:36'),
+(52, '5', 'Updated User', '2020-06-23 11:50:52'),
+(53, '5', 'Updated User', '2020-06-23 11:51:40'),
+(54, '5', 'Updated User', '2020-06-23 11:51:54'),
+(55, '5', 'Updated User', '2020-06-23 12:01:50'),
+(56, '5', 'Updated User', '2020-06-23 12:01:59'),
+(57, '5', 'Updated Loan Repayment', '2020-06-23 16:03:59'),
+(58, '5', 'Updated Loan Repayment', '2020-06-23 16:04:35'),
+(59, '4', 'Logged In', '2020-06-24 10:14:56'),
+(60, '4', 'Updated Bank Details', '2020-06-24 10:34:25'),
+(61, '4', 'Initiated Loan Application', '2020-06-24 11:28:49'),
+(62, '4', 'Ran Payroll Routine', '2020-06-24 11:36:47'),
+(63, '4', 'Approved Payroll Routine', '2020-06-24 11:37:55'),
+(64, '4', 'Updated Bank Details', '2020-06-24 11:59:26'),
+(65, '4', 'Logged Out', '2020-06-24 13:15:51');
 
 -- --------------------------------------------------------
 
@@ -484,7 +511,7 @@ CREATE TABLE `permission` (
 
 INSERT INTO `permission` (`permission_id`, `username`, `employee_management`, `payroll_management`, `biometrics`, `configuration`, `hr_configuration`, `payroll_configuration`, `user_management`) VALUES
 (2, 'administrator', 1, 1, 1, 1, 1, 1, 1),
-(3, 'peterejiro', 1, 0, 0, 0, 0, 0, 0);
+(3, 'peterejiro', 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -548,23 +575,23 @@ CREATE TABLE `salary` (
 --
 
 INSERT INTO `salary` (`salary_id`, `salary_employee_id`, `salary_payment_definition_id`, `salary_pay_month`, `salary_pay_year`, `salary_amount`, `salary_confirmed`) VALUES
-(320, 7, 8, 6, 2020, 15000, 1),
-(321, 7, 1, 6, 2020, 200000, 1),
-(322, 7, 2, 6, 2020, 50000, 1),
-(323, 7, 6, 6, 2020, 5000, 1),
-(324, 7, 5, 6, 2020, 10000, 1),
-(325, 7, 3, 6, 2020, 50000, 1),
-(326, 7, 7, 6, 2020, 18666.666666667, 1),
-(327, 8, 8, 6, 2020, 22500, 1),
-(328, 8, 1, 6, 2020, 300000, 1),
-(329, 8, 2, 6, 2020, 100000, 1),
-(330, 8, 3, 6, 2020, 50000, 1),
-(331, 8, 3, 6, 2020, 50000, 1),
-(332, 8, 7, 6, 2020, 18666.666666667, 1),
-(333, 9, 8, 6, 2020, 375000, 1),
-(334, 9, 1, 6, 2020, 5000000, 1),
-(335, 9, 2, 6, 2020, 200000, 1),
-(336, 9, 7, 6, 2020, 110666.66666667, 1);
+(354, 7, 8, 6, 2020, 15000, 1),
+(355, 7, 1, 6, 2020, 200000, 1),
+(356, 7, 2, 6, 2020, 50000, 1),
+(357, 7, 6, 6, 2020, 5000, 1),
+(358, 7, 5, 6, 2020, 50000, 1),
+(359, 7, 3, 6, 2020, 50000, 1),
+(360, 7, 7, 6, 2020, 18666.666666667, 1),
+(361, 8, 8, 6, 2020, 22500, 1),
+(362, 8, 1, 6, 2020, 300000, 1),
+(363, 8, 2, 6, 2020, 100000, 1),
+(364, 8, 3, 6, 2020, 50000, 1),
+(365, 8, 3, 6, 2020, 50000, 1),
+(366, 8, 7, 6, 2020, 18666.666666667, 1),
+(367, 9, 8, 6, 2020, 375000, 1),
+(368, 9, 1, 6, 2020, 5000000, 1),
+(369, 9, 2, 6, 2020, 200000, 1),
+(370, 9, 7, 6, 2020, 110666.66666667, 1);
 
 -- --------------------------------------------------------
 
@@ -664,8 +691,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_username`, `user_email`, `user_password`, `user_token`, `user_name`, `user_status`) VALUES
-(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', '1592832401', 'Administrator Administrator', '1'),
-(5, 'peterejiro', 'peterejiro96@gmail.comE', '$2y$10$7OLmMpkXuTEhrMdIIsdnoO4GCUs7yB/Hm7qL6rRAmHEA1lzikvOjW', '', 'Oki-Peter Ejiroghene - test', '1');
+(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', '', 'Administrator Administrator', '1'),
+(5, 'peterejiro', 'peterejiro96@gmail.com', '$2y$10$7OLmMpkXuTEhrMdIIsdnoO4GCUs7yB/Hm7qL6rRAmHEA1lzikvOjW', '1592909204', 'Oki-Peter Ejiroghene', '1');
 
 -- --------------------------------------------------------
 
@@ -931,7 +958,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `emolument_report`
 --
 ALTER TABLE `emolument_report`
-  MODIFY `emolument_report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `emolument_report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `employee`
@@ -961,19 +988,19 @@ ALTER TABLE `job_role`
 -- AUTO_INCREMENT for table `loans`
 --
 ALTER TABLE `loans`
-  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `loan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `loan_repayment`
 --
 ALTER TABLE `loan_repayment`
-  MODIFY `loan_repayment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `loan_repayment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `loan_reschedule_log`
 --
 ALTER TABLE `loan_reschedule_log`
-  MODIFY `loan_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `loan_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `location`
@@ -985,7 +1012,7 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `minimum_tax_rate`
@@ -1045,7 +1072,7 @@ ALTER TABLE `qualification`
 -- AUTO_INCREMENT for table `salary`
 --
 ALTER TABLE `salary`
-  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=337;
+  MODIFY `salary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=371;
 
 --
 -- AUTO_INCREMENT for table `salary_structure_allowance`

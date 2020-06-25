@@ -169,6 +169,9 @@ $route['emolument_report'] = 'payroll_report/emolument_report';
 $route['emolument_report_clear'] = 'payroll_report/emolument_report_clear';
 $route['deduction'] = 'payroll_report/deduction';
 $route['deduction_report'] = 'payroll_report/deduction_report';
+$route['pay_order'] = 'payroll_report/pay_order';
+$route['pay_order_report'] = 'payroll_report/pay_order_report';
+
 
 $route['view_log'] = 'log/view_log';
 

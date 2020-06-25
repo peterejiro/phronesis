@@ -1,124 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
 
-		<?php include(APPPATH.'\views\stylesheet.php'); ?>
+	<?php include(APPPATH.'\views\stylesheet.php'); ?>
 
-    </head>
+</head>
+
+<body>
+<div id="app">
+	<div class="main-wrapper">
+		<div class="navbar-bg"></div>
+		<?php include(APPPATH.'\views\topbar.php'); ?>
 
 
-    <body class="fixed-left">
-        <!-- Begin page -->
-        <div id="wrapper">
+		<?php include(APPPATH.'\views\sidebar.php'); ?>
 
-            <!-- ========== Left Sidebar Start ========== -->
 
-			<?php include(APPPATH.'\views\sidebar.php'); ?>
 
-            <!-- Left Sidebar End -->
+		<div class="main-content">
 
-            <!-- Start right Content here -->
+			<section class="section">
+				<div class="section-header">
+					<h1>PayRoll Reports</h1>
+				</div>
 
-            <div class="content-page" id="raps">
-                <!-- Start content -->
-                <div class="content">
+				<div class="section-body">
 
-                    <!-- Top Bar Start -->
-					<?php include(APPPATH.'\views\topbar.php'); ?>
-                    <!-- Top Bar End -->
-
-                    <div class="page-content-wrapper">
-
-                        <div class="container-fluid">
-
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="page-title-box">
-                                        <div class="float-right">
-
-                                        </div>
-                                        <h4 class="page-title">Payroll Reports </h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end page title end breadcrumb -->
-
-                            <div class="row">
-
-                                <div class="col-md-12 col-xl-3">
-									<a href="<?php echo site_url('emolument'); ?>">
-                                    <div class="card mini-stat">
-                                        <div class="mini-stat-icon text-right">
-                                            <i class="mdi mdi-book-open"></i>
-                                        </div>
-                                        <div class="p-4">
-                                            <h6 class="text-uppercase mb-3">Emolument Report</h6>
-
-                                            <h4 class="mb-0"><?php //echo count($employees); ?><small class="ml-2"> </small></h4>
-                                        </div>
-                                    </div>
-									</a>
-                                </div>
-
-								<div class="col-md-12 col-xl-3">
-									<a href="<?php echo site_url('deduction'); ?>">
-										<div class="card mini-stat">
-											<div class="mini-stat-icon text-right">
-												<i class="mdi mdi-book-open"></i>
-											</div>
-											<div class="p-4">
-												<h6 class="text-uppercase mb-3">Deduction Report</h6>
-
-												<h4 class="mb-0"><?php //echo count($employees); ?><small class="ml-2"> </small></h4>
-											</div>
-										</div>
-									</a>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="card card-large-icons">
+								<div class="card-icon bg-primary text-white">
+									<i class="fas fa-cog"></i>
 								</div>
+								<div class="card-body">
+									<h4>Emolument Report</h4>
 
-                                <div class="col-md-12 col-xl-3">
-                                    <div class="card mini-stat">
-                                        <div class="mini-stat-icon text-right">
-                                            <i class="mdi mdi-tag-text-outline"></i>
-                                        </div>
-                                        <div class="p-4">
-                                            <h6 class="text-uppercase mb-3">Number of Users</h6>
+									<a href="<?php echo base_url('emolument') ?>" class="card-cta">View Report <i class="fas fa-chevron-right"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="card card-large-icons">
+								<div class="card-icon bg-primary text-white">
+									<i class="fas fa-search"></i>
+								</div>
+								<div class="card-body">
+									<h4>Deduction Report</h4>
 
-                                            <h4 class="mb-0"><?php //echo count($users); ?><small class="ml-2"></small></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-xl-3">
-                                    <div class="card mini-stat">
-                                        <div class="mini-stat-icon text-right">
-                                            <i class="mdi mdi-briefcase-check"></i>
-                                        </div>
-                                        <div class="p-4">
-                                            <h6 class="text-uppercase mb-3">Settings</h6>
+									<a href="<?php echo base_url('deduction'); ?>" class="card-cta">View Report <i class="fas fa-chevron-right"></i></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="card card-large-icons">
+								<div class="card-icon bg-primary text-white">
+									<i class="fas fa-envelope"></i>
+								</div>
+								<div class="card-body">
+									<h4>Pay Order</h4>
 
-                                            <h4 class="mb-0">652<small class="ml-2"><i class="mdi mdi-arrow-down text-danger"></i></small></h4>
-                                        </div>
-                                    </div>
+									<a href="<?php echo base_url('pay_order'); ?>" class="card-cta">View Report <i class="fas fa-chevron-right"></i></a>
+								</div>
+							</div>
+						</div>
 
-                                </div>                                            
-                            </div><!-- end row -->
-
-
-                        </div><!-- container -->
-
-                    </div> <!-- Page content Wrapper -->
-
-                </div> <!-- content -->
-
-               <<?php include(APPPATH.'\views\footer.php'); ?>
-
-            </div>
-            <!-- End Right content here -->
-
-        </div>
-        <!-- END wrapper -->
+					</div>
+				</div>
+			</section>
 
 
-      <?php include(APPPATH.'\views\js.php'); ?>
 
-    </body>
+		</div>
+
+
+
+
+	</div>
+</div>
+<!-- END wrapper -->
+
+<?php include(APPPATH.'\views\js.php'); ?>
+</body>
 </html>

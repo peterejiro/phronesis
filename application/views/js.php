@@ -1,102 +1,198 @@
-        <!-- END wrapper -->
+		<?php
+		defined('BASEPATH') OR exit('No direct script access allowed');
+		?>
+		<!-- General JS Scripts -->
+		<script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
+		<script src="<?php echo base_url(); ?>assets/modules/popper.js"></script>
+		<script src="<?php echo base_url(); ?>assets/modules/tooltip.js"></script>
+		<script src="<?php echo base_url(); ?>assets/modules/bootstrap/js/bootstrap.min.js"></script>
+		<script src="<?php echo base_url(); ?>assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+		<script src="<?php echo base_url(); ?>assets/modules/moment.min.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/stisla.js"></script>
 
+		<!-- JS Libraies -->
 
-        <!-- jQuery  -->
-        <script src="<?php echo base_url(); ?>/assets/js/jquery.min.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/popper.min.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/modernizr.min.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/detect.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/fastclick.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/jquery.slimscroll.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/jquery.blockUI.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/waves.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/jquery.nicescroll.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/js/jquery.scrollTo.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jquery.sparkline.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
 
-        <script src="<?php echo base_url(); ?>/assets/plugins/metro/MetroJs.min.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/plugins/sparkline-chart/jquery.sparkline.min.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/plugins/morris/morris.min.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/plugins/raphael/raphael-min.js"></script>
-        <script src="<?php echo base_url(); ?>/assets/pages/dashboard.js"></script>
-        <!-- App js -->
-        <script src="<?php echo base_url(); ?>/assets/js/app.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/simple-weather/jquery.simpleWeather.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
 
-		<!-- Required datatable js -->
-		<script src="<?php echo base_url(); ?>/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jquery-ui/jquery-ui.min.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/prism/prism.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/sticky-kit.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/dropzonejs/min/dropzone.min.js"></script>-->
+		<script src="<?php echo base_url(); ?>/assets/modules/dropzone/dist/dropzone.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/jquery.sparkline.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/jquery-ui/jquery-ui.min.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/cleave-js/dist/cleave.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/cleave-js/dist/addons/cleave-phone.us.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/select2/dist/js/select2.full.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/codemirror/lib/codemirror.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/codemirror/mode/javascript/javascript.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+<!--			<script src="http://maps.google.com/maps/api/js?key=AIzaSyB55Np3_WsZwUQ9NS7DP-HnneleZLYZDNw&amp;sensor=true"></script>-->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/gmaps.js"></script>-->
+
+			<script src="<?php echo base_url(); ?>assets/modules/fullcalendar/fullcalendar.min.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script>
+
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/datatables/datatables.min.js"></script>-->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>-->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>-->
+<!--		-->
+
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/jquery.dataTables.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/dataTables.bootstrap4.min.js"></script>
 		<!-- Buttons examples -->
-		<script src="<?php echo base_url(); ?>/assets/plugins/datatables/dataTables.buttons.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/datatables/jszip.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/datatables/pdfmake.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/datatables/vfs_fonts.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/datatables/buttons.html5.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/datatables/buttons.print.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/datatables/buttons.colVis.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/dataTables.buttons.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/buttons.bootstrap4.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/jszip.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/pdfmake.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/vfs_fonts.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/buttons.html5.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/buttons.print.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/buttons.colVis.min.js"></script>
 		<!-- Responsive examples -->
-		<script src="<?php echo base_url(); ?>/assets/plugins/datatables/dataTables.responsive.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
-
-		<!-- parsley -->
-		<script src="<?php echo base_url(); ?>/assets/plugins/parsleyjs/parsley.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/pages/form-validation.init.js"></script>
-
-		<!-- Datatable init js -->
-		<script src="<?php echo base_url(); ?>/assets/pages/datatables.init.js"></script>
-
-		<!-- Sweet-Alert  -->
-		<script src="<?php echo base_url(); ?>/assets/plugins/sweet-alert2/sweetalert2.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/pages/sweet-alert.init.js"></script>
-
-
-		<script src="<?php echo base_url(); ?>/assets/plugins/timepicker/moment.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/timepicker/tempusdominus-bootstrap-4.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/timepicker/bootstrap-material-datetimepicker.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/colorpicker/jquery-asColor.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/colorpicker/jquery-asGradient.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/colorpicker/jquery-asColorPicker.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/select2/select2.min.js"></script>
-
-		<script src="<?php echo base_url(); ?>/assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-		<script src="<?php echo base_url(); ?>/assets/plugins/dropzone/dist/dropzone.js"></script>
-
-		<!-- Plugins Init js -->
-		<script src="<?php echo base_url(); ?>/assets/pages/form-advanced.js"></script>
-
-		<script>
-			window.onload = function(){
-				document.getElementById("opennav").style.display='none';
-				document.getElementById("closenav").style.display='block';
-			};
-
-			function openNav() {
-				document.getElementById("sidebar").style.width = "250px";
-				//document.getElementsByClassName("wrapper").style.marginLeft = "250px";
-				document.getElementById("raps").style.marginLeft = "250px";
-				document.getElementById("opennav").style.display='none';
-				document.getElementById("closenav").style.display='block';
-
-			}
-
-			/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-			function closeNav() {
-				document.getElementById("sidebar").style.width = "0px";
-				//document.getElementsByClassName("wrapper").style.marginLeft = "0px";
-				document.getElementById("raps").style.marginLeft = "0px";
-				document.getElementById("opennav").style.display='block';
-				document.getElementById("closenav").style.display='none';
-				document.getElementById("top-bar").style.marginLeft = "0px";
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/dataTables.responsive.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/responsive.bootstrap4.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/datatables.init.js"></script>
 
 
 
-			}
+		<script src="<?php echo base_url(); ?>assets/modules/jquery-ui/jquery-ui.min.js"></script>
 
-		</script>
+			<script src="<?php echo base_url(); ?>assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
 
+			<script src="<?php echo base_url(); ?>assets/modules/jquery.sparkline.min.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/sweetalert/sweetalert.min.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/izitoast/js/iziToast.min.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/izitoast/js/iziToast.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/codemirror/lib/codemirror.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/codemirror/mode/javascript/javascript.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+
+
+
+
+		<!-- Page Specific JS File -->
+
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/index.js"></script>-->
+<!---->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/index-0.js"></script>-->
+
+			<script src="<?php echo base_url(); ?>assets/js/page/bootstrap-modal.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/components-chat-box.js"></script>
+
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/components-multiple-upload.js"></script>-->
+
+			<script src="<?php echo base_url(); ?>assets/js/page/components-statistic.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/components-table.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/components-user.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/forms-advanced-forms.js"></script>
+
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-advanced-route.js"></script>-->
+<!---->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-draggable-marker.js"></script>-->
+<!---->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-geocoding.js"></script>-->
+<!---->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-geolocation.js"></script>-->
+<!---->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-marker.js"></script>-->
+<!---->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-multiple-marker.js"></script>-->
+<!---->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-route.js"></script>-->
+<!---->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-simple.js"></script>-->
+
+			<script src="<?php echo base_url(); ?>assets/js/page/modules-calendar.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/modules-chartjs.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/modules-datatables.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/modules-ion-icons.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/modules-slider.js"></script>
+
+
+			<script src="<?php echo base_url(); ?>assets/js/page/modules-sparkline.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/modules-sweetalert.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/modules-toastr.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/modules-vector-map.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/auth-register.js"></script>
+
+
+			<script src="<?php echo base_url(); ?>assets/js/page/features-post-create.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/features-posts.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/features-setting-detail.js"></script>
+
+			<script src="<?php echo base_url(); ?>assets/js/page/utilities-contact.js"></script>
+
+		<!-- Template JS File -->
+		<script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
