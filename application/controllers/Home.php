@@ -96,7 +96,8 @@ class Home extends CI_Controller
 			$user_token_data = $this->security->xss_clean($user_token_data);
 			$query = $this->users->update_token($user_username, $user_token_data);
 			$this->session->unset_userdata('user_username');
-			$this->session->sess_destroy();
+      $this->session->unset_userdata('login_time');
+      $this->session->sess_destroy();
 			redirect('/login');
 			endif;
 
@@ -245,6 +246,10 @@ class Home extends CI_Controller
 
 	}
 
+	public function timestamp(){
+    date_default_timezone_set('Africa/Lagos');
+    echo $timestamp = date('F j, Y g:i:s a');
+  }
 
 
 }
