@@ -606,6 +606,7 @@
 
 
         </div>
+	</div>
         <!-- END wrapper -->
 
 

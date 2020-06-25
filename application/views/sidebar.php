@@ -34,7 +34,7 @@
 				<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-file-invoice"></i> <span>Payroll</span></a>
 				<ul class="dropdown-menu">
 
-					<li><a class="nav-link" href="<?php //echo site_url('employee_salary_structure') ?>"> Employee Salary Struct </a></li>
+					<li><a class="nav-link" href="<?php echo site_url('employee_salary_structure') ?>"> Employee Salary Struct </a></li>
 					<li><a class="nav-link" href="<?php echo site_url('variational_payment') ?>"> Variational Payment </a></li>
 					<li><a class="nav-link" href="<?php echo site_url('approve_variational_payment') ?>"> Approve  Payment </a></li>
 					<li><a class="nav-link" href="<?php echo site_url('payroll_routine') ?>"> Payroll Routine </a></li>

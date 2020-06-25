@@ -1,7 +1,10 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php //error_reporting(0); ?>
+
+
 
 	<?php include(APPPATH.'\views\stylesheet.php'); ?>
 	<!-- DataTables -->
@@ -12,43 +15,33 @@
 
 <body class="fixed-left">
 <!-- Begin page -->
-<div id="wrapper">
+<div id="app">
+	<div class="main-wrapper">
+		<div class="navbar-bg"></div>
+		<?php include(APPPATH.'\views\topbar.php'); ?>
 
-	<!-- ========== Left Sidebar Start ========== -->
-	<?php include(APPPATH.'\views\sidebar.php'); ?>
-	<!-- Left Sidebar End -->
 
-	<!-- Start right Content here -->
+		<?php include(APPPATH.'\views\sidebar.php'); ?>
 
-	<div class="content-page" id="raps">
-		<!-- Start content -->
-		<div class="content">
 
-			<!-- Top Bar Start -->
-			<?php include(APPPATH.'\views\topbar.php'); ?>
-			<!-- Top Bar End -->
 
-			<div class="page-content-wrapper">
+		<div class="main-content">
+			<section class="section">
+				<div class="section-header">
+					<h1> Create Employee</h1>
+				</div>
 
-				<div class="container-fluid">
 
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="page-title-box">
-								<div class="float-right">
+				<div class="row">
+					<div class="col-12 col-md-12 col-lg-12">
+						<div class="card">
+							<!--							<div class="card-header">-->
+							<!--								<h4>Simple Table</h4>-->
+							<!--							</div>-->
 
-								</div>
-								<h4 class="page-title">New Employees</h4>
-							</div>
-						</div>
-					</div>
-					<!-- end page title end breadcrumb -->
 
-					<div class="row">
-						<div class="col-md-12">
-							<div class="card m-b-30">
-								<div class="card-body">
-									<form class="" method="post" action="<?php echo site_url('add_employee'); ?>" enctype="multipart/form-data">
+							<div class="card-body">
+								<form class="" method="post" action="<?php echo site_url('add_employee'); ?>" enctype="multipart/form-data">
 									<!-- Nav tabs -->
 									<ul class="nav nav-pills nav-justified" role="tablist">
 										<li class="nav-item waves-effect waves-light">
@@ -78,85 +71,85 @@
 												</div>
 											<?php endif; ?>
 
-												<div class="modal-body">
+											<div class="modal-body">
 
-													<div class="form-group">
-														<label>Employee ID:</label>
-														<input type="text" class="form-control"  name="employee_unique_id" required readonly value="<?php echo $unique_id; ?>" placeholder="Enter Name of employee"/>
+												<div class="form-group">
+													<label>Employee ID:</label>
+													<input type="text" class="form-control"  name="employee_unique_id" required readonly value="<?php echo $unique_id; ?>" placeholder="Enter Name of employee"/>
+												</div>
+
+
+												<div class="form-group row">
+
+													<div class="col-sm-4">
+														<label>Employee First Name:</label>
+														<input type="text" class="form-control"  name="employee_first_name" required value="" placeholder="Enter Name of employee first name"/>
+													</div>
+													<div class="col-sm-4">
+														<label>Employee Last Name:</label>
+														<input type="text" class="form-control"  name="employee_last_name" required value="" placeholder="Enter employee last name"/>
 													</div>
 
-
-													<div class="form-group row">
-
-														<div class="col-sm-4">
-															<label>Employee First Name:</label>
-															<input type="text" class="form-control"  name="employee_first_name" required value="" placeholder="Enter Name of employee first name"/>
-														</div>
-														<div class="col-sm-4">
-															<label>Employee Last Name:</label>
-															<input type="text" class="form-control"  name="employee_last_name" required value="" placeholder="Enter employee last name"/>
-														</div>
-
-														<div class="col-sm-4">
-															<label>Employee Other Name:</label>
-															<input type="text" class="form-control" name="employee_other_name"  value="" placeholder="Enter employee other name"/>
-														</div>
-
+													<div class="col-sm-4">
+														<label>Employee Other Name:</label>
+														<input type="text" class="form-control" name="employee_other_name"  value="" placeholder="Enter employee other name"/>
 													</div>
 
+												</div>
 
-													<div class="form-group row">
 
-														<div class="col-sm-4">
-															<label> Employee Personal Email:</label>
-															<input type="email" class="form-control"  name="employee_personal_email" required value="" placeholder="Enter employee personal email"/>
-														</div>
-														<div class="col-sm-4">
-															<label>Employee Official Email:</label>
-															<input type="email" class="form-control"  name="employee_official_email"  value="" placeholder="Enter employee official email"/>
-														</div>
+												<div class="form-group row">
 
-														<div class="col-sm-4">
+													<div class="col-sm-4">
+														<label> Employee Personal Email:</label>
+														<input type="email" class="form-control"  name="employee_personal_email" required value="" placeholder="Enter employee personal email"/>
+													</div>
+													<div class="col-sm-4">
+														<label>Employee Official Email:</label>
+														<input type="email" class="form-control"  name="employee_official_email"  value="" placeholder="Enter employee official email"/>
+													</div>
 
-															<label>Employee Date of Birth:</label>
-															<div class="input-group">
+													<div class="col-sm-4">
+
+														<label>Employee Date of Birth:</label>
+														<div class="input-group">
 															<input type="date" name="employee_dob" required class="form-control" placeholder="mm/dd/yyyy">
 
 															<div class="input-group-addon">
 																<span><i class="mdi mdi-calendar" aria-hidden="true"></i></span>
 
 															</div>
-															</div>
-
 														</div>
 
 													</div>
 
-													<div class="form-group row">
+												</div>
 
-														<div class="col-sm-4">
-															<label>Employee Phone Number</label>
-															<input type="text" placeholder="" name="employee_phone_number" data-mask="(999) 9999-9999" class="form-control">
-														</div>
+												<div class="form-group row">
 
-														<div class="col-sm-8">
-															<label> Employee Address:</label>
-															<textarea id="textarea" class="form-control" required name="employee_address" maxlength="225" rows="3" placeholder="Employee Address."></textarea>
-														</div>
-
-
+													<div class="col-sm-4">
+														<label>Employee Phone Number</label>
+														<input type="text" placeholder="" name="employee_phone_number" data-mask="(999) 9999-9999" class="form-control">
 													</div>
 
-
-
-
-
-
-
-													<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
+													<div class="col-sm-8">
+														<label> Employee Address:</label>
+														<textarea id="textarea" class="form-control" required name="employee_address" maxlength="225" rows="3" placeholder="Employee Address."></textarea>
+													</div>
 
 
 												</div>
+
+
+
+
+
+
+
+												<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
+
+
+											</div>
 										</div>
 
 										<div class="tab-pane p-3" id="job-information" role="tabpanel">
@@ -168,11 +161,11 @@
 
 
 													<label>Current Grade</label>
-													<select class="select2 form-control mb-3 custom-select" required name="employee_grade" style="width: 100%; height:36px;">
+													<select class="selectric form-control mb-3 custom-select" required name="employee_grade" style="width: 100%; height:36px;">
 														<option>Select</option>
 														<?php foreach ($grades as $grade): ?>
 
-														<option value="<?php echo $grade->grade_id; ?>"> <?php echo $grade->grade_name; ?></option>
+															<option value="<?php echo $grade->grade_id; ?>"> <?php echo $grade->grade_name; ?></option>
 
 
 														<?php endforeach; ?>
@@ -182,10 +175,12 @@
 
 
 												</div>
+
+
 												<div class="col-sm-6">
 													<label>Job Role</label>
 
-													<select class="select2 form-control mb-3 custom-select" required  name="employee_job_role" style="width: 100%; height:56px;">
+													<select class="selectric form-control mb-3 custom-select" required  name="employee_job_role" style="width: 100%; height:56px;">
 														<option>Select</option>
 														<?php foreach ($roles as $role): ?>
 
@@ -199,23 +194,23 @@
 											</div>
 
 											<div class="form-group row">
-											<div class="col-sm-6">
-												<label>Employee Qualification</label>
-												<select class="select2 mb-3 select2-multiple"  required name="employee_qualification[]" style="width: 100%" multiple="multiple" data-placeholder="Choose">
-													<option>Select</option>
-													<?php foreach ($qualifications as $qualification): ?>
+												<div class="col-sm-6">
+													<label>Employee Qualification</label>
+													<select class="selectric form-control mb-3 custom-select" required name="employee_qualification[]" style="width: 100%" multiple="multiple" data-placeholder="Choose">
+														<option>Select</option>
+														<?php foreach ($qualifications as $qualification): ?>
 
-														<option value="<?php echo $qualification->qualification_id; ?>"> <?php echo $qualification->qualification_name; ?></option>
+															<option value="<?php echo $qualification->qualification_id; ?>"> <?php echo $qualification->qualification_name; ?></option>
 
 
-													<?php endforeach; ?>
-												</select>
+														<?php endforeach; ?>
+													</select>
 
-											</div>
+												</div>
 
 												<div class="col-sm-6">
 													<label>SBU (Location)</label>
-													<select class="select2 form-control mb-3 custom-select" required name="location" style="width: 100%; height:56px;">		<option>Select</option>
+													<select class="selectric form-control mb-3 custom-select" required name="location" style="width: 100%; height:56px;">		<option>Select</option>
 														<?php foreach ($locations as $location): ?>
 
 															<option value="<?php echo $location->location_id; ?>"> <?php echo $location->location_name; ?></option>
@@ -228,15 +223,18 @@
 
 												</div>
 
-										</div>
+											</div>
 
 											<div class="form-group row">
 
 
 												<div class="col-sm-12">
 													<label>Work Experience</label>
-													<select class="select2 mb-3 select2-multiple" id="check_experience" required name="check_experience" style="width: 100%"  data-placeholder="Choose" onchange="work_experience()">
-														<option>Select</option>
+<!--													<select class="select2 mb-3 select2-multiple" id="check_experience" required name="check_experience" style="width: 100%"  data-placeholder="Choose" onchange="work_experience()">-->
+<!--													-->
+													<select class="selectric form-control mb-3 custom-select" id="check_experience"  name="check_experience" style="width: 100%"  onchange="work_experience()">
+
+													<option>Select</option>
 
 
 														<option value="0"> Entry Level</option>
@@ -260,39 +258,39 @@
 														<i class="mdi mdi-delete "></i>
 													</button>
 
-												<div class="form-group row">
+													<div class="form-group row">
 
-													<div class="col-sm-12">
-														<label>Company Name</label>
+														<div class="col-sm-12">
+															<label>Company Name</label>
 
-														<input type="text" class="form-control" name="company_name[]"  value="" placeholder="Enter company name"/>
+															<input type="text" class="form-control" name="company_name[]"  value="" placeholder="Enter company name"/>
 
 
-													</div>
-												</div>
-
-												<div class="form-group row">
-
-													<div class="col-sm-12">
-														<label> Job Description:</label>
-														<textarea id="textarea" class="form-control" name="job_description[]" maxlength="225" rows="3" placeholder="Job Description."></textarea>
+														</div>
 													</div>
 
-												</div>
+													<div class="form-group row">
 
-												<div class="form-group row">
+														<div class="col-sm-12">
+															<label> Job Description:</label>
+															<textarea id="textarea" class="form-control" name="job_description[]" maxlength="225" rows="3" placeholder="Job Description."></textarea>
+														</div>
 
-													<div class="col-sm-6">
-														<label> Start Date:</label>
-														<input type="date" name="experience_start_date[]" class="form-control" placeholder="mm/dd/yyyy">
 													</div>
 
-													<div class="col-sm-6">
-														<label> End Date:</label>
-														<input type="date" name="experience_end_date[]" class="form-control" placeholder="mm/dd/yyyy">
-													</div>
+													<div class="form-group row">
 
-												</div>
+														<div class="col-sm-6">
+															<label> Start Date:</label>
+															<input type="date" name="experience_start_date[]" class="form-control" placeholder="mm/dd/yyyy">
+														</div>
+
+														<div class="col-sm-6">
+															<label> End Date:</label>
+															<input type="date" name="experience_end_date[]" class="form-control" placeholder="mm/dd/yyyy">
+														</div>
+
+													</div>
 
 												</div>
 
@@ -314,7 +312,7 @@
 
 												<div class="col-sm-6">
 													<label>Bank</label>
-													<select class="select2 form-control mb-3 custom-select" required name="employee_bank" style="width: 100%; height:56px;">		<option>Select</option>
+													<select class="selectric form-control mb-3 custom-select" required name="employee_bank" style="width: 100%; height:56px;">		<option>Select</option>
 														<?php foreach ($banks as $bank): ?>
 
 															<option value="<?php echo $bank->bank_id; ?>"> <?php echo $bank->bank_name; ?></option>
@@ -331,13 +329,13 @@
 												<div class="col-sm-6">
 													<label> HMO ID:</label>
 													<input  name="employee_hmo_number" type="text"
-														   class="form-control"
-														   placeholder="Enter id"/>
+															class="form-control"
+															placeholder="Enter id"/>
 												</div>
 
 												<div class="col-sm-6">
 													<label>HMO Provider</label>
-													<select class="select2 form-control mb-3 custom-select" required name="employee_hmo_id" style="width: 100%; height:56px;">		<option>Select</option>
+													<select class="selectric form-control mb-3 custom-select" required name="employee_hmo_id" style="width: 100%; height:56px;">		<option>Select</option>
 
 														<option value="0"> N/A </option>
 														<?php foreach ($health_insurances as $health_insurance): ?>
@@ -361,7 +359,7 @@
 												<div class="col-sm-6">
 
 													<label>Pensionable? </label>
-													<select class="select2 form-control mb-3 custom-select" required name="employee_pensionable" onchange="pensionable()" id="employee_pensionable" style="width: 100%; height:56px;">		<option>Select</option>
+													<select class="selectric form-control mb-3 custom-select" required name="employee_pensionable" onchange="pensionable()" id="employee_pensionable" style="width: 100%; height:56px;">		<option>Select</option>
 
 														<option value="0"> No </option>
 														<option value="1"> Yes </option>
@@ -379,36 +377,36 @@
 
 											<div id="pension_div">
 
-											<div class="form-group row" >
+												<div class="form-group row" >
 
-												<div class="col-sm-6">
-													<label> Pension Number:</label>
-													<input  name="employee_pension_number" type="text"
-															class="form-control"
-															placeholder="Enter Pension Number"/>
+													<div class="col-sm-6">
+														<label> Pension Number:</label>
+														<input  name="employee_pension_number" type="text"
+																class="form-control"
+																placeholder="Enter Pension Number"/>
+													</div>
+
+													<div class="col-sm-6">
+														<label>Pension Administrator</label>
+														<select class="selectric form-control mb-3 custom-select" required name="employee_pension_id" style="width: 100%; height:56px;">		<option>Select</option>
+
+															<option value="0"> N/A </option>
+															<?php foreach ($pensions as $pension): ?>
+
+																<option value="<?php echo $pension->pension_id; ?>"> <?php echo $pension->pension_provider; ?></option>
+
+															<?php endforeach; ?>
+														</select>
+
+													</div>
+
 												</div>
 
-												<div class="col-sm-6">
-													<label>Pension Administrator</label>
-													<select class="select2 form-control mb-3 custom-select" required name="employee_pension_id" style="width: 100%; height:56px;">		<option>Select</option>
 
-														<option value="0"> N/A </option>
-														<?php foreach ($pensions as $pension): ?>
 
-															<option value="<?php echo $pension->pension_id; ?>"> <?php echo $pension->pension_provider; ?></option>
 
-														<?php endforeach; ?>
-													</select>
-
-												</div>
 
 											</div>
-
-
-
-
-
-										</div>
 										</div>
 										<div class="tab-pane p-3" id="other-information" role="tabpanel">
 
@@ -428,7 +426,7 @@
 													<label>NYSC Document</label> <br>
 													<input name="employee_nysc" class="form-group" type="file" multiple="multiple">
 
-											</div>
+												</div>
 											</div>
 
 											<div class="form-group row">
@@ -436,7 +434,7 @@
 												<div class="col-sm-6">
 													<label> Employment Start Date:</label>
 													<input type="date" name="employment_start_date" required class="form-control" placeholder="mm/dd/yyyy">
-													</div>
+												</div>
 
 												<div class="col-sm-6">
 													<label>Employment Stop Date</label> <br>
@@ -448,13 +446,13 @@
 											<div class="form-group row">
 												<div class="col-sm-6">
 													<label>Employment Status</label>
-													<select class="select2 form-control mb-3 custom-select" required name="employment_status" style="width: 100%; height:56px;">		<option>Select</option>
+													<select class="selectric form-control mb-3 custom-select" required name="employment_status" style="width: 100%; height:56px;">		<option>Select</option>
 
 
-															<option value="0"> Fired </option>
-															<option value="1"> Probationary </option>
-															<option value="2"> Confirmed  </option>
-															<option value="3">Retired</option>
+														<option value="0"> Fired </option>
+														<option value="1"> Probationary </option>
+														<option value="2"> Confirmed  </option>
+														<option value="3">Retired</option>
 
 
 													</select>
@@ -495,32 +493,87 @@
 
 
 
-									</form>
+								</form>
 
-								</div>
 							</div>
+
 						</div>
 					</div>
 
-					</div>
 
-				</div><!-- container -->
+			</section>
+		</div>
 
-			</div> <!-- Page content Wrapper -->
 
-		</div> <!-- content -->
 
-		<?php include(APPPATH.'\views\footer.php'); ?>
 
 	</div>
-	<!-- End Right content here -->
+</div>
+
+
+
+
+
+<!-- End Right content here -->
 
 </div>
 <!-- END wrapper -->
 
 
-
 <?php include(APPPATH.'\views\js.php'); ?>
+
+<script>
+
+
+	$(document).ready(function() {
+
+		Dropzone.autoDiscover = false;
+		var name = new Date().getTime();
+		var myDropzone = this;
+		$("div#myId").dropzone(
+				{
+					renameFilename: function (file) {
+						return name + '_' + file.name;
+						//return newName;
+					},
+					url: '<?php echo site_url('employee_upload_others'); ?>',
+					method: 'post',
+					addRemoveLinks: 'true',
+					dictRemoveFile: 'Remove',
+
+					success: function (file, response) {
+						//file.upload.filename =  name + '_' + file.name;
+						$('form').append('<input type="hidden" name="employee_others[]" value="'+ response+'">');
+						console.log(response);
+					},
+
+					error: function(file, response){
+
+						console.log(response);
+					},
+
+					removedfile: function (file) {
+						file.previewElement.remove();
+//                    var name = '';
+//                    if (typeof file.file_name !== 'undefined') {
+//                        name = file.file_name
+//                    } else {
+//                        name = uploadedDocumentMap[file.name]
+//                    }
+						$('form').find('input[name="employee_others[]"][value="' + name + '_' + file.name + '"]').remove()
+					}
+
+				});
+
+
+
+	});
+
+
+
+</script>
+</body>
+</html>
 
 <script>
 	window.onload = function(){
@@ -595,7 +648,7 @@
 			inputs = elem.getElementsByTagName('textarea');
 			for(index = 0; index < inputs.length; ++index){
 				// if(inputs[index].type == 'textarea')
-					inputs[index].value = '';
+				inputs[index].value = '';
 			}
 
 			// var textarea = elem.getElementsByTagName('textarea');
@@ -607,64 +660,7 @@
 		}
 
 	}
-
-
-
-
-
-
-</script>
-
-<script>
-	Dropzone.autoDiscover = false;
-
-	$(document).ready(function() {
-		var name = new Date().getTime();
-		var myDropzone = this;
-		$("div#myId").dropzone(
-
-				{
-					renameFilename: function (file) {
-						return name + '_' + file.name;
-						//return newName;
-					},
-					url: '<?php echo site_url('employee_upload_others'); ?>',
-					method: 'post',
-					addRemoveLinks: 'true',
-					dictRemoveFile: 'Remove',
-
-					success: function (file, response) {
-						//file.upload.filename =  name + '_' + file.name;
-						$('form').append('<input type="hidden" name="employee_others[]" value="'+ response+'">');
-						console.log(response);
-					},
-
-					error: function(file, response){
-
-						console.log(response);
-					},
-
-				removedfile: function (file) {
-						file.previewElement.remove();
-//                    var name = '';
-//                    if (typeof file.file_name !== 'undefined') {
-//                        name = file.file_name
-//                    } else {
-//                        name = uploadedDocumentMap[file.name]
-//                    }
-						$('form').find('input[name="employee_others[]"][value="' + name + '_' + file.name + '"]').remove()
-					}
-
-				});
-
-
-
-	});
-
-
-
 </script>
 
 
-</body>
-</html>
+

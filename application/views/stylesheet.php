@@ -33,11 +33,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/chocolat/dist/css/chocolat.css">
 
-		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/dropzonejs/dropzone.css">
+<!--		<link rel="stylesheet" href="--><?php //echo base_url(); ?><!--assets/modules/dropzonejs/dropzone.css">-->
+
+	<link href="<?php echo base_url(); ?>assets/modules/dropzone/dist/dropzone.css" rel="stylesheet" type="text/css">
 
 
-		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jqvmap.min.css">
+
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jqvmap.min.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/flag-icon-css/css/flag-icon.min.css">
+	<link href="<?php echo base_url(); ?>/assets/modules/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
 
 
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/bootstrap-social/bootstrap-social.css">
@@ -58,9 +62,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/fullcalendar/fullcalendar.min.css">
 
-		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/datatables/datatables.min.css">
-		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
-		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css">
+	<link href="<?php echo base_url(); ?>assets/modules/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo base_url(); ?>assets/modules/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+	<!-- Responsive datatable examples -->
+	<link href="<?php echo base_url(); ?>assets/modules/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+
+
+	<!--		<link rel="stylesheet" href="--><?php //echo base_url(); ?><!--assets/modules/datatables/datatables.min.css">-->
+<!--		<link rel="stylesheet" href="--><?php //echo base_url(); ?><!--assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">-->
+<!--		<link rel="stylesheet" href="--><?php //echo base_url(); ?><!--assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css">-->
 
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/ionicons/css/ionicons.min.css">
 

@@ -9,9 +9,8 @@
 		}
 	</script>
 
+
 	<?php include(APPPATH.'\views\stylesheet.php'); ?>
-
-
 	<!-- DataTables -->
 
 
@@ -20,43 +19,31 @@
 
 <body class="fixed-left">
 <!-- Begin page -->
-<div id="wrapper">
+<div id="app">
+	<div class="main-wrapper">
+		<div class="navbar-bg"></div>
+		<?php include(APPPATH.'\views\topbar.php'); ?>
 
-	<!-- ========== Left Sidebar Start ========== -->
-	<?php include(APPPATH.'\views\sidebar.php'); ?>
-	<!-- Left Sidebar End -->
 
-	<!-- Start right Content here -->
+		<?php include(APPPATH.'\views\sidebar.php'); ?>
 
-	<div class="content-page" id="raps">
-		<!-- Start content -->
-		<div class="content">
 
-			<!-- Top Bar Start -->
-			<?php include(APPPATH.'\views\topbar.php'); ?>
-			<!-- Top Bar End -->
 
-			<div class="page-content-wrapper">
+		<div class="main-content">
+			<section class="section">
+				<div class="section-header">
+					<h1> View Employee</h1>
+				</div>
 
-				<div class="container-fluid">
 
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="page-title-box">
-								<div class="float-right">
+				<div class="row">
+					<div class="col-12 col-md-12 col-lg-12">
+						<div class="card">
+							<!--							<div class="card-header">-->
+							<!--								<h4>Simple Table</h4>-->
+							<!--							</div>-->
 
-								</div>
-								<h4 class="page-title">View Employees</h4>
-							</div>
-						</div>
-					</div>
-					<!-- end page title end breadcrumb -->
-
-					<div class="row">
-						<div class="col-md-12">
-							<div class="card m-b-30">
-								<div class="card-body">
-									<form class="" method="post" action="<?php echo site_url('add_employee'); ?>" enctype="multipart/form-data">
+								<form class="" method="post" action="<?php echo site_url('add_employee'); ?>" enctype="multipart/form-data">
 									<!-- Nav tabs -->
 									<ul class="nav nav-pills nav-justified" role="tablist">
 										<li class="nav-item waves-effect waves-light">
@@ -86,87 +73,87 @@
 												</div>
 											<?php endif; ?>
 
-												<div class="modal-body">
+											<div class="modal-body">
 
-													<img src="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" alt="" class="rounded-circle  mx-auto d-block w-80">
+												<img src="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" alt="" class="rounded-circle  mx-auto d-block w-80">
 
-													<div class="form-group">
-														<label>Employee ID:</label>
-														<input type="text" class="form-control" disabled  name="employee_unique_id" required  value="<?php echo $employee->employee_unique_id; ?>" placeholder="Enter Name of employee"/>
+												<div class="form-group">
+													<label>Employee ID:</label>
+													<input type="text" class="form-control" disabled  name="employee_unique_id" required  value="<?php echo $employee->employee_unique_id; ?>" placeholder="Enter Name of employee"/>
+												</div>
+
+
+												<div class="form-group row">
+
+													<div class="col-sm-4">
+														<label>Employee First Name:</label>
+														<input type="text" class="form-control" disabled  name="employee_first_name" required  value="<?php echo $employee->employee_first_name; ?>" placeholder="Enter Name of employee first name"/>
+													</div>
+													<div class="col-sm-4">
+														<label>Employee Last Name:</label>
+														<input type="text" class="form-control"  disabled name="employee_last_name" required  value="<?php echo $employee->employee_last_name; ?>" placeholder="Enter employee last name"/>
 													</div>
 
-
-													<div class="form-group row">
-
-														<div class="col-sm-4">
-															<label>Employee First Name:</label>
-															<input type="text" class="form-control" disabled  name="employee_first_name" required  value="<?php echo $employee->employee_first_name; ?>" placeholder="Enter Name of employee first name"/>
-														</div>
-														<div class="col-sm-4">
-															<label>Employee Last Name:</label>
-															<input type="text" class="form-control"  disabled name="employee_last_name" required  value="<?php echo $employee->employee_last_name; ?>" placeholder="Enter employee last name"/>
-														</div>
-
-														<div class="col-sm-4">
-															<label>Employee Other Name:</label>
-															<input type="text" class="form-control" disabled name="employee_other_name"   value="<?php echo $employee->employee_other_name; ?>" placeholder="Enter employee other name"/>
-														</div>
-
+													<div class="col-sm-4">
+														<label>Employee Other Name:</label>
+														<input type="text" class="form-control" disabled name="employee_other_name"   value="<?php echo $employee->employee_other_name; ?>" placeholder="Enter employee other name"/>
 													</div>
 
+												</div>
 
-													<div class="form-group row">
 
-														<div class="col-sm-4">
-															<label> Employee Personal Email:</label>
-															<input type="email" class="form-control" disabled  name="employee_personal_mail" required value="<?php echo $employee->employee_personal_email; ?>" placeholder="Enter employee personal email"/>
-														</div>
-														<div class="col-sm-4">
-															<label>Employee Official Email:</label>
-															<input type="email" class="form-control" disabled name="employee_official_email"  value="<?php echo $employee->employee_official_email; ?>" placeholder="Enter employee official email"/>
-														</div>
+												<div class="form-group row">
 
-														<div class="col-sm-4">
+													<div class="col-sm-4">
+														<label> Employee Personal Email:</label>
+														<input type="email" class="form-control" disabled  name="employee_personal_mail" required value="<?php echo $employee->employee_personal_email; ?>" placeholder="Enter employee personal email"/>
+													</div>
+													<div class="col-sm-4">
+														<label>Employee Official Email:</label>
+														<input type="email" class="form-control" disabled name="employee_official_email"  value="<?php echo $employee->employee_official_email; ?>" placeholder="Enter employee official email"/>
+													</div>
 
-															<label>Employee Date of Birth:</label>
-															<div class="input-group">
+													<div class="col-sm-4">
+
+														<label>Employee Date of Birth:</label>
+														<div class="input-group">
 															<input type="date" name="employee_dob" disabled value="<?php echo $employee->employee_dob; ?>" required class="form-control" placeholder="mm/dd/yyyy">
 
 															<div class="input-group-addon">
 																<span><i class="mdi mdi-calendar" aria-hidden="true"></i></span>
 
 															</div>
-															</div>
-
 														</div>
 
 													</div>
 
-													<div class="form-group row">
+												</div>
 
-														<div class="col-sm-4">
-															<label>Employee Phone Number</label>
-															<input type="text" placeholder="" disabled name="employee_phone_number" data-mask="(999) 9999-9999" value="<?php echo $employee->employee_phone_number ?>" class="form-control">
-														</div>
+												<div class="form-group row">
 
-														<div class="col-sm-8">
-															<label> Employee Address:</label>
-															<textarea id="textarea" class="form-control" disabled required name="employee_address" maxlength="225" rows="3" placeholder="Employee Address."><?php echo $employee->employee_address ?></textarea>
-														</div>
-
-
+													<div class="col-sm-4">
+														<label>Employee Phone Number</label>
+														<input type="text" placeholder="" disabled name="employee_phone_number" data-mask="(999) 9999-9999" value="<?php echo $employee->employee_phone_number ?>" class="form-control">
 													</div>
 
-
-
-
-
-
-
-													<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
+													<div class="col-sm-8">
+														<label> Employee Address:</label>
+														<textarea id="textarea" class="form-control" disabled required name="employee_address" maxlength="225" rows="3" placeholder="Employee Address."><?php echo $employee->employee_address ?></textarea>
+													</div>
 
 
 												</div>
+
+
+
+
+
+
+
+												<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
+
+
+											</div>
 										</div>
 
 										<div class="tab-pane p-3" id="job-information" role="tabpanel">
@@ -182,7 +169,7 @@
 														<option>Select</option>
 														<?php foreach ($grades as $grade): ?>
 
-														<option value="<?php echo $grade->grade_id; ?>" <?php if($grade->grade_id == $employee->employee_grade_id) { echo "selected"; } ?>> <?php echo $grade->grade_name; ?></option>
+															<option value="<?php echo $grade->grade_id; ?>" <?php if($grade->grade_id == $employee->employee_grade_id) { echo "selected"; } ?>> <?php echo $grade->grade_name; ?></option>
 
 
 														<?php endforeach; ?>
@@ -209,25 +196,25 @@
 											</div>
 
 											<div class="form-group row">
-											<div class="col-sm-6">
-												<label>Employee Qualification</label>
-												<select class="select2 mb-3 select2-multiple"  required name="employee_qualification[]" style="width: 100%" multiple="multiple" data-placeholder="Choose" disabled>
-													<option>Select</option>
-													<?php foreach ($qualifications as $qualification): ?>
+												<div class="col-sm-6">
+													<label>Employee Qualification</label>
+													<select class="select2 mb-3 select2-multiple"  required name="employee_qualification[]" style="width: 100%" multiple="multiple" data-placeholder="Choose" disabled>
+														<option>Select</option>
+														<?php foreach ($qualifications as $qualification): ?>
 
-														<?php $employee_qualifications = json_decode($employee->employee_qualification); ?>
+															<?php $employee_qualifications = json_decode($employee->employee_qualification); ?>
 
-														<option value="<?php echo $qualification->qualification_id; ?>" <?php foreach ($employee_qualifications as $employee_qualification){
-															if($employee_qualification == $qualification->qualification_id){
-																echo "selected";
-															}
-														} ?>> <?php echo $qualification->qualification_name; ?></option>
+															<option value="<?php echo $qualification->qualification_id; ?>" <?php foreach ($employee_qualifications as $employee_qualification){
+																if($employee_qualification == $qualification->qualification_id){
+																	echo "selected";
+																}
+															} ?>> <?php echo $qualification->qualification_name; ?></option>
 
 
-													<?php endforeach; ?>
-												</select>
+														<?php endforeach; ?>
+													</select>
 
-											</div>
+												</div>
 
 												<div class="col-sm-6">
 													<label>SBU (Location)</label>
@@ -245,7 +232,7 @@
 
 												</div>
 
-										</div>
+											</div>
 
 
 											<div id="work_experiences">
@@ -297,7 +284,7 @@
 													<hr>
 
 
-										<?php		}
+												<?php		}
 												} ?>
 
 
@@ -391,28 +378,28 @@
 
 												<?php if($employee->employee_pensionable == 1): ?>
 
-												<div class="col-sm-6">
-													<label> Pension Number:</label>
-													<input  name="employee_pension_number"  disabled value="<?php echo $employee->employee_pension_number ?>" type="text"
-															class="form-control"
-															placeholder="Enter Pension Number"/>
-												</div>
+													<div class="col-sm-6">
+														<label> Pension Number:</label>
+														<input  name="employee_pension_number"  disabled value="<?php echo $employee->employee_pension_number ?>" type="text"
+																class="form-control"
+																placeholder="Enter Pension Number"/>
+													</div>
 
-												<div class="col-sm-6">
-													<label>Pension Administrator</label>
-													<select class="select2 form-control mb-3 custom-select" disabled name="employee_pension_id" style="width: 100%; height:56px;">
+													<div class="col-sm-6">
+														<label>Pension Administrator</label>
+														<select class="select2 form-control mb-3 custom-select" disabled name="employee_pension_id" style="width: 100%; height:56px;">
 
-														<option value="0" selected> N/A </option>
-														<?php foreach ($pensions as $pension): ?>
+															<option value="0" selected> N/A </option>
+															<?php foreach ($pensions as $pension): ?>
 
-															<option value="<?php echo $pension->pension_id; ?>" <?php if($pension->pension_id == $employee->employee_pension_id){
-																echo "Selected";
-															} ?>> <?php echo $pension->pension_provider; ?></option>
+																<option value="<?php echo $pension->pension_id; ?>" <?php if($pension->pension_id == $employee->employee_pension_id){
+																	echo "Selected";
+																} ?>> <?php echo $pension->pension_provider; ?></option>
 
-														<?php endforeach; ?>
-													</select>
+															<?php endforeach; ?>
+														</select>
 
-												</div>
+													</div>
 
 												<?php
 
@@ -439,10 +426,10 @@
 												</div>
 
 												<div class="col-sm-6">
-												<div style="margin-top: 28px">
-													<button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-form">View Uploaded Documents</button>
+													<div style="margin-top: 28px">
+														<button type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-form">View Uploaded Documents</button>
 
-												</div>
+													</div>
 												</div>
 
 											</div>
@@ -454,7 +441,7 @@
 												<div class="col-sm-6">
 													<label> Employment Start Date:</label>
 													<input type="date" name="employment_start_date" value="<?php echo $employee->employee_employment_date; ?>" disabled required class="form-control" placeholder="mm/dd/yyyy">
-													</div>
+												</div>
 
 												<div class="col-sm-6">
 													<label>Employment Stop Date</label> <br>
@@ -473,10 +460,10 @@
 													<select class="select2 form-control mb-3 custom-select" required disabled name="employment_status" style="width: 100%; height:56px;">		<option>Select</option>
 
 
-															<option value="0" <?php if($employee->employee_status == 0){echo "selected" ;} ?>> Fired </option>
-															<option value="1"  <?php if($employee->employee_status == 1){echo "selected" ;} ?>> Probationary </option>
-															<option value="2"  <?php if($employee->employee_status == 2){echo "selected" ;} ?>> Confirmed  </option>
-															<option value="3"  <?php if($employee->employee_status == 3){echo "selected" ;} ?>>Retired</option>
+														<option value="0" <?php if($employee->employee_status == 0){echo "selected" ;} ?>> Fired </option>
+														<option value="1"  <?php if($employee->employee_status == 1){echo "selected" ;} ?>> Probationary </option>
+														<option value="2"  <?php if($employee->employee_status == 2){echo "selected" ;} ?>> Confirmed  </option>
+														<option value="3"  <?php if($employee->employee_status == 3){echo "selected" ;} ?>>Retired</option>
 
 
 													</select>
@@ -503,83 +490,79 @@
 
 
 
-									</form>
-
-								</div>
-							</div>
-						</div>
-					</div>
-
-					</div>
-
-				<div class="modal fade bd-example-modal-form" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-lg">
-						<div class="modal-content">
-							<div class="modal-body">
-								<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-									<div class="carousel-inner" role="listbox">
-										<div class="carousel-item active">
-											<iframe
-												src="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" scrolling="no" frameborder="no" height="700px" onload="resizeIframe(this)" width="100%">
-											</iframe>
-
-										</div>
-										<div class="carousel-item">
-											<iframe
-													src="<?php echo base_url()."/uploads/employee_nysc/".$employee->employee_nysc_document; ?>" scrolling="no" frameborder="no" height="700px" width="100%">
-											</iframe>
-										</div>
-
-										<?php if(empty($other_documents)){
+								</form>
 
 
-										} else{ foreach ($other_documents as $other_document){ ?>
-											<div class="carousel-item">
 
-												<iframe
-														src="<?php echo base_url()."/uploads/employee_others/".$other_document->other_document_name; ?>" height="700px" width="100%">
-												</iframe>
+							<div class="modal fade bd-example-modal-form" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-body">
+											<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+												<div class="carousel-inner" role="listbox">
+													<div class="carousel-item active">
+														<iframe
+																src="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" scrolling="no" frameborder="no" height="700px" onload="resizeIframe(this)" width="100%">
+														</iframe>
+
+													</div>
+													<div class="carousel-item">
+														<iframe
+																src="<?php echo base_url()."/uploads/employee_nysc/".$employee->employee_nysc_document; ?>" scrolling="no" frameborder="no" height="700px" width="100%">
+														</iframe>
+													</div>
+
+													<?php if(empty($other_documents)){
+
+
+													} else{ foreach ($other_documents as $other_document){ ?>
+														<div class="carousel-item">
+
+															<iframe
+																	src="<?php echo base_url()."/uploads/employee_others/".$other_document->other_document_name; ?>" height="700px" width="100%">
+															</iframe>
+														</div>
+
+													<?php	} } ?>
+
+												</div>
+												<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+													<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+													<span class="sr-only">Previous</span>
+												</a>
+												<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+													<span class="carousel-control-next-icon" aria-hidden="true"></span>
+													<span class="sr-only">Next</span>
+												</a>
 											</div>
-
-									<?php	} } ?>
-
+										</div>
 									</div>
-									<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-										<span class="sr-only">Previous</span>
-									</a>
-									<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-										<span class="carousel-control-next-icon" aria-hidden="true"></span>
-										<span class="sr-only">Next</span>
-									</a>
 								</div>
 							</div>
+
 						</div>
 					</div>
-				</div>
 
 
-				</div><!-- container -->
+			</section>
+		</div>
 
-			</div> <!-- Page content Wrapper -->
 
-		</div> <!-- content -->
 
-		<?php include(APPPATH.'\views\footer.php'); ?>
 
 	</div>
-	<!-- End Right content here -->
-
 </div>
+
+
+
+
+
+<!-- End Right content here -->
+
+
 <!-- END wrapper -->
 
 
-
 <?php include(APPPATH.'\views\js.php'); ?>
-
-
-
 </body>
 </html>
-
-

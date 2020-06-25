@@ -1,4 +1,3 @@
-
 		<?php
 		defined('BASEPATH') OR exit('No direct script access allowed');
 		?>
@@ -35,7 +34,8 @@
 
 			<script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
 
-			<script src="<?php echo base_url(); ?>assets/modules/dropzonejs/min/dropzone.min.js"></script>
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/dropzonejs/min/dropzone.min.js"></script>-->
+		<script src="<?php echo base_url(); ?>/assets/modules/dropzone/dist/dropzone.js"></script>
 
 			<script src="<?php echo base_url(); ?>assets/modules/jquery.sparkline.min.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script>
@@ -68,10 +68,30 @@
 
 			<script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script>
 
-			<script src="<?php echo base_url(); ?>assets/modules/datatables/datatables.min.js"></script>
-			<script src="<?php echo base_url(); ?>assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
-			<script src="<?php echo base_url(); ?>assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
-			<script src="<?php echo base_url(); ?>assets/modules/jquery-ui/jquery-ui.min.js"></script>
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/datatables/datatables.min.js"></script>-->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>-->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>-->
+<!--		-->
+
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/jquery.dataTables.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/dataTables.bootstrap4.min.js"></script>
+		<!-- Buttons examples -->
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/dataTables.buttons.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/buttons.bootstrap4.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/jszip.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/pdfmake.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/vfs_fonts.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/buttons.html5.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/buttons.print.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/buttons.colVis.min.js"></script>
+		<!-- Responsive examples -->
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/dataTables.responsive.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/responsive.bootstrap4.min.js"></script>
+		<script src="<?php echo base_url(); ?>/assets/modules/datatables/datatables.init.js"></script>
+
+
+
+		<script src="<?php echo base_url(); ?>assets/modules/jquery-ui/jquery-ui.min.js"></script>
 
 			<script src="<?php echo base_url(); ?>assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
 
@@ -109,15 +129,15 @@
 
 		<!-- Page Specific JS File -->
 
-			<script src="<?php echo base_url(); ?>assets/js/page/index.js"></script>
-
-			<script src="<?php echo base_url(); ?>assets/js/page/index-0.js"></script>
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/index.js"></script>-->
+<!---->
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/index-0.js"></script>-->
 
 			<script src="<?php echo base_url(); ?>assets/js/page/bootstrap-modal.js"></script>
 
 			<script src="<?php echo base_url(); ?>assets/js/page/components-chat-box.js"></script>
 
-			<script src="<?php echo base_url(); ?>assets/js/page/components-multiple-upload.js"></script>
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/components-multiple-upload.js"></script>-->
 
 			<script src="<?php echo base_url(); ?>assets/js/page/components-statistic.js"></script>
 
