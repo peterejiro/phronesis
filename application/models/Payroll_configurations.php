@@ -32,6 +32,7 @@ class Payroll_configurations extends CI_Model
 
 		$this->db->select('*');
 		$this->db->from('tax_rate');
+		$this->db->order_by('tax_rate_id', 'asc');
 		return $this->db->get()->result();
 
 	}

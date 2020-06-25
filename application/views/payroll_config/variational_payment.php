@@ -38,6 +38,9 @@
 							<!--							</div>-->
 							<div class="card-body">
 								<div class="table-responsive">
+									<a href="<?php echo base_url('new_variational_payment') ?>" class="btn btn-secondary btn-round"  aria-haspopup="true" aria-expanded="false" style="margin: 5vh">
+										<i class="mdi mdi-new-box "></i>Add Variational Payment
+									</a>
 
 									<table id="datatable-buttons" class="table table-bordered table-md">
 										<thead>
