@@ -1,35 +1,48 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
+      <meta charset="UTF-8">
+      <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+      <meta content="IHUMANE" name="description" />
+      <meta content="Connexxion Group" name="author" />
 
-		<?php include(APPPATH.'\views\stylesheet.php'); ?>
+      <title>IHUMANE</title>
+
+      <!-- General CSS Files -->
+      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/fontawesome/css/all.min.css">
+
+      <!-- Template CSS -->
+      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/components.css">
 
     </head>
 	<body>
-
 	<div id="app">
 		<section class="section" >
 			<div class="d-flex flex-wrap align-items-stretch">
-				<div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white" style="height: 100vh">
+				<div class="col-lg-4 col-md-6 col-12 order-lg-1 order-2 bg-white" style="height: 100vh;">
 					<div class="p-4 m-3">
-
 						<img src="<?php echo base_url() ?>/assets/img/stisla-fill.svg" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2">
-
-						<h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">Ihumane</span></h4>
-						<p class="text-muted">Before you get started, you must login</p>
+						<h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">IHUMANE</span></h4>
+						<p class="text-muted">Before you get started, you must login with your credentials.</p>
 						<form method="POST" action="<?php echo site_url('login') ?>" class="needs-validation" novalidate="">
 							<div class="form-group">
-								<label for="email">Username:</label>
-								<input class="form-control" name="username" type="text" required="" autocomplete="username" placeholder="Username">
-
+								<label for="username">Username</label>
+								<input class="form-control" name="username" type="text" required="" autocomplete="username" placeholder="Username" id="username">
 								<div class="invalid-feedback">
-									Please fill in your email
+									Please fill in your username
 								</div>
 							</div>
 
 							<div class="form-group">
 								<div class="d-block">
-									<label for="password" class="control-label">Password</label>
+									<label for="password-field" class="control-label">Password</label>
 								</div>
 								<input class="form-control" name="password" type="password" required="" id="password-field" autocomplete="current-password" placeholder="Password">
 
@@ -40,9 +53,7 @@
 
 							<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 
-
 							<?php if($error != ' '): ?>
-
 								<div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
 									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
@@ -65,8 +76,6 @@
 									Login
 								</button>
 							</div>
-
-
 							<div class="text-center mt-5 text-small">
 								Copyright &copy; Connexxion Telecom
 								<div class="mt-2">
@@ -77,7 +86,7 @@
 							</div>
 					</div>
 				</div>
-				<div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" data-background="<?php echo base_url() ?>assets/img/unsplash/login-bg.jpg" style="height: 100vh;">
+				<div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" data-background="<?php echo base_url() ?>assets/img/unsplash/login-bg.jpg">
 					<div class="absolute-bottom-left index-2">
 						<div class="text-light p-5 pb-2">
 							<div class="mb-5 pb-3">
@@ -92,19 +101,17 @@
 		</section>
 	</div>
 
+  <!-- General JS Scripts -->
+  <script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/modules/popper.js"></script>
+  <script src="<?php echo base_url(); ?>assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/modules/moment.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/stisla.js"></script>
 
+  <!-- Template JS File -->
+  <script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
 
-
-	<?php include(APPPATH.'\views\js.php'); ?>
 </body>
-
-
-
-
-
-
-
-
-
-
 </html>
