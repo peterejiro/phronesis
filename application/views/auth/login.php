@@ -90,7 +90,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="absolute-bottom-left index-2">
 						<div class="text-light p-5 pb-2">
 							<div class="mb-5 pb-3">
-								<h1 class="mb-2 display-4 font-weight-bold">Good Morning</h1>
+								<h1 class="mb-2 display-4 font-weight-bold greeting">Good Morning</h1>
 								<h4 class="font-weight-normal text-muted-transparent">Abuja, Nigeria</h4>
                 <h6 id="timestamp"></h6>
 							</div>
@@ -116,6 +116,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script>
     $(document).ready(function () {
       setInterval(timestamp, 1000);
+      let today = new Date();
+      let curHr = today.getHours();
+      if (curHr < 12) {
+        $('.greeting').html('Good Morning')
+      } else if (curHr < 18) {
+        $('.greeting').html('Good Afternoon')
+      } else {
+        $('.greeting').html('Good Evening')
+      }
     });
 
     function timestamp() {
