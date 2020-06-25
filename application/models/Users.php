@@ -58,7 +58,8 @@ class Users extends CI_Model
 			$user = $query->row();
 			if(password_verify($userdata['password'], $user->user_password)):
 				$dat = array(
-					'user_username'=> $user->user_username
+					'user_username'=> $user->user_username,
+          'login_time' => time()
 				);
 				$this->session->set_userdata($dat);
 				return true;

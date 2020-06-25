@@ -96,7 +96,8 @@ class Home extends CI_Controller
 			$user_token_data = $this->security->xss_clean($user_token_data);
 			$query = $this->users->update_token($user_username, $user_token_data);
 			$this->session->unset_userdata('user_username');
-			$this->session->sess_destroy();
+      $this->session->unset_userdata('login_time');
+      $this->session->sess_destroy();
 			redirect('/login');
 			endif;
 
