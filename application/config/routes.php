@@ -57,6 +57,7 @@ $route['login'] = 'home/auth_login';
 $route['logout'] = 'home/logout';
 $route['access_denied'] = 'home/access_denied';
 $route['error_404'] = 'home/error_404';
+$route['timestamp'] = 'home/timestamp';
 
 $route['bank'] = 'hr_configuration/bank';
 $route['add_bank'] = 'hr_configuration/add_bank';
@@ -169,6 +170,9 @@ $route['emolument_report'] = 'payroll_report/emolument_report';
 $route['emolument_report_clear'] = 'payroll_report/emolument_report_clear';
 $route['deduction'] = 'payroll_report/deduction';
 $route['deduction_report'] = 'payroll_report/deduction_report';
+$route['pay_order'] = 'payroll_report/pay_order';
+$route['pay_order_report'] = 'payroll_report/pay_order_report';
+
 
 $route['view_log'] = 'log/view_log';
 

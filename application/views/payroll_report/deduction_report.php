@@ -3,6 +3,7 @@
 <head>
 
 
+
 	<?php include(APPPATH.'\views\stylesheet.php'); ?>
 	<!-- DataTables -->
 
@@ -12,182 +13,162 @@
 
 <body class="fixed-left">
 <!-- Begin page -->
-<div id="wrapper">
-
-	<!-- ========== Left Sidebar Start ========== -->
-	<?php include(APPPATH.'\views\sidebar.php'); ?>
-	<!-- Left Sidebar End -->
-
-	<!-- Start right Content here -->
-
-	<div class="content-page" id="raps">
-		<!-- Start content -->
-		<div class="content">
-
-			<!-- Top Bar Start -->
-			<?php include(APPPATH.'\views\topbar.php'); ?>
-			<!-- Top Bar End -->
-
-			<div class="page-content-wrapper">
-
-				<div class="container-fluid">
-
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="page-title-box">
-								<div class="float-right">
-
-								</div>
-								<h4 class="page-title">Deduction Report</h4>
-							</div>
-						</div>
-					</div>
-					<!-- end page title end breadcrumb -->
+<div id="app">
+	<div class="main-wrapper">
+		<div class="navbar-bg"></div>
+		<?php include(APPPATH.'\views\topbar.php'); ?>
 
 
-					<div class="row">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-body">
-
-									<h4 class="mt-0 header-title"> Deduction Report</h4>
+		<?php include(APPPATH.'\views\sidebar.php'); ?>
 
 
-									<br> <br> <br>
+
+		<div class="main-content">
+			<section class="section">
+				<div class="section-header">
+					<h1> Deduction Report </h1>
+				</div>
 
 
-									<div class="modal-content">
+				<div class="row">
+					<div class="col-12 col-md-12 col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="modal-content">
 									<form class="" method="post" action="<?php echo site_url('deduction_report'); ?>">
-											<div class="modal-body">
+										<div class="modal-body">
 
-												<div class="form-group row">
-
-
-													<div class="col-sm-6">
-														<label>Deduction Type:</label>
+											<div class="form-group row">
 
 
-														<select class="select2 form-control mb-3 custom-select" id="start_month" required name="payment_type" style="width: 100%; height:56px;">
-															<option value="0"> -- Select -- </option>
+												<div class="col-sm-6">
+													<label>Deduction Type:</label>
 
-																<?php foreach ($payment_definitions as $payment_definition):
-																		if($payment_definition->payment_definition_type == 0):
+
+													<select class="selectric form-control mb-3 custom-select" id="start_month" required name="payment_type" style="width: 100%; height:56px;">
+														<option value="0"> -- Select -- </option>
+
+														<?php foreach ($payment_definitions as $payment_definition):
+															if($payment_definition->payment_definition_type == 0):
 																?>
 
 																<option value="<?php echo $payment_definition->payment_definition_id?>">
 																	<?php echo $payment_definition->payment_definition_payment_name; ?>
 																</option>
-														<?php endif;
-																endforeach;
+															<?php endif;
+														endforeach;
 														?>
 
 
-														</select>
-
-													</div>
-
+													</select>
 
 												</div>
 
-													<div class="form-group row">
 
-														<div class="col-sm-6">
-															<label>Start Year:</label>
+											</div>
 
-															<select class="select2 form-control mb-3 custom-select" id="start_year" required name="year" style="width: 100%; height:56px;">
-																<option value="0"> -- Select -- </option>
-																<option value="<?php echo $min_payroll_year[0]->salary_pay_year; ?>"> <?php echo $min_payroll_year[0]->salary_pay_year; ?> </option>
+											<div class="form-group row">
+
+												<div class="col-sm-6">
+													<label>Start Year:</label>
+
+													<select class="selectric form-control mb-3 custom-select" id="start_year" required name="year" style="width: 100%; height:56px;">
+														<option value="0"> -- Select -- </option>
+														<option value="<?php echo $min_payroll_year[0]->salary_pay_year; ?>"> <?php echo $min_payroll_year[0]->salary_pay_year; ?> </option>
 														<?php
 														$_min_payroll_year = $min_payroll_year[0]->salary_pay_year;
 														$_year = date("Y");
 														$check = $_year - $_min_payroll_year;
 														if($check > 0):
 															$count = 1;
-																	while ($count <= $check):
-														?>
+															while ($count <= $check):
+																?>
 																<option value="<?php echo $_min_payroll_year + $count; ?>"> <?php echo $_min_payroll_year + $count; ?> </option>
 
-															<?php
-																	$count++;
+																<?php
+																$count++;
 															endwhile;
-															endif; ?>
+														endif; ?>
 
-															</select>
-
-														</div>
-
-
-
-													</div>
-
-
-												<div class="form-group row">
-
-
-													<div class="col-sm-6">
-														<label>Start Month:</label>
-
-
-														<select class="select2 form-control mb-3 custom-select" id="start_month" required name="month" style="width: 100%; height:56px;">
-															<option value="0"> -- Select -- </option>
-
-															<?php $month = date('n'); // current month
-															for ($x = 0; $x < 12; $x++): ?>
-																<option value="<?php echo date('n', mktime(0,0,0,$month + $x,1)); ?>">
-																	<?php echo date('F', mktime(0,0,0,$month + $x,1)); ?>
-																</option>
-															<?php endfor; ?>
-
-
-
-														</select>
-
-													</div>
-
+													</select>
 
 												</div>
 
 
 
+											</div>
+
+
+											<div class="form-group row">
+
+
+												<div class="col-sm-6">
+													<label>Start Month:</label>
+
+
+													<select class="selectric form-control mb-3 custom-select" id="start_month" required name="month" style="width: 100%; height:56px;">
+														<option value="0"> -- Select -- </option>
+
+														<?php $month = date('n'); // current month
+														for ($x = 0; $x < 12; $x++): ?>
+															<option value="<?php echo date('n', mktime(0,0,0,$month + $x,1)); ?>">
+																<?php echo date('F', mktime(0,0,0,$month + $x,1)); ?>
+															</option>
+														<?php endfor; ?>
 
 
 
+													</select>
 
-
-
-
-
-
-
-												<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
-												<div class="modal-footer">
-
-													<button type="submit" id="loan_button"  class="btn btn-primary">List</button>
-													<button type="reset" class="btn btn-danger ml-2">Clear All</button>
 												</div>
-										</form>
-									</div>
+
+
+											</div>
 
 
 
 
+
+
+
+
+
+
+
+
+
+											<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
+											<div class="modal-footer">
+
+												<button type="submit" id="loan_button"  class="btn btn-primary">List</button>
+												<button type="reset" class="btn btn-danger ml-2">Clear All</button>
+											</div>
+									</form>
 								</div>
 
 
+
+
 							</div>
+
+
 						</div>
-					</div> <!-- end col -->
-				</div> <!-- end row -->
+					</div>
 
-			</div><!-- container -->
 
-		</div> <!-- Page content Wrapper -->
+			</section>
+		</div>
 
-	</div> <!-- content -->
 
-	<?php include(APPPATH.'\views\footer.php'); ?>
 
+
+	</div>
 </div>
+
+
+
+
+
 <!-- End Right content here -->
 
 </div>
@@ -197,6 +178,3 @@
 <?php include(APPPATH.'\views\js.php'); ?>
 </body>
 </html>
-
-
-

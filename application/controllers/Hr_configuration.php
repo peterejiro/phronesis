@@ -76,8 +76,10 @@ class Hr_configuration extends CI_Controller
 
 				$data['user_data'] = $this->users->get_user($username);
 				$bank_name = $this->input->post('bank_name');
+				$bank_code = $this->input->post('bank_code');
 				$bank_array = array(
-					'bank_name'=>$bank_name
+					'bank_name'=>$bank_name,
+					'bank_code' => $bank_code
 				);
 				$bank_array = $this->security->xss_clean($bank_array);
 				$query = $this->hr_configurations->add_bank($bank_array);
@@ -130,8 +132,11 @@ class Hr_configuration extends CI_Controller
 				$data['user_data'] = $this->users->get_user($username);
 				$bank_name = $this->input->post('bank_name');
 				$bank_id = $this->input->post('bank_id');
+				$bank_name = $this->input->post('bank_name');
+				$bank_code = $this->input->post('bank_code');
 				$bank_array = array(
-					'bank_name'=>$bank_name
+					'bank_name'=>$bank_name,
+					'bank_code' => $bank_code
 				);
 				$bank_array = $this->security->xss_clean($bank_array);
 				$query = $this->hr_configurations->update_bank($bank_id, $bank_array);

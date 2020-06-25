@@ -3,6 +3,7 @@
 <head>
 
 
+
 	<?php include(APPPATH.'\views\stylesheet.php'); ?>
 	<!-- DataTables -->
 
@@ -12,200 +13,177 @@
 
 <body class="fixed-left">
 <!-- Begin page -->
-<div id="wrapper">
-
-	<!-- ========== Left Sidebar Start ========== -->
-	<?php include(APPPATH.'\views\sidebar.php'); ?>
-	<!-- Left Sidebar End -->
-
-	<!-- Start right Content here -->
-
-	<div class="content-page" id="raps">
-		<!-- Start content -->
-		<div class="content">
-
-			<!-- Top Bar Start -->
-			<?php include(APPPATH.'\views\topbar.php'); ?>
-			<!-- Top Bar End -->
-
-			<div class="page-content-wrapper">
-
-				<div class="container-fluid">
-
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="page-title-box">
-								<div class="float-right">
-
-								</div>
-								<h4 class="page-title">Employee Salary Structure Setup</h4>
-							</div>
-						</div>
-					</div>
-					<!-- end page title end breadcrumb -->
+<div id="app">
+	<div class="main-wrapper">
+		<div class="navbar-bg"></div>
+		<?php include(APPPATH.'\views\topbar.php'); ?>
 
 
-					<div class="row">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-body">
-
-									<h4 class="mt-0 header-title"> Setup Employee Salary Structure</h4>
-
-
-									<br> <br> <br>
+		<?php include(APPPATH.'\views\sidebar.php'); ?>
 
 
 
+		<div class="main-content">
+			<section class="section">
+				<div class="section-header">
+					<h1> Setup Employee Salary Structure</h1>
+				</div>
 
 
-											<div class="modal-content">
+				<div class="row">
+					<div class="col-12 col-md-12 col-lg-12">
+						<div class="card">
+							<div class="card-body">
+							<div class="modal-content">
 
-												<form class="" method="post" action="<?php echo site_url('add_employee_salary_structure'); ?>">
-												<div class="modal-body">
-
-
-													<div class="form-group row">
-
-														<div class="col-sm-6">
-															<label>Employee ID:</label>
-															<input type="text" class="form-control"  name="employee_unique_id" required disabled value="<?php echo $employee->employee_unique_id; ?>" placeholder="Enter Name of employee"/>
+									<form class="" method="post" action="<?php echo site_url('add_employee_salary_structure'); ?>">
+										<div class="modal-body">
 
 
-														</div>
+											<div class="form-group row">
 
-														<div class="col-sm-6">
-															<label>Employee Name:</label>
-															<input type="text" class="form-control"  name="employee_unique_id" required disabled value="<?php echo $employee->employee_last_name." ".$employee->employee_first_name." ".$employee->employee_other_name; ?>" placeholder="Enter Name of employee"/>
-
-
-														</div>
+												<div class="col-sm-6">
+													<label>Employee ID:</label>
+													<input type="text" class="form-control"  name="employee_unique_id" required disabled value="<?php echo $employee->employee_unique_id; ?>" placeholder="Enter Name of employee"/>
 
 
+												</div>
 
-													</div>
+												<div class="col-sm-6">
+													<label>Employee Name:</label>
+													<input type="text" class="form-control"  name="employee_unique_id" required disabled value="<?php echo $employee->employee_last_name." ".$employee->employee_first_name." ".$employee->employee_other_name; ?>" placeholder="Enter Name of employee"/>
 
-
-													<div class="form-group row">
-
-														<div class="col-sm-6">
-															<label> Salary Structure Type:</label>
-															<select id="salary_structure_type" class="select2 form-control mb-3 custom-select" required onchange="check_salary_structure_type()" name="salary_structure_type" style="width: 100%; height:200px;">
-																<option value="2"> -- Select -- </option>
-
-																	<option value="0"> Personalized </option>
-																	<option value="1"> Categorised </option>
-
-
-
-															</select>
-
-														</div>
-
-
-													</div>
-
-
-													<div class="form-group row" id="salary_structure_category">
-
-														<div class="col-sm-6">
-															<label> Salary Structure Category:</label>
-															<select id="payment_type" class="select2 form-control mb-3 custom-select"  required name="salary_structure_category" style="width: 100%; height:56px;">
-																<option> -- Select -- </option>
-																<?php foreach ($salary_structures as $salary_structure): ?>
-																	<option value="<?php echo $salary_structure->salary_structure_id ?>>"> <?php echo $salary_structure->salary_structure_category_name; ?> </option>
-
-																<?php endforeach; ?>
-
-															</select>
-
-														</div>
-
-													</div>
-
-
-
-
-
-												<div id="allowances">
-
-													<div class="form-group row" id="allowance">
-														<button type="button" onclick="delete_div(this)"  class="btn btn-youtube btn-round m-b-10 m-l-10 waves-effect waves-light">
-															<i class="mdi mdi-delete "></i>
-														</button> <br>
-
-														<div class="col-sm-6" >
-
-
-															<label> Payment Definition:</label>
-															<select class="select form-control mb-3 custom-select" id="payment_definition" required name="payment_definition[]" style="width: 100%; height:56px;">
-																<option> -- Select -- </option>
-																<?php foreach ($payment_definitions as $payment_definition): ?>
-																	<option value="<?php echo $payment_definition->payment_definition_id ?>"> <?php echo $payment_definition->payment_definition_payment_name." (".$payment_definition->payment_definition_payment_code.")"; ?> </option>
-
-																<?php endforeach; ?>
-
-
-															</select>
-														</div>
-
-
-														<div class="col-sm-6">
-															<label> Amount:</label>
-															<input  name="allowance_amount[]"  data-parsley-type="digits" type="text"
-																	class="form-control"
-																	placeholder="Enter allowance amount"/>
-														</div>
-
-													</div>
-
-													<button id="allowance_button" type="button" onclick="clone_div()"  class="btn btn-skype btn-round m-b-10 m-l-10 waves-effect waves-light">
-														<i class="mdi mdi-plus-circle-outline"></i>
-													</button>
 
 												</div>
 
 
 
+											</div>
+
+
+											<div class="form-group row">
+
+												<div class="col-sm-6">
+													<label> Salary Structure Type:</label>
+													<select id="salary_structure_type" class="selectric form-control mb-3 custom-select" required onchange="check_salary_structure_type()" name="salary_structure_type" style="width: 100%; height:200px;">
+														<option value="2"> -- Select -- </option>
+
+														<option value="0"> Personalized </option>
+														<option value="1"> Categorised </option>
 
 
 
+													</select>
 
-
-
-
-
-
-													<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
-													<input type="hidden" name="employee_id" value="<?php echo $employee->employee_id; ?>">
-												<div class="modal-footer">
-													<button type="submit" class="btn btn-primary">Add Salary Allowance</button>
-													<button type="reset" class="btn btn-danger ml-2" data-dismiss="modal">Close</button>
 												</div>
-												</form>
+
+
+											</div>
+
+
+											<div class="form-group row" id="salary_structure_category">
+
+												<div class="col-sm-6">
+													<label> Salary Structure Category:</label>
+													<select id="payment_type" class="selectric form-control mb-3 custom-select"  required name="salary_structure_category" style="width: 100%; height:56px;">
+														<option> -- Select -- </option>
+														<?php foreach ($salary_structures as $salary_structure): ?>
+															<option value="<?php echo $salary_structure->salary_structure_id ?>>"> <?php echo $salary_structure->salary_structure_category_name; ?> </option>
+
+														<?php endforeach; ?>
+
+													</select>
+
+												</div>
+
 											</div>
 
 
 
 
+
+											<div id="allowances">
+
+												<div class="form-group row" id="allowance">
+													<button type="button" onclick="delete_div(this)"  class="btn btn-youtube btn-round m-b-10 m-l-10 waves-effect waves-light">
+														<i class="mdi mdi-delete "></i>
+													</button> <br>
+
+													<div class="col-sm-6" >
+
+
+														<label> Payment Definition:</label>
+														<select class="select form-control mb-3 custom-select" id="payment_definition" required name="payment_definition[]" style="width: 100%; height:56px;">
+															<option> -- Select -- </option>
+															<?php foreach ($payment_definitions as $payment_definition): ?>
+																<option value="<?php echo $payment_definition->payment_definition_id ?>"> <?php echo $payment_definition->payment_definition_payment_name." (".$payment_definition->payment_definition_payment_code.")"; ?> </option>
+
+															<?php endforeach; ?>
+
+
+														</select>
+													</div>
+
+
+													<div class="col-sm-6">
+														<label> Amount:</label>
+														<input  name="allowance_amount[]"  data-parsley-type="digits" type="text"
+																class="form-control"
+																placeholder="Enter allowance amount"/>
+													</div>
+
+												</div>
+
+												<button id="allowance_button" type="button" onclick="clone_div()"  class="btn btn-skype btn-round m-b-10 m-l-10 waves-effect waves-light">
+													<i class="mdi mdi-plus-circle-outline"></i>
+												</button>
+
+											</div>
+
+
+
+
+
+
+
+
+
+
+
+
+											<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
+											<input type="hidden" name="employee_id" value="<?php echo $employee->employee_id; ?>">
+											<div class="modal-footer">
+												<button type="submit" class="btn btn-primary">Add Salary Allowance</button>
+												<button type="reset" class="btn btn-danger ml-2" data-dismiss="modal">Close</button>
+											</div>
+									</form>
 								</div>
 
 
-								</div>
+
+
 							</div>
-						</div> <!-- end col -->
-					</div> <!-- end row -->
 
-				</div><!-- container -->
 
-			</div> <!-- Page content Wrapper -->
+						</div>
+					</div>
 
-		</div> <!-- content -->
 
-	<?php include(APPPATH.'\views\footer.php'); ?>
+			</section>
+		</div>
+
+
+
 
 	</div>
-	<!-- End Right content here -->
+</div>
+
+
+
+
+
+<!-- End Right content here -->
 
 </div>
 <!-- END wrapper -->
@@ -214,6 +192,7 @@
 <?php include(APPPATH.'\views\js.php'); ?>
 </body>
 </html>
+
 
 <script>
 	window.onload = function(){

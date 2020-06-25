@@ -1,116 +1,141 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
+      <meta charset="UTF-8">
+      <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+      <meta content="IHUMANE" name="description" />
+      <meta content="Connexxion Group" name="author" />
 
-		<?php include(APPPATH.'\views\stylesheet.php'); ?>
+      <title>IHUMANE</title>
+
+      <!-- General CSS Files -->
+      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/bootstrap/css/bootstrap.min.css">
+      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/fontawesome/css/all.min.css">
+
+      <!-- Template CSS -->
+      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/components.css">
 
     </head>
+	<body>
+	<div id="app">
+		<section class="section" >
+			<div class="d-flex flex-wrap align-items-stretch">
+				<div class="col-lg-4 col-md-6 col-12 order-lg-1 order-2 bg-white" style="height: 100vh; overflow: auto">
+					<div class="p-4 m-3">
+						<img src="<?php echo base_url() ?>/assets/img/stisla-fill.svg" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2">
+						<h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">IHUMANE</span></h4>
+						<p class="text-muted">Before you get started, please login with your credentials.</p>
+						<form method="POST" action="<?php echo site_url('login') ?>" class="needs-validation" novalidate="">
+							<div class="form-group">
+								<label for="username">Username</label>
+								<input class="form-control" name="username" type="text" required="" autocomplete="username" placeholder="Username" id="username">
+								<div class="invalid-feedback">
+									Please fill in your username
+								</div>
+							</div>
 
+							<div class="form-group">
+								<div class="d-block">
+									<label for="password-field" class="control-label">Password</label>
+								</div>
+								<input class="form-control" name="password" type="password" required="" id="password-field" autocomplete="current-password" placeholder="Password">
 
-    <body class="fixed-left">
-        <!-- Begin page -->
-        <!--<div class="accountbg"></div>-->
-        <div id="stars"></div>
-        <div id="stars2"></div>
-        <div class="wrapper-page">
+								<div class="invalid-feedback">
+									please fill in your password
+								</div>
+							</div>
 
-            <div class="card">
-                <div class="card-body">
-
-                    <h3 class="text-center mt-0">
-                        <a href="index.html" class="logo logo-admin">
-<!--							<img src="assets/images/logo.png" height="20" alt="logo">-->
-							<h3 class="text-center">IHUMANE</h3>
-						</a>
-                    </h3>
-
-                    <h6 class="text-center">Sign In</h6>
-
-                    <div class="p-3">
-                        
-                        <form class="form-horizontal" method="post" action="<?php echo site_url('login') ?>">
-
-                            <div class="form-group row">
-                                <div class="col-12">
-                                    <input class="form-control" name="username" type="text" required="" autocomplete="username" placeholder="Username">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="col-12">
-									<div class="input-group">
-										<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
-
-
-										<input class="form-control" name="password" type="password" required="" id="password-field" autocomplete="current-password" placeholder="Password">
-										<div class="input-group-addon">
-											<span><i id="pass-status" class="fa fa-eye" aria-hidden="true" onClick="viewPassword()"></i></span>
-
-										</div>
-									</div>
-									      </div>
-                            </div>
+							<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 
 							<?php if($error != ' '): ?>
-
-							<div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								<i class="mdi mdi-close-circle font-32"></i><strong class="pr-1">Error !</strong> <?php echo $error; ?>.
-							</div>
+								<div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<i class="mdi mdi-close-circle font-32"></i><strong class="pr-1">Error !</strong> <?php echo $error; ?>.
+								</div>
 							<?php endif; ?>
+							<div class="form-group">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
+									<label class="custom-control-label" for="remember-me">Remember Me</label>
+								</div>
+							</div>
 
-<!--                            <div class="form-group row">-->
-<!--                                <div class="col-12">-->
-<!--                                    <div class="custom-control custom-checkbox">-->
-<!--                                        <input type="checkbox" class="custom-control-input" id="customCheck1">-->
-<!--                                        <label class="custom-control-label" for="customCheck1">Remember me</label>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
+							<div class="form-group text-right">
+								<a href="#" class="float-left mt-3">
+									Forgot Password?
+								</a>
+								<button type="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
+									Login
+								</button>
+							</div>
+							<div class="text-center mt-5 text-small">
+								Copyright &copy; Connexxion Telecom
+								<div class="mt-2">
+									<a href="#">Privacy Policy</a>
+									<div class="bullet"></div>
+									<a href="#">Terms of Service</a>
+								</div>
+							</div>
+					</div>
+				</div>
+				<div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" data-background="<?php echo base_url() ?>assets/img/unsplash/login-bg-4-1.jpg">
+					<div class="absolute-bottom-left index-2">
+						<div class="text-light p-5 pb-2">
+							<div class="mb-5 pb-3">
+								<h1 class="mb-2 display-4 font-weight-bold greeting">Good Morning</h1>
+								<h4 class="font-weight-normal text-muted-transparent">Abuja, Nigeria</h4>
+                <h6 id="timestamp"></h6>
+							</div>
 
-                            <div class="form-group text-center row m-t-20">
-                                <div class="col-12">
-                                    <button  class="btn btn-danger btn-block waves-effect waves-light" type="submit">Log In</button>
-                                </div>
-                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
 
-                            <div class="form-group m-t-10 mb-0 row">
-                                <div class="col-sm-7 m-t-20">
-                                    <a href="#" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password ?</a>
-                                </div>
+  <!-- General JS Scripts -->
+  <script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/modules/popper.js"></script>
+  <script src="<?php echo base_url(); ?>assets/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/modules/moment.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/stisla.js"></script>
 
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- Template JS File -->
+  <script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
+  <script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
+  <script>
+    $(document).ready(function () {
+      setInterval(timestamp, 1000);
+      let today = new Date();
+      let curHr = today.getHours();
+      if (curHr < 12) {
+        $('.greeting').html('Good Morning')
+      } else if (curHr < 18) {
+        $('.greeting').html('Good Afternoon')
+      } else {
+        $('.greeting').html('Good Evening')
+      }
+    });
 
+    function timestamp() {
+      $.ajax({
+        url: '<?php echo site_url('timestamp')?>',
+        success: function (data) {
+          $('#timestamp').html(data);
+        }
+      })
+    }
+  </script>
 
-		<?php include(APPPATH.'\views\js.php'); ?>
-
-	<script>
-
-		function viewPassword() {
-			var passwordInput = document.getElementById('password-field');
-			var passStatus = document.getElementById('pass-status');
-			if (passwordInput.type == 'password')
-			{
-				passwordInput.type='text';
-				passStatus.className='fa fa-eye-slash';
-			}
-			else
-			{
-				passwordInput.type='password';
-				passStatus.className='fa fa-eye';
-			}
-		}
-
-
-	</script>
-
-
-	</body>
+</body>
 </html>
