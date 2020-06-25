@@ -41,22 +41,34 @@
 
 
 							<div class="card-body">
+
+
 								<form class="" method="post" action="<?php echo site_url('add_employee'); ?>" enctype="multipart/form-data">
 									<!-- Nav tabs -->
-									<ul class="nav nav-pills nav-justified" role="tablist">
-										<li class="nav-item waves-effect waves-light">
-											<a class="nav-link active" data-toggle="tab" href="#personal-information" role="tab">Personal Information</a>
-										</li>
-										<li class="nav-item waves-effect waves-light">
-											<a class="nav-link" data-toggle="tab" href="#job-information" role="tab">Work Information</a>
-										</li>
-										<li class="nav-item waves-effect waves-light">
-											<a class="nav-link" data-toggle="tab" href="#bank-information" role="tab">Bank Information </a>
-										</li>
-										<li class="nav-item waves-effect waves-light">
-											<a class="nav-link" data-toggle="tab" href="#other-information" role="tab">Other Information</a>
-										</li>
-									</ul>
+
+										<ul class="nav nav-pills nav-justified" role="tablist">
+											<li class="nav-item waves-effect waves-light">
+
+												<a class="nav-link active" data-toggle="tab" href="#personal-information" role="tab">Personal Information</a>
+											</li>
+											<li class="nav-item waves-effect waves-light">
+
+
+																								<a class="nav-link" data-toggle="tab" href="#job-information" role="tab">Work Information</a>
+											</li>
+											<li class="nav-item waves-effect waves-light">
+
+
+																								<a class="nav-link" data-toggle="tab" href="#bank-information" role="tab">Bank Information </a>
+											</li>
+											<li class="nav-item waves-effect waves-light">
+
+
+																								<a class="nav-link" data-toggle="tab" href="#other-information" role="tab">Other Information</a>
+											</li>
+										</ul>
+
+
 
 									<!-- Tab panes -->
 									<div class="tab-content">
