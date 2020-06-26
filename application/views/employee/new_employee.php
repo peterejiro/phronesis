@@ -1,37 +1,19 @@
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<?php include(APPPATH.'\views\stylesheet.php'); ?>
 
 
-
-	<?php include(APPPATH.'\views\stylesheet.php'); ?>
-	<!-- DataTables -->
-
-
-</head>
-
-
-<body class="fixed-left">
+<body>
 <!-- Begin page -->
 <div id="app">
 	<div class="main-wrapper">
 		<div class="navbar-bg"></div>
 		<?php include(APPPATH.'\views\topbar.php'); ?>
-
-
 		<?php include(APPPATH.'\views\sidebar.php'); ?>
-
-
-
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1> Create Employee</h1>
+					<h1>New Employee</h1>
 				</div>
-
-
 				<div class="row">
 					<div class="col-12 col-md-12 col-lg-12">
 						<div class="card">
