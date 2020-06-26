@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link href="<?php echo base_url(); ?>/assets/modules/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
 
 
-	<?php include('stylesheet.php'); ?>
+<!--	--><?php //include('stylesheet.php'); ?>
 </head>
 
 
@@ -35,6 +36,5 @@
 <!-- Sweet-Alert  -->
 
 
-<?php include ('js.php');?>
 </body>
 </html>

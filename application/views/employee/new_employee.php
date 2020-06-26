@@ -18,6 +18,7 @@
             <div class="breadcrumb-item">New Employee</div>
           </div>
 				</div>
+
         <div class="section-body">
           <div class="section-title">All About Creating Employees</div>
           <p class="section-lead">You can complete the form to create an employee here</p>
@@ -164,7 +165,21 @@
                           </div>
                         </div>
                         <div class="form-group row">
-                          <div class="col-sm-12">
+                          <div class="col-sm-6">
+													<label>Subsidiary</label>
+													<select class="selectric form-control mb-3 custom-select" required name="subsidiary" style="width: 100%; height:56px;">		<option>Select</option>
+														<?php foreach ($subsidiarys as $subsidiary): ?>
+
+															<option value="<?php echo $subsidiary->subsidiary_id; ?>"> <?php echo $subsidiary->subsidiary_name; ?></option>
+
+
+														<?php endforeach; ?>
+													</select>
+
+
+
+												</div>
+                          <div class="col-sm-6">
                             <label for="check_experience">Work Experience</label>
                             <select class="selectric form-control mb-3 custom-select" id="check_experience"  name="check_experience" style="width: 100%"  onchange="work_experience()">
                               <option>Select</option>
@@ -348,6 +363,7 @@
           </div>
         </div>
       </section>
+	
 		</div>
   </div>
 </div>

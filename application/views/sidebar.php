@@ -1,10 +1,10 @@
 <div class="main-sidebar">
 	<aside id="sidebar-wrapper">
 		<div class="sidebar-brand">
-			<a href="index.html">IHumane</a>
+			<a href="<?php echo site_url() ?>">IHumane</a>
 		</div>
 		<div class="sidebar-brand sidebar-brand-sm">
-			<a href="index.html">IH</a>
+			<a href="<?php echo site_url() ?>">IH</a>
 		</div>
 		<ul class="sidebar-menu">
 			<li class="menu-header">Dashboard</li>
@@ -88,6 +88,7 @@
       $this->uri->segment(1) == 'grade' ||
       $this->uri->segment(1) == 'job_role' ||
       $this->uri->segment(1) == 'location' ||
+	  $this->uri->segment(1) == 'subsidiary' ||
       $this->uri->segment(1) == 'qualification' ? 'active' : '';
 			?>">
 			<?php if($hr_configuration == 1){  ?>
@@ -101,6 +102,7 @@
 					<li class="<?php echo $this->uri->segment(1) == 'job_role' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('job_role') ?>">Job Roles Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'location' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('location') ?>">Location Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'qualification' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('qualification') ?>">Qualification Setup</a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'subsidiary' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('subsidiary') ?>">Subsidiary Setup</a></li>
 				</ul>
 			<?php } ?>
 			</li>

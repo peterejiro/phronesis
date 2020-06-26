@@ -71,9 +71,15 @@ $route['health_insurance'] = 'hr_configuration/health_insurance';
 $route['add_health_insurance'] = 'hr_configuration/add_health_insurance';
 $route['update_health_insurance'] = 'hr_configuration/update_health_insurance';
 
+$route['test'] = 'hr_configuration/test';
+
 $route['location'] = 'hr_configuration/location';
 $route['add_location'] = 'hr_configuration/add_location';
 $route['update_location'] = 'hr_configuration/update_location';
+
+$route['subsidiary'] = 'hr_configuration/subsidiary';
+$route['add_subsidiary'] = 'hr_configuration/add_subsidiary';
+$route['update_subsidiary'] = 'hr_configuration/update_subsidiary';
 
 $route['grade'] = 'hr_configuration/grade';
 $route['add_grade'] = 'hr_configuration/add_grade';

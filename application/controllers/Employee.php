@@ -78,6 +78,7 @@ class Employee extends CI_Controller
 				$data['locations'] = $this->hr_configurations->view_locations();
 				$data['health_insurances'] = $this->hr_configurations->view_health_insurances();
 				$data['pensions'] = $this->hr_configurations->view_pensions();
+				$data['subsidiarys'] = $this->hr_configurations->view_subsidiarys();
 				$employee_unique_id = "ihumane_".random_string('alnum', 3);
 
 				$employee_check = $this->employees->get_employee($employee_unique_id);
@@ -110,7 +111,7 @@ class Employee extends CI_Controller
 	}
 
 	public function add_employee(){
-
+		error_reporting(0);
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
@@ -188,6 +189,7 @@ class Employee extends CI_Controller
 				$employment_stop_date = $this->input->post('employment_stop_date');
 				$employment_status = $this->input->post('employment_status');
 				$employee_others = $this->input->post('employee_others');
+				$employee_subsidiary = $this->input->post('subsidiary');
 				$employee_pensionable = $this->input->post('employee_pensionable');
 
 				if($employee_pensionable == 1):
@@ -233,7 +235,8 @@ class Employee extends CI_Controller
 					'employee_hmo_number' => $employee_hmo_number,
 					'employee_hmo_id' => $employee_hmo_id,
 					'employee_nysc_document' => $employee_nysc_name,
-					'employee_paye_number' => $employee_paye_number
+					'employee_paye_number' => $employee_paye_number,
+					'employee_subsidiary_id' => $employee_subsidiary
 
 				);
 
@@ -361,6 +364,7 @@ class Employee extends CI_Controller
 				$data['locations'] = $this->hr_configurations->view_locations();
 				$data['health_insurances'] = $this->hr_configurations->view_health_insurances();
 				$data['pensions'] = $this->hr_configurations->view_pensions();
+				$data['subsidiarys'] = $this->hr_configurations->view_subsidiarys();
 
 				$data['work_experiences'] = $this->employees->get_work_experience($employee_id);
 
@@ -422,6 +426,7 @@ class Employee extends CI_Controller
 				$data['locations'] = $this->hr_configurations->view_locations();
 				$data['health_insurances'] = $this->hr_configurations->view_health_insurances();
 				$data['pensions'] = $this->hr_configurations->view_pensions();
+				$data['subsidiarys'] = $this->hr_configurations->view_subsidiarys();
 
 				$data['work_experiences'] = $this->employees->get_work_experience($employee_id);
 
@@ -497,6 +502,7 @@ class Employee extends CI_Controller
 				$employment_status = $this->input->post('employment_status');
 				$employee_others = $this->input->post('employee_others');
 				$employee_pensionable = $this->input->post('employee_pensionable');
+				$employee_subsidiary = $this->input->post('subsidiary');
 
 				if($employee_pensionable == 1):
 					$employee_pension_number = $this->input->post('employee_pension_number');
@@ -540,7 +546,8 @@ class Employee extends CI_Controller
 					'employee_hmo_number' => $employee_hmo_number,
 					'employee_hmo_id' => $employee_hmo_id,
 					'employee_status' => $employment_status,
-					'employee_paye_number' => $employee_paye_number
+					'employee_paye_number' => $employee_paye_number,
+					'employee_subsidiary_id' => $employee_subsidiary
 
 				);
 
