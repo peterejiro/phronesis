@@ -81,6 +81,11 @@ $route['subsidiary'] = 'hr_configuration/subsidiary';
 $route['add_subsidiary'] = 'hr_configuration/add_subsidiary';
 $route['update_subsidiary'] = 'hr_configuration/update_subsidiary';
 
+$route['leave'] = 'hr_configuration/leave';
+$route['add_leave'] = 'hr_configuration/add_leave';
+$route['update_leave'] = 'hr_configuration/update_leave';
+
+
 $route['grade'] = 'hr_configuration/grade';
 $route['add_grade'] = 'hr_configuration/add_grade';
 $route['update_grade'] = 'hr_configuration/update_grade';
@@ -111,6 +116,9 @@ $route['employee_upload_others'] = 'employee/employee_upload_others';
 $route['view_employee/:num'] = 'employee/view_employee/$1';
 $route['update_employee/:num'] = 'employee/update_employee/$1';
 $route['edit_employee'] = 'employee/edit_employee';
+$route['employee_transfer'] = 'employee/employee_transfer';
+$route['new_employee_transfer'] = 'employee/new_employee_transfer';
+$route['add_new_employee_transfer'] = 'employee/add_new_employee_transfer';
 
 
 $route['tax_rates'] = 'payroll_configuration/tax_rate';
