@@ -603,7 +603,7 @@
 			</div>
     </div>
 	</div>
-        <!-- END wrapper -->
+  <?php include(APPPATH.'\views\footer.php'); ?>
   <?php include('js.php'); ?>
   <script>
     $(document).ready(function() {
