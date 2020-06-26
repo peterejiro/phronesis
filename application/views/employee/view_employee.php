@@ -196,7 +196,7 @@
 											</div>
 
 											<div class="form-group row">
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<label>Employee Qualification</label>
 													<select class="select2 mb-3 select2-multiple"  required name="employee_qualification[]" style="width: 100%" multiple="multiple" data-placeholder="Choose" disabled>
 														<option>Select</option>
@@ -216,7 +216,7 @@
 
 												</div>
 
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<label>SBU (Location)</label>
 													<select class="select2 form-control mb-3 custom-select" required name="location" style="width: 100%; height:56px;" disabled>
 														<option>Select</option>
@@ -231,7 +231,20 @@
 
 
 												</div>
+												<div class="col-sm-4">
+													<label>Subsidiary</label>
+													<select class="selectric form-control mb-3 custom-select" required name="location" style="width: 100%; height:56px;" disabled>		<option>Select</option>
+														<?php foreach ($subsidiarys as $subsidiary): ?>
 
+															<option value="<?php echo $subsidiary->subsidiary_id; ?>" <?php if($subsidiary->subsidiary_id == $employee->employee_subsidiary_id){ echo "selected"; } ?>> <?php echo $subsidiary->subsidiary_name; ?></option>
+
+
+														<?php endforeach; ?>
+													</select>
+
+
+
+												</div>
 											</div>
 
 

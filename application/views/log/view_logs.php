@@ -50,7 +50,6 @@
 
 										<?php endif; ?>
 
-
 										<div class="activity-icon bg-primary text-white shadow-primary">
 											<i class="fas fa-comment-alt"></i>
 										</div>
@@ -78,9 +77,6 @@
 									Load More
 								</button>
 
-<!--								<div id="loadMore" style="">-->
-<!--									<a href="#">Load More</a>-->
-<!--								</div>-->
 						</div>
 					</div>
 
