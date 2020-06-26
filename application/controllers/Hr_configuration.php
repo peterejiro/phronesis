@@ -452,7 +452,7 @@ class Hr_configuration extends CI_Controller
 
 					$msg = array(
 						'msg'=> 'Subsidiary Updated Successfully',
-						'location' => site_url('location'),
+						'location' => site_url('subsidiary'),
 						'type' => 'success'
 
 					);
