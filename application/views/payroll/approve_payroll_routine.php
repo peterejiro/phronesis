@@ -28,7 +28,12 @@
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1> Summary Of Payroll Routine - <?php echo $payroll_year." ".date("F", mktime(0, 0, 0, $payroll_month, 10)); ?> </h1>
+					<?php if($check_salary > 0): ?>
+						<h1> Summary Of Payroll Routine - <?php echo $payroll_year." ".date("F", mktime(0, 0, 0, $payroll_month, 10)); ?> </h1>
+
+					<?php else: ?>
+						<h1>No Routine </h1>
+					<?php endif; ?>
 				</div>
 
 
@@ -36,12 +41,18 @@
 					<div class="col-12 col-md-12 col-lg-12">
 						<div class="card">
 							<div class="card-body">
-								<?php if(!empty($employees)): ?>
+
+
+								<?php
+								if($check_salary > 0):
+								?>
 									<span style="float: right;">
 									<button type="button" class="btn btn-primary waves-effect waves-light" id="sa-paramss">Approve Routine</button>
 									<button type="button" class="btn btn-danger waves-effect waves-light" id="sa-params">Undo Routine</button>
 									</span>
-								<?php endif; ?>
+								<?php
+								endif;
+								?>
 								<table id="datatable-buttons" class="table table-bordered table-md">
 									<thead>
 									<tr>
@@ -61,7 +72,7 @@
 									<tbody>
 
 									<?php
-
+									if($check_salary > 0):
 									$sn = 1;
 									if(!empty($employees)):
 										foreach($employees as $employee):
@@ -118,6 +129,8 @@
 											endif;
 										endforeach;
 
+									endif;
+
 									endif; ?>
 
 									</tbody>
@@ -163,67 +176,42 @@
 
 
 	$('#sa-params').click(function () {
+
 		swal({
 			title: 'Are you sure?',
-			text: "You won't be able to revert this!",
-			type: 'warning',
-			showCancelButton: true,
-			confirmButtonText: 'Yes, Undo PayRoll Routine!',
-			cancelButtonText: 'No, Cancel!',
-			confirmButtonClass: 'btn btn-success',
-			cancelButtonClass: 'btn btn-danger m-l-10',
-			buttonsStyling: false
-		}).then(function () {
-
-			window.location="<?php echo site_url('undo_payroll_routine'); ?>";
-			// swal(
-			// 		'Deleted!',
-			// 		'Your file has been deleted.',
-			// 		'success'
-			// )
-		}, function (dismiss) {
-			// dismiss can be 'cancel', 'overlay',
-			// 'close', and 'timer'
-			if (dismiss === 'cancel') {
-				swal(
-						'Cancelled',
-						'Undo Canceled!!',
-						'error'
-				)
-			}
+			text: 'Action Cannot be reversed!',
+			icon: 'warning',
+			buttons: true,
+			dangerMode: true,
 		})
+				.then((willDelete) => {
+					if (willDelete) {
+						window.location="<?php echo site_url('undo_payroll_routine'); ?>"
+					} else {
+						swal('Undo Canceled!');
+					}
+				});
 	});
 
 	$('#sa-paramss').click(function () {
+
 		swal({
 			title: 'Are you sure?',
-			text: "You won't be able to revert this!",
-			type: 'warning',
-			showCancelButton: true,
-			confirmButtonText: 'Yes, Approve PayRoll Routine!',
-			cancelButtonText: 'No, Cancel!',
-			confirmButtonClass: 'btn btn-success',
-			cancelButtonClass: 'btn btn-danger m-l-10',
-			buttonsStyling: false
-		}).then(function () {
-
-			window.location="<?php echo site_url('run_approve_payroll_routine'); ?>";
-			// swal(
-			// 		'Deleted!',
-			// 		'Your file has been deleted.',
-			// 		'success'
-			// )
-		}, function (dismiss) {
-			// dismiss can be 'cancel', 'overlay',
-			// 'close', and 'timer'
-			if (dismiss === 'cancel') {
-				swal(
-						'Cancelled',
-						'Undo Canceled!!',
-						'error'
-				)
-			}
+			text: 'Action Cannot be reversed!',
+			icon: 'warning',
+			buttons: true,
+			dangerMode: true,
 		})
+				.then((willDelete) => {
+					if (willDelete) {
+						window.location="<?php echo site_url('run_approve_payroll_routine'); ?>"
+					} else {
+						swal('Routine Canceled!');
+					}
+				});
+
+
 	});
+
 
 </script>

@@ -1,6 +1,8 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 
 
 	<?php include(APPPATH.'\views\stylesheet.php'); ?>
@@ -12,82 +14,87 @@
 
 <body class="fixed-left">
 <!-- Begin page -->
-<div id="wrapper">
+<div id="app">
+	<div class="main-wrapper">
+		<div class="navbar-bg"></div>
+		<?php include(APPPATH.'\views\topbar.php'); ?>
 
-	<!-- ========== Left Sidebar Start ========== -->
-	<?php include(APPPATH.'\views\sidebar.php'); ?>
-	<!-- Left Sidebar End -->
 
-	<!-- Start right Content here -->
+		<?php include(APPPATH.'\views\sidebar.php'); ?>
 
-	<div class="content-page" id="raps">
-		<!-- Start content -->
-		<div class="content">
 
-			<!-- Top Bar Start -->
-			<?php include(APPPATH.'\views\topbar.php'); ?>
-			<!-- Top Bar End -->
 
-			<div class="page-content-wrapper">
+		<div class="main-content">
+			<section class="section">
+				<div class="section-header">
+					<h1>Activities</h1>
 
-				<div class="container-fluid">
+				</div>
+				<div class="section-body">
 
 					<div class="row">
-						<div class="col-sm-12">
-							<div class="page-title-box">
-								<div class="float-right">
-
-								</div>
-								<h4 class="page-title">Activity Logs</h4>
-							</div>
-						</div>
-					</div>
-					<!-- end page title end breadcrumb -->
 
 
-					<div class="row">
-						<div class="col-md-12 col-xl-12">
-							<div class="card">
-								<div class="card-body">
-									<div class="main-timeline mt-3">
+						<div class="col-6">
+							<div class="activities">
 
-										<?php foreach ($logs as $log):  ?>
+								<?php $count = 0;
 
+								foreach ($logs as $log):
+										if($count > 2):
+								?>
+									<div class="activity moreBox" style="display: none;">
 
+								<?php else: ?>
+										<div class="activity">
 
-										<div class="timeline">
-											<span class="timeline-icon"></span>
-<!--											<span class="year" style="float: right;">--><?php //$dateTime = new DateTime($log->log_date);
-//												echo $dateTime->format("d F Y H:i:s");  ?><!--</span>-->
-											<div class="timeline-content">
-												<h5 class="title"><?php echo $log->user_name; ?></h5>
-												<span class="post"><?php $dateTime = new DateTime($log->log_date);
-													echo $dateTime->format("d F Y H:i:s");  ?></span>
-												<p class="description">
-													<?php echo $log->log_description; ?></p>
-											</div>
+										<?php endif; ?>
+
+										<div class="activity-icon bg-primary text-white shadow-primary">
+											<i class="fas fa-comment-alt"></i>
 										</div>
+										<div class="activity-detail">
+											<div class="mb-2">
+												<span class="text-job text-primary"><?php $dateTime = new DateTime($log->log_date);
+													echo $dateTime->format("d F Y H:i:s");  ?></span>
+												<span class="bullet"></span>
+												<a class="text-job" href="#"><?php echo $log->user_name; ?></a>
 
-										<?php endforeach; ?>
-
-
+											</div>
+											<p><?php echo $log->log_description; ?></p>
+										</div>
 									</div>
-								</div>
+
+
+								<?php
+								$count++;
+								endforeach; ?>
+
+
 							</div>
+
+								<button class="btn btn-primary m-b-10 m-l-10 waves-effect waves-light" id="loadMore">
+									Load More
+								</button>
+
 						</div>
 					</div>
-					<!-- end col -->
-				</div> <!-- end row -->
 
-			</div><!-- container -->
 
-		</div> <!-- Page content Wrapper -->
 
-	</div> <!-- content -->
+				</div>
+			</section>
+		</div>
 
-	<?php include(APPPATH.'\views\footer.php'); ?>
 
+
+	</div>
 </div>
+
+
+
+
+
 <!-- End Right content here -->
 
 </div>
@@ -98,59 +105,23 @@
 </body>
 </html>
 
-
 <script>
 
-	window.onload = function(){
-		document.getElementById("loan_button").style.display='none';
-	};
-	function reset_form() {
-		document.getElementById("loan_form").reset();
-		document.getElementById("loan_button").style.display='none';
-		document.getElementById("compute_loan").style.display='block';
-	}
-
-	function addMonths(date, months) {
-		var d = date.getDate();
-		date.setMonth(date.getMonth() + +months);
-		if (date.getDate() != d) {
-			date.setDate(0);
+	$( document ).ready(function () {
+		//$(".moreBox").slice(0, 3).show();
+		if ($(".activity:hidden").length != 0) {
+			$("#loadMore").show();
 		}
-		return date;
-	}
-
-	function add_months(){
-		var start_month = document.getElementById('start_month').value;
-		var start_year = document.getElementById('start_year').value;
-		var payroll_month = document.getElementById('payroll_month').value;
-		var payroll_year = document.getElementById('payroll_year').value;
-		var amount = document.getElementById('amount').value;
-		var repayment_amount = document.getElementById('repayment_amount').value;
-
-		var installments = amount/repayment_amount;
-
-		var start_date = new Date(start_year, start_month-1);
-		var payroll_date = new Date(payroll_year, payroll_month-1);
-		if(start_date <= payroll_date){
-
-			alert("Start date cannot be equal or less than current payroll date");
-
-		} else {
-			var date = addMonths(start_date, installments-1);
-			var end_year = date.getFullYear();
-			var end_month = date.getMonth() + 1;
-			const monthNames = ["January", "February", "March", "April", "May", "June",
-				"July", "August", "September", "October", "November", "December"
-			];
-			 var end_month_name = monthNames[date.getMonth()];
-			 document.getElementById('end_month').value = end_month;
-			 document.getElementById('end_year').value = end_year;
-			 document.getElementById('end_year_name').value = end_year;
-			 document.getElementById('end_month_name').value = end_month_name;
-			 document.getElementById("loan_button").style.display='block';
-			 document.getElementById("compute_loan").style.display='none';
-	  	}
-	}
-
+		$("#loadMore").on('click', function (e) {
+			e.preventDefault();
+			$(".moreBox:hidden").slice(0, 6).slideDown();
+			if ($(".moreBox:hidden").length == 0) {
+				$("#loadMore").fadeOut('slow');
+			}
+		});
+	});
 
 </script>
+
+
+

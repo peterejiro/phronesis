@@ -321,6 +321,159 @@ class Hr_configuration extends CI_Controller
 
 	}
 
+
+	public function subsidiary(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['subsidiarys'] = $this->hr_configurations->view_subsidiarys();
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+
+
+				$this->load->view('hr_config/subsidiary', $data);
+
+
+
+
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function add_subsidiary(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+
+				$data['user_data'] = $this->users->get_user($username);
+				$subsidiary_name = $this->input->post('subsidiary_name');
+				$subsidiary_array = array(
+					'subsidiary_name'=>$subsidiary_name
+				);
+				$subsidiary_array = $this->security->xss_clean($subsidiary_array);
+				$query = $this->hr_configurations->add_subsidiary($subsidiary_array);
+
+				if($query == true):
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Added A New Subsidiary"
+					);
+
+					$this->logs->add_log($log_array);
+
+					$msg = array(
+						'msg'=> 'Subsidiary Added Successfully',
+						'location' => site_url('subsidiary'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+				else:
+					echo "An Error Occurred";
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function update_subsidiary(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$subsidiary_id = $this->input->post('subsidiary_id');
+				$subsidiary_name = $this->input->post('subsidiary_name');
+				$subsidiary_array = array(
+					'subsidiary_name'=>$subsidiary_name
+				);
+				$subsidiary_array = $this->security->xss_clean($subsidiary_array);
+				$query = $this->hr_configurations->update_subsidiary($subsidiary_id, $subsidiary_array);
+
+				if($query == true):
+
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Updated A Subsidiary"
+					);
+
+					$this->logs->add_log($log_array);
+
+					$msg = array(
+						'msg'=> 'Subsidiary Updated Successfully',
+						'location' => site_url('location'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+				else:
+					echo "An Error Occurred";
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+
 	public function grade(){
 
 		$username = $this->session->userdata('user_username');
@@ -1234,6 +1387,19 @@ class Hr_configuration extends CI_Controller
 		else:
 			redirect('/login');
 		endif;
+
+	}
+
+
+	public function test(){
+
+		$msg = array(
+			'msg'=> 'Subsidiary Updated Successfully',
+			'location' => site_url('test'),
+			'type' => 'success'
+
+		);
+		$this->load->view('swal', $msg);
 
 	}
 }

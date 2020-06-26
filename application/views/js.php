@@ -48,7 +48,7 @@
 			<script src="<?php echo base_url(); ?>assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
 
 			<script src="<?php echo base_url(); ?>assets/modules/cleave-js/dist/cleave.min.js"></script>
-			<script src="<?php echo base_url(); ?>assets/modules/cleave-js/dist/addons/cleave-phone.us.js"></script>
+			<script src="<?php echo base_url(); ?>assets/modules/cleave-js/dist/addons/cleave-phone.ng.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
