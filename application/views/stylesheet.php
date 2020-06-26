@@ -6,10 +6,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="UTF-8">
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-			<meta content="iHumane" name="description" />
-			<meta content="Connexxion Group" name="author" />
-
+  <meta content="iHumane" name="description" />
+  <meta content="Connexxion Group" name="author" />
 	<title>Ihumane</title>
+
+  <style>
+    /*Remove Arrows From Form Input Number Types*/
+    /*For Chrome, Safari, Edge, Opera: */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    /*For Firefox:*/
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+    /*Note, it is still possible to increment the number when you scroll inside the number input*/
+  </style>
+
 
 	<!-- General CSS Files -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/bootstrap/css/bootstrap.min.css">
