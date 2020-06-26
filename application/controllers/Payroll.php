@@ -1520,8 +1520,23 @@ class Payroll extends CI_Controller
 				$data['employees'] = $this->employees->view_employees();
 				$data['payroll_month'] = $this->payroll_configurations->get_payroll_month_year()->payroll_month_year_month;
 				$data['payroll_year'] = $this->payroll_configurations->get_payroll_month_year()->payroll_month_year_year;
-				//$this->load->view('payroll/payroll_routine_summary', $data);
 
+				$salaries = $this->salaries->view_salaries();
+
+				$check_salary = 0;
+				foreach ($salaries as $salary):
+
+					if(($salary->salary_pay_month == $this->payroll_configurations->get_payroll_month_year()->payroll_month_year_month) && ($salary->salary_pay_year == $this->payroll_configurations->get_payroll_month_year()->payroll_month_year_year) && ($salary->salary_confirmed == 0)):
+
+						$check_salary ++;
+
+					endif;
+
+				endforeach;
+
+
+
+				$data['check_salary'] = $check_salary;
 
 
 				$this->load->view('payroll/approve_payroll_routine', $data);

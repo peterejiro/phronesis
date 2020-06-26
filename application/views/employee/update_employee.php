@@ -178,7 +178,7 @@
 												<div class="col-sm-6">
 													<label>Job Role</label>
 
-													<select class="select2 form-control mb-3 custom-select" required  name="employee_job_role" style="width: 100%; height:56px;" >
+													<select class="selectric form-control mb-3 custom-select" required  name="employee_job_role" style="width: 100%; height:56px;" >
 														<option>Select</option>
 														<?php foreach ($roles as $role): ?>
 
@@ -192,9 +192,9 @@
 											</div>
 
 											<div class="form-group row">
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<label>Employee Qualification</label>
-													<select class="select2 mb-3 select2-multiple"  required name="employee_qualification[]" style="width: 100%" multiple="multiple" data-placeholder="Choose" >
+													<select class="selectric mb-3 select2-multiple"  required name="employee_qualification[]" style="width: 100%" multiple="multiple" data-placeholder="Choose" >
 														<option>Select</option>
 														<?php foreach ($qualifications as $qualification): ?>
 
@@ -212,13 +212,28 @@
 
 												</div>
 
-												<div class="col-sm-6">
+												<div class="col-sm-4">
 													<label>SBU (Location)</label>
-													<select class="select2 form-control mb-3 custom-select" required name="location" style="width: 100%; height:56px;" >
+													<select class="selectric form-control mb-3 custom-select" required name="location" style="width: 100%; height:56px;" >
 														<option>Select</option>
 														<?php foreach ($locations as $location): ?>
 
 															<option value="<?php echo $location->location_id; ?>" <?php if($location->location_id == $employee->employee_location_id){ echo "selected"; } ?>> <?php echo $location->location_name; ?></option>
+
+
+														<?php endforeach; ?>
+													</select>
+
+
+
+												</div>
+
+												<div class="col-sm-4">
+													<label>Subsidiary</label>
+													<select class="selectric form-control mb-3 custom-select" required name="subsidiary" style="width: 100%; height:56px;">		<option>Select</option>
+														<?php foreach ($subsidiarys as $subsidiary): ?>
+
+															<option value="<?php echo $subsidiary->subsidiary_id; ?>" <?php if($subsidiary->subsidiary_id == $employee->employee_subsidiary_id){ echo "selected"; } ?>> <?php echo $subsidiary->subsidiary_name; ?></option>
 
 
 														<?php endforeach; ?>
@@ -301,7 +316,7 @@
 
 												<div class="col-sm-6">
 													<label>Bank</label>
-													<select class="select2 form-control mb-3 custom-select" required  name="employee_bank" style="width: 100%; height:56px;">		<option>Select</option>
+													<select class="selectric form-control mb-3 custom-select" required  name="employee_bank" style="width: 100%; height:56px;">		<option>Select</option>
 														<?php foreach ($banks as $bank): ?>
 
 															<option value="<?php echo $bank->bank_id; ?>"<?php if($bank->bank_id == $employee->employee_bank_id){
@@ -326,7 +341,7 @@
 
 												<div class="col-sm-6">
 													<label>HMO Provider</label>
-													<select class="select2 form-control mb-3 custom-select"  required name="employee_hmo_id" style="width: 100%; height:56px;">
+													<select class="selectric form-control mb-3 custom-select"  required name="employee_hmo_id" style="width: 100%; height:56px;">
 
 														<option value="0" selected> N/A </option>
 														<?php foreach ($health_insurances as $health_insurance): ?>
@@ -355,7 +370,7 @@
 												<div class="col-sm-6">
 
 													<label>Pensionable? </label>
-													<select class="select2 form-control mb-3 custom-select" required name="employee_pensionable" onchange="pensionable()" id="employee_pensionable" style="width: 100%; height:56px;">		<option>Select</option>
+													<select class="selectric form-control mb-3 custom-select" required name="employee_pensionable" onchange="pensionable()" id="employee_pensionable" style="width: 100%; height:56px;">		<option>Select</option>
 
 														<option value="0" <?php if($employee->employee_pensionable == 0){ echo "selected"; } ?>> No </option>
 														<option value="1" <?php if($employee->employee_pensionable == 1){ echo "selected"; } ?>> Yes </option>
@@ -449,7 +464,7 @@
 
 												<div class="col-sm-6">
 													<label>Employment Status</label>
-													<select class="select2 form-control mb-3 custom-select" required  name="employment_status" style="width: 100%; height:56px;">		<option>Select</option>
+													<select class="selectric form-control mb-3 custom-select" required  name="employment_status" style="width: 100%; height:56px;">		<option>Select</option>
 
 
 														<option value="0" <?php if($employee->employee_status == 0){echo "selected" ;} ?>> Fired </option>

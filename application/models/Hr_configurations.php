@@ -115,7 +115,41 @@ class Hr_configurations extends CI_Model
 
 	}
 
-	//location setup end
+	//subsidiary setup end
+
+	public function add_subsidiary($subsidiary_data){
+
+		$this->db->insert('subsidiary', $subsidiary_data);
+		return true;
+	}
+
+	public function update_subsidiary($subsidiary_id, $subsidiary_data){
+
+		$this->db->where('subsidiary.subsidiary_id', $subsidiary_id);
+		$this->db->update('subsidiary', $subsidiary_data);
+		return true;
+
+
+	}
+
+	public function view_subsidiarys(){
+
+		$this->db->select('*');
+		$this->db->from('subsidiary');
+		return $this->db->get()->result();
+
+	}
+
+	public function view_subsidiary($subsidiary_id){
+		$this->db->select('*');
+		$this->db->from('subsidiary');
+		$this->db->where('subsidiary_id', $subsidiary_id);
+		$query = $this->db->get();
+		return $query->row();
+
+	}
+
+	//subsidiary setup end
 
 	//qualification setup begin
 	public function add_qualification($qualification_data){

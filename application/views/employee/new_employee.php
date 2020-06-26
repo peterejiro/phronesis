@@ -238,9 +238,22 @@
 											</div>
 
 											<div class="form-group row">
+												<div class="col-sm-6">
+													<label>Subsidiary</label>
+													<select class="selectric form-control mb-3 custom-select" required name="subsidiary" style="width: 100%; height:56px;">		<option>Select</option>
+														<?php foreach ($subsidiarys as $subsidiary): ?>
+
+															<option value="<?php echo $subsidiary->subsidiary_id; ?>"> <?php echo $subsidiary->subsidiary_name; ?></option>
 
 
-												<div class="col-sm-12">
+														<?php endforeach; ?>
+													</select>
+
+
+
+												</div>
+
+												<div class="col-sm-6">
 													<label>Work Experience</label>
 <!--													<select class="select2 mb-3 select2-multiple" id="check_experience" required name="check_experience" style="width: 100%"  data-placeholder="Choose" onchange="work_experience()">-->
 <!--													-->
