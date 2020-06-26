@@ -413,7 +413,6 @@ class Hr_configuration extends CI_Controller
 		else:
 			redirect('/login');
 		endif;
-
 	}
 
 	public function update_subsidiary(){
@@ -453,6 +452,158 @@ class Hr_configuration extends CI_Controller
 					$msg = array(
 						'msg'=> 'Subsidiary Updated Successfully',
 						'location' => site_url('subsidiary'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+				else:
+					echo "An Error Occurred";
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+
+
+	public function leave(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['leaves'] = $this->hr_configurations->view_leaves();
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+
+
+				$this->load->view('hr_config/leave', $data);
+
+
+
+
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function add_leave(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+
+				$data['user_data'] = $this->users->get_user($username);
+				$leave_name = $this->input->post('leave_name');
+				$leave_array = array(
+					'leave_name'=>$leave_name
+				);
+				$leave_array = $this->security->xss_clean($leave_array);
+				$query = $this->hr_configurations->add_leave($leave_array);
+
+				if($query == true):
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Added A New Leave Type"
+					);
+
+					$this->logs->add_log($log_array);
+
+					$msg = array(
+						'msg'=> 'Leave Added Successfully',
+						'location' => site_url('leave'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+				else:
+					echo "An Error Occurred";
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+	}
+
+	public function update_leave(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$leave_id = $this->input->post('leave_id');
+				$leave_name = $this->input->post('leave_name');
+				$leave_array = array(
+					'leave_name'=>$leave_name
+				);
+				$leave_array = $this->security->xss_clean($leave_array);
+				$query = $this->hr_configurations->update_leave($leave_id, $leave_array);
+
+				if($query == true):
+
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Updated A Leave Type"
+					);
+
+					$this->logs->add_log($log_array);
+
+					$msg = array(
+						'msg'=> 'Leave Updated Successfully',
+						'location' => site_url('leave'),
 						'type' => 'success'
 
 					);
