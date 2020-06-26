@@ -48,7 +48,7 @@
             <div class="col-12">
               <div class="card card-primary">
                 <div class="card-header">
-                  <h5>New Employee Form</h5>
+                  <h4>New Employee Form</h4>
                 </div>
                 <div class="card-body">
                   <form class="needs-validation" novalidate method="post" action="<?php echo site_url('add_employee'); ?>" enctype="multipart/form-data">
@@ -166,18 +166,13 @@
                         </div>
                         <div class="form-group row">
                           <div class="col-sm-6">
-													<label>Subsidiary</label>
-													<select class="selectric form-control mb-3 custom-select" required name="subsidiary" style="width: 100%; height:56px;">		<option>Select</option>
+													<label for="subsidiary">Subsidiary</label>
+													<select id="subsidiary" class="selectric form-control mb-3 custom-select" required name="subsidiary" style="width: 100%; height:56px;">
+                            <option>Select</option>
 														<?php foreach ($subsidiarys as $subsidiary): ?>
-
 															<option value="<?php echo $subsidiary->subsidiary_id; ?>"> <?php echo $subsidiary->subsidiary_name; ?></option>
-
-
 														<?php endforeach; ?>
 													</select>
-
-
-
 												</div>
                           <div class="col-sm-6">
                             <label for="check_experience">Work Experience</label>

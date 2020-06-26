@@ -151,6 +151,43 @@ class Hr_configurations extends CI_Model
 
 	//subsidiary setup end
 
+
+	//Leava setup end
+
+	public function add_leave($leave_data){
+
+		$this->db->insert('leave_type', $leave_data);
+		return true;
+	}
+
+	public function update_leave($leave_id, $leave_data){
+
+		$this->db->where('leave_type.leave_id', $leave_id);
+		$this->db->update('leave_type', $leave_data);
+		return true;
+
+
+	}
+
+	public function view_leaves(){
+
+		$this->db->select('*');
+		$this->db->from('leave_type');
+		return $this->db->get()->result();
+
+	}
+
+	public function view_leave($leave_id){
+		$this->db->select('*');
+		$this->db->from('leave_type');
+		$this->db->where('leave_id', $leave_id);
+		$query = $this->db->get();
+		return $query->row();
+
+	}
+
+	//leave setup end
+
 	//qualification setup begin
 	public function add_qualification($qualification_data){
 

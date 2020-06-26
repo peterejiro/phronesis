@@ -21,6 +21,7 @@
 				<ul class="dropdown-menu">
           <li class="<?php echo $this->uri->segment(1) == 'new_employee' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('new_employee') ?>"> New Employee</a></li>
           <li class="<?php echo $this->uri->segment(1) == 'employee' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee') ?>"> Manage Employees</a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'employee_transfer' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee_transfer') ?>"> Employee Transfers</a></li>
 				</ul>
       <?php } ?>
 			</li>
@@ -89,6 +90,7 @@
       $this->uri->segment(1) == 'job_role' ||
       $this->uri->segment(1) == 'location' ||
 	  $this->uri->segment(1) == 'subsidiary' ||
+	  $this->uri->segment(1) == 'leave' ||
       $this->uri->segment(1) == 'qualification' ? 'active' : '';
 			?>">
 			<?php if($hr_configuration == 1){  ?>
@@ -103,6 +105,7 @@
 					<li class="<?php echo $this->uri->segment(1) == 'location' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('location') ?>">Location Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'qualification' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('qualification') ?>">Qualification Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'subsidiary' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('subsidiary') ?>">Subsidiary Setup</a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'leave' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('leave') ?>">Leave Setup</a></li>
 				</ul>
 			<?php } ?>
 			</li>

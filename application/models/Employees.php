@@ -127,4 +127,26 @@ class Employees extends CI_Model
 		return $query;
 
 	}
+
+	public function insert_employee_history($employee_history_data){
+		$this->db->insert('employee_history', $employee_history_data);
+		return true;
+
+	}
+
+	public function get_employees_transfers(){
+		$this->db->select('*');
+		$this->db->from('transfer');
+		$this->db->join('employee', 'employee.employee_id = transfer.transfer_employee_id');
+		$this->db->order_by('transfer_date', 'DESC');
+		$query = $this->db->get()->result();
+		return $query;
+
+	}
+
+	public function insert_transfer($transfer_data){
+		$this->db->insert('transfer', $transfer_data);
+		return true;
+
+	}
 }

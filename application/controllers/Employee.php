@@ -596,5 +596,286 @@ class Employee extends CI_Controller
 
 	}
 
+	public function employee_transfer(){
+
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+
+			if($permission->employee_management == 1):
+				$errormsg = ' ';
+				$error_msg = array('error' => $errormsg);
+				$data['error'] = $errormsg;
+				$data['user_data'] = $this->users->get_user($username);
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+				$data['grades'] = $this->hr_configurations->view_grades();
+				$data['roles'] = $this->hr_configurations->view_job_roles();
+				$data['qualifications'] = $this->hr_configurations->view_qualifications();
+				$data['banks'] = $this->hr_configurations->view_banks();
+				$data['locations'] = $this->hr_configurations->view_locations();
+				$data['health_insurances'] = $this->hr_configurations->view_health_insurances();
+				$data['pensions'] = $this->hr_configurations->view_pensions();
+				$data['subsidiarys'] = $this->hr_configurations->view_subsidiarys();
+
+				$data['transfers'] = $this->employees->get_employees_transfers();
+
+
+				$this->load->view('employee/employee_transfer',$data);
+
+
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function new_employee_transfer(){
+
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+
+			if($permission->employee_management == 1):
+				$errormsg = ' ';
+				$error_msg = array('error' => $errormsg);
+				$data['error'] = $errormsg;
+				$data['user_data'] = $this->users->get_user($username);
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+				$data['grades'] = $this->hr_configurations->view_grades();
+				$data['roles'] = $this->hr_configurations->view_job_roles();
+				$data['qualifications'] = $this->hr_configurations->view_qualifications();
+				$data['banks'] = $this->hr_configurations->view_banks();
+				$data['locations'] = $this->hr_configurations->view_locations();
+				$data['health_insurances'] = $this->hr_configurations->view_health_insurances();
+				$data['pensions'] = $this->hr_configurations->view_pensions();
+				$data['subsidiarys'] = $this->hr_configurations->view_subsidiarys();
+
+				//$data['transfers'] = $this->employees->get_employees_transfers();
+				$data['employees'] = $this->employees->view_employees();
+
+				$this->load->view('employee/new_employee_transfer',$data);
+
+
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function add_new_employee_transfer(){
+
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+
+			if($permission->employee_management == 1):
+				$employee_id = $this->input->post('employee_id');
+				$transfer_type = $this->input->post('transfer_type');
+				$subsidiary_id = $this->input->post('subsidiary_id');
+
+
+				$location_id = $this->input->post('location_id');
+
+				$employee = $this->employees->get_employee($employee_id);
+
+
+				if($transfer_type == 0):
+					$transfer_from = $employee->employee_location_id;
+					$transfer_to = $location_id;
+
+					if($transfer_from == $transfer_to):
+
+						$msg = array(
+							'msg'=> 'Employee already in this branch',
+							'location' => site_url('employee_transfer'),
+							'type' => 'warning'
+
+						);
+						$this->load->view('swal', $msg);
+
+					endif;
+
+					if($transfer_from != $transfer_to):
+
+					$employee_data = array(
+						'employee_location_id' => $location_id
+					);
+						$transfer_array = array(
+							'transfer_employee_id' => $employee_id,
+							'transfer_type' => $transfer_type,
+							'transfer_from'=> $transfer_from,
+							'transfer_to' => $transfer_to
+
+
+						);
+
+						$transfer_array = $this->security->xss_clean($transfer_array);
+
+						$query = $this->employees->insert_transfer($transfer_array);
+
+
+
+						$query = $this->employees->update_employee($employee_id, $employee_data);
+
+						if($query == true):
+							$log_array = array(
+								'log_user_id' => $this->users->get_user($username)->user_id,
+								'log_description' => "Initiated Employee Transfer"
+							);
+
+							$this->logs->add_log($log_array);
+
+							$msg = array(
+								'msg'=> 'Employee Transfer Successful',
+								'location' => site_url('employee_transfer'),
+								'type' => 'success'
+
+							);
+							$this->load->view('swal', $msg);
+						else:
+//					$msg = array(
+//						'msg'=> 'An Error Occurred',
+//						'location' => site_url('new_employee'),
+//						'type' => 'success'
+//
+//					);
+//					$this->load->view('swal', $msg);
+
+						endif;
+
+					endif;
+
+				endif;
+
+				if($transfer_type == 1):
+					$transfer_from = $employee->employee_subsidiary_id;
+					$transfer_to = $subsidiary_id;
+					if($transfer_from == $transfer_to):
+
+							$msg = array(
+								'msg'=> 'Employee already in this subsidiary',
+								'location' => site_url('employee_transfer'),
+								'type' => 'warning'
+
+							);
+							$this->load->view('swal', $msg);
+							endif;
+
+						if($transfer_from != $transfer_to):
+
+							$employee_data = array(
+								'employee_subsidiary_id' => $subsidiary_id
+							);
+
+							$transfer_array = array(
+								'transfer_employee_id' => $employee_id,
+								'transfer_type' => $transfer_type,
+								'transfer_from'=> $transfer_from,
+								'transfer_to' => $transfer_to
+
+
+							);
+
+							$transfer_array = $this->security->xss_clean($transfer_array);
+
+							$query = $this->employees->insert_transfer($transfer_array);
+
+
+
+							$query = $this->employees->update_employee($employee_id, $employee_data);
+
+							if($query == true):
+								$log_array = array(
+									'log_user_id' => $this->users->get_user($username)->user_id,
+									'log_description' => "Initiated Employee Transfer"
+								);
+
+								$this->logs->add_log($log_array);
+
+								$msg = array(
+									'msg'=> 'Employee Transfer Successful',
+									'location' => site_url('employee_transfer'),
+									'type' => 'success'
+
+								);
+								$this->load->view('swal', $msg);
+							else:
+//					$msg = array(
+//						'msg'=> 'An Error Occurred',
+//						'location' => site_url('new_employee'),
+//						'type' => 'success'
+//
+//					);
+//					$this->load->view('swal', $msg);
+
+							endif;
+
+					endif;
+				endif;
+
+
+
+				//$this->load->view('employee/new_employee_transfer',$data);
+
+
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+
 
 }
