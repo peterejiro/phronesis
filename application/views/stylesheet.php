@@ -23,6 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       -moz-appearance: textfield;
     }
     /*Note, it is still possible to increment the number when you scroll inside the number input*/
+
   </style>
 
 
