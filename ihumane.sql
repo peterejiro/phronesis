@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2020 at 03:22 PM
+-- Generation Time: Jun 26, 2020 at 02:17 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -92,6 +92,7 @@ CREATE TABLE `employee` (
   `employee_qualification` text NOT NULL,
   `employee_address` text NOT NULL,
   `employee_location_id` text NOT NULL,
+  `employee_subsidiary_id` text NOT NULL,
   `employee_job_role_id` text NOT NULL,
   `employee_grade_id` text NOT NULL,
   `employee_account_number` text NOT NULL,
@@ -116,10 +117,25 @@ CREATE TABLE `employee` (
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`employee_id`, `employee_unique_id`, `employee_first_name`, `employee_other_name`, `employee_last_name`, `employee_dob`, `employee_personal_email`, `employee_official_email`, `employee_phone_number`, `employee_qualification`, `employee_address`, `employee_location_id`, `employee_job_role_id`, `employee_grade_id`, `employee_account_number`, `employee_bank_id`, `employee_hmo_number`, `employee_hmo_id`, `employee_pensionable`, `employee_pension_number`, `employee_pension_id`, `employee_paye_number`, `employee_passport`, `employee_nysc_details`, `employee_nysc_document`, `employee_employment_date`, `employee_status`, `employee_stop_date`, `employee_salary_structure_setup`, `employee_salary_structure_category`) VALUES
-(7, 'ihumane_qt5', 'Ejiroghene', '', 'Oki-petereeeee', '1996-06-16', 'peterejiro96@gmail.com', 'oki-peter@connexxiongroup.com', '(080) 9094-5451', '[\"1\"]', 'bwari', '1', '1', '2', '0150176481', '2', 'pc_fct_3571', '1', 1, '0154175960', '1', '01501746575', '252221390125c3f1a435c6e2c0ad793a.jpg', 'FC19B3571', 'c6ea91ed4f42920eccc280ee0317124a.pdf', '2020-05-14', 2, '2020-06-07', 1, 1),
-(8, 'ihumane_3ag', 'Ogheneovie', '', 'Oki-Peter', '1998-05-02', 'ovie@gmail.com', 'ovie@test.com', '(080) 3355-3769', '[\"1\"]', 'Bwari - Fct', '1', '2', '1', '0150176489', '6', 'oki-91', '1', 1, '21321321321', '1', '2321321321321', 'd5a4062d6904d862eb2cc8f13d141d49.png', 'FC19B3571', '170e02227fc749d5ffbfd7090746d4bd.pdf', '2020-05-25', 2, '2020-06-07', 1, 0),
-(9, 'ihumane_IRE', 'Olalekan', 'Sulaiman', 'Hassan', '1996-06-16', 'haslek@gmail.com', 'has@connexxiongroup.com', '(070) 6076-4410', '[\"1\"]', 'asaba', '1', '2', '1', '0150176481', '7', '', '0', 1, '0150176481', '1', '', 'fdb1e14fac1f80d55ec080d61dac47e6.png', 'nysc2343_ben', '07d9aeea60e044fbcd27a688df0e75d9.png', '2020-06-08', 1, '0000-00-00', 1, 0);
+INSERT INTO `employee` (`employee_id`, `employee_unique_id`, `employee_first_name`, `employee_other_name`, `employee_last_name`, `employee_dob`, `employee_personal_email`, `employee_official_email`, `employee_phone_number`, `employee_qualification`, `employee_address`, `employee_location_id`, `employee_subsidiary_id`, `employee_job_role_id`, `employee_grade_id`, `employee_account_number`, `employee_bank_id`, `employee_hmo_number`, `employee_hmo_id`, `employee_pensionable`, `employee_pension_number`, `employee_pension_id`, `employee_paye_number`, `employee_passport`, `employee_nysc_details`, `employee_nysc_document`, `employee_employment_date`, `employee_status`, `employee_stop_date`, `employee_salary_structure_setup`, `employee_salary_structure_category`) VALUES
+(7, 'ihumane_qt5', 'Ejiroghene', '', 'Oki-petereeeee', '1996-06-16', 'peterejiro96@gmail.com', 'oki-peter@connexxiongroup.com', '(080) 9094-5451', '[\"1\"]', 'bwari', '1', '', '1', '2', '0150176481', '2', 'pc_fct_3571', '1', 1, '0154175960', '1', '01501746575', '252221390125c3f1a435c6e2c0ad793a.jpg', 'FC19B3571', 'c6ea91ed4f42920eccc280ee0317124a.pdf', '2020-05-14', 2, '2020-06-07', 1, 1),
+(8, 'ihumane_3ag', 'Ogheneovie', '', 'Oki-Peter', '1998-05-02', 'ovie@gmail.com', 'ovie@test.com', '(080) 3355-3769', '[\"1\"]', 'Bwari - Fct', '1', '', '2', '1', '0150176489', '6', 'oki-91', '1', 1, '21321321321', '1', '2321321321321', 'd5a4062d6904d862eb2cc8f13d141d49.png', 'FC19B3571', '170e02227fc749d5ffbfd7090746d4bd.pdf', '2020-05-25', 2, '2020-06-07', 1, 0),
+(9, 'ihumane_IRE', 'Olalekan', 'Sulaiman', 'Hassan', '1996-06-16', 'haslek@gmail.com', 'has@connexxiongroup.com', '(070) 6076-4410', '[\"1\"]', 'asaba', '1', '1', '2', '1', '0150176481', '7', '', '0', 1, '0150176481', '1', '', 'fdb1e14fac1f80d55ec080d61dac47e6.png', 'nysc2343_ben', '07d9aeea60e044fbcd27a688df0e75d9.png', '2020-06-08', 1, '0000-00-00', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_leave`
+--
+
+CREATE TABLE `employee_leave` (
+  `leave_id` int(11) NOT NULL,
+  `leave_employee_id` int(11) NOT NULL,
+  `leave_leave_type` text NOT NULL,
+  `leave_start_date` date NOT NULL,
+  `leave_end_date` date NOT NULL,
+  `leave_status` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -161,6 +177,21 @@ INSERT INTO `health_insurance` (`health_insurance_id`, `health_insurance_hmo`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `incident`
+--
+
+CREATE TABLE `incident` (
+  `incident_id` int(11) NOT NULL,
+  `incident_employee_id` int(11) NOT NULL,
+  `incident_subject` int(11) NOT NULL,
+  `incident_body` int(11) NOT NULL,
+  `incident_date` int(11) NOT NULL,
+  `incident_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `job_role`
 --
 
@@ -178,6 +209,17 @@ CREATE TABLE `job_role` (
 INSERT INTO `job_role` (`job_role_id`, `job_name`, `job_description`, `department_id`) VALUES
 (1, 'Lead Engineers', ' Coordination', '1'),
 (2, 'Junior Software Developer', 'rubbish', '2');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leave_type`
+--
+
+CREATE TABLE `leave_type` (
+  `leave_id` int(11) NOT NULL,
+  `leave_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -360,7 +402,67 @@ INSERT INTO `logs` (`log_id`, `log_user_id`, `log_description`, `log_date`) VALU
 (62, '4', 'Ran Payroll Routine', '2020-06-24 11:36:47'),
 (63, '4', 'Approved Payroll Routine', '2020-06-24 11:37:55'),
 (64, '4', 'Updated Bank Details', '2020-06-24 11:59:26'),
-(65, '4', 'Logged Out', '2020-06-24 13:15:51');
+(65, '4', 'Logged Out', '2020-06-24 13:15:51'),
+(66, '4', 'Logged In', '2020-06-24 14:51:41'),
+(67, '4', 'Logged Out', '2020-06-24 14:51:59'),
+(68, '4', 'Logged In', '2020-06-24 15:22:41'),
+(69, '4', 'Logged Out', '2020-06-24 15:22:46'),
+(70, '4', 'Logged In', '2020-06-24 15:41:59'),
+(71, '4', 'Logged Out', '2020-06-24 15:42:07'),
+(72, '4', 'Logged In', '2020-06-24 15:51:06'),
+(73, '5', 'Logged In', '2020-06-24 16:03:39'),
+(74, '5', 'Logged Out', '2020-06-24 16:03:44'),
+(75, '5', 'Logged In', '2020-06-24 16:04:20'),
+(76, '4', 'Logged Out', '2020-06-24 16:34:48'),
+(77, '4', 'Logged In', '2020-06-24 16:35:21'),
+(78, '5', 'Logged Out', '2020-06-24 16:53:03'),
+(79, '5', 'Logged In', '2020-06-24 16:53:17'),
+(80, '5', 'Logged Out', '2020-06-24 16:55:55'),
+(81, '4', 'Logged Out', '2020-06-24 17:04:50'),
+(82, '4', 'Logged In', '2020-06-24 17:07:14'),
+(83, '4', 'Logged In', '2020-06-24 20:02:45'),
+(84, '4', 'Update Employee Record', '2020-06-24 20:26:15'),
+(85, '4', 'Logged Out', '2020-06-24 20:42:28'),
+(86, '4', 'Logged In', '2020-06-24 20:42:56'),
+(87, '4', 'Update Employee Record', '2020-06-24 20:51:32'),
+(88, '4', 'Update Employee Record', '2020-06-24 20:53:15'),
+(89, '4', 'Logged Out', '2020-06-24 22:25:04'),
+(90, '4', 'Logged In', '2020-06-24 22:25:50'),
+(91, '4', 'Logged In', '2020-06-25 08:19:07'),
+(92, '5', 'Logged In', '2020-06-25 08:52:32'),
+(93, '4', 'Logged Out', '2020-06-25 09:40:08'),
+(94, '4', 'Logged In', '2020-06-25 09:53:51'),
+(95, '5', 'Logged In', '2020-06-25 10:09:12'),
+(96, '5', 'Logged Out', '2020-06-25 10:17:39'),
+(97, '5', 'Logged Out', '2020-06-25 10:18:22'),
+(98, '4', 'Logged In', '2020-06-25 10:26:07'),
+(99, '4', 'Logged Out', '2020-06-25 10:26:45'),
+(100, '4', 'Logged In', '2020-06-25 10:28:03'),
+(101, '4', 'Logged Out', '2020-06-25 10:29:03'),
+(102, '4', 'Logged In', '2020-06-25 10:32:47'),
+(103, '4', 'Logged Out', '2020-06-25 10:33:15'),
+(104, '4', 'Logged In', '2020-06-25 11:55:40'),
+(105, '4', 'Logged Out', '2020-06-25 15:07:35'),
+(106, '4', 'Logged In', '2020-06-26 08:19:20'),
+(107, '5', 'Logged In', '2020-06-26 10:55:11'),
+(108, '5', 'Logged Out', '2020-06-26 10:55:46'),
+(109, '5', 'Logged In', '2020-06-26 10:56:08'),
+(110, '4', 'Logged In', '2020-06-26 11:26:37'),
+(111, '4', 'Added A New Subsidiary', '2020-06-26 11:28:49'),
+(112, '4', 'Update Employee Record', '2020-06-26 12:56:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `memo`
+--
+
+CREATE TABLE `memo` (
+  `memo_id` int(11) NOT NULL,
+  `memo_subject` text NOT NULL,
+  `memo_body` text NOT NULL,
+  `memo_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -557,6 +659,22 @@ INSERT INTO `qualification` (`qualification_id`, `qualification_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `query`
+--
+
+CREATE TABLE `query` (
+  `query_id` int(11) NOT NULL,
+  `query_employee_id` int(11) NOT NULL,
+  `query_subject` text NOT NULL,
+  `query_body` text NOT NULL,
+  `query_type` int(11) NOT NULL COMMENT '0 == warning, 1== query',
+  `query_date` int(11) NOT NULL,
+  `query_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `salary`
 --
 
@@ -638,6 +756,24 @@ INSERT INTO `salary_structure_category` (`salary_structure_id`, `salary_structur
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subsidiary`
+--
+
+CREATE TABLE `subsidiary` (
+  `subsidiary_id` int(11) NOT NULL,
+  `subsidiary_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `subsidiary`
+--
+
+INSERT INTO `subsidiary` (`subsidiary_id`, `subsidiary_name`) VALUES
+(1, 'Connexxion Telecoms');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tax_rate`
 --
 
@@ -673,6 +809,21 @@ CREATE TABLE `title` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transfer`
+--
+
+CREATE TABLE `transfer` (
+  `transfer_id` int(11) NOT NULL,
+  `transfer_employee_id` int(11) NOT NULL,
+  `transfer_type` int(11) NOT NULL,
+  `transfer_from` text NOT NULL,
+  `transfer_to` text NOT NULL,
+  `transfer_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -691,8 +842,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_username`, `user_email`, `user_password`, `user_token`, `user_name`, `user_status`) VALUES
-(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', '', 'Administrator Administrator', '1'),
-(5, 'peterejiro', 'peterejiro96@gmail.com', '$2y$10$7OLmMpkXuTEhrMdIIsdnoO4GCUs7yB/Hm7qL6rRAmHEA1lzikvOjW', '1592909204', 'Oki-Peter Ejiroghene', '1');
+(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', '1593167197', 'Administrator Administrator', '1'),
+(5, 'peterejiro', 'peterejiro96@gmail.com', '$2y$10$7OLmMpkXuTEhrMdIIsdnoO4GCUs7yB/Hm7qL6rRAmHEA1lzikvOjW', '1593165368', 'Oki-Peter Ejiroghene', '1');
 
 -- --------------------------------------------------------
 
@@ -779,6 +930,12 @@ ALTER TABLE `employee`
   ADD UNIQUE KEY `employee_phone_number` (`employee_phone_number`) USING HASH;
 
 --
+-- Indexes for table `employee_leave`
+--
+ALTER TABLE `employee_leave`
+  ADD PRIMARY KEY (`leave_id`);
+
+--
 -- Indexes for table `grade`
 --
 ALTER TABLE `grade`
@@ -793,11 +950,23 @@ ALTER TABLE `health_insurance`
   ADD UNIQUE KEY `health_insurance_hmo` (`health_insurance_hmo`) USING HASH;
 
 --
+-- Indexes for table `incident`
+--
+ALTER TABLE `incident`
+  ADD PRIMARY KEY (`incident_id`);
+
+--
 -- Indexes for table `job_role`
 --
 ALTER TABLE `job_role`
   ADD PRIMARY KEY (`job_role_id`),
   ADD UNIQUE KEY `job_name` (`job_name`) USING HASH;
+
+--
+-- Indexes for table `leave_type`
+--
+ALTER TABLE `leave_type`
+  ADD PRIMARY KEY (`leave_id`);
 
 --
 -- Indexes for table `loans`
@@ -829,6 +998,12 @@ ALTER TABLE `location`
 --
 ALTER TABLE `logs`
   ADD PRIMARY KEY (`log_id`);
+
+--
+-- Indexes for table `memo`
+--
+ALTER TABLE `memo`
+  ADD PRIMARY KEY (`memo_id`);
 
 --
 -- Indexes for table `minimum_tax_rate`
@@ -888,6 +1063,12 @@ ALTER TABLE `qualification`
   ADD UNIQUE KEY `qualification_name` (`qualification_name`) USING HASH;
 
 --
+-- Indexes for table `query`
+--
+ALTER TABLE `query`
+  ADD PRIMARY KEY (`query_id`);
+
+--
 -- Indexes for table `salary`
 --
 ALTER TABLE `salary`
@@ -906,6 +1087,12 @@ ALTER TABLE `salary_structure_category`
   ADD PRIMARY KEY (`salary_structure_id`);
 
 --
+-- Indexes for table `subsidiary`
+--
+ALTER TABLE `subsidiary`
+  ADD PRIMARY KEY (`subsidiary_id`);
+
+--
 -- Indexes for table `tax_rate`
 --
 ALTER TABLE `tax_rate`
@@ -917,6 +1104,12 @@ ALTER TABLE `tax_rate`
 ALTER TABLE `title`
   ADD PRIMARY KEY (`title_id`),
   ADD UNIQUE KEY `title_name` (`title_name`) USING HASH;
+
+--
+-- Indexes for table `transfer`
+--
+ALTER TABLE `transfer`
+  ADD PRIMARY KEY (`transfer_id`);
 
 --
 -- Indexes for table `user`
@@ -958,13 +1151,19 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `emolument_report`
 --
 ALTER TABLE `emolument_report`
-  MODIFY `emolument_report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `emolument_report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
   MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `employee_leave`
+--
+ALTER TABLE `employee_leave`
+  MODIFY `leave_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `grade`
@@ -979,10 +1178,22 @@ ALTER TABLE `health_insurance`
   MODIFY `health_insurance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `incident`
+--
+ALTER TABLE `incident`
+  MODIFY `incident_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `job_role`
 --
 ALTER TABLE `job_role`
   MODIFY `job_role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `leave_type`
+--
+ALTER TABLE `leave_type`
+  MODIFY `leave_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `loans`
@@ -1012,7 +1223,13 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+
+--
+-- AUTO_INCREMENT for table `memo`
+--
+ALTER TABLE `memo`
+  MODIFY `memo_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `minimum_tax_rate`
@@ -1069,6 +1286,12 @@ ALTER TABLE `qualification`
   MODIFY `qualification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `query`
+--
+ALTER TABLE `query`
+  MODIFY `query_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `salary`
 --
 ALTER TABLE `salary`
@@ -1087,6 +1310,12 @@ ALTER TABLE `salary_structure_category`
   MODIFY `salary_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `subsidiary`
+--
+ALTER TABLE `subsidiary`
+  MODIFY `subsidiary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tax_rate`
 --
 ALTER TABLE `tax_rate`
@@ -1097,6 +1326,12 @@ ALTER TABLE `tax_rate`
 --
 ALTER TABLE `title`
   MODIFY `title_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transfer`
+--
+ALTER TABLE `transfer`
+  MODIFY `transfer_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
