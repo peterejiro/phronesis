@@ -186,7 +186,7 @@ class Hr_configurations extends CI_Model
 
 	}
 
-	//leave setup end
+	//subsidiary setup end
 
 	//qualification setup begin
 	public function add_qualification($qualification_data){

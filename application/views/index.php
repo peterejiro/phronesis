@@ -85,6 +85,90 @@
                 </div>
               </div>
             </div>
+			  <div class="row">
+				  <div class="col-lg-8 col-md-12 col-12 col-sm-12">
+					  <div class="card">
+						  <div class="card-header">
+							  <h4 class="d-inline">Employees On Leave</h4>
+
+						  </div>
+						  <div class="card-body">
+							  <ul class="list-unstyled list-unstyled-border">
+								<?php foreach ($leaves as $leave):
+									if($leave->leave_status == 2):
+
+										else:
+									?>
+
+								  <li class="media">
+
+									  <img class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $leave->employee_passport; ?>" alt="avatar">
+									  <div class="media-body">
+										  <div class="badge badge-pill badge-danger mb-1 float-right"><?php if($leave->leave_status == 0){ echo "pending"; } if($leave->leave_status == 1 ){ echo "On Leave"; } ?></div>
+										  <h6 class="media-title"><?php echo $leave->employee_first_name." ".$leave->employee_last_name; ?></h6>
+										  <div class="text-small text-muted"><?php echo $leave->leave_name; ?> <div class="bullet"></div> <span class="text-primary"><?php echo $leave->leave_end_date; ?></span></div>
+									  </div>
+								  </li>
+
+								  <?php
+								  endif;
+								  endforeach; ?>
+
+							  </ul>
+						  </div>
+					  </div>
+				  </div>
+				  <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+					  <div class="card">
+						  <div class="card-header">
+							  <h4>Recent Activities</h4>
+						  </div>
+						  <div class="card-body">
+							  <ul class="list-unstyled list-unstyled-border">
+								  <li class="media">
+									  <img class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>assets/img/avatar/avatar-1.png" alt="avatar">
+									  <div class="media-body">
+										  <div class="float-right text-primary">Now</div>
+										  <div class="media-title">Farhan A Mujib</div>
+										  <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+									  </div>
+								  </li>
+								  <li class="media">
+									  <img class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>assets/img/avatar/avatar-2.png" alt="avatar">
+									  <div class="media-body">
+										  <div class="float-right">12m</div>
+										  <div class="media-title">Ujang Maman</div>
+										  <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+									  </div>
+								  </li>
+								  <li class="media">
+									  <img class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>assets/img/avatar/avatar-3.png" alt="avatar">
+									  <div class="media-body">
+										  <div class="float-right">17m</div>
+										  <div class="media-title">Rizal Fakhri</div>
+										  <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+									  </div>
+								  </li>
+								  <li class="media">
+									  <img class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>assets/img/avatar/avatar-4.png" alt="avatar">
+									  <div class="media-body">
+										  <div class="float-right">21m</div>
+										  <div class="media-title">Alfa Zulkarnain</div>
+										  <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+									  </div>
+								  </li>
+							  </ul>
+							  <div class="text-center pt-1 pb-1">
+								  <a href="#" class="btn btn-primary btn-lg btn-round">
+									  View All
+								  </a>
+							  </div>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+
+
             <div class="row">
               <div class="col-lg-8 col-md-12 col-12 col-sm-12">
                 <div class="card">
@@ -182,6 +266,7 @@
                 </div>
               </div>
               <div class="col-lg-6 col-md-12 col-12 col-sm-12">
+
                 <div class="card">
                   <div class="card-header">
                     <h4>Authors</h4>
