@@ -119,6 +119,12 @@ $route['edit_employee'] = 'employee/edit_employee';
 $route['employee_transfer'] = 'employee/employee_transfer';
 $route['new_employee_transfer'] = 'employee/new_employee_transfer';
 $route['add_new_employee_transfer'] = 'employee/add_new_employee_transfer';
+$route['employee_leave'] = 'employee/employee_leave';
+$route['new_employee_leave'] = 'employee/new_employee_leave';
+$route['add_new_employee_leave'] = 'employee/add_new_employee_leave';
+$route['extend_leave/:num'] = 'employee/extend_leave/$1';
+$route['extend_employee_leave'] = 'employee/extend_employee_leave';
+
 
 
 $route['tax_rates'] = 'payroll_configuration/tax_rate';

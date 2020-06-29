@@ -771,6 +771,14 @@ class Employee extends CI_Controller
 
 							$this->logs->add_log($log_array);
 
+							$employee_history_array = array(
+								'employee_history_employee_id' => $employee_id,
+							'employee_history_details' =>'Transfer'
+
+							);
+
+							$this->employees->insert_employee_history($employee_history_array);
+
 							$msg = array(
 								'msg'=> 'Employee Transfer Successful',
 								'location' => site_url('employee_transfer'),
@@ -876,6 +884,301 @@ class Employee extends CI_Controller
 
 	}
 
+
+	public function employee_leave(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+
+			if($permission->employee_management == 1):
+				$errormsg = ' ';
+				$error_msg = array('error' => $errormsg);
+				$data['error'] = $errormsg;
+				$data['user_data'] = $this->users->get_user($username);
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+
+
+				$data['leaves'] = $this->employees->get_employees_leaves();
+
+
+				$this->load->view('employee/employee_leave',$data);
+
+
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+	public function new_employee_leave(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+
+			if($permission->employee_management == 1):
+				$errormsg = ' ';
+				$error_msg = array('error' => $errormsg);
+				$data['error'] = $errormsg;
+				$data['user_data'] = $this->users->get_user($username);
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+				$data['leaves'] = $this->hr_configurations->view_leaves();
+				$data['employees'] = $this->employees->view_employees();
+
+
+				$this->load->view('employee/new_employee_leave', $data);
+
+
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+	public function add_new_employee_leave(){
+
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+
+			if($permission->employee_management == 1):
+				$employee_id = $this->input->post('employee_id');
+				$leave_id = $this->input->post('leave_id');
+				$start_date = $this->input->post('start_date');
+				$end_date = $this->input->post('end_date');
+
+
+				$check_existing_leave = $this->employees->check_existing_employee_leaves($employee_id);
+
+				if(!empty($check_existing_leave)):
+					$msg = array(
+						'msg'=> 'Employee Already Has Existing Leave',
+						'location' => site_url('employee_leave'),
+						'type' => 'error'
+
+					);
+					$this->load->view('swal', $msg);
+
+					else:
+
+						$leave_array = array(
+						'leave_employee_id'=> $employee_id,
+						'leave_leave_type' => $leave_id,
+						'leave_start_date' => $start_date,
+						'leave_end_date' => $end_date,
+						'leave_status' => 1
+
+						);
+
+						$leave_array = $this->security->xss_clean($leave_array);
+						$query = $this->employees->insert_leave($leave_array);
+
+						if($query == true):
+
+							$log_array = array(
+								'log_user_id' => $this->users->get_user($username)->user_id,
+								'log_description' => "Initiated Employee Transfer"
+							);
+
+							$this->logs->add_log($log_array);
+
+							$employee_history_array = array(
+								'employee_history_employee_id' => $employee_id,
+								'employee_history_details' =>'Leave Application'
+
+							);
+
+							$this->employees->insert_employee_history($employee_history_array);
+
+							$msg = array(
+								'msg'=> 'Leave Application Successful, Automatically approved because you are Administrator',
+								'location' => site_url('employee_leave'),
+								'type' => 'success'
+
+							);
+							$this->load->view('swal', $msg);
+							else:
+
+
+							endif;
+
+						endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function extend_leave(){
+
+		$leave_id = $this->uri->segment(2);
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+
+			if($permission->employee_management == 1):
+				$data['user_data'] = $this->users->get_user($username);
+			$data['leave'] = $this->employees->get_leave($leave_id);
+			$data['csrf_name'] = $this->security->get_csrf_token_name();
+			$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+			$this->load->view('employee/extend_leave', $data);
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function extend_employee_leave(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+
+			if($permission->employee_management == 1):
+				$leave_id = $this->input->post('leave_id');
+				$leaf = $this->employees->get_leave($leave_id);
+
+				$end_date = $this->input->post('end_date');
+
+
+				if(empty($leave_id) || empty($end_date)):
+
+					redirect('error_404');
+
+				else:
+					if($end_date < date('yy-m-d')):
+
+
+						else:
+							$leave_array = array(
+
+								'leave_end_date' => $end_date
+							);
+
+						$query = $this->employees->update_leave($leave_id, $leave_array);
+
+						if($query ==  true):
+
+							$log_array = array(
+								'log_user_id' => $this->users->get_user($username)->user_id,
+								'log_description' => "Updated Employee Leave"
+							);
+
+							$this->logs->add_log($log_array);
+
+							$employee_history_array = array(
+								'employee_history_employee_id' => $leaf->leave_employee_id,
+								'employee_history_details' =>'Leave Updated'
+
+							);
+
+							$this->employees->insert_employee_history($employee_history_array);
+
+							$msg = array(
+								'msg'=> 'Leave Updated',
+								'location' => site_url('employee_leave'),
+								'type' => 'success'
+
+							);
+							$this->load->view('swal', $msg);
+
+							else:
+
+
+							endif;
+
+						endif;
+
+					endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
 
 
 }

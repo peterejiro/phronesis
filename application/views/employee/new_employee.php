@@ -18,7 +18,6 @@
             <div class="breadcrumb-item">New Employee</div>
           </div>
 				</div>
-
         <div class="section-body">
           <div class="section-title">All About Creating Employees</div>
           <p class="section-lead">You can complete the form to create an employee here</p>
@@ -34,10 +33,10 @@
                       <a class="nav-link" data-toggle="tab" href="#job-information" role="tab"><i class="fas fa-id-card-alt"></i> Work Information</a>
                     </li>
                     <li class="nav-item waves-effect waves-light">
-                      <a class="nav-link" data-toggle="tab" href="#bank-information" role="tab"><i class="fas fa-university"></i>Bank Information </a>
+                      <a class="nav-link" data-toggle="tab" href="#bank-information" role="tab"><i class="fas fa-university"></i> Bank Information </a>
                     </li>
                     <li class="nav-item waves-effect waves-light">
-                      <a class="nav-link" data-toggle="tab" href="#other-information" role="tab"><i class="fas fa-ellipsis-h"></i>Other Information</a>
+                      <a class="nav-link" data-toggle="tab" href="#other-information" role="tab"><i class="fas fa-ellipsis-h"></i> Other Information</a>
                     </li>
                   </ul>
                 </div>
@@ -230,7 +229,7 @@
                             <p class="form-text text-muted">Please fill in a 10 digit account number</p>
                           </div>
                           <div class="col-sm-6">
-                            <label for="bank"  >Bank</label><span style="color: red"> *</span>
+                            <label for="bank">Bank</label><span style="color: red"> *</span>
                             <select id="bank" class="selectric form-control mb-3 custom-select" required name="employee_bank" style="width: 100%; height:56px;">
                               <option>Select</option>
                               <?php foreach ($banks as $bank): ?>
@@ -288,11 +287,8 @@
                       <div class="tab-pane p-3" id="other-information" role="tabpanel">
                         <div class="form-group row">
                           <div class="col-sm-6">
-                            <label for="nysc-pass-out">NYSC Pass Out Number</label><span style="color: red"> *</span>
-                            <input id="nysc-pass-out" name="nysc_pass_out" type="text" class="form-control" required/>
-                            <div class="invalid-feedback">
-                              please fill in an NYSC pass out number
-                            </div>
+                            <label for="nysc-pass-out">NYSC Pass Out Number</label>
+                            <input id="nysc-pass-out" name="nysc_pass_out" type="text" class="form-control"/>
                           </div>
                           <div class="col-sm-6">
                             <label>NYSC Document</label>

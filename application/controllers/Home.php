@@ -23,6 +23,8 @@ class Home extends CI_Controller
 
 	public function index(){
 
+		$this->employees->check_leave_end_date(date('yy-m-d'));
+
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
@@ -40,6 +42,7 @@ class Home extends CI_Controller
 			$data['employees'] = $this->employees->view_employees();
 			$data['users'] = $this->users->view_users();
 			$data['departments'] = $this->hr_configurations->view_departments();
+			$data['leaves'] = $this->employees->get_employees_leaves();
 
 
 			$this->load->view('index', $data);
@@ -110,6 +113,7 @@ class Home extends CI_Controller
 	}
 
 	public function auth_login(){
+		$this->employees->check_leave_end_date(date('yy-m-d'));
 
 		$user_username = $this->session->userdata('user_username');
 
