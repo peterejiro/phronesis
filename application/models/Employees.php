@@ -149,4 +149,62 @@ class Employees extends CI_Model
 		return true;
 
 	}
+
+
+	public function get_employees_leaves(){
+		$this->db->select('*');
+		$this->db->from('employee_leave');
+		$this->db->join('employee', 'employee.employee_id = employee_leave.leave_employee_id');
+		$this->db->join('leave_type', 'leave_type.leave_id = employee_leave.leave_leave_type');
+		//$this->db->order_by('transfer_date', 'DESC');
+		$query = $this->db->get()->result();
+		return $query;
+
+	}
+
+	public function check_existing_employee_leaves($employee_id){
+		$this->db->select('*');
+		$this->db->from('employee_leave');
+		$this->db->where('employee_leave.leave_employee_id', $employee_id);
+		$this->db->where('employee_leave.leave_status', 0 );
+		$this->db->or_where('employee_leave.leave_status', 1);
+//		$this->db->join('leave_type', 'leave_type.leave_id = employee_leave.leave_leave_type');
+		//$this->db->order_by('transfer_date', 'DESC');
+		$query = $this->db->get()->result();
+		return $query;
+
+	}
+
+	public function insert_leave($data){
+
+		$this->db->insert('employee_leave', $data);
+		return true;
+	}
+
+	public function check_leave_end_date($date){
+		$leave_array = array(
+		'leave_status' => 2
+		);
+		$this->db->where('employee_leave.leave_end_date', $date);
+		$this->db->update('employee_leave', $leave_array);
+		return true;
+
+	}
+
+	public function get_leave($leave_id){
+		$this->db->select('*');
+		$this->db->from('employee_leave');
+		$this->db->join('employee', 'employee.employee_id = employee_leave.leave_employee_id');
+		$this->db->join('leave_type', 'leave_type.leave_id = employee_leave.leave_leave_type');
+		$this->db->where('employee_leave.employee_leave_id', $leave_id);
+		$query = $this->db->get()->row();
+		return $query;
+	}
+
+	public function update_leave($leave_id, $leave_data){
+		$this->db->where('employee_leave.employee_leave_id', $leave_id);
+		$this->db->update('employee_leave', $leave_data);
+		return true;
+
+	}
 }

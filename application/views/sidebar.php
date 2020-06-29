@@ -19,9 +19,10 @@
 			<?php if($employee_management == 1){  ?>
 				<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Employees</span></a>
 				<ul class="dropdown-menu">
-          <li class="<?php echo $this->uri->segment(1) == 'new_employee' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('new_employee') ?>"> New Employee</a></li>
-          <li class="<?php echo $this->uri->segment(1) == 'employee' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee') ?>"> Manage Employees</a></li>
-					<li class="<?php echo $this->uri->segment(1) == 'employee_transfer' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee_transfer') ?>"> Employee Transfers</a></li>
+        		  <li class="<?php echo $this->uri->segment(1) == 'new_employee' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('new_employee') ?>"> New Employee</a></li>
+         		 <li class="<?php echo $this->uri->segment(1) == 'employee' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee') ?>"> Manage Employees</a></li>
+		 		 <li class="<?php echo $this->uri->segment(1) == 'employee_transfer' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee_transfer') ?>"> Employee Transfers</a></li>
+				<li class="<?php echo $this->uri->segment(1) == 'employee_leave' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee_leave') ?>"> Employee Leaves</a></li>
 				</ul>
       <?php } ?>
 			</li>
