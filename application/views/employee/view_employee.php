@@ -61,10 +61,14 @@
                     <div class="tab-content">
                       <div class="tab-pane active p-3" id="personal-information" role="tabpanel">
                         <div class="modal-body">
-                          <figure class="figure">
-                            <img src="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" alt="" class="figure-img img-fluid rounded mx-auto d-block w-80 img-thumbnail">
-                            <figcaption class="figure-caption">Most Recent Passport Photograph</figcaption>
-                          </figure>
+                          <div class="chocolat-parent">
+                            <a href="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" class="chocolat-image" title="Passport Photo">
+                              <figure class="figure">
+                                <img src="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" alt="" class="figure-img img-fluid rounded mx-auto d-block w-80 img-thumbnail">
+                                <figcaption class="figure-caption">Most Recent Passport Photograph</figcaption>
+                              </figure>
+                            </a>
+                          </div>
                           <div class="form-group">
                             <label>Employee ID</label>
                             <input type="text" class="form-control" disabled  name="employee_unique_id" value="<?php echo $employee->employee_unique_id; ?>"/>
