@@ -49,13 +49,23 @@
                             <td><?php echo $employee->employee_last_name." ".$employee->employee_first_name." ".$employee->employee_other_name; ?></td>
                             <td><?php echo $employee->department_name; ?></td>
                             <td><?php echo $employee->job_name; ?></td>
-                            <td><?php $status = $employee->employee_status; if ($status == 0) { echo "Fired";} if ($status == 1) { echo "Probationary";} if ($status == 2) { echo "Confirmed";} if ($status == 3) { echo "Retired";} ?></td>
+                            <td><?php $status = $employee->employee_status;?>
+                              <?php if($status == 0):?>
+                                <div class="badge badge-danger">Fired</div>
+                              <?php elseif($status == 1):?>
+                                <div class="badge badge-info">Probationary</div>
+                              <?php elseif($status == 2):?>
+                                <div class="badge badge-success">Confirmed</div>
+                              <?php else:?>
+                                <div class="badge badge-dark">Retired</div>
+                              <?php endif;?>
+                            </td>
                             <td class="text-center" style="width: 9px">
                               <div class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu">
                                   <a class="dropdown-item has-icon" href="<?php echo site_url('view_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-eye"></i>View</a>
-                                  <a class="dropdown-item has-icon" href="<?php echo site_url('update_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-cog"></i>Update</a>
+                                  <a class="dropdown-item has-icon" href="<?php echo site_url('update_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-edit"></i>Update</a>
                                 </div>
                               </div>
                             </td>

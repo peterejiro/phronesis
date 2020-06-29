@@ -12,7 +12,7 @@
           <div class="section-header-back">
             <a href="<?php echo site_url('employee')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
           </div>
-					<h1> View Employee </h1>
+					<h1>View Employee</h1>
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
             <div class="breadcrumb-item active"><a href="<?php echo site_url('employee')?>">Employees</a></div>
@@ -285,14 +285,10 @@
                             <label> Employment Start Date</label>
                             <input type="date" name="employment_start_date" value="<?php echo $employee->employee_employment_date; ?>" disabled class="form-control">
                           </div>
-
                           <div class="col-sm-6">
                             <label>Employment Stop Date</label> <br>
                             <input type="date" name="employment_stop_date" value="<?php echo $employee->employee_stop_date; ?>" disabled class="form-control">
                           </div>
-                        </div>
-                        <div class="form-group row">
-
                         </div>
                         <div class="modal-footer"></div>
                       </div>
@@ -309,6 +305,12 @@
     <div class="modal fade bd-example-modal-form" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
+          <div class="modal-header">
+            <h5>Uploaded Documents</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">x</span>
+            </button>
+          </div>
           <div class="modal-body">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner" role="listbox">
@@ -316,27 +318,20 @@
                   <iframe
                     src="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" scrolling="no" frameborder="no" height="700px" onload="resizeIframe(this)" width="100%">
                   </iframe>
-
                 </div>
                 <div class="carousel-item">
                   <iframe
                     src="<?php echo base_url()."/uploads/employee_nysc/".$employee->employee_nysc_document; ?>" scrolling="no" frameborder="no" height="700px" width="100%">
                   </iframe>
                 </div>
-
                 <?php if(empty($other_documents)){
-
-
                 } else{ foreach ($other_documents as $other_document){ ?>
                   <div class="carousel-item">
-
                     <iframe
                       src="<?php echo base_url()."/uploads/employee_others/".$other_document->other_document_name; ?>" height="700px" width="100%">
                     </iframe>
                   </div>
-
                 <?php	} } ?>
-
               </div>
               <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -347,6 +342,9 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
+          </div>
+          <div class="modal-footer bg-whitesmoke">
+            <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
           </div>
         </div>
       </div>
