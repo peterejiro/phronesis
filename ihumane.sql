@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2020 at 02:17 PM
+-- Generation Time: Jun 26, 2020 at 06:10 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -118,9 +118,22 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employee_id`, `employee_unique_id`, `employee_first_name`, `employee_other_name`, `employee_last_name`, `employee_dob`, `employee_personal_email`, `employee_official_email`, `employee_phone_number`, `employee_qualification`, `employee_address`, `employee_location_id`, `employee_subsidiary_id`, `employee_job_role_id`, `employee_grade_id`, `employee_account_number`, `employee_bank_id`, `employee_hmo_number`, `employee_hmo_id`, `employee_pensionable`, `employee_pension_number`, `employee_pension_id`, `employee_paye_number`, `employee_passport`, `employee_nysc_details`, `employee_nysc_document`, `employee_employment_date`, `employee_status`, `employee_stop_date`, `employee_salary_structure_setup`, `employee_salary_structure_category`) VALUES
-(7, 'ihumane_qt5', 'Ejiroghene', '', 'Oki-petereeeee', '1996-06-16', 'peterejiro96@gmail.com', 'oki-peter@connexxiongroup.com', '(080) 9094-5451', '[\"1\"]', 'bwari', '1', '', '1', '2', '0150176481', '2', 'pc_fct_3571', '1', 1, '0154175960', '1', '01501746575', '252221390125c3f1a435c6e2c0ad793a.jpg', 'FC19B3571', 'c6ea91ed4f42920eccc280ee0317124a.pdf', '2020-05-14', 2, '2020-06-07', 1, 1),
-(8, 'ihumane_3ag', 'Ogheneovie', '', 'Oki-Peter', '1998-05-02', 'ovie@gmail.com', 'ovie@test.com', '(080) 3355-3769', '[\"1\"]', 'Bwari - Fct', '1', '', '2', '1', '0150176489', '6', 'oki-91', '1', 1, '21321321321', '1', '2321321321321', 'd5a4062d6904d862eb2cc8f13d141d49.png', 'FC19B3571', '170e02227fc749d5ffbfd7090746d4bd.pdf', '2020-05-25', 2, '2020-06-07', 1, 0),
+(7, 'ihumane_qt5', 'Ejiroghene', '', 'Oki-petereeeee', '1996-06-16', 'peterejiro96@gmail.com', 'oki-peter@connexxiongroup.com', '(080) 9094-5451', '[\"1\"]', 'bwari', '1', '1', '1', '2', '0150176481', '2', 'pc_fct_3571', '1', 1, '0154175960', '1', '01501746575', '252221390125c3f1a435c6e2c0ad793a.jpg', 'FC19B3571', 'c6ea91ed4f42920eccc280ee0317124a.pdf', '2020-05-14', 2, '2020-06-07', 1, 1),
+(8, 'ihumane_3ag', 'Ogheneovie', '', 'Oki-Peter', '1998-05-02', 'ovie@gmail.com', 'ovie@test.com', '(080) 3355-3769', '[\"1\"]', 'Bwari - Fct', '1', '1', '2', '1', '0150176489', '6', 'oki-91', '1', 1, '21321321321', '1', '2321321321321', 'd5a4062d6904d862eb2cc8f13d141d49.png', 'FC19B3571', '170e02227fc749d5ffbfd7090746d4bd.pdf', '2020-05-25', 2, '2020-06-07', 1, 0),
 (9, 'ihumane_IRE', 'Olalekan', 'Sulaiman', 'Hassan', '1996-06-16', 'haslek@gmail.com', 'has@connexxiongroup.com', '(070) 6076-4410', '[\"1\"]', 'asaba', '1', '1', '2', '1', '0150176481', '7', '', '0', 1, '0150176481', '1', '', 'fdb1e14fac1f80d55ec080d61dac47e6.png', 'nysc2343_ben', '07d9aeea60e044fbcd27a688df0e75d9.png', '2020-06-08', 1, '0000-00-00', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_history`
+--
+
+CREATE TABLE `employee_history` (
+  `employee_history_id` int(11) NOT NULL,
+  `employee_history_employee_id` int(11) NOT NULL,
+  `employee_history_details` text NOT NULL,
+  `employee_history_date` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -220,6 +233,13 @@ CREATE TABLE `leave_type` (
   `leave_id` int(11) NOT NULL,
   `leave_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `leave_type`
+--
+
+INSERT INTO `leave_type` (`leave_id`, `leave_name`) VALUES
+(1, 'Study Leave');
 
 -- --------------------------------------------------------
 
@@ -449,7 +469,12 @@ INSERT INTO `logs` (`log_id`, `log_user_id`, `log_description`, `log_date`) VALU
 (109, '5', 'Logged In', '2020-06-26 10:56:08'),
 (110, '4', 'Logged In', '2020-06-26 11:26:37'),
 (111, '4', 'Added A New Subsidiary', '2020-06-26 11:28:49'),
-(112, '4', 'Update Employee Record', '2020-06-26 12:56:03');
+(112, '4', 'Update Employee Record', '2020-06-26 12:56:03'),
+(113, '4', 'Added A New Leave Type', '2020-06-26 14:34:34'),
+(114, '4', 'Updated A Leave Type', '2020-06-26 14:35:04'),
+(115, '4', 'Initiated Employee Transfer', '2020-06-26 16:39:54'),
+(116, '4', 'Logged Out', '2020-06-26 16:54:59'),
+(117, '4', 'Logged In', '2020-06-26 16:55:25');
 
 -- --------------------------------------------------------
 
@@ -815,10 +840,10 @@ CREATE TABLE `title` (
 CREATE TABLE `transfer` (
   `transfer_id` int(11) NOT NULL,
   `transfer_employee_id` int(11) NOT NULL,
-  `transfer_type` int(11) NOT NULL,
+  `transfer_type` int(11) NOT NULL COMMENT '0 == branches, 1 ==  subidiary',
   `transfer_from` text NOT NULL,
   `transfer_to` text NOT NULL,
-  `transfer_date` date NOT NULL
+  `transfer_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -842,7 +867,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_username`, `user_email`, `user_password`, `user_token`, `user_name`, `user_status`) VALUES
-(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', '1593167197', 'Administrator Administrator', '1'),
+(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', '1593186925', 'Administrator Administrator', '1'),
 (5, 'peterejiro', 'peterejiro96@gmail.com', '$2y$10$7OLmMpkXuTEhrMdIIsdnoO4GCUs7yB/Hm7qL6rRAmHEA1lzikvOjW', '1593165368', 'Oki-Peter Ejiroghene', '1');
 
 -- --------------------------------------------------------
@@ -1193,7 +1218,7 @@ ALTER TABLE `job_role`
 -- AUTO_INCREMENT for table `leave_type`
 --
 ALTER TABLE `leave_type`
-  MODIFY `leave_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `loans`
@@ -1223,7 +1248,7 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `memo`
@@ -1331,7 +1356,7 @@ ALTER TABLE `title`
 -- AUTO_INCREMENT for table `transfer`
 --
 ALTER TABLE `transfer`
-  MODIFY `transfer_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `transfer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`

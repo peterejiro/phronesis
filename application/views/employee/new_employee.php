@@ -34,10 +34,10 @@
                       <a class="nav-link" data-toggle="tab" href="#job-information" role="tab"><i class="fas fa-id-card-alt"></i> Work Information</a>
                     </li>
                     <li class="nav-item waves-effect waves-light">
-                      <a class="nav-link" data-toggle="tab" href="#bank-information" role="tab"><i class="fas fa-university"></i>Bank Information </a>
+                      <a class="nav-link" data-toggle="tab" href="#bank-information" role="tab"><i class="fas fa-university"></i> Bank Information </a>
                     </li>
                     <li class="nav-item waves-effect waves-light">
-                      <a class="nav-link" data-toggle="tab" href="#other-information" role="tab"><i class="fas fa-ellipsis-h"></i>Other Information</a>
+                      <a class="nav-link" data-toggle="tab" href="#other-information" role="tab"><i class="fas fa-ellipsis-h"></i> Other Information</a>
                     </li>
                   </ul>
                 </div>
