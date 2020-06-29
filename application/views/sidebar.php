@@ -15,14 +15,22 @@
 				</ul>
 			</li>
 			<li class="menu-header">Human Resources</li>
-			<li class="dropdown <?php echo $this->uri->segment(1) == 'new_employee' || $this->uri->segment(1) == 'employee' ? 'active' : ''; ?>">
+			<li class="dropdown <?php echo
+      $this->uri->segment(1) == 'new_employee' ||
+      $this->uri->segment(1) == 'employee' ||
+      $this->uri->segment(1) == 'view_employee' ||
+      $this->uri->segment(1) == 'update_employee' ||
+      $this->uri->segment(1) == 'employee_transfer' ? 'active' : '';
+			?>">
 			<?php if($employee_management == 1){  ?>
 				<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Employees</span></a>
 				<ul class="dropdown-menu">
-        		  <li class="<?php echo $this->uri->segment(1) == 'new_employee' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('new_employee') ?>"> New Employee</a></li>
-         		 <li class="<?php echo $this->uri->segment(1) == 'employee' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee') ?>"> Manage Employees</a></li>
-		 		 <li class="<?php echo $this->uri->segment(1) == 'employee_transfer' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee_transfer') ?>"> Employee Transfers</a></li>
-				<li class="<?php echo $this->uri->segment(1) == 'employee_leave' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee_leave') ?>"> Employee Leaves</a></li>
+
+          <li class="<?php echo $this->uri->segment(1) == 'new_employee' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('new_employee') ?>"> New Employee</a></li>
+          <li class="<?php echo $this->uri->segment(1) == 'employee' || $this->uri->segment(1) == 'view_employee' || $this->uri->segment(1) == 'update_employee' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee') ?>"> Manage Employees</a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'employee_transfer' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee_transfer') ?>"> Employee Transfers</a></li>
+      	<li class="<?php echo $this->uri->segment(1) == 'employee_leave' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee_leave') ?>"> Employee Leaves</a></li>
+
 				</ul>
       <?php } ?>
 			</li>
@@ -36,17 +44,17 @@
       $this->uri->segment(1) == 'approve_payroll_routine' ||
       $this->uri->segment(1) == 'payroll_report'? 'active' : '';
 			?>">
-				<?php if($payroll_management == 1){  ?>
-				<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-money-bill-wave"></i><span>Payroll</span></a>
-				<ul class="dropdown-menu">
-					<li class="<?php echo $this->uri->segment(1) == 'employee_salary_structure' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('employee_salary_structure') ?>">Salary Structures </a></li>
-					<li class="<?php echo $this->uri->segment(1) == 'variational_payment' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('variational_payment') ?>">Variational Payment</a></li>
-					<li class="<?php echo $this->uri->segment(1) == 'approve_variational_payment' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('approve_variational_payment') ?>">Approve Payment</a></li>
-					<li class="<?php echo $this->uri->segment(1) == 'payroll_routine' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payroll_routine') ?>"> Payroll Routine</a></li>
-					<li class="<?php echo $this->uri->segment(1) == 'approve_payroll_routine' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('approve_payroll_routine') ?>"> Approve Routine </a></li>
-					<li class="<?php echo $this->uri->segment(1) == 'payroll_report' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payroll_report') ?>"> Payroll Reports </a></li>
-				</ul>
-				<?php  } ?>
+      <?php if($payroll_management == 1){  ?>
+      <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-money-bill-wave"></i><span>Payroll</span></a>
+      <ul class="dropdown-menu">
+        <li class="<?php echo $this->uri->segment(1) == 'employee_salary_structure' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('employee_salary_structure') ?>">Salary Structures </a></li>
+        <li class="<?php echo $this->uri->segment(1) == 'variational_payment' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('variational_payment') ?>">Variational Payment</a></li>
+        <li class="<?php echo $this->uri->segment(1) == 'approve_variational_payment' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('approve_variational_payment') ?>">Approve Payment</a></li>
+        <li class="<?php echo $this->uri->segment(1) == 'payroll_routine' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payroll_routine') ?>"> Payroll Routine</a></li>
+        <li class="<?php echo $this->uri->segment(1) == 'approve_payroll_routine' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('approve_payroll_routine') ?>"> Approve Routine </a></li>
+        <li class="<?php echo $this->uri->segment(1) == 'payroll_report' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payroll_report') ?>"> Payroll Reports </a></li>
+      </ul>
+      <?php  } ?>
 			</li>
 			<li class="dropdown <?php echo $this->uri->segment(1) == 'new_loan' || $this->uri->segment(1) == 'loans' ? 'active' : ''; ?>">
 			<?php if($payroll_management == 1){  ?>
