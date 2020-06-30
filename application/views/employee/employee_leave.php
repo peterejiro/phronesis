@@ -32,7 +32,7 @@ $CI->load->model('hr_configurations');
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table id="datatable-buttons" class="table table-bordered table-md">
+                    <table id="datatable-buttons" class="table table-bordered table-striped table-md">
                       <thead>
                       <tr>
                         <th>Employee Name</th>
@@ -81,6 +81,7 @@ $CI->load->model('hr_configurations');
                     </table>
                   </div>
                 </div>
+                <div class="card-footer bg-whitesmoke"></div>
               </div>
             </div>
           </div>
