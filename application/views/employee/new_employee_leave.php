@@ -89,15 +89,6 @@
 </div>
 <?php include(APPPATH.'\views\footer.php'); ?>
 <?php include(APPPATH.'\views\js.php'); ?>
-
-<script>
-  $(document).ready(function () {
-    $('select[name="employee_id"]').on('change', function () {
-      $(this).valid();
-    });
-  });
-</script>
-
 </body>
 </html>
 
