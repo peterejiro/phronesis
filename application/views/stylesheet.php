@@ -6,9 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="UTF-8">
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <meta content="iHumane" name="description" />
+  <meta content="IHUMANE" name="description" />
   <meta content="Connexxion Group" name="author" />
-	<title>Ihumane</title>
+	<title>IHUMANE</title>
 
   <style>
     /*Remove Arrows From Form Input Number Types*/

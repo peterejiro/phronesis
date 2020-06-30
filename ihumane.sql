@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2020 at 06:10 PM
+-- Generation Time: Jun 30, 2020 at 10:13 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -135,6 +135,16 @@ CREATE TABLE `employee_history` (
   `employee_history_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `employee_history`
+--
+
+INSERT INTO `employee_history` (`employee_history_id`, `employee_history_employee_id`, `employee_history_details`, `employee_history_date`) VALUES
+(0, 7, 'Leave Application', '2020-06-29'),
+(0, 9, 'Leave Updated', '2020-06-29'),
+(0, 9, 'Leave Updated', '2020-06-29'),
+(0, 9, 'Leave Updated', '2020-06-29');
+
 -- --------------------------------------------------------
 
 --
@@ -142,13 +152,20 @@ CREATE TABLE `employee_history` (
 --
 
 CREATE TABLE `employee_leave` (
-  `leave_id` int(11) NOT NULL,
+  `employee_leave_id` int(11) NOT NULL,
   `leave_employee_id` int(11) NOT NULL,
   `leave_leave_type` text NOT NULL,
   `leave_start_date` date NOT NULL,
   `leave_end_date` date NOT NULL,
-  `leave_status` text NOT NULL
+  `leave_status` text NOT NULL COMMENT '0 == pending\r\n1 == running\r\n2 == finished'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `employee_leave`
+--
+
+INSERT INTO `employee_leave` (`employee_leave_id`, `leave_employee_id`, `leave_leave_type`, `leave_start_date`, `leave_end_date`, `leave_status`) VALUES
+(1, 9, '1', '2020-05-25', '2020-06-30', '2');
 
 -- --------------------------------------------------------
 
@@ -239,7 +256,13 @@ CREATE TABLE `leave_type` (
 --
 
 INSERT INTO `leave_type` (`leave_id`, `leave_name`) VALUES
-(1, 'Study Leave');
+(1, 'Study Leave'),
+(2, 'Maternity Leave'),
+(3, 'Casual Leave'),
+(5, 'Annual Leave'),
+(7, 'Paternity Leave'),
+(8, 'test leave'),
+(9, 'A Leave');
 
 -- --------------------------------------------------------
 
@@ -338,7 +361,9 @@ CREATE TABLE `location` (
 --
 
 INSERT INTO `location` (`location_id`, `location_name`) VALUES
-(1, 'Lagos - Eti Osa 1');
+(1, 'Lagos - Eti Osa 1'),
+(2, 'Abuja'),
+(3, 'Port Harcourt 1');
 
 -- --------------------------------------------------------
 
@@ -474,7 +499,36 @@ INSERT INTO `logs` (`log_id`, `log_user_id`, `log_description`, `log_date`) VALU
 (114, '4', 'Updated A Leave Type', '2020-06-26 14:35:04'),
 (115, '4', 'Initiated Employee Transfer', '2020-06-26 16:39:54'),
 (116, '4', 'Logged Out', '2020-06-26 16:54:59'),
-(117, '4', 'Logged In', '2020-06-26 16:55:25');
+(117, '4', 'Logged In', '2020-06-26 16:55:25'),
+(118, '4', 'Logged In', '2020-06-29 10:19:50'),
+(119, '4', 'Initiated Employee Transfer', '2020-06-29 14:21:19'),
+(120, '4', 'Added A New Branch', '2020-06-29 15:43:25'),
+(121, '4', 'Added A New Branch', '2020-06-29 15:43:46'),
+(122, '4', 'Initiated Employee Transfer', '2020-06-29 16:47:52'),
+(123, '4', 'Initiated Employee Transfer', '2020-06-29 16:48:34'),
+(124, '4', 'Updated Employee Leave', '2020-06-29 16:56:01'),
+(125, '4', 'Logged In', '2020-06-30 08:44:19'),
+(126, '4', 'Added A New Leave Type', '2020-06-30 08:44:37'),
+(127, '4', 'Logged Out', '2020-06-30 08:45:50'),
+(128, '4', 'Logged In', '2020-06-30 08:45:58'),
+(129, '4', 'Added A New Leave Type', '2020-06-30 08:46:15'),
+(130, '4', 'Added A New Leave Type', '2020-06-30 08:46:15'),
+(131, '4', 'Logged Out', '2020-06-30 08:46:53'),
+(132, '4', 'Logged In', '2020-06-30 08:48:51'),
+(133, '4', 'Added A New Leave Type', '2020-06-30 08:49:06'),
+(134, '4', 'Added A New Leave Type', '2020-06-30 08:49:06'),
+(135, '5', 'Logged In', '2020-06-30 08:49:26'),
+(136, '4', 'Logged Out', '2020-06-30 08:50:09'),
+(137, '5', 'Logged Out', '2020-06-30 08:50:52'),
+(138, '5', 'Logged In', '2020-06-30 08:51:00'),
+(139, '5', 'Added A New Leave Type', '2020-06-30 08:51:16'),
+(140, '5', 'Logged Out', '2020-06-30 08:51:31'),
+(141, '5', 'Logged In', '2020-06-30 08:52:48'),
+(142, '5', 'Added A New Leave Type', '2020-06-30 08:55:09'),
+(143, '5', 'Logged Out', '2020-06-30 08:57:20'),
+(144, '5', 'Logged In', '2020-06-30 09:02:20'),
+(145, '5', 'Added A New Leave Type', '2020-06-30 09:02:46'),
+(146, '5', 'Logged Out', '2020-06-30 09:03:16');
 
 -- --------------------------------------------------------
 
@@ -867,8 +921,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_username`, `user_email`, `user_password`, `user_token`, `user_name`, `user_status`) VALUES
-(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', '1593186925', 'Administrator Administrator', '1'),
-(5, 'peterejiro', 'peterejiro96@gmail.com', '$2y$10$7OLmMpkXuTEhrMdIIsdnoO4GCUs7yB/Hm7qL6rRAmHEA1lzikvOjW', '1593165368', 'Oki-Peter Ejiroghene', '1');
+(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', '', 'Administrator Administrator', '1'),
+(5, 'peterejiro', 'peterejiro96@gmail.com', '$2y$10$7OLmMpkXuTEhrMdIIsdnoO4GCUs7yB/Hm7qL6rRAmHEA1lzikvOjW', '', 'Oki-Peter Ejiroghene', '1');
 
 -- --------------------------------------------------------
 
@@ -958,7 +1012,7 @@ ALTER TABLE `employee`
 -- Indexes for table `employee_leave`
 --
 ALTER TABLE `employee_leave`
-  ADD PRIMARY KEY (`leave_id`);
+  ADD PRIMARY KEY (`employee_leave_id`);
 
 --
 -- Indexes for table `grade`
@@ -1188,7 +1242,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `employee_leave`
 --
 ALTER TABLE `employee_leave`
-  MODIFY `leave_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `grade`
@@ -1218,7 +1272,7 @@ ALTER TABLE `job_role`
 -- AUTO_INCREMENT for table `leave_type`
 --
 ALTER TABLE `leave_type`
-  MODIFY `leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `loans`
@@ -1242,13 +1296,13 @@ ALTER TABLE `loan_reschedule_log`
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 
 --
 -- AUTO_INCREMENT for table `memo`
