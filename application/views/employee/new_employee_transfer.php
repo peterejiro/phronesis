@@ -24,7 +24,7 @@
           <p class="section-lead">You can fill in the form to add a new employee transfer here</p>
           <div class="row">
             <div class="col-12">
-              <form action="<?php echo site_url('add_new_employee_transfer'); ?>"  method="post" id="loan_form">
+              <form method="post" action="<?php echo site_url('add_new_employee_transfer'); ?>" id="loan_form">
                 <div class="card card-primary">
                   <div class="card-header">
                     <h4>New Transfer Form</h4>
@@ -78,7 +78,7 @@
                   </div>
                   <div class="card-footer text-right bg-whitesmoke">
                     <button type="submit"  class="btn btn-primary">Add Transfer</button>
-                    <button onclick="location.href='<?php echo site_url('employee_transfer');?>'" class="btn btn-secondary" type="button">Close</button>
+                    <button onclick="location.href='<?php echo site_url('employee_transfer');?>'" class="btn btn-danger" type="button">Go Back</button>
                   </div>
                 </div>
               </form>
@@ -117,6 +117,7 @@
     }
     return date;
   }
+
 </script>
 </body>
 </html>
