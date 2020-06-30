@@ -40,7 +40,7 @@ $CI->load->model('hr_configurations');
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Status</th>
-                        <th>Action</th>
+                        <th>Actions</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -63,7 +63,7 @@ $CI->load->model('hr_configurations');
                             </td>
                             <td class="text-center" style="width: 9px">
                               <?php if($leave->leave_status == 2):
-                                echo "No Action";
+                                echo "No Actions";
                               else:?>
                                 <div class="dropdown">
                                   <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
