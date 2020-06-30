@@ -87,34 +87,67 @@
             </div>
 			  <div class="row">
 				  <div class="col-lg-8 col-md-12 col-12 col-sm-12">
+
 					  <div class="card">
 						  <div class="card-header">
-							  <h4 class="d-inline">Employees On Leave</h4>
-
+							  <h4>Employees On Leave</h4>
 						  </div>
 						  <div class="card-body">
-							  <ul class="list-unstyled list-unstyled-border">
-								<?php foreach ($leaves as $leave):
-									if($leave->leave_status == 2):
 
-										else:
-									?>
+							  <?php foreach ($leaves as $leave):
+							  if($leave->leave_status == 2):
 
-								  <li class="media">
+								  endif;
 
-									  <img class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $leave->employee_passport; ?>" alt="avatar">
-									  <div class="media-body">
-										  <div class="badge badge-pill badge-danger mb-1 float-right"><?php if($leave->leave_status == 0){ echo "pending"; } if($leave->leave_status == 1 ){ echo "On Leave"; } ?></div>
-										  <h6 class="media-title"><?php echo $leave->employee_first_name." ".$leave->employee_last_name; ?></h6>
+							  if($leave->leave_status == 1):
+							  ?>
+								  <?php
+								  $leave_end_date = new DateTime($leave->leave_end_date);
+								  $leave_start_date = new DateTime($leave->leave_start_date);
+								  $today = time();
+
+								  $percentage_leave = ((($today - $leave_start_date->getTimestamp())/($leave_end_date->getTimestamp() - $leave_start_date->getTimestamp()))*100);
+
+								  ?>
+
+							  <div class="mb-4">
+
+
+								  <div class="text-small float-right font-weight-bold text-muted"><?php echo  number_format($percentage_leave, 1)."%" ?></div>
+								  <div class="font-weight-bold mb-1"><?php echo $leave->employee_first_name." ".$leave->employee_last_name; ?></div>
+								  <div class="progress" data-height="3">
+
+									  <div class="progress-bar" role="progressbar" data-width="<?php echo $percentage_leave."%" ?>" aria-valuenow="<?php echo $percentage_leave; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+								  </div>
+								  <div class="badge badge-pill badge-warning mb-1 float-right"><?php  echo "On Leave";  ?></div>
+								  <div class="text-small text-muted"><?php echo $leave->leave_name; ?> <div class="bullet"></div> <span class="text-primary"><?php echo $leave->leave_end_date; ?></span></div>
+							  </div>
+							  <?php
+							  endif;
+
+								  if($leave->leave_status == 0):
+									  ?>
+									  <?php
+									  $leave_end_date = new DateTime($leave->leave_end_date);
+									  $leave_start_date = new DateTime($leave->leave_start_date);
+									  $today = time();
+
+									  $percentage_leave = ((($today - $leave_start_date->getTimestamp())/($leave_end_date->getTimestamp() - $leave_start_date->getTimestamp()))*100);
+
+									  ?>
+
+									  <div class="mb-4">
+										  <div class="badge badge-pill badge-danger mb-1 float-right"><?php  echo "Leave Pending";  ?></div>
+										  <div class="font-weight-bold mb-1"><?php echo $leave->employee_first_name." ".$leave->employee_last_name; ?></div>
+										  <div class="progress" data-height="3">
+
+											  <div class="progress-bar" role="progressbar" data-width="0%"aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+										  </div>
 										  <div class="text-small text-muted"><?php echo $leave->leave_name; ?> <div class="bullet"></div> <span class="text-primary"><?php echo $leave->leave_end_date; ?></span></div>
 									  </div>
-								  </li>
-
 								  <?php
 								  endif;
-								  endforeach; ?>
-
-							  </ul>
+							  endforeach; ?>
 						  </div>
 					  </div>
 				  </div>

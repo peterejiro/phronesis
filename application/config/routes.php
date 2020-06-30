@@ -103,6 +103,28 @@ $route['job_role'] = 'hr_configuration/job_role';
 $route['add_job_role'] = 'hr_configuration/add_job_role';
 $route['update_job_role'] = 'hr_configuration/update_job_role';
 
+//appraisal
+$route['appraisal_setup'] = 'hr_configuration/appraisal_setup';
+$route['self_assessment'] = 'hr_configuration/self_assessment';
+$route['add_self_assessment'] = 'hr_configuration/add_self_assessment';
+$route['update_self_assessment'] = 'hr_configuration/update_self_assessment';
+
+
+$route['quantitative_assessment'] = 'hr_configuration/quantitative_assessment';
+$route['add_quantitative_assessment'] = 'hr_configuration/add_quantitative_assessment';
+$route['view_quantitative_assessment/:num'] = 'hr_configuration/view_quantitative_assessment/$1';
+$route['update_quantitative_assessment'] = 'hr_configuration/update_quantitative_assessment';
+
+
+$route['qualitative_assessment'] = 'hr_configuration/qualitative_assessment';
+$route['add_qualitative_assessment'] = 'hr_configuration/add_qualitative_assessment';
+$route['update_qualitative_assessment'] = 'hr_configuration/update_qualitative_assessment';
+
+$route['supervisor_assessment'] = 'hr_configuration/supervisor_assessment';
+$route['add_supervisor_assessment'] = 'hr_configuration/add_supervisor_assessment';
+$route['update_supervisor_assessment'] = 'hr_configuration/update_supervisor_assessment';
+
+
 $route['user'] = 'user/user';
 $route['new_user'] = 'user/new_user';
 $route['add_user'] = 'user/add_user';

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2020 at 06:10 PM
+-- Generation Time: Jun 30, 2020 at 05:41 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -125,6 +125,23 @@ INSERT INTO `employee` (`employee_id`, `employee_unique_id`, `employee_first_nam
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `employee_appraisal`
+--
+
+CREATE TABLE `employee_appraisal` (
+  `employee_appraisal_id` int(11) NOT NULL,
+  `employee_appraisal_employee_id` int(11) NOT NULL,
+  `employee_appraisal_period_from` int(11) NOT NULL,
+  `employee_appraisal_period_to` int(11) NOT NULL,
+  `employee_appraisal_supervisor_id` int(11) NOT NULL,
+  `employee_appraisal_qualitative_score` double NOT NULL,
+  `employee_appraisal_quantitave_score` double NOT NULL,
+  `employee_appraisal_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `employee_history`
 --
 
@@ -135,6 +152,19 @@ CREATE TABLE `employee_history` (
   `employee_history_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `employee_history`
+--
+
+INSERT INTO `employee_history` (`employee_history_id`, `employee_history_employee_id`, `employee_history_details`, `employee_history_date`) VALUES
+(0, 7, 'Leave Application', '2020-06-29'),
+(0, 9, 'Leave Updated', '2020-06-29'),
+(0, 9, 'Leave Updated', '2020-06-29'),
+(0, 9, 'Leave Updated', '2020-06-29'),
+(0, 7, 'Transfer', '2020-06-30'),
+(0, 7, 'Transfer', '2020-06-30'),
+(0, 8, 'Leave Application', '2020-06-30');
+
 -- --------------------------------------------------------
 
 --
@@ -142,13 +172,21 @@ CREATE TABLE `employee_history` (
 --
 
 CREATE TABLE `employee_leave` (
-  `leave_id` int(11) NOT NULL,
+  `employee_leave_id` int(11) NOT NULL,
   `leave_employee_id` int(11) NOT NULL,
   `leave_leave_type` text NOT NULL,
   `leave_start_date` date NOT NULL,
   `leave_end_date` date NOT NULL,
-  `leave_status` text NOT NULL
+  `leave_status` text NOT NULL COMMENT '0 == pending\r\n1 == running\r\n2 == finished'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `employee_leave`
+--
+
+INSERT INTO `employee_leave` (`employee_leave_id`, `leave_employee_id`, `leave_leave_type`, `leave_start_date`, `leave_end_date`, `leave_status`) VALUES
+(1, 9, '1', '2020-05-25', '2020-07-31', '1'),
+(2, 8, '1', '2020-06-26', '2020-06-25', '1');
 
 -- --------------------------------------------------------
 
@@ -239,7 +277,13 @@ CREATE TABLE `leave_type` (
 --
 
 INSERT INTO `leave_type` (`leave_id`, `leave_name`) VALUES
-(1, 'Study Leave');
+(1, 'Study Leave'),
+(2, 'Maternity Leave'),
+(3, 'Casual Leave'),
+(5, 'Annual Leave'),
+(7, 'Paternity Leave'),
+(8, 'test leave'),
+(9, 'A Leave');
 
 -- --------------------------------------------------------
 
@@ -338,7 +382,9 @@ CREATE TABLE `location` (
 --
 
 INSERT INTO `location` (`location_id`, `location_name`) VALUES
-(1, 'Lagos - Eti Osa 1');
+(1, 'Lagos - Eti Osa 1'),
+(2, 'Abuja'),
+(3, 'Port Harcourt 1');
 
 -- --------------------------------------------------------
 
@@ -474,7 +520,50 @@ INSERT INTO `logs` (`log_id`, `log_user_id`, `log_description`, `log_date`) VALU
 (114, '4', 'Updated A Leave Type', '2020-06-26 14:35:04'),
 (115, '4', 'Initiated Employee Transfer', '2020-06-26 16:39:54'),
 (116, '4', 'Logged Out', '2020-06-26 16:54:59'),
-(117, '4', 'Logged In', '2020-06-26 16:55:25');
+(117, '4', 'Logged In', '2020-06-26 16:55:25'),
+(118, '4', 'Logged In', '2020-06-29 10:19:50'),
+(119, '4', 'Initiated Employee Transfer', '2020-06-29 14:21:19'),
+(120, '4', 'Added A New Branch', '2020-06-29 15:43:25'),
+(121, '4', 'Added A New Branch', '2020-06-29 15:43:46'),
+(122, '4', 'Initiated Employee Transfer', '2020-06-29 16:47:52'),
+(123, '4', 'Initiated Employee Transfer', '2020-06-29 16:48:34'),
+(124, '4', 'Updated Employee Leave', '2020-06-29 16:56:01'),
+(125, '4', 'Logged In', '2020-06-30 08:44:19'),
+(126, '4', 'Added A New Leave Type', '2020-06-30 08:44:37'),
+(127, '4', 'Logged Out', '2020-06-30 08:45:50'),
+(128, '4', 'Logged In', '2020-06-30 08:45:58'),
+(129, '4', 'Added A New Leave Type', '2020-06-30 08:46:15'),
+(130, '4', 'Added A New Leave Type', '2020-06-30 08:46:15'),
+(131, '4', 'Logged Out', '2020-06-30 08:46:53'),
+(132, '4', 'Logged In', '2020-06-30 08:48:51'),
+(133, '4', 'Added A New Leave Type', '2020-06-30 08:49:06'),
+(134, '4', 'Added A New Leave Type', '2020-06-30 08:49:06'),
+(135, '5', 'Logged In', '2020-06-30 08:49:26'),
+(136, '4', 'Logged Out', '2020-06-30 08:50:09'),
+(137, '5', 'Logged Out', '2020-06-30 08:50:52'),
+(138, '5', 'Logged In', '2020-06-30 08:51:00'),
+(139, '5', 'Added A New Leave Type', '2020-06-30 08:51:16'),
+(140, '5', 'Logged Out', '2020-06-30 08:51:31'),
+(141, '5', 'Logged In', '2020-06-30 08:52:48'),
+(142, '5', 'Added A New Leave Type', '2020-06-30 08:55:09'),
+(143, '5', 'Logged Out', '2020-06-30 08:57:20'),
+(144, '5', 'Logged In', '2020-06-30 09:02:20'),
+(145, '5', 'Added A New Leave Type', '2020-06-30 09:02:46'),
+(146, '5', 'Logged Out', '2020-06-30 09:03:16'),
+(147, '4', 'Logged In', '2020-06-30 09:32:42'),
+(148, '4', 'Initiated Employee Transfer', '2020-06-30 09:47:03'),
+(149, '4', 'Initiated Employee Transfer', '2020-06-30 09:47:15'),
+(150, '4', 'Initiated Employee Transfer', '2020-06-30 11:57:05'),
+(151, '4', 'Added A New Self Assessment Question', '2020-06-30 14:34:28'),
+(152, '4', 'Added A New Self Assessment Question', '2020-06-30 14:39:47'),
+(153, '4', 'Added A New Qualitative Assessment Question', '2020-06-30 15:05:32'),
+(154, '4', 'Update a Qualitative Assessment Question', '2020-06-30 15:05:54'),
+(155, '4', 'Added A New Supervisor Assessment Question', '2020-06-30 15:27:46'),
+(156, '4', 'Updated a Supervisor Assessment Question', '2020-06-30 15:28:46'),
+(157, '4', 'Added A New Quantitative Assessment Question', '2020-06-30 16:37:09'),
+(158, '4', 'Update a Quantitative Assessment Question', '2020-06-30 16:38:33'),
+(159, '4', 'Update a Quantitative Assessment Question', '2020-06-30 16:39:21'),
+(160, '4', 'Added A New Quantitative Assessment Question', '2020-06-30 16:39:40');
 
 -- --------------------------------------------------------
 
@@ -684,6 +773,48 @@ INSERT INTO `qualification` (`qualification_id`, `qualification_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `qualitative`
+--
+
+CREATE TABLE `qualitative` (
+  `qualitative_id` int(11) NOT NULL,
+  `qualitative_question` text NOT NULL,
+  `qualitative_min` int(11) NOT NULL DEFAULT 1,
+  `qualitative_max` int(11) NOT NULL DEFAULT 4
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `qualitative`
+--
+
+INSERT INTO `qualitative` (`qualitative_id`, `qualitative_question`, `qualitative_min`, `qualitative_max`) VALUES
+(1, '  Quality of Work - Accuracy skill, thoroughness, neatness, error free etc<br>', 1, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quantitative`
+--
+
+CREATE TABLE `quantitative` (
+  `quantitative_id` int(11) NOT NULL,
+  `quantitative_job_role_id` int(11) NOT NULL,
+  `quantitative_question` text NOT NULL,
+  `quantitative_min` int(11) NOT NULL,
+  `quantitative_max` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `quantitative`
+--
+
+INSERT INTO `quantitative` (`quantitative_id`, `quantitative_job_role_id`, `quantitative_question`, `quantitative_min`, `quantitative_max`) VALUES
+(1, 2, '   Which language is most difficult for you; C or PHP?<br>', 0, 0),
+(2, 2, ' What is your favorite style of programming?<br>', 0, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `query`
 --
 
@@ -781,6 +912,25 @@ INSERT INTO `salary_structure_category` (`salary_structure_id`, `salary_structur
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `self_appraisee`
+--
+
+CREATE TABLE `self_appraisee` (
+  `self_appraisee_id` int(11) NOT NULL,
+  `self_appraisee_question` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `self_appraisee`
+--
+
+INSERT INTO `self_appraisee` (`self_appraisee_id`, `self_appraisee_question`) VALUES
+(1, 'State the various jobs you handled during the appraisal period?'),
+(2, '<p> Which aspect of your job experience do you find most challenging and interesting?</p>');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subsidiary`
 --
 
@@ -795,6 +945,24 @@ CREATE TABLE `subsidiary` (
 
 INSERT INTO `subsidiary` (`subsidiary_id`, `subsidiary_name`) VALUES
 (1, 'Connexxion Telecoms');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supervisor_appraisee`
+--
+
+CREATE TABLE `supervisor_appraisee` (
+  `supervisor_appraisee_id` int(11) NOT NULL,
+  `supervisor_appraisee_question` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `supervisor_appraisee`
+--
+
+INSERT INTO `supervisor_appraisee` (`supervisor_appraisee_id`, `supervisor_appraisee_question`) VALUES
+(1, '  What is your impression of this employees?<br>');
 
 -- --------------------------------------------------------
 
@@ -846,6 +1014,14 @@ CREATE TABLE `transfer` (
   `transfer_date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `transfer`
+--
+
+INSERT INTO `transfer` (`transfer_id`, `transfer_employee_id`, `transfer_type`, `transfer_from`, `transfer_to`, `transfer_date`) VALUES
+(3, 7, 0, '1', '3', '2020-06-30'),
+(4, 7, 0, '3', '1', '2020-06-30');
+
 -- --------------------------------------------------------
 
 --
@@ -867,8 +1043,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_username`, `user_email`, `user_password`, `user_token`, `user_name`, `user_status`) VALUES
-(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', '1593186925', 'Administrator Administrator', '1'),
-(5, 'peterejiro', 'peterejiro96@gmail.com', '$2y$10$7OLmMpkXuTEhrMdIIsdnoO4GCUs7yB/Hm7qL6rRAmHEA1lzikvOjW', '1593165368', 'Oki-Peter Ejiroghene', '1');
+(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', '1593505962', 'Administrator Administrator', '1'),
+(5, 'peterejiro', 'peterejiro96@gmail.com', '$2y$10$7OLmMpkXuTEhrMdIIsdnoO4GCUs7yB/Hm7qL6rRAmHEA1lzikvOjW', '', 'Oki-Peter Ejiroghene', '1');
 
 -- --------------------------------------------------------
 
@@ -955,10 +1131,16 @@ ALTER TABLE `employee`
   ADD UNIQUE KEY `employee_phone_number` (`employee_phone_number`) USING HASH;
 
 --
+-- Indexes for table `employee_appraisal`
+--
+ALTER TABLE `employee_appraisal`
+  ADD PRIMARY KEY (`employee_appraisal_id`);
+
+--
 -- Indexes for table `employee_leave`
 --
 ALTER TABLE `employee_leave`
-  ADD PRIMARY KEY (`leave_id`);
+  ADD PRIMARY KEY (`employee_leave_id`);
 
 --
 -- Indexes for table `grade`
@@ -1088,6 +1270,18 @@ ALTER TABLE `qualification`
   ADD UNIQUE KEY `qualification_name` (`qualification_name`) USING HASH;
 
 --
+-- Indexes for table `qualitative`
+--
+ALTER TABLE `qualitative`
+  ADD PRIMARY KEY (`qualitative_id`);
+
+--
+-- Indexes for table `quantitative`
+--
+ALTER TABLE `quantitative`
+  ADD PRIMARY KEY (`quantitative_id`);
+
+--
 -- Indexes for table `query`
 --
 ALTER TABLE `query`
@@ -1112,10 +1306,22 @@ ALTER TABLE `salary_structure_category`
   ADD PRIMARY KEY (`salary_structure_id`);
 
 --
+-- Indexes for table `self_appraisee`
+--
+ALTER TABLE `self_appraisee`
+  ADD PRIMARY KEY (`self_appraisee_id`);
+
+--
 -- Indexes for table `subsidiary`
 --
 ALTER TABLE `subsidiary`
   ADD PRIMARY KEY (`subsidiary_id`);
+
+--
+-- Indexes for table `supervisor_appraisee`
+--
+ALTER TABLE `supervisor_appraisee`
+  ADD PRIMARY KEY (`supervisor_appraisee_id`);
 
 --
 -- Indexes for table `tax_rate`
@@ -1185,10 +1391,16 @@ ALTER TABLE `employee`
   MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `employee_appraisal`
+--
+ALTER TABLE `employee_appraisal`
+  MODIFY `employee_appraisal_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `employee_leave`
 --
 ALTER TABLE `employee_leave`
-  MODIFY `leave_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `employee_leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `grade`
@@ -1218,7 +1430,7 @@ ALTER TABLE `job_role`
 -- AUTO_INCREMENT for table `leave_type`
 --
 ALTER TABLE `leave_type`
-  MODIFY `leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `loans`
@@ -1242,13 +1454,13 @@ ALTER TABLE `loan_reschedule_log`
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT for table `memo`
@@ -1311,6 +1523,18 @@ ALTER TABLE `qualification`
   MODIFY `qualification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `qualitative`
+--
+ALTER TABLE `qualitative`
+  MODIFY `qualitative_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `quantitative`
+--
+ALTER TABLE `quantitative`
+  MODIFY `quantitative_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `query`
 --
 ALTER TABLE `query`
@@ -1335,10 +1559,22 @@ ALTER TABLE `salary_structure_category`
   MODIFY `salary_structure_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `self_appraisee`
+--
+ALTER TABLE `self_appraisee`
+  MODIFY `self_appraisee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `subsidiary`
 --
 ALTER TABLE `subsidiary`
   MODIFY `subsidiary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `supervisor_appraisee`
+--
+ALTER TABLE `supervisor_appraisee`
+  MODIFY `supervisor_appraisee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tax_rate`
@@ -1356,7 +1592,7 @@ ALTER TABLE `title`
 -- AUTO_INCREMENT for table `transfer`
 --
 ALTER TABLE `transfer`
-  MODIFY `transfer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `transfer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`

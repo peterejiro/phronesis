@@ -56,7 +56,7 @@ $CI->load->model('hr_configurations');
                             if($transfer->transfer_type == 0){ echo $CI->hr_configurations->view_location($transfer->transfer_to)->location_name; } if($transfer->transfer_type == 1){ echo $CI->hr_configurations->view_subsidiary($transfer->transfer_to)->subsidiary_name; }
                             ?>
                           </td>
-                          <td><?php echo $transfer->transfer_date; ?></td>
+                          <td><?php echo date('l, j F Y', strtotime($transfer->transfer_date)); ?></td>
                         </tr>
                       <?php
                       endforeach;
@@ -73,6 +73,7 @@ $CI->load->model('hr_configurations');
 		</div>
 	</div>
 </div>
+<?php include(APPPATH.'\views\footer.php'); ?>
 <?php include(APPPATH.'\views\js.php'); ?>
 </body>
 </html>
