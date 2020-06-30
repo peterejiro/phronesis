@@ -73,6 +73,7 @@ $CI->load->model('hr_configurations');
 		</div>
 	</div>
 </div>
+<?php include(APPPATH.'\views\footer.php'); ?>
 <?php include(APPPATH.'\views\js.php'); ?>
 </body>
 </html>
