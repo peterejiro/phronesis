@@ -1542,6 +1542,721 @@ class Hr_configuration extends CI_Controller
 	}
 
 
+	public function appraisal_setup (){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->payroll_configuration == 1):
+
+				$data['user_data'] = $this->users->get_user($username);
+				//$data['employees'] = $this->employees->get_employee_by_salary_setup();
+
+
+				$this->load->view('hr_config/appraisal_setup', $data);
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+	}
+
+	public function self_assessment(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->payroll_configuration == 1):
+
+				$data['user_data'] = $this->users->get_user($username);
+				//$data['employees'] = $this->employees->get_employee_by_salary_setup();
+
+				$data['questions'] = $this->hr_configurations->view_self_assessments();
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+				$this->load->view('hr_config/self_assessment', $data);
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+
+	public function add_self_assessment(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+				$data['user_data'] = $this->users->get_user($username);
+
+
+				$question = $this->input->post('question');
+
+				$question_array = array(
+					'self_appraisee_question'=>$question,
+				);
+				$question_array = $this->security->xss_clean($question_array);
+
+				$query = $this->hr_configurations->add_self_assessment($question_array);
+
+				if($query == true):
+
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Added A New Self Assessment Question"
+					);
+
+					$this->logs->add_log($log_array);
+
+					$msg = array(
+						'msg'=> 'Question Added Successfully',
+						'location' => site_url('self_assessment'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+				else:
+					echo "An Error Occurred";
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function update_self_assessment(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+
+
+				$data['user_data'] = $this->users->get_user($username);
+				$question_id = $this->input->post('question_id');
+				$question = $this->input->post('question');
+
+				$question_array = array(
+					'self_appraisee_question'=>$question,
+				);
+				$question_array = $this->security->xss_clean($question_array);
+
+				$query = $this->hr_configurations->update_self_assessment($question_id, $question_array);
+
+				if($query == true):
+
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Update a Self Assessment Question"
+					);
+
+					$this->logs->add_log($log_array);
+
+					$msg = array(
+						'msg'=> 'Question Updated Successfully',
+						'location' => site_url('self_assessment'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+
+				else:
+					echo "An Error Occurred";
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+
+	public function quantitative_assessment(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->payroll_configuration == 1):
+
+				$data['user_data'] = $this->users->get_user($username);
+				//$data['employees'] = $this->employees->get_employee_by_salary_setup();
+				$data['job_roles'] = $this->hr_configurations->view_job_roles();
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+				$this->load->view('hr_config/quantitative_assessment', $data);
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+	public function view_quantitative_assessment(){
+
+		$job_role_id = $this->uri->segment(2);
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->payroll_configuration == 1):
+
+				if(empty($job_role_id)):
+
+					redirect('error_404');
+
+					else:
+
+					$check_existing_job_role = $this->hr_configurations-> view_job_role($job_role_id);
+
+					if(empty($check_existing_job_role)):
+
+						redirect('error_404');
+
+						else:
+
+							$data['user_data'] = $this->users->get_user($username);
+							//$data['employees'] = $this->employees->get_employee_by_salary_setup();
+							$data['job_role'] = $check_existing_job_role;
+							$data['questions'] = $this->hr_configurations->view_quantitative_assessments($job_role_id);
+							$data['csrf_name'] = $this->security->get_csrf_token_name();
+							$data['csrf_hash'] = $this->security->get_csrf_hash();
+							$this->load->view('hr_config/view_quantitative_assessment', $data);
+						endif;
+
+					endif;
+
+
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+	public function add_quantitative_assessment(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+				$data['user_data'] = $this->users->get_user($username);
+
+
+				$question = $this->input->post('question');
+				$job_role_id = $this->input->post('job_role_id');
+
+				$question_array = array(
+					'quantitative_question'=>$question,
+					'quantitative_job_role_id' => $job_role_id,
+				);
+				$question_array = $this->security->xss_clean($question_array);
+
+				$query = $this->hr_configurations->add_quantitative_assessment($question_array);
+
+				if($query == true):
+
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Added A New Quantitative Assessment Question"
+					);
+
+					$this->logs->add_log($log_array);
+					$url = site_url('view_quantitative_assessment')."/".$job_role_id;
+					$msg = array(
+						'msg'=> 'Question Added Successfully',
+						'location' => $url,
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+				else:
+					echo "An Error Occurred";
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function update_quantitative_assessment(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+
+
+				$data['user_data'] = $this->users->get_user($username);
+				$question_id = $this->input->post('question_id');
+				$question = $this->input->post('question');
+				$job_role_id = $this->input->post('job_role_id');
+
+				$question_array = array(
+					'quantitative_question'=>$question,
+				);
+				$question_array = $this->security->xss_clean($question_array);
+
+				$query = $this->hr_configurations->update_quantitative_assessment($question_id, $question_array);
+
+				if($query == true):
+
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Update a Quantitative Assessment Question"
+					);
+
+					$this->logs->add_log($log_array);
+					$url = site_url('view_quantitative_assessment')."/".$job_role_id;
+					$msg = array(
+						'msg'=> 'Question Updated Successfully',
+						'location' => $url,
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+
+				else:
+					echo "An Error Occurred";
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function qualitative_assessment(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->payroll_configuration == 1):
+
+				$data['user_data'] = $this->users->get_user($username);
+				//$data['employees'] = $this->employees->get_employee_by_salary_setup();
+
+				$data['questions'] = $this->hr_configurations->view_qualitative_assessments();
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+				$this->load->view('hr_config/qualitative_assessment', $data);
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+	public function add_qualitative_assessment(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+				$data['user_data'] = $this->users->get_user($username);
+
+
+				$question = $this->input->post('question');
+
+				$question_array = array(
+					'qualitative_question'=>$question,
+				);
+				$question_array = $this->security->xss_clean($question_array);
+
+				$query = $this->hr_configurations->add_qualitative_assessment($question_array);
+
+				if($query == true):
+
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Added A New Qualitative Assessment Question"
+					);
+
+					$this->logs->add_log($log_array);
+
+					$msg = array(
+						'msg'=> 'Question Added Successfully',
+						'location' => site_url('qualitative_assessment'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+				else:
+					echo "An Error Occurred";
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function update_qualitative_assessment(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+
+
+				$data['user_data'] = $this->users->get_user($username);
+				$question_id = $this->input->post('question_id');
+				$question = $this->input->post('question');
+
+				$question_array = array(
+					'qualitative_question'=>$question,
+				);
+				$question_array = $this->security->xss_clean($question_array);
+
+				$query = $this->hr_configurations->update_qualitative_assessment($question_id, $question_array);
+
+				if($query == true):
+
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Update a Qualitative Assessment Question"
+					);
+
+					$this->logs->add_log($log_array);
+
+					$msg = array(
+						'msg'=> 'Question Updated Successfully',
+						'location' => site_url('qualitative_assessment'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+
+				else:
+					echo "An Error Occurred";
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function supervisor_assessment(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->payroll_configuration == 1):
+
+				$data['user_data'] = $this->users->get_user($username);
+				//$data['employees'] = $this->employees->get_employee_by_salary_setup();
+				$data['questions'] = $this->hr_configurations->view_supervisor_assessments();
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+				$this->load->view('hr_config/supervisor_assessment', $data);
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+	public function add_supervisor_assessment(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+				$data['user_data'] = $this->users->get_user($username);
+
+
+				$question = $this->input->post('question');
+
+				$question_array = array(
+					'supervisor_appraisee_question'=>$question,
+				);
+				$question_array = $this->security->xss_clean($question_array);
+
+				$query = $this->hr_configurations->add_supervisor_assessment($question_array);
+
+				if($query == true):
+
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Added A New Supervisor Assessment Question"
+					);
+
+					$this->logs->add_log($log_array);
+
+					$msg = array(
+						'msg'=> 'Question Added Successfully',
+						'location' => site_url('supervisor_assessment'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+				else:
+					echo "An Error Occurred";
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function update_supervisor_assessment(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if($permission->hr_configuration == 1):
+
+
+				$data['user_data'] = $this->users->get_user($username);
+				$question_id = $this->input->post('question_id');
+				$question = $this->input->post('question');
+
+				$question_array = array(
+					'supervisor_appraisee_question'=>$question,
+				);
+				$question_array = $this->security->xss_clean($question_array);
+
+				$query = $this->hr_configurations->update_supervisor_assessment($question_id, $question_array);
+
+				if($query == true):
+
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Updated a Supervisor Assessment Question"
+					);
+
+					$this->logs->add_log($log_array);
+
+					$msg = array(
+						'msg'=> 'Question Updated Successfully',
+						'location' => site_url('supervisor_assessment'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+
+				else:
+					echo "An Error Occurred";
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+
+
 	public function test(){
 
 		$msg = array(

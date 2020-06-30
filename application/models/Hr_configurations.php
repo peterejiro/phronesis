@@ -287,6 +287,7 @@ class Hr_configurations extends CI_Model
 		$this->db->select('*');
 		$this->db->from('job_role');
 		$this->db->where('job_role_id', $job_role_id);
+		$this->db->join('department', 'department.department_id = job_role.department_id');
 		$query = $this->db->get();
 		return $query->row();
 
@@ -368,4 +369,139 @@ class Hr_configurations extends CI_Model
 	}
 
 	//Health Insurance setup end
+
+
+	//self assessment setup begin
+	public function add_self_assessment($assessment_data){
+
+		$this->db->insert('self_appraisee', $assessment_data);
+		return true;
+	}
+
+	public function update_self_assessment($assessment_id, $assessment_data){
+
+		$this->db->where('self_appraisee.self_appraisee_id', $assessment_id);
+		$this->db->update('self_appraisee', $assessment_data);
+		return true;
+
+
+	}
+
+	public function view_self_assessments(){
+
+		$this->db->select('*');
+		$this->db->from('self_appraisee');
+		return $this->db->get()->result();
+
+	}
+
+	public function view_self_assessment($assessment_id){
+		$this->db->select('*');
+		$this->db->from('self_appraisee');
+		$this->db->where('self_appraisee_id', $assessment_id);
+		$query = $this->db->get();
+		return $query->row();
+
+	}
+
+
+	//qualitative assessment setup begin
+	public function add_qualitative_assessment($qualitative_assessment_data){
+
+		$this->db->insert('qualitative', $qualitative_assessment_data);
+		return true;
+	}
+
+	public function update_qualitative_assessment($assessment_id, $assessment_data){
+
+		$this->db->where('qualitative.qualitative_id', $assessment_id);
+		$this->db->update('qualitative', $assessment_data);
+		return true;
+
+
+	}
+
+	public function view_qualitative_assessments(){
+
+		$this->db->select('*');
+		$this->db->from('qualitative');
+		return $this->db->get()->result();
+
+	}
+
+	public function view_qualitative_assessment($assessment_id){
+		$this->db->select('*');
+		$this->db->from('qualitative');
+		$this->db->where('qualitative_id', $assessment_id);
+		$query = $this->db->get();
+		return $query->row();
+
+	}
+
+	//supervisor assessment setup begin
+	public function add_supervisor_assessment($supervisor_assessment_data){
+
+		$this->db->insert('supervisor_appraisee', $supervisor_assessment_data);
+		return true;
+	}
+
+	public function update_supervisor_assessment($assessment_id, $assessment_data){
+
+		$this->db->where('supervisor_appraisee.supervisor_appraisee_id', $assessment_id);
+		$this->db->update('supervisor_appraisee', $assessment_data);
+		return true;
+
+
+	}
+
+	public function view_supervisor_assessments(){
+
+		$this->db->select('*');
+		$this->db->from('supervisor_appraisee');
+		return $this->db->get()->result();
+
+	}
+
+	public function view_supervisor_assessment($assessment_id){
+		$this->db->select('*');
+		$this->db->from('supervisor_appraisee');
+		$this->db->where('supervisor_appraisee_id', $assessment_id);
+		$query = $this->db->get();
+		return $query->row();
+
+	}
+
+	//supervisor assessment setup begin
+	public function add_quantitative_assessment($quantitative_assessment_data){
+
+		$this->db->insert('quantitative', $quantitative_assessment_data);
+		return true;
+	}
+
+	public function update_quantitative_assessment($assessment_id, $assessment_data){
+
+		$this->db->where('quantitative.quantitative_id', $assessment_id);
+		$this->db->update('quantitative', $assessment_data);
+		return true;
+
+
+	}
+
+	public function view_quantitative_assessments($job_role_id){
+
+		$this->db->select('*');
+		$this->db->from('quantitative');
+		$this->db->where('quantitative_job_role_id', $job_role_id);
+		return $this->db->get()->result();
+
+	}
+
+	public function view_quantitative_assessment($assessment_id){
+		$this->db->select('*');
+		$this->db->from('quantitative');
+		$this->db->where('quantitative_id', $assessment_id);
+		$query = $this->db->get();
+		return $query->row();
+
+	}
 }

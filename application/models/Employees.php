@@ -166,10 +166,8 @@ class Employees extends CI_Model
 		$this->db->select('*');
 		$this->db->from('employee_leave');
 		$this->db->where('employee_leave.leave_employee_id', $employee_id);
-		$this->db->where('employee_leave.leave_status', 0 );
-		$this->db->or_where('employee_leave.leave_status', 1);
-//		$this->db->join('leave_type', 'leave_type.leave_id = employee_leave.leave_leave_type');
-		//$this->db->order_by('transfer_date', 'DESC');
+		//$this->db->where('employee_leave.leave_status', 0 );
+		//$this->db->or_where('employee_leave.leave_status', 1);
 		$query = $this->db->get()->result();
 		return $query;
 
