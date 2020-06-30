@@ -700,7 +700,7 @@ class Employee extends CI_Controller
 
 	public function add_new_employee_transfer(){
 
-
+		//error_reporting(0);
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
@@ -995,17 +995,71 @@ class Employee extends CI_Controller
 				$end_date = $this->input->post('end_date');
 
 
-				$check_existing_leave = $this->employees->check_existing_employee_leaves($employee_id);
+				$check_existing_leaves = $this->employees->check_existing_employee_leaves($employee_id);
 
-				if(!empty($check_existing_leave)):
-					$msg = array(
-						'msg'=> 'Employee Already Has Existing Leave',
-						'location' => site_url('employee_leave'),
-						'type' => 'error'
 
-					);
-					$this->load->view('swal', $msg);
 
+				if(!empty($check_existing_leaves)):
+					$count = 0;
+					foreach ($check_existing_leaves as $check_existing_leave):
+
+						if($check_existing_leave->leave_status == 0 || $check_existing_leave->leave_status == 1):
+							$count++;
+							endif;
+
+						endforeach;
+
+							if($count > 0):
+
+								$msg = array(
+									'msg'=> 'Employee Already Has Existing Leave',
+									'location' => site_url('employee_leave'),
+									'type' => 'error'
+
+								);
+								$this->load->view('swal', $msg);
+							else:
+
+								$leave_array = array(
+									'leave_employee_id'=> $employee_id,
+									'leave_leave_type' => $leave_id,
+									'leave_start_date' => $start_date,
+									'leave_end_date' => $end_date,
+									'leave_status' => 1
+
+								);
+
+								$leave_array = $this->security->xss_clean($leave_array);
+								$query = $this->employees->insert_leave($leave_array);
+
+								if($query == true):
+
+									$log_array = array(
+										'log_user_id' => $this->users->get_user($username)->user_id,
+										'log_description' => "Initiated Employee Transfer"
+									);
+
+									$this->logs->add_log($log_array);
+
+									$employee_history_array = array(
+										'employee_history_employee_id' => $employee_id,
+										'employee_history_details' =>'Leave Application'
+
+									);
+
+									$this->employees->insert_employee_history($employee_history_array);
+
+									$msg = array(
+										'msg'=> 'Leave Application Successful, Automatically approved because you are Administrator',
+										'location' => site_url('employee_leave'),
+										'type' => 'success'
+
+									);
+									$this->load->view('swal', $msg);
+
+									endif;
+
+							endif;
 					else:
 
 						$leave_array = array(
