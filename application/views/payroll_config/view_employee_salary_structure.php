@@ -1,7 +1,6 @@
 <?php include(APPPATH.'\views\stylesheet.php'); ?>
 
 <body>
-<!-- Begin page -->
 <div id="app">
 	<div class="main-wrapper">
 		<div class="navbar-bg"></div>
@@ -25,7 +24,7 @@
           <p class="section-lead">You can view details and breakdown of an employee's salary structure here</p>
           <div class="row">
             <div class="col-md-7">
-              <div class="card">
+              <div class="card card-primary">
                 <div class="card-header">
                   <h4>Salary Structure Details</h4>
                   <div class="card-header-action">
