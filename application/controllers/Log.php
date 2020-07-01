@@ -34,13 +34,17 @@ class Log extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
+				$user_type = $this->users->get_user($username)->user_type;
 
+				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 				$data['logs'] = $this->logs->view_logs();
 
 
 				$this->load->view('log/view_logs', $data);
-
+				else:
+					redirect('/access_denied');
+				endif;
 			else:
 
 				redirect('/access_denied');

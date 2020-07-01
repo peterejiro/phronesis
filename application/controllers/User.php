@@ -31,12 +31,20 @@ class User extends CI_Controller
 
 			if($permission->user_management == 1):
 
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
+
 				$data['users'] = $this->users->view_users();
 				$data['user_data'] = $this->users->get_user($username);
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
 
 				$this->load->view('user/user', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
 
 			else:
 
@@ -64,6 +72,9 @@ class User extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->user_management == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 
 				$data['users'] = $this->users->view_users();
 				$data['user_data'] = $this->users->get_user($username);
@@ -76,6 +87,10 @@ class User extends CI_Controller
 				);
 				$data['error'] = $errormsg;
 				$this->load->view('user/new_user', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
 
 			else:
 				redirect('/access_denied');
@@ -233,6 +248,9 @@ class User extends CI_Controller
 
 
 			if($permission->user_management == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 				$user_datum = $this->users->get_user_id($user_id);
 
@@ -250,6 +268,10 @@ class User extends CI_Controller
 
 						$this->load->view('user/manage_user', $data);
 
+					endif;
+
+					else:
+						redirect('/access_denied');
 					endif;
 
 			else:
@@ -286,6 +308,9 @@ class User extends CI_Controller
 
 
 			if($permission->user_management == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 
 				$user_username = $this->input->post('username');
 				$user_email = $this->input->post('email');
@@ -479,7 +504,9 @@ class User extends CI_Controller
 				endif;
 
 			endif;
-
+		else:
+			redirect('/access_denied');
+		endif;
 
 			else:
 

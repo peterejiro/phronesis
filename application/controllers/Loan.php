@@ -35,6 +35,9 @@ class Loan extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['loans'] = $this->loans->view_loans();
@@ -45,6 +48,10 @@ class Loan extends CI_Controller
 
 				//print_r($data['loans']);
 				$this->load->view('loan/loans', $data);
+				else:
+					redirect('/access_denied');
+
+				endif;
 
 			else:
 
@@ -73,6 +80,9 @@ class Loan extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['employees'] = $this->employees->view_employees();
@@ -82,6 +92,10 @@ class Loan extends CI_Controller
 				$data['payroll'] = $this->payroll_configurations->get_payroll_month_year();
 
 				$this->load->view('loan/new_loan', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
 
 			else:
 

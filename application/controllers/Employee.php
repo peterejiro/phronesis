@@ -34,13 +34,20 @@ class Employee extends CI_Controller
 
 			if($permission->employee_management == 1):
 
+				$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+
 				$data['employees'] = $this->employees->view_employees();
 				$data['user_data'] = $this->users->get_user($username);
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
 
 				$this->load->view('employee/employee', $data);
+			else:
 
+				redirect('/access_denied');
+				endif;
 			else:
 
 				redirect('/access_denied');
@@ -71,6 +78,10 @@ class Employee extends CI_Controller
 
 //				$data['employees'] = $this->users->view_employees();
 
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
+
 				$data['grades'] = $this->hr_configurations->view_grades();
 				$data['roles'] = $this->hr_configurations->view_job_roles();
 				$data['qualifications'] = $this->hr_configurations->view_qualifications();
@@ -97,6 +108,12 @@ class Employee extends CI_Controller
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
 
 				$this->load->view('employee/new_employee', $data);
+
+				else:
+
+					redirect('/access_denied');
+
+				endif;
 
 			else:
 
@@ -126,7 +143,7 @@ class Employee extends CI_Controller
 
 			if($permission->employee_management == 1):
 				$config['upload_path'] = 'uploads/employee_passports';
-				$config['allowed_types'] = 'gif|jpg|png|pdf';
+				$config['allowed_types'] = 'gif|jpg|png|pdf|jpeg';
 				$config['max_size'] = '8000000';
 				$config['max_width'] = '102452';
 				$config['max_height'] = '768555';
@@ -146,7 +163,7 @@ class Employee extends CI_Controller
 
 
 				$config2['upload_path'] = 'uploads/employee_nysc';
-				$config2['allowed_types'] = 'gif|jpg|png|pdf';
+				$config2['allowed_types'] = 'gif|jpg|png|pdf|jpeg';
 				$config2['max_size'] = '8000000';
 				$config2['max_width'] = '102452';
 				$config2['max_height'] = '768555';
@@ -191,6 +208,8 @@ class Employee extends CI_Controller
 				$employee_others = $this->input->post('employee_others');
 				$employee_subsidiary = $this->input->post('subsidiary');
 				$employee_pensionable = $this->input->post('employee_pensionable');
+				$employee_username = $this->input->post('employee_username');
+				$employee_password = $this->input->post('employee_password');
 
 				if($employee_pensionable == 1):
 					$employee_pension_number = $this->input->post('employee_pension_number');
@@ -240,7 +259,36 @@ class Employee extends CI_Controller
 
 				);
 
+				$employee_name = $employee_last_name." ".$employee_first_name;
+
+				$user_array = array(
+					'user_username'=> $employee_username,
+					'user_email'=> $employee_official_email,
+					'user_password'=> password_hash($employee_password, PASSWORD_BCRYPT),
+					'user_name'=> $employee_name,
+					'user_type' => 2,
+					'user_status'=> 1
+				);
+
+				$permission_array = array(
+					'username'=> $employee_username,
+					'employee_management'=> 0,
+					'payroll_management'=> 0,
+					'biometrics' =>0,
+					'user_management'=> 0,
+					'configuration' => 0,
+					'hr_configuration' => 0,
+					'payroll_configuration' => 0
+				);
+
+
+				$permission_array = $this->security->xss_clean($permission_array);
+
+				$user_array = $this->security->xss_clean($user_array);
+
 				$employee_data = $this->security->xss_clean($employee_data);
+
+				$query = $this->users->add($user_array, $permission_array);
 
 				$employee_id = $this->employees->add_employee($employee_data);
 				$k = 0;
@@ -350,6 +398,10 @@ class Employee extends CI_Controller
 
 
 			if($permission->employee_management == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
+
 				$errormsg = ' ';
 				$error_msg = array('error' => $errormsg);
 				$data['error'] = $errormsg;
@@ -380,7 +432,11 @@ class Employee extends CI_Controller
 
 					$this->load->view('employee/view_employee',$data);
 				endif;
+			else:
 
+					redirect('/access_denied');
+
+				endif;
 
 					else:
 
@@ -412,6 +468,11 @@ class Employee extends CI_Controller
 
 
 			if($permission->employee_management == 1):
+
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
+
 				$errormsg = ' ';
 				$error_msg = array('error' => $errormsg);
 				$data['error'] = $errormsg;
@@ -444,7 +505,10 @@ class Employee extends CI_Controller
 
 					$this->load->view('employee/update_employee',$data);
 					endif;
+				else:
 
+					redirect('access_denied');
+					endif;
 
 			else:
 
@@ -613,6 +677,9 @@ class Employee extends CI_Controller
 
 
 			if($permission->employee_management == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 				$errormsg = ' ';
 				$error_msg = array('error' => $errormsg);
 				$data['error'] = $errormsg;
@@ -634,7 +701,11 @@ class Employee extends CI_Controller
 
 				$this->load->view('employee/employee_transfer',$data);
 
+			else:
 
+					redirect('/access_denied');
+
+				endif;
 
 			else:
 
@@ -664,28 +735,35 @@ class Employee extends CI_Controller
 
 
 			if($permission->employee_management == 1):
-				$errormsg = ' ';
-				$error_msg = array('error' => $errormsg);
-				$data['error'] = $errormsg;
-				$data['user_data'] = $this->users->get_user($username);
-				$data['csrf_name'] = $this->security->get_csrf_token_name();
-				$data['csrf_hash'] = $this->security->get_csrf_hash();
+				$user_type = $this->users->get_user($username)->user_type;
 
-				$data['grades'] = $this->hr_configurations->view_grades();
-				$data['roles'] = $this->hr_configurations->view_job_roles();
-				$data['qualifications'] = $this->hr_configurations->view_qualifications();
-				$data['banks'] = $this->hr_configurations->view_banks();
-				$data['locations'] = $this->hr_configurations->view_locations();
-				$data['health_insurances'] = $this->hr_configurations->view_health_insurances();
-				$data['pensions'] = $this->hr_configurations->view_pensions();
-				$data['subsidiarys'] = $this->hr_configurations->view_subsidiarys();
+				if($user_type == 1 || $user_type == 3):
+					$errormsg = ' ';
+					$error_msg = array('error' => $errormsg);
+					$data['error'] = $errormsg;
+					$data['user_data'] = $this->users->get_user($username);
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
 
-				//$data['transfers'] = $this->employees->get_employees_transfers();
-				$data['employees'] = $this->employees->view_employees();
+					$data['grades'] = $this->hr_configurations->view_grades();
+					$data['roles'] = $this->hr_configurations->view_job_roles();
+					$data['qualifications'] = $this->hr_configurations->view_qualifications();
+					$data['banks'] = $this->hr_configurations->view_banks();
+					$data['locations'] = $this->hr_configurations->view_locations();
+					$data['health_insurances'] = $this->hr_configurations->view_health_insurances();
+					$data['pensions'] = $this->hr_configurations->view_pensions();
+					$data['subsidiarys'] = $this->hr_configurations->view_subsidiarys();
 
-				$this->load->view('employee/new_employee_transfer',$data);
+					//$data['transfers'] = $this->employees->get_employees_transfers();
+					$data['employees'] = $this->employees->view_employees();
 
+					$this->load->view('employee/new_employee_transfer',$data);
 
+				else:
+
+				redirect('/access_denied');
+
+				endif;
 
 			else:
 
@@ -901,6 +979,10 @@ class Employee extends CI_Controller
 
 
 			if($permission->employee_management == 1):
+
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 				$errormsg = ' ';
 				$error_msg = array('error' => $errormsg);
 				$data['error'] = $errormsg;
@@ -914,7 +996,11 @@ class Employee extends CI_Controller
 
 
 				$this->load->view('employee/employee_leave',$data);
+			else:
 
+					redirect('access_denied');
+
+				endif;
 
 
 			else:
@@ -945,18 +1031,25 @@ class Employee extends CI_Controller
 
 
 			if($permission->employee_management == 1):
-				$errormsg = ' ';
-				$error_msg = array('error' => $errormsg);
-				$data['error'] = $errormsg;
-				$data['user_data'] = $this->users->get_user($username);
-				$data['csrf_name'] = $this->security->get_csrf_token_name();
-				$data['csrf_hash'] = $this->security->get_csrf_hash();
+				$user_type = $this->users->get_user($username)->user_type;
 
-				$data['leaves'] = $this->hr_configurations->view_leaves();
-				$data['employees'] = $this->employees->view_employees();
+				if($user_type == 1 || $user_type == 3):
+					$errormsg = ' ';
+					$error_msg = array('error' => $errormsg);
+					$data['error'] = $errormsg;
+					$data['user_data'] = $this->users->get_user($username);
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$data['leaves'] = $this->hr_configurations->view_leaves();
+					$data['employees'] = $this->employees->view_employees();
 
 
-				$this->load->view('employee/new_employee_leave', $data);
+					$this->load->view('employee/new_employee_leave', $data);
+				else:
+				redirect('/access_denied');
+
+				endif;
 
 
 
@@ -1134,13 +1227,19 @@ class Employee extends CI_Controller
 
 
 			if($permission->employee_management == 1):
-				$data['user_data'] = $this->users->get_user($username);
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
+			$data['user_data'] = $this->users->get_user($username);
 			$data['leave'] = $this->employees->get_leave($leave_id);
 			$data['csrf_name'] = $this->security->get_csrf_token_name();
 			$data['csrf_hash'] = $this->security->get_csrf_hash();
 
 			$this->load->view('employee/extend_leave', $data);
+				else:
 
+					redirect('/access_denied');
+				endif;
 			else:
 
 				redirect('/access_denied');
@@ -1233,6 +1332,258 @@ class Employee extends CI_Controller
 		endif;
 
 	}
+
+
+	public function employee_appraisal(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+
+			if($permission->employee_management == 1):
+
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
+
+				$data['user_data'] = $this->users->get_user($username);
+				$data['appraisals'] = $this->employees->get_appraisals();
+				$data['employees'] = $this->employees->view_employees();
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+				$this->load->view('employee/employee_appraisal', $data);
+				else:
+
+					redirect('/access_denied');
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+
+	public function new_employee_appraisal(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+
+			if($permission->employee_management == 1):
+
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
+
+				$data['user_data'] = $this->users->get_user($username);
+				//$data['appraisals'] = $this->employees->get_appraisals();
+				$data['employees'] = $this->employees->view_employees();
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+				$this->load->view('employee/new_employee_appraisal', $data);
+				else:
+					redirect('/access_denied');
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function add_new_employee_appraisal(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+
+			if($permission->employee_management == 1):
+
+				$data['user_data'] = $this->users->get_user($username);
+				//$data['appraisals'] = $this->employees->get_appraisals();
+				$employee_id = $this->input->post('employee_id');
+				$supervisor_id = $this->input->post('supervisor_id');
+				$start_date = $this->input->post('start_date');
+				$end_date = $this->input->post('end_date');
+
+				if($employee_id == $supervisor_id):
+					$msg = array(
+						'msg'=> 'Employee and supervisor cannot be the same',
+						'location' => site_url('employee_appraisal'),
+						'type' => 'error'
+
+					);
+					$this->load->view('swal', $msg);
+
+					else:
+							$check = $this->employees->check_employee_appraisal($employee_id);
+							if(!empty($check)):
+
+								$msg = array(
+									'msg'=> 'Employee has pending appraisal',
+									'location' => site_url('employee_appraisal'),
+									'type' => 'error'
+
+								);
+								$this->load->view('swal', $msg);
+								else:
+
+								$appraisal_array = array(
+									'employee_appraisal_employee_id' => $employee_id,
+									'employee_appraisal_period_from' => $start_date,
+									'employee_appraisal_period_to' => $end_date,
+									'employee_appraisal_supervisor_id' => $supervisor_id,
+									'employee_appraisal_status' => 0
+								);
+
+									$appraisal_array = $this->security->xss_clean($appraisal_array);
+									$appraisal_id = $this->employees->insert_appraisal($appraisal_array);
+
+						//1 == employee comment 2 == qunatitative 3 == qualitative, 4 == supervisor
+
+									$self_assessments_questions = $this->hr_configurations->view_self_assessments();
+
+
+									foreach ($self_assessments_questions as $self_assessments_question):
+
+										$self_question_array = array(
+										'employee_appraisal_result_appraisal_id' => $appraisal_id,
+										'employee_appraisal_result_type' => 1,
+										'employee_appraisal_result_question' => $self_assessments_question->self_appraisee_question,
+
+
+										);
+										$self_question_array = $this->security->xss_clean($self_question_array);
+										$this->employees->insert_question_result($self_question_array);
+
+									endforeach;
+
+									$employee_job_role_id = $this->employees->get_employee($employee_id)->employee_job_role_id;
+
+
+									$quantitative_assessment_questions = $this->hr_configurations->view_quantitative_assessments($employee_job_role_id);
+
+									foreach ($quantitative_assessment_questions as $quantitative_assessment_question):
+
+										$quantitative_question_array = array(
+											'employee_appraisal_result_appraisal_id' => $appraisal_id,
+											'employee_appraisal_result_type' => 2,
+											'employee_appraisal_result_question' => $quantitative_assessment_question->quantitative_question,
+
+
+										);
+										$quantitative_question_array = $this->security->xss_clean($quantitative_question_array);
+										$this->employees->insert_question_result($quantitative_question_array);
+
+									endforeach;
+
+
+									$qualitative_assessments_questions = $this->hr_configurations->view_qualitative_assessments();
+
+									foreach ($qualitative_assessments_questions as $qualitative_assessments_question):
+
+										$qualitative_question_array = array(
+											'employee_appraisal_result_appraisal_id' => $appraisal_id,
+											'employee_appraisal_result_type' => 3,
+											'employee_appraisal_result_question' => $qualitative_assessments_question->qualitative_question,
+
+
+										);
+										$qualitative_question_array = $this->security->xss_clean($qualitative_question_array);
+										$this->employees->insert_question_result($qualitative_question_array);
+
+									endforeach;
+
+
+									$supervisor_assessments_questions = $this->hr_configurations->view_supervisor_assessments();
+
+									foreach ($supervisor_assessments_questions as $supervisor_assessments_question):
+
+										$supervisor_question_array = array(
+											'employee_appraisal_result_appraisal_id' => $appraisal_id,
+											'employee_appraisal_result_type' => 4,
+											'employee_appraisal_result_question' => $supervisor_assessments_question->supervisor_appraisee_question,
+
+
+										);
+										$supervisor_question_array = $this->security->xss_clean($supervisor_question_array);
+										$query = $this->employees->insert_question_result($supervisor_question_array);
+
+									endforeach;
+
+									if($query == true):
+										$msg = array(
+											'msg'=> 'Appraisal Started',
+											'location' => site_url('employee_appraisal'),
+											'type' => 'success'
+										);
+										$this->load->view('swal', $msg);
+
+										else:
+
+
+										endif;
+
+								endif;
+
+						endif;
+
+				$data['employees'] = $this->employees->view_employees();
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+				$this->load->view('employee/new_employee_appraisal', $data);
+
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+
 
 
 }

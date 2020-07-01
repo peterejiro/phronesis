@@ -45,7 +45,16 @@ class Home extends CI_Controller
 			$data['leaves'] = $this->employees->get_employees_leaves();
 
 
-			$this->load->view('index', $data);
+			if($this->users->get_user($username)->user_type == 1 || $this->users->get_user($username)->user_type == 3):
+
+				$this->load->view('index', $data);
+			elseif($this->users->get_user($username)->user_type == 2):
+
+				redirect('employee_main');
+			endif;
+
+
+
 		else:
 			redirect('login');
 		endif;
@@ -160,7 +169,13 @@ class Home extends CI_Controller
 							);
 
 							$this->logs->add_log($log_array);
+							if($this->users->get_user($username)->user_type == 1 || $this->users->get_user($username)->user_type == 3):
+
 							redirect('home');
+							elseif($this->users->get_user($username)->user_type == 2):
+
+								redirect('employee_main');
+							endif;
 						endif;
 					else:
 						$diff = $time - $user_token;
@@ -194,7 +209,13 @@ class Home extends CI_Controller
 								);
 
 								$this->logs->add_log($log_array);
-								redirect('home');
+								if($this->users->get_user($username)->user_type == 1 || $this->users->get_user($username)->user_type == 3):
+
+									redirect('home');
+								elseif($this->users->get_user($username)->user_type == 2):
+
+									redirect('employee_main');
+								endif;
 							endif;
 						endif;
 

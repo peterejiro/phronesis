@@ -285,6 +285,17 @@
                         </div>
                       </div>
                       <div class="tab-pane p-3" id="other-information" role="tabpanel">
+						  <div class="form-group row">
+							  <div class="col-sm-6">
+								  <label for="employee-username">Employee UserName:</label>
+								  <input id="employee-username" readonly name="employee_username" type="text" value="<?php echo $unique_id; ?>" class="form-control"/>
+							  </div>
+							  <div class="col-sm-6">
+								 <label for="employee-password">Employee Password</label>
+								 <input id="employee-password" readonly name="employee_password" value="<?php echo "password1234"; ?>" class="form-control" type="text">
+
+							  </div>
+						  </div>
                         <div class="form-group row">
                           <div class="col-sm-6">
                             <label for="nysc-pass-out">NYSC Pass Out Number</label>

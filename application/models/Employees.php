@@ -22,8 +22,7 @@ class Employees extends CI_Model
 		$this->db->join('job_role', 'job_role.job_role_id = employee.employee_job_role_id');
 		$this->db->join('department', 'department.department_id = job_role.department_id');
 		$this->db->join('bank', 'bank.bank_id = employee.employee_bank_id');
-		$query = $this->db->get()->result();
-		return $query;
+		return $this->db->get()->result();
 
 	}
 
@@ -88,16 +87,14 @@ class Employees extends CI_Model
 		$this->db->select('*');
 		$this->db->from('other_document');
 		$this->db->where('other_document_employee_id', $employee_id);
-		$query = $this->db->get()->result();
-		return $query;
+		return $this->db->get()->result();
 	}
 
 	public function get_work_experience($employee_id){
 		$this->db->select('*');
 		$this->db->from('work_experience');
 		$this->db->where('employee_id', $employee_id);
-		$query = $this->db->get()->result();
-		return $query;
+		return $this->db->get()->result();
 	}
 
 	public function get_employee_by_salary_setup(){
@@ -109,8 +106,7 @@ class Employees extends CI_Model
 		//$this->db->group_by('employee_salary_structure_setup');
 		$this->db->order_by('employee_salary_structure_setup', 'ASC');
 
-		$query = $this->db->get()->result();
-		return $query;
+		return $this->db->get()->result();
 
 	}
 
@@ -123,8 +119,7 @@ class Employees extends CI_Model
 		$this->db->where('department.department_id', $department_id);
 		$this->db->where('employee.employee_status !=', 0);
 		$this->db->where('employee.employee_status !=', 3);
-		$query = $this->db->get()->result();
-		return $query;
+		return $this->db->get()->result();
 
 	}
 
@@ -139,8 +134,7 @@ class Employees extends CI_Model
 		$this->db->from('transfer');
 		$this->db->join('employee', 'employee.employee_id = transfer.transfer_employee_id');
 		$this->db->order_by('transfer_date', 'DESC');
-		$query = $this->db->get()->result();
-		return $query;
+		return $this->db->get()->result();
 
 	}
 
@@ -157,8 +151,7 @@ class Employees extends CI_Model
 		$this->db->join('employee', 'employee.employee_id = employee_leave.leave_employee_id');
 		$this->db->join('leave_type', 'leave_type.leave_id = employee_leave.leave_leave_type');
 		//$this->db->order_by('transfer_date', 'DESC');
-		$query = $this->db->get()->result();
-		return $query;
+		return $this->db->get()->result();
 
 	}
 
@@ -168,8 +161,7 @@ class Employees extends CI_Model
 		$this->db->where('employee_leave.leave_employee_id', $employee_id);
 		//$this->db->where('employee_leave.leave_status', 0 );
 		//$this->db->or_where('employee_leave.leave_status', 1);
-		$query = $this->db->get()->result();
-		return $query;
+		return $this->db->get()->result();
 
 	}
 
@@ -195,8 +187,7 @@ class Employees extends CI_Model
 		$this->db->join('employee', 'employee.employee_id = employee_leave.leave_employee_id');
 		$this->db->join('leave_type', 'leave_type.leave_id = employee_leave.leave_leave_type');
 		$this->db->where('employee_leave.employee_leave_id', $leave_id);
-		$query = $this->db->get()->row();
-		return $query;
+		return $this->db->get()->row();
 	}
 
 	public function update_leave($leave_id, $leave_data){
@@ -205,4 +196,36 @@ class Employees extends CI_Model
 		return true;
 
 	}
+
+	public function get_appraisals(){
+		$this->db->select('*');
+		$this->db->from('employee_appraisal');
+		$this->db->join('employee', 'employee.employee_id = employee_appraisal.employee_appraisal_employee_id');
+		return $this->db->get()->result();
+
+	}
+
+	public function check_employee_appraisal($employee_id){
+		$this->db->select('*');
+		$this->db->from('employee_appraisal');
+		$this->db->where('employee_appraisal.employee_appraisal_employee_id', $employee_id);
+		$this->db->where('employee_appraisal.employee_appraisal_status', 0);
+		return $this->db->get()->result();
+
+	}
+
+	public function insert_appraisal($appraisal_data){
+
+		$this->db->insert('employee_appraisal', $appraisal_data);
+		return $this->db->insert_id();
+	}
+
+	public function insert_question_result($question_data){
+
+		$this->db->insert('employee_appraisal_result', $question_data);
+		return true;
+	}
+
+
+
 }
