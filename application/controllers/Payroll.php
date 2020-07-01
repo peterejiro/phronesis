@@ -40,21 +40,19 @@ class Payroll extends CI_Controller
 
 			if($permission->payroll_configuration == 1):
 
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
+
 				$data['user_data'] = $this->users->get_user($username);
 				$data['employees'] = $this->employees->get_employee_by_salary_setup();
 
 				//print_r($data['employees']);
 				$this->load->view('payroll_config/employee_salary_structure', $data);
 
-
-
-
-
-
-
-			//$query = $this->payroll_configurations->update_allowance($allowance_id, $allowance_array);
-
-
+				else:
+					redirect('/access_denied');
+				endif;
 
 			else:
 
@@ -222,6 +220,9 @@ class Payroll extends CI_Controller
 
 			if($permission->payroll_configuration == 1):
 
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 				if((empty($employee_id))):
 
 					redirect('/error_404');
@@ -290,7 +291,9 @@ class Payroll extends CI_Controller
 					endif;
 
 				endif;
-
+				else:
+					redirect('/access_denied');
+				endif;
 			else:
 
 				redirect('/access_denied');
@@ -319,7 +322,9 @@ class Payroll extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
+				$user_type = $this->users->get_user($username)->user_type;
 
+				if($user_type == 1 || $user_type == 3):
 				if((empty($employee_id))):
 
 					redirect('/error_404');
@@ -396,7 +401,9 @@ class Payroll extends CI_Controller
 					endif;
 
 				endif;
-
+				else:
+					redirect('/access_denied');
+				endif;
 			else:
 
 				redirect('/access_denied');
@@ -596,13 +603,18 @@ class Payroll extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 
 				$data['user_data'] = $this->users->get_user($username);
 				$data['variational_payments'] = $this->payroll_configurations->view_variational_payments();
 
 
 				$this->load->view('payroll_config/variational_payment', $data);
-
+				else:
+					redirect('/access_denied');
+				endif;
 			else:
 
 				redirect('/access_denied');
@@ -630,6 +642,10 @@ class Payroll extends CI_Controller
 
 			if($permission->payroll_configuration == 1):
 
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
+
 				$data['user_data'] = $this->users->get_user($username);
 				$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
 				$data['departments'] = $this->hr_configurations->view_departments();
@@ -639,6 +655,10 @@ class Payroll extends CI_Controller
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
 
 				$this->load->view('payroll_config/new_variational_payment', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
 
 			else:
 
@@ -822,6 +842,9 @@ class Payroll extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 
 				$data['user_data'] = $this->users->get_user($username);
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
@@ -830,6 +853,10 @@ class Payroll extends CI_Controller
 
 
 				$this->load->view('payroll_config/approve_variational_payment', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
 
 			else:
 
@@ -966,6 +993,9 @@ class Payroll extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 
 				$data['user_data'] = $this->users->get_user($username);
 				$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
@@ -992,7 +1022,10 @@ class Payroll extends CI_Controller
 
 				//print_r($data['variational_payments']);
 				$this->load->view('payroll_config/recall_payment', $data);
+			else:
+				redirect('/access_denied');
 
+			endif;
 			else:
 
 				redirect('/access_denied');
@@ -1021,6 +1054,10 @@ class Payroll extends CI_Controller
 
 			if($permission->payroll_configuration == 1):
 
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
+
 				$data['user_data'] = $this->users->get_user($username);
 				$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
 				$data['departments'] = $this->hr_configurations->view_departments();
@@ -1048,7 +1085,10 @@ class Payroll extends CI_Controller
 
 				//print_r($data['variational_payments']);
 				$this->load->view('payroll/payroll_routine', $data);
+				else:
+					redirect('/access_denied');
 
+				endif;
 			else:
 
 				redirect('/access_denied');
@@ -1509,7 +1549,9 @@ class Payroll extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
+				$user_type = $this->users->get_user($username)->user_type;
 
+				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 				$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
 				$data['departments'] = $this->hr_configurations->view_departments();
@@ -1540,6 +1582,10 @@ class Payroll extends CI_Controller
 
 
 				$this->load->view('payroll/approve_payroll_routine', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
 
 			else:
 

@@ -146,7 +146,9 @@ $route['new_employee_leave'] = 'employee/new_employee_leave';
 $route['add_new_employee_leave'] = 'employee/add_new_employee_leave';
 $route['extend_leave/:num'] = 'employee/extend_leave/$1';
 $route['extend_employee_leave'] = 'employee/extend_employee_leave';
-
+$route['employee_appraisal'] = 'employee/employee_appraisal';
+$route['new_employee_appraisal'] = 'employee/new_employee_appraisal';
+$route['add_new_employee_appraisal'] = 'employee/add_new_employee_appraisal';
 
 
 $route['tax_rates'] = 'payroll_configuration/tax_rate';

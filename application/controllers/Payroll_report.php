@@ -38,6 +38,9 @@ class Payroll_report extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 
 				$data['user_data'] = $this->users->get_user($username);
 				$data['employees'] = $this->employees->get_employee_by_salary_setup();
@@ -45,16 +48,9 @@ class Payroll_report extends CI_Controller
 
 				$this->load->view('payroll_report/base', $data);
 
-
-
-
-
-
-
-			//$query = $this->payroll_configurations->update_allowance($allowance_id, $allowance_array);
-
-
-
+				else:
+					redirect('/access_denied');
+				endif;
 			else:
 
 				redirect('/access_denied');
@@ -80,6 +76,9 @@ class Payroll_report extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 
 				$data['user_data'] = $this->users->get_user($username);
 
@@ -88,6 +87,10 @@ class Payroll_report extends CI_Controller
 				$data['min_payroll_year'] = $this->salaries->view_min_payroll_year();
 
 				$this->load->view('payroll_report/emolument_report', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
 
 			else:
 
@@ -114,6 +117,7 @@ class Payroll_report extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
+
 
 				$data['user_data'] = $this->users->get_user($username);
 
@@ -277,6 +281,9 @@ class Payroll_report extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 
 				$data['user_data'] = $this->users->get_user($username);
 
@@ -286,6 +293,9 @@ class Payroll_report extends CI_Controller
 				$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
 
 				$this->load->view('payroll_report/deduction_report', $data);
+				else:
+					redirect('/access_denied');
+				endif;
 
 			else:
 
@@ -374,6 +384,9 @@ class Payroll_report extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
 
 				$data['user_data'] = $this->users->get_user($username);
 
@@ -383,6 +396,10 @@ class Payroll_report extends CI_Controller
 				$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
 
 				$this->load->view('payroll_report/pay_order', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
 
 			else:
 
