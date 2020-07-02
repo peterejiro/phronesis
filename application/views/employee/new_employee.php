@@ -353,11 +353,16 @@
                             </div>
                           </div>
                           <div class="col-sm-4">
-                            <label>Passport Photograph</label>
+                            <label>Passport Photograph</label><span style="color: red"> *</span>
                             <div class="custom-file">
-                              <input id="employee-passport" name="employee_passport" class="custom-file-input" type="file">
+                              <input id="employee-passport" name="employee_passport" class="custom-file-input" type="file" required>
                               <label for="employee-passport" class="custom-file-label">Choose File</label>
                             </div>
+                            <div class="invalid-feedback">
+                              please upload a passport photograph image
+                            </div>
+                            <p class="form-text text-muted">Upload image as either gif, jpg, png or jpeg </p>
+
                           </div>
                         </div>
                         <div class="form-group row">
