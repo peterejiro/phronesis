@@ -55,9 +55,9 @@
 			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/select2/dist/js/select2.full.min.js"></script>
-    <?php if($this->uri->segment(1) != 'edit_employee_salary_structure'): ?>
-			  <script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
-    <?php endif;?>
+      <?php if($this->uri->segment(1) != 'edit_employee_salary_structure' && $this->uri->segment(1) != 'setup_salary_structure'): ?>
+          <script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+      <?php endif;?>
 
 			<script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/codemirror/lib/codemirror.js"></script>

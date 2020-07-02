@@ -70,10 +70,16 @@
                                   <option value="<?php echo $payment_definition->payment_definition_id ?>" <?php if($personalized_allowance->personalized_payment_definition == $payment_definition->payment_definition_id){echo "selected";} ?>> <?php echo $payment_definition->payment_definition_payment_name." (".$payment_definition->payment_definition_payment_code.")"; ?> </option>
 			                          <?php endforeach; ?>
                               </select>
+                              <div class="invalid-feedback">
+                                please select a payment definition
+                              </div>
                             </div>
                             <div class="col-sm-5">
                               <label>Amount</label>
-                              <input name="allowance_amount[]" type="number" class="form-control" value="<?php echo $personalized_allowance->personalized_amount; ?>"/>
+                              <input required name="allowance_amount[]" type="number" class="form-control" value="<?php echo $personalized_allowance->personalized_amount; ?>"/>
+                              <div class="invalid-feedback">
+                                please fill in an amount
+                              </div>
                             </div>
                             <button type="button" onclick="delete_div(this)" class="btn btn-round btn-sm btn-danger" style="margin: 30px 0">
                               <i class="fa fa-minus"></i>
@@ -91,10 +97,16 @@
                                 <option value="<?php echo $payment_definition->payment_definition_id ?>" > <?php echo $payment_definition->payment_definition_payment_name." (".$payment_definition->payment_definition_payment_code.")"; ?> </option>
 					                    <?php endforeach; ?>
                             </select>
+                            <div class="invalid-feedback">
+                              please select a payment definition
+                            </div>
                           </div>
                           <div class="col-sm-5">
                             <label>Amount</label>
-                            <input name="allowance_amount[]" type="number" class="form-control"/>
+                            <input required name="allowance_amount[]" type="number" class="form-control"/>
+                            <div class="invalid-feedback">
+                              please fill in an amount
+                            </div>
                           </div>
                           <button type="button" onclick="delete_div(this)" class="btn btn-round btn-sm btn-danger" style="margin: 30px 0">
                             <i class="fa fa-minus"></i>
@@ -109,7 +121,7 @@
                     <input type="hidden" name="employee_id" value="<?php echo $employee->employee_id; ?>">
                   </div>
                   <div class="card-footer text-right bg-whitesmoke">
-                    <button type="submit" class="btn btn-primary">Update Salary Structure</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="button" onclick="location.reload();" class="btn btn-secondary">Reset</button>
                     <button type="button" onclick="location.href='<?php echo site_url('employee_salary_structure');?>'" class="btn btn-danger" data-dismiss="modal">Go Back</button>
                   </div>
