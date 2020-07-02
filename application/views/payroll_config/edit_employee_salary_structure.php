@@ -61,11 +61,7 @@
                     <div id="allowances" style="display: <?php if($employee->employee_salary_structure_category == 0) { echo "block";} else{ echo "none"; } ?>">
 	                    <?php if(!empty($personalized_allowances)):
 		                    foreach ($personalized_allowances as $personalized_allowance): ?>
-
                           <div class="form-group row" id="allowance">
-                            <button type="button" onclick="delete_div(this)" class="btn btn-sm btn-danger" style="margin: 30px 0">
-                              <i class="fa fa-times"></i>
-                            </button>
                             <div class="col-sm-5">
                               <label>Payment Definition</label>
                               <select class="form-control" id="payment_definition" required name="payment_definition[]" style="width: 100%; height: 42px !important;">
@@ -74,12 +70,20 @@
                                   <option value="<?php echo $payment_definition->payment_definition_id ?>" <?php if($personalized_allowance->personalized_payment_definition == $payment_definition->payment_definition_id){echo "selected";} ?>> <?php echo $payment_definition->payment_definition_payment_name." (".$payment_definition->payment_definition_payment_code.")"; ?> </option>
 			                          <?php endforeach; ?>
                               </select>
+                              <div class="invalid-feedback">
+                                please select a payment definition
+                              </div>
                             </div>
                             <div class="col-sm-5">
                               <label>Amount</label>
-                              <input name="allowance_amount[]" type="number" class="form-control" value="<?php echo $personalized_allowance->personalized_amount; ?>"/>
+                              <input required name="allowance_amount[]" type="number" class="form-control" value="<?php echo $personalized_allowance->personalized_amount; ?>"/>
+                              <div class="invalid-feedback">
+                                please fill in an amount
+                              </div>
                             </div>
-
+                            <button type="button" onclick="delete_div(this)" class="btn btn-round btn-sm btn-danger" style="margin: 30px 0">
+                              <i class="fa fa-minus"></i>
+                            </button>
                           </div>
 		                    <?php endforeach;
 	                    else:
@@ -87,19 +91,25 @@
                         <div class="form-group row" id="allowance">
                           <div class="col-sm-5" >
                             <label>Payment Definition</label>
-                            <select class="form-control" id="payment_definition" required name="payment_definition[]" style="width: 100%; min-height:100px;">
+                            <select class="form-control" id="payment_definition" required name="payment_definition[]" style="width: 100%; height: 42px !important;">
                               <option disabled> -- Select -- </option>
 					                    <?php foreach ($payment_definitionss as $payment_definition): ?>
                                 <option value="<?php echo $payment_definition->payment_definition_id ?>" > <?php echo $payment_definition->payment_definition_payment_name." (".$payment_definition->payment_definition_payment_code.")"; ?> </option>
 					                    <?php endforeach; ?>
                             </select>
+                            <div class="invalid-feedback">
+                              please select a payment definition
+                            </div>
                           </div>
                           <div class="col-sm-5">
                             <label>Amount</label>
-                            <input name="allowance_amount[]" type="number" class="form-control"/>
+                            <input required name="allowance_amount[]" type="number" class="form-control"/>
+                            <div class="invalid-feedback">
+                              please fill in an amount
+                            </div>
                           </div>
-                          <button type="button" onclick="delete_div(this)" class="btn btn-sm btn-danger" style="margin: 30px 0">
-                            <i class="fa fa-times"></i>
+                          <button type="button" onclick="delete_div(this)" class="btn btn-round btn-sm btn-danger" style="margin: 30px 0">
+                            <i class="fa fa-minus"></i>
                           </button>
                         </div>
 	                    <?php endif; ?>
@@ -111,7 +121,7 @@
                     <input type="hidden" name="employee_id" value="<?php echo $employee->employee_id; ?>">
                   </div>
                   <div class="card-footer text-right bg-whitesmoke">
-                    <button type="submit" class="btn btn-primary">Update Salary Structure</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="button" onclick="location.reload();" class="btn btn-secondary">Reset</button>
                     <button type="button" onclick="location.href='<?php echo site_url('employee_salary_structure');?>'" class="btn btn-danger" data-dismiss="modal">Go Back</button>
                   </div>
@@ -126,80 +136,56 @@
 </div>
 <?php include(APPPATH.'\views\footer.php'); ?>
 <?php include(APPPATH.'\views\js.php'); ?>
+<script>
+  let count = 1;
+  function clone_div() {
+    let elem = document.getElementById('allowance');
+    if(elem.style.display === 'none'){
+      let inputs = elem.getElementsByTagName('input');
+      let selects = elem.getElementsByTagName('select');
+      inputs[0].removeAttribute('disabled');
+      selects[0].removeAttribute('disabled');
+      elem.style.removeProperty('display');
+    } else{
+      // Create a copy of it
+      let clone = elem.cloneNode(true);
+      // Update the ID and add a class
+      clone.id = 'allowance'+count;
+      let allowances = document.getElementById('allowances');
+      let allowance_button = document.getElementById('allowance_button');
+      allowances.insertBefore(clone,allowance_button);
+      // Inject it into the DOM
+      elem.after(clone);
+      $('#'+clone.id).find('select').attr('id', 'payment_definition'+count );
+      count ++;
+    }
+  }
+
+  function delete_div(e){
+    let id = e.parentElement.id;
+    if (id === 'allowance') {
+      let inputs = e.parentElement.getElementsByTagName('input');
+      let selects = e.parentElement.getElementsByTagName('select');
+      inputs[0].setAttribute('disabled', 'disabled');
+      selects[0].setAttribute('disabled', 'disabled');
+      e.parentElement.style.display = 'none';
+    } else {
+      e.parentElement.remove();
+    }
+
+  }
+
+  function check_salary_structure_type(){
+    let salary_structure_type = document.getElementById('salary_structure_type').value;
+    if(salary_structure_type == 1){
+      document.getElementById("allowances").style.display='none';
+      document.getElementById("salary_structure_category").style.display='block';
+    }
+    if(salary_structure_type == 0){
+      document.getElementById("salary_structure_category").style.display = 'none';
+      document.getElementById("allowances").style.display='block';
+    }
+  }
+</script>
 </body>
 </html>
-
-<script>
-	window.onload = function(){
-		// document.getElementById("allowances").style.display='none';
-		// document.getElementById("salary_structure_category").style.display = 'none';
-	};
-
-	var count = 1;
-
-	function clone_div() {
-		var elem = document.getElementById('allowance');
-		if(elem.style.display == 'none'){
-			// elem.style.display = 'block';
-			// elem.style.display = 'null';
-      elem.style.removeProperty('display');
-		} else{
-			// Create a copy of it
-			var clone = elem.cloneNode(true);
-			// Update the ID and add a class
-			clone.id = 'allowance'+count;
-			var allowances = document.getElementById('allowances');
-			var allowance_button = document.getElementById('allowance_button');
-			//clone.insertBefore(work_experience_button);
-			allowances.insertBefore(clone,allowance_button);
-			// Inject it into the DOM
-			elem.after(clone);
-			var test_id = 'payment_definition'+count;
-			$('#'+clone.id).find('select').attr('id', 'payment_definition'+count );
-			count ++;
-		}
-	}
-
-	function delete_div(e){
-		var id = e.parentElement.id;
-		if(id === 'allowance'){
-		  console.log(e.parentElement);
-      var elem = document.getElementById('allowance');
-			var inputs = e.parentElement.getElementsByTagName('input');
-			var index;
-			for(index = 0; index < inputs.length; ++index){
-				if(inputs[index].type == 'text')
-					inputs[index].value = '';
-			}
-			// var textarea = elem.getElementsByTagName('textarea');
-			// textarea.value = '';
-      // console.log(elem);
-			// elem.style.display = 'none';
-      e.parentElement.style.display = 'none';
-		} else{
-			e.parentElement.remove();
-		}
-
-	}
-
-	function check_salary_structure_type(){
-		var salary_structure_type = document.getElementById('salary_structure_type').value;
-
-
-
-		if(salary_structure_type == 1){
-
-			//alert(salary_structure_type);
-
-			document.getElementById("allowances").style.display='none';
-			document.getElementById("salary_structure_category").style.display='block';
-
-		}
-
-		if(salary_structure_type == 0){
-			//alert(salary_structure_type);
-			document.getElementById("salary_structure_category").style.display = 'none';
-			document.getElementById("allowances").style.display='block';
-		}
-	}
-</script>
