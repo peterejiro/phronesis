@@ -143,7 +143,7 @@ class Employee extends CI_Controller
 
 			if($permission->employee_management == 1):
 				$config['upload_path'] = 'uploads/employee_passports';
-				$config['allowed_types'] = 'gif|jpg|png|pdf|jpeg';
+				$config['allowed_types'] = 'gif|jpg|png|jpeg';
 				$config['max_size'] = '8000000';
 				$config['max_width'] = '102452';
 				$config['max_height'] = '768555';
@@ -174,8 +174,10 @@ class Employee extends CI_Controller
 				$upload = $this->upload->do_upload('employee_nysc');
 
 				if(!$upload):
-					echo $this->upload->display_errors();
-					die();
+					$employee_nysc_name = 'n/a';
+
+//					echo $this->upload->display_errors();
+//					die();
 				else:
 					$file_data = $this->upload->data();
 					$employee_nysc_name = $file_data['file_name'];
@@ -330,6 +332,14 @@ class Employee extends CI_Controller
 					);
 
 					$this->logs->add_log($log_array);
+
+					$employee_history_array = array(
+						'employee_history_employee_id' => $employee_id,
+						'employee_history_details' => "You were Hired",
+						'employee_history_date' => $employment_start_date
+					);
+
+					$this->employees->insert_employee_history($employee_history_array);
 
 					$msg = array(
 						'msg'=> 'New Employee Added Successfully',

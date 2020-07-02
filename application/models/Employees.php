@@ -32,6 +32,9 @@ class Employees extends CI_Model
 		$this->db->join('grade', 'grade.grade_id = employee.employee_grade_id');
 		$this->db->join('job_role', 'job_role.job_role_id = employee.employee_job_role_id');
 		$this->db->join('department', 'department.department_id = job_role.department_id');
+		$this->db->join('location', 'location.location_id = employee.employee_location_id');
+		$this->db->join('subsidiary', 'subsidiary.subsidiary_id = employee.employee_subsidiary_id');
+		$this->db->join('bank', 'bank.bank_id = employee.employee_bank_id');
 		$this->db->where('employee_id', $employee_id);
 		$query = $this->db->get()->row();
 
@@ -44,6 +47,9 @@ class Employees extends CI_Model
 			$this->db->join('grade', 'grade.grade_id = employee.employee_grade_id');
 			$this->db->join('job_role', 'job_role.job_role_id = employee.employee_job_role_id');
 			$this->db->join('department', 'department.department_id = job_role.department_id');
+			$this->db->join('location', 'location.location_id = employee.employee_location_id');
+			$this->db->join('subsidiary', 'subsidiary.subsidiary_id = employee.employee_subsidiary_id');
+			$this->db->join('bank', 'bank.bank_id = employee.employee_bank_id');
 			$this->db->join('salary_structure_category', 'salary_structure_category.salary_structure_id = employee.employee_salary_structure_category');
 			$this->db->where('employee_id', $employee_id);
 			$query = $this->db->get()->row();
@@ -55,6 +61,44 @@ class Employees extends CI_Model
 
 
 	}
+
+	public function get_employee_by_unique($employee_unique_id){
+		$this->db->select('*');
+		$this->db->from('employee');
+		$this->db->join('grade', 'grade.grade_id = employee.employee_grade_id');
+		$this->db->join('job_role', 'job_role.job_role_id = employee.employee_job_role_id');
+		$this->db->join('department', 'department.department_id = job_role.department_id');
+		$this->db->join('location', 'location.location_id = employee.employee_location_id');
+		$this->db->join('subsidiary', 'subsidiary.subsidiary_id = employee.employee_subsidiary_id');
+		$this->db->join('bank', 'bank.bank_id = employee.employee_bank_id');
+		$this->db->where('employee_unique_id', $employee_unique_id);
+		$query = $this->db->get()->row();
+
+		if($query->employee_salary_structure_category == 0):
+			return $query;
+		else:
+
+			$this->db->select('*');
+			$this->db->from('employee');
+			$this->db->join('grade', 'grade.grade_id = employee.employee_grade_id');
+			$this->db->join('job_role', 'job_role.job_role_id = employee.employee_job_role_id');
+			$this->db->join('department', 'department.department_id = job_role.department_id');
+			$this->db->join('location', 'location.location_id = employee.employee_location_id');
+			$this->db->join('subsidiary', 'subsidiary.subsidiary_id = employee.employee_subsidiary_id');
+			$this->db->join('bank', 'bank.bank_id = employee.employee_bank_id');
+			$this->db->join('salary_structure_category', 'salary_structure_category.salary_structure_id = employee.employee_salary_structure_category');
+			$this->db->where('employee_unique_id', $employee_unique_id);
+			$query = $this->db->get()->row();
+
+
+			return $query;
+		endif;
+
+
+
+	}
+
+
 
 	public function update_employee($employee_id, $employee_data){
 
@@ -159,6 +203,7 @@ class Employees extends CI_Model
 		$this->db->select('*');
 		$this->db->from('employee_leave');
 		$this->db->where('employee_leave.leave_employee_id', $employee_id);
+		$this->db->join('leave_type', 'leave_type.leave_id = employee_leave.leave_leave_type');
 		//$this->db->where('employee_leave.leave_status', 0 );
 		//$this->db->or_where('employee_leave.leave_status', 1);
 		return $this->db->get()->result();
@@ -224,6 +269,16 @@ class Employees extends CI_Model
 
 		$this->db->insert('employee_appraisal_result', $question_data);
 		return true;
+	}
+
+
+	public function view_employee_history($employee_id){
+		$this->db->select('*');
+		$this->db->from('employee_history');
+		$this->db->where('employee_history.employee_history_employee_id', $employee_id);
+		$this->db->order_by('employee_history_date', 'DESC');
+		return $this->db->get()->result();
+
 	}
 
 

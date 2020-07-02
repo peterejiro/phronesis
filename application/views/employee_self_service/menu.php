@@ -4,8 +4,8 @@
 			<li class="nav-item dropdown">
 				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
 				<ul class="dropdown-menu">
-					<li class="nav-item"><a href="index-0.html" class="nav-link">Personal Information</a></li>
-					<li class="nav-item"><a href="index-0.html" class="nav-link">Employee History</a></li>
+					<li class="nav-item"><a href="<?php echo base_url(); ?>" class="nav-link">Personal Information</a></li>
+					<li class="nav-item"><a href="<?php echo base_url('employee_history') ?>" class="nav-link">Employee History</a></li>
 
 				</ul>
 			</li>
@@ -13,8 +13,8 @@
 			<li class="nav-item dropdown">
 				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Leaves</span></a>
 				<ul class="dropdown-menu">
-					<li class="nav-item"><a href="index-0.html" class="nav-link">Leave History</a></li>
-					<li class="nav-item"><a href="index-0.html" class="nav-link">Request Leave</a></li>
+					<li class="nav-item"><a href="<?php echo base_url('my_leave') ?>" class="nav-link">Leave History</a></li>
+					<li class="nav-item"><a href="<?php echo base_url('request_leave') ?>" class="nav-link">Request Leave</a></li>
 
 
 				</ul>
