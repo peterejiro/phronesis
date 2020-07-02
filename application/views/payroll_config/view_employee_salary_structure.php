@@ -64,7 +64,9 @@
                     <?php endforeach; ?>
                   <?php endif; ?>
                 </div>
-                <div class="card-footer bg-whitesmoke"></div>
+                <div class="card-footer text-right bg-whitesmoke">
+                  <button type="button" onclick="location.href='<?php echo site_url('employee_salary_structure');?>'" class="btn btn-danger" data-dismiss="modal">Go Back</button>
+                </div>
               </div>
             </div>
           </div>
