@@ -221,7 +221,10 @@ $route['pay_order_report'] = 'payroll_report/pay_order_report';
 $route['view_log'] = 'log/view_log';
 
 
-
+$route['employee_history'] = 'employee_main/employee_history';
+$route['request_leave'] = 'employee_main/request_leave';
+$route['request_new_leave'] = 'employee_main/request_new_leave';
+$route['my_leave'] = 'employee_main/my_leave';
 
 
 
