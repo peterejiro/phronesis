@@ -58,7 +58,7 @@
                     <div id="allowances">
                       <div class="form-group row" id="allowance">
                         <div class="col-sm-5">
-                          <label> Payment Definition</label>
+                          <label> Payment Definition</label><span style="color: red"> *</span>
                           <select class="form-control" id="payment_definition" required name="payment_definition[]" style="width: 100%; height: 42px !important;">
                             <option disabled> -- Select -- </option>
 		                        <?php foreach ($payment_definitions as $payment_definition): ?>
@@ -70,7 +70,7 @@
                           </div>
                         </div>
                         <div class="col-sm-5">
-                          <label> Amount</label>
+                          <label> Amount</label><span style="color: red"> *</span>
                           <input required name="allowance_amount[]" type="number" class="form-control"/>
                           <div class="invalid-feedback">
                             please fill in an amount
