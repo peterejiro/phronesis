@@ -21,7 +21,7 @@
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
             <div class="breadcrumb-item active"><a href="<?php echo site_url('payroll_report')?>">Payroll Reports</a></div>
-            <div class="breadcrumb-item active"><a href="<?php echo site_url('emolument_report')?>">Emolument Report</a></div>
+            <div class="breadcrumb-item active"><a href="<?php echo site_url('emolument')?>">Emolument Report</a></div>
             <div class="breadcrumb-item">Emolument Sheet</div>
           </div>
 				</div>
