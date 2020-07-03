@@ -15,7 +15,7 @@
 			<section class="section">
 				<div class="section-header">
           <div class="section-header-back">
-            <a href="<?php echo site_url('emolument_report')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+            <a href="<?php echo site_url('emolument')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
           </div>
 					<h1>Emolument Sheet</h1>
           <div class="section-header-breadcrumb">

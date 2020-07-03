@@ -27,7 +27,7 @@
 								<div class="card-body">
 									<h4>Emolument Report</h4>
                   <p>Generate emolument sheet for the selected month & year</p>
-									<a href="<?php echo base_url('emolument') ?>" class="card-cta">Generate Report <i class="fas fa-chevron-right"></i></a>
+									<a href="<?php echo base_url('emolument') ?>" class="card-cta">View Report <i class="fas fa-chevron-right"></i></a>
 								</div>
 							</div>
 						</div>
@@ -39,7 +39,7 @@
 								<div class="card-body">
 									<h4>Deduction Report</h4>
                   <p>Generate deduction sheet for deduction type, month & year</p>
-									<a href="<?php echo base_url('deduction'); ?>" class="card-cta">Generate Report <i class="fas fa-chevron-right"></i></a>
+									<a href="<?php echo base_url('deduction'); ?>" class="card-cta">View Report <i class="fas fa-chevron-right"></i></a>
 								</div>
 							</div>
 						</div>
@@ -51,7 +51,7 @@
 								<div class="card-body">
 									<h4>Pay Order</h4>
                   <p>Generate pay order sheet for the selected month & year</p>
-									<a href="<?php echo base_url('pay_order'); ?>" class="card-cta">Generate Report <i class="fas fa-chevron-right"></i></a>
+									<a href="<?php echo base_url('pay_order'); ?>" class="card-cta">View Report <i class="fas fa-chevron-right"></i></a>
 								</div>
 							</div>
 						</div>

@@ -25,7 +25,7 @@
           <div class="row">
             <div class="col-md-7">
               <form method="post" action="<?php echo site_url('emolument_report'); ?>" class="needs-validation" novalidate id="loan_form">
-                <div class="card">
+                <div class="card card-primary">
                   <div class="card-header">
                     <h4>Emolument Report Form</h4>
                   </div>
