@@ -29,7 +29,7 @@
                   <div class="card-header">
                     <h4>New Variational Payment Form</h4>
                     <div class="card-header-action">
-                      <a href="<?php echo site_url('recall_month') ?>" class="btn btn-warning ml-2">Recall Previous Month's Payment</a>
+                      <a href="<?php echo site_url('recall_month') ?>" class="btn btn-warning">Recall Previous Month's Payment</a>
                     </div>
                   </div>
                   <div class="card-body">
@@ -85,7 +85,7 @@
                         </select>
                       </div>
                       <div class="col-sm-6">
-                        <label> Amount</label><span style="color: red"> *</span>
+                        <label>Amount</label><span style="color: red"> *</span>
                         <input name="payment_amount" type="number" class="form-control" required/>
                         <div class="invalid-feedback">
                           please fill in an amount
@@ -94,11 +94,11 @@
                     </div>
                     <div class="form-group row">
                       <div class="col-sm-6">
-                        <label> Payroll Month</label>
+                        <label>Payroll Month</label>
                         <input name="payroll_month" type="text" class="form-control" disabled value="<?php echo date("F", mktime(0, 0, 0, $payroll->payroll_month_year_month, 10)) ?>"/>
                       </div>
                       <div class="col-sm-6">
-                        <label> Payroll Year</label>
+                        <label>Payroll Year</label>
                         <input name="payroll_year" type="text" class="form-control" disabled value="<?php echo $payroll->payroll_month_year_year; ?>"/>
                       </div>
                     </div>

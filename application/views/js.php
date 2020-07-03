@@ -55,8 +55,16 @@
 			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/select2/dist/js/select2.full.min.js"></script>
-      <?php if($this->uri->segment(1) != 'edit_employee_salary_structure' && $this->uri->segment(1) != 'setup_salary_structure' && $this->uri->segment(1) != 'new_employee' && $this->uri->segment(1) != 'new_variational_payment'): ?>
-          <script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+      <?php
+        if(
+            $this->uri->segment(1) != 'edit_employee_salary_structure' &&
+            $this->uri->segment(1) != 'setup_salary_structure' &&
+            $this->uri->segment(1) != 'new_employee' &&
+            $this->uri->segment(1) != 'new_variational_payment' &&
+	          $this->uri->segment(1) != 'recall_month'
+        ):
+      ?>
+        <script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
       <?php endif;?>
 
 			<script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
