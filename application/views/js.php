@@ -61,7 +61,8 @@
             $this->uri->segment(1) != 'setup_salary_structure' &&
             $this->uri->segment(1) != 'new_employee' &&
             $this->uri->segment(1) != 'new_variational_payment' &&
-	          $this->uri->segment(1) != 'recall_month'
+	          $this->uri->segment(1) != 'recall_month' &&
+            $this->uri->segment(1) != 'emolument'
         ):
       ?>
         <script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
