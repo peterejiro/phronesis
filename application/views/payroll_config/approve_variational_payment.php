@@ -16,7 +16,7 @@
           </div>
 				</div>
         <div class="section-body">
-          <div class="section-title">Approve Variational Payment</div>
+          <div class="section-title">All About Approving Variational Payments</div>
           <p class="section-lead">Select variational payments to approve and confirm here</p>
           <div class="row">
             <div class="col-12">
