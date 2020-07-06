@@ -60,7 +60,7 @@
                               <div class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu">
-                                  <a class="dropdown-item has-icon" data-toggle="modal" data-target="#view_loan<?php echo $loan->loan_id ?>"><i class="fas fa-eye"></i>View Loan Details</a>
+                                  <a class="dropdown-item has-icon" href="" data-toggle="modal" data-target="#view_loan<?php echo $loan->loan_id ?>"><i class="fas fa-eye"></i>View Loan Details</a>
                                   <a class="dropdown-item has-icon" href="<?php echo site_url('edit_loan')."/".$loan->loan_id; ?>"><i class="fas fa-edit"></i>Reschedule Loan</a>
                                 </div>
                               </div>

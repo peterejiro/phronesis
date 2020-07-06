@@ -69,12 +69,12 @@
       </ul>
       <?php  } ?>
 			</li>
-			<li class="dropdown <?php echo $this->uri->segment(1) == 'new_loan' || $this->uri->segment(1) == 'loans' ? 'active' : ''; ?>">
+			<li class="dropdown <?php echo $this->uri->segment(1) == 'new_loan' || $this->uri->segment(1) == 'loans' || $this->uri->segment(1) == 'edit_loan' ? 'active' : ''; ?>">
 			<?php if($payroll_management == 1){  ?>
 				<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-university"></i> <span>Loans</span></a>
 				<ul class="dropdown-menu">
 					<li class="<?php echo $this->uri->segment(1) == 'new_loan' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('new_loan') ?>"> New Loan </a></li>
-					<li class="<?php echo $this->uri->segment(1) == 'loans' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('loans') ?>"> Manage Loans </a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'loans' || $this->uri->segment(1) == 'edit_loan' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('loans') ?>"> Manage Loans </a></li>
 				</ul>
 			<?php } ?>
 			</li>

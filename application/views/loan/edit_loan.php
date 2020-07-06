@@ -1,34 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<?php include(APPPATH.'\views\stylesheet.php'); ?>
 
-
-
-	<?php include(APPPATH.'\views\stylesheet.php'); ?>
-	<!-- DataTables -->
-
-
-</head>
-
-
-<body class="fixed-left">
-<!-- Begin page -->
+<body>
 <div id="app">
 	<div class="main-wrapper">
 		<div class="navbar-bg"></div>
 		<?php include(APPPATH.'\views\topbar.php'); ?>
-
-
 		<?php include(APPPATH.'\views\sidebar.php'); ?>
-
-
-
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1> Reschedule Loan</h1>
+          <div class="section-header-back">
+            <a href="<?php echo site_url('loans')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+          </div>
+					<h1>Reschedule Loan</h1>
+          <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
+            <div class="breadcrumb-item active"><a href="<?php echo site_url('loans');?>">Manage Loans</a></div>
+            <div class="breadcrumb-item">Reschedule Loan</div>
+          </div>
 				</div>
-
+        <div class="section-body">
+          <div class="section-title">All About Rescheduling Loans</div>
+          <p class="section-lead">You can skip a payment month or change the repayment amount of a loan here</p>
+          <div class="row">
+            <div class="col-12">
+            </div>
+          </div>
+        </div>
 
 				<div class="row">
 					<div class="col-12 col-md-12 col-lg-12">
