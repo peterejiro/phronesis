@@ -70,7 +70,7 @@
 
 
 										<div class="form-group row">
-											<div class="col-sm-6">
+											<div class="col-sm-4">
 
 
 
@@ -96,15 +96,31 @@
 
 
 											</div>
-											<div class="col-sm-6">
+											<div class="col-sm-4">
 												<label>Status</label>
 
-												<select name="status" class="custom-select">
+												<select name="status" class="custom-select selectric">
 
 
 
 													<option value="1" <?php if($user_datum->user_status == 1){ echo "selected"; } ?>> Active </option>
 													<option value="0" <?php if($user_datum->user_status == 0){ echo "selected"; } ?>> Inactive </option>
+
+
+
+												</select>
+											</div>
+
+											<div class="col-sm-4">
+												<label>User Type</label>
+
+												<select name="user_type" class="custom-select selectric">
+
+
+
+													<option value="1" <?php if($user_datum->user_type == 1){ echo "selected"; } ?>> Administrator </option>
+													<option value="2" <?php if($user_datum->user_type == 2){ echo "selected"; } ?>> Employee </option>
+													<option value="3" <?php if($user_datum->user_type == 3){ echo "selected"; } ?>>Moderator </option>
 
 
 

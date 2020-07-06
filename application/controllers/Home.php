@@ -28,26 +28,28 @@ class Home extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
-			$permission = $this->users->check_permission($username);
-			$data['employee_management'] = $permission->employee_management;
-			$data['payroll_management'] = $permission->payroll_management;
-			$data['biometrics'] = $permission->biometrics;
-			$data['user_management'] = $permission->user_management;
-			$data['configuration'] = $permission->configuration;
-			$data['payroll_configuration'] = $permission->payroll_configuration;
-			$data['hr_configuration'] = $permission->hr_configuration;
-			$data['configuration'] = $permission->configuration;
-			$data['user_data'] = $this->users->get_user($username);
 
-			$data['employees'] = $this->employees->view_employees();
-			$data['users'] = $this->users->view_users();
-			$data['departments'] = $this->hr_configurations->view_departments();
-			$data['leaves'] = $this->employees->get_employees_leaves();
 
 
 			if($this->users->get_user($username)->user_type == 1 || $this->users->get_user($username)->user_type == 3):
 
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+				$data['configuration'] = $permission->configuration;
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['employees'] = $this->employees->view_employees();
+				$data['users'] = $this->users->view_users();
+				$data['departments'] = $this->hr_configurations->view_departments();
+				$data['leaves'] = $this->employees->get_employees_leaves();
 				$this->load->view('index', $data);
+
 			elseif($this->users->get_user($username)->user_type == 2):
 
 				redirect('employee_main');
@@ -212,6 +214,8 @@ class Home extends CI_Controller
 								if($this->users->get_user($username)->user_type == 1 || $this->users->get_user($username)->user_type == 3):
 
 									redirect('home');
+
+
 								elseif($this->users->get_user($username)->user_type == 2):
 
 									redirect('employee_main');

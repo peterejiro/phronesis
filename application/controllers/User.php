@@ -321,6 +321,7 @@ class User extends CI_Controller
 				$user_datum = $this->users->get_user_id($user_id);
 
 				$user_status = $this->input->post('status');
+				$user_type = $this->input->post('user_type');
 
 				$employee_management = $this->input->post('employee_management');
 				$payroll_management = $this->input->post('payroll_management');
@@ -377,7 +378,8 @@ class User extends CI_Controller
 							'user_username'=> $user_username,
 							'user_email'=> $user_email,
 							'user_name'=> $user_name,
-							'user_status'=>$user_status
+							'user_status'=>$user_status,
+							'user_type' => $user_type
 						);
 
 						$permission_array = array(
@@ -464,7 +466,8 @@ class User extends CI_Controller
 						'user_password'=> password_hash($user_password, PASSWORD_BCRYPT),
 						'user_email'=> $user_email,
 						'user_name'=> $user_name,
-						'user_status'=>$user_status
+						'user_status'=>$user_status,
+						'user_type' => $user_type
 					);
 
 					$permission_array = array(

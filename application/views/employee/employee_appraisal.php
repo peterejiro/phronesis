@@ -1,6 +1,7 @@
 <?php include(APPPATH.'\views\stylesheet.php');
 $CI =& get_instance();
 $CI->load->model('hr_configurations');
+$CI->load->model('employees');
 ?>
 
 <body>
@@ -37,6 +38,7 @@ $CI->load->model('hr_configurations');
                       <tr>
                         <th>Employee Name</th>
                         <th>Appraisal Period</th>
+						 <th> Supervisor Name </th>
                         <th>Status</th>
                         <th>Actions</th>
                       </tr>
@@ -47,9 +49,12 @@ $CI->load->model('hr_configurations');
                           ?>
                           <tr>
                             <td><?php echo $appraisal->employee_last_name." ".$appraisal->employee_first_name; ?></td>
-                            <td><?php //echo $appraisal->appraisal_name; ?></td>
+							  <td><?php echo date("M Y", strtotime($appraisal->employee_appraisal_period_from))." - ".date("M Y", strtotime($appraisal->employee_appraisal_period_to)) ; ?></td>
+								<td> <?php $supervisor = $CI->employees->get_employee($appraisal->employee_appraisal_supervisor_id);
+									echo $supervisor->employee_last_name." ".$supervisor->employee_first_name;
+								?> </td>
 
-                            <td>
+							  <td>
                               <?php if($appraisal->employee_appraisal_status == 0): ?>
                                 <div class="badge badge-warning">Running</div>
                                      <?php else:?>

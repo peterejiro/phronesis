@@ -281,6 +281,60 @@ class Employees extends CI_Model
 
 	}
 
+	public function get_employee_appraisal($employee_id){
+		$this->db->select('*');
+		$this->db->from('employee_appraisal');
+		$this->db->where('employee_appraisal.employee_appraisal_employee_id', $employee_id);
+		$this->db->join('employee', 'employee.employee_id = employee_appraisal.employee_appraisal_supervisor_id');
+		//$this->db->where('employee_appraisal.employee_appraisal_status', 0);
+		return $this->db->get()->result();
+
+	}
+
+	public function update_appraisal($appraisal_id, $appraisal_data){
+		$this->db->where('employee_appraisal.employee_appraisal_id', $appraisal_id);
+		$this->db->update('employee_appraisal', $appraisal_data);
+		return true;
+
+	}
+
+
+	public function get_appraise_employees($employee_id){
+		$this->db->select('*');
+		$this->db->from('employee_appraisal');
+		$this->db->where('employee_appraisal.employee_appraisal_supervisor_id', $employee_id);
+		$this->db->join('employee', 'employee.employee_id = employee_appraisal.employee_appraisal_employee_id');
+		//$this->db->where('employee_appraisal.employee_appraisal_status', 0);
+		return $this->db->get()->result();
+
+	}
+
+
+	public function get_appraisal_questions($appraisal_id){
+
+		$this->db->select('*');
+		$this->db->from('employee_appraisal_result');
+		$this->db->where('employee_appraisal_result.employee_appraisal_result_appraisal_id', $appraisal_id);
+		return $this->db->get()->result();
+
+
+	}
+
+	public function get_appraisal($appraisal_id){
+		$this->db->select('*');
+		$this->db->from('employee_appraisal');
+		$this->db->where('employee_appraisal.employee_appraisal_id', $appraisal_id);
+		$this->db->join('employee', 'employee.employee_id = employee_appraisal.employee_appraisal_employee_id');
+		return $this->db->get()->row();
+	}
+
+	public function answer_question($question_id, $answer_data){
+		$this->db->where('employee_appraisal_result.employee_appraisal_result_id', $question_id);
+		$this->db->update('employee_appraisal_result', $answer_data);
+		return true;
+
+	}
+
 
 
 }
