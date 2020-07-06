@@ -109,6 +109,8 @@ $route['self_assessment'] = 'hr_configuration/self_assessment';
 $route['add_self_assessment'] = 'hr_configuration/add_self_assessment';
 $route['update_self_assessment'] = 'hr_configuration/update_self_assessment';
 
+$route['appraisals'] = 'employee_main/appraisals';
+
 
 $route['quantitative_assessment'] = 'hr_configuration/quantitative_assessment';
 $route['add_quantitative_assessment'] = 'hr_configuration/add_quantitative_assessment';
@@ -145,6 +147,9 @@ $route['employee_leave'] = 'employee/employee_leave';
 $route['new_employee_leave'] = 'employee/new_employee_leave';
 $route['add_new_employee_leave'] = 'employee/add_new_employee_leave';
 $route['extend_leave/:num'] = 'employee/extend_leave/$1';
+$route['approve_leave/:num'] = 'employee/approve_employee_leave/$1';
+$route['discard_leave/:num'] = 'employee/discard_employee_leave/$1';
+
 $route['extend_employee_leave'] = 'employee/extend_employee_leave';
 $route['employee_appraisal'] = 'employee/employee_appraisal';
 $route['new_employee_appraisal'] = 'employee/new_employee_appraisal';
@@ -225,6 +230,13 @@ $route['employee_history'] = 'employee_main/employee_history';
 $route['request_leave'] = 'employee_main/request_leave';
 $route['request_new_leave'] = 'employee_main/request_new_leave';
 $route['my_leave'] = 'employee_main/my_leave';
+$route['appraise_employee'] = 'employee_main/appraise_employee';
+$route['respond_appraisal_supervisor/:num'] = 'employee_main/respond_appraisal_supervisor/$1';
+$route['answer_questions_supervisor'] = 'employee_main/answer_questions_supervisor';
+$route['respond_appraisal_self/:num'] = 'employee_main/respond_appraisal_self/$1';
+$route['answer_questions_self'] = 'employee_main/answer_questions_self';
+$route['appraisal_result/:num'] = 'employee_main/check_appraisal_results/$1';
+
 
 
 

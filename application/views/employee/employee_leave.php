@@ -57,21 +57,34 @@ $CI->load->model('hr_configurations');
                                 <div class="badge badge-warning">Pending</div>
                               <?php elseif ($leave->leave_status == 1):?>
                                 <div class="badge badge-success">Started</div>
+							  <?php elseif ($leave->leave_status == 3):?>
+								  <div class="badge badge-danger">Discarded</div>
                               <?php else:?>
                                 <div class="badge badge-dark">Finished</div>
                               <?php endif;?>
                             </td>
                             <td class="text-center" style="width: 9px">
-                              <?php if($leave->leave_status == 2):
+                              <?php if($leave->leave_status == 2 || $leave->leave_status == 3):
                                 echo "No Actions";
-                              else:?>
+                              endif;
+                              if($leave->leave_status == 1):?>
                                 <div class="dropdown">
                                   <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                   <div class="dropdown-menu">
                                     <a class="dropdown-item has-icon" href="<?php echo site_url('extend_leave').'/'.$leave->employee_leave_id; ?>"><i class="fas fa-plane-departure"></i>Extend Leave</a>
                                   </div>
                                 </div>
-                              <?php endif; ?>
+                              <?php endif;
+
+								if($leave->leave_status == 0):?>
+								<div class="dropdown">
+									<a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item has-icon" href="<?php echo site_url('approve_leave').'/'.$leave->employee_leave_id; ?>"><i class="fas fa-check-square"></i>Approve Leave</a>
+										<a class="dropdown-item has-icon" href="<?php echo site_url('discard_leave').'/'.$leave->employee_leave_id; ?>"><i class="fas fa-trash"></i>Discard Leave</a>
+									</div>
+								</div>
+								<?php endif; ?>
                             </td>
                           </tr>
                         <?php

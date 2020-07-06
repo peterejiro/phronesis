@@ -8,6 +8,7 @@ class Employee extends CI_Controller
 		parent::__construct();
 		$this->load->database();
 		$this->load->library('form_validation');
+		$this->load->library('user_agent');
 		$this->load->library('session');
 		$this->load->helper('security');
 		$this->load->helper('string');
@@ -1331,6 +1332,188 @@ class Employee extends CI_Controller
 						endif;
 
 					endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function approve_employee_leave(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+
+			if($permission->employee_management == 1):
+				if($this->agent->referrer() !== site_url('employee_leave')):
+
+					redirect('error_404');
+
+				else:
+
+
+					$leave_id = $this->uri->segment(2);
+
+					if(empty($leave_id)):
+
+						redirect('error_404');
+
+					else:
+						$leaf = $this->employees->get_leave($leave_id);
+
+						if(!empty($leaf)):
+
+							$leave_array = array(
+
+								'leave_status' => 1
+							);
+
+							$query = $this->employees->update_leave($leave_id, $leave_array);
+
+							if($query ==  true):
+
+								$log_array = array(
+									'log_user_id' => $this->users->get_user($username)->user_id,
+									'log_description' => "Approved Employee Leave"
+								);
+
+								$this->logs->add_log($log_array);
+
+								$employee_history_array = array(
+									'employee_history_employee_id' => $leaf->leave_employee_id,
+									'employee_history_details' =>'Leave Updated'
+
+								);
+
+								$this->employees->insert_employee_history($employee_history_array);
+
+								$msg = array(
+									'msg'=> 'Leave Approved',
+									'location' => site_url('employee_leave'),
+									'type' => 'success'
+
+								);
+								$this->load->view('swal', $msg);
+
+							else:
+
+
+							endif;
+
+						else:
+
+							redirect('error_404');
+						endif;
+
+
+				endif;
+
+			endif;
+
+		else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function discard_employee_leave(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+
+			if($permission->employee_management == 1):
+				if($this->agent->referrer() !== site_url('employee_leave')):
+
+					redirect('error_404');
+
+				else:
+
+
+					$leave_id = $this->uri->segment(2);
+
+					if(empty($leave_id)):
+
+						redirect('error_404');
+
+					else:
+						$leaf = $this->employees->get_leave($leave_id);
+
+						if(!empty($leaf)):
+
+							$leave_array = array(
+
+								'leave_status' => 3
+							);
+
+							$query = $this->employees->update_leave($leave_id, $leave_array);
+
+							if($query ==  true):
+
+								$log_array = array(
+									'log_user_id' => $this->users->get_user($username)->user_id,
+									'log_description' => "Discarded Employee Leave"
+								);
+
+								$this->logs->add_log($log_array);
+
+								$employee_history_array = array(
+									'employee_history_employee_id' => $leaf->leave_employee_id,
+									'employee_history_details' =>'Leave Discarded'
+
+								);
+
+								$this->employees->insert_employee_history($employee_history_array);
+
+								$msg = array(
+									'msg'=> 'Leave Discaarded',
+									'location' => site_url('employee_leave'),
+									'type' => 'success'
+
+								);
+								$this->load->view('swal', $msg);
+
+							else:
+
+
+							endif;
+
+						else:
+
+							redirect('error_404');
+						endif;
+
+
+					endif;
+
+				endif;
 
 			else:
 

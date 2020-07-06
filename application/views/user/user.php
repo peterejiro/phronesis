@@ -128,11 +128,18 @@
 
 								<div class="form-group row">
 
-									<div class="col-sm-12 ml-auto input-group mt-3">
+									<div class="col-sm-6 ml-auto input-group mt-3">
 										<div class="input-group-prepend">
 											<span class="input-group-text" id="inputGroup-sizing-normal">Status</span>
 										</div>
 										<input type="text" disabled value="<?php if($user->user_status == 1){ echo "Active"; } else { echo "Inactive"; } ?>" class="form-control" aria-label="Normal" aria-describedby="inputGroup-sizing-sm">
+									</div>
+
+									<div class="col-sm-6 ml-auto input-group mt-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="inputGroup-sizing-normal">User Type</span>
+										</div>
+										<input type="text" disabled value="<?php if($user->user_type == 1){ echo "Administrator"; } if($user->user_type == 2){ echo "Employee"; } if($user->user_type == 3){ echo "Moderator"; } ?>" class="form-control" aria-label="Normal" aria-describedby="inputGroup-sizing-sm">
 									</div>
 								</div>
 

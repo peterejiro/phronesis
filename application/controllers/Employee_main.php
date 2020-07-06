@@ -296,4 +296,360 @@ class Employee_main extends CI_Controller
 			redirect('/login');
 		endif;
 	}
+
+	public function appraisals(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+				$data['histories'] = $this->employees->view_employee_history($employee_id);
+				$data['appraisals'] = $this->employees->get_employee_appraisal($employee_id);
+
+
+				//$this->load->view('log/view_logs', $data);
+
+				$this->load->view('employee_self_service/employee_appraisal', $data);
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function appraise_employee(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+				$data['histories'] = $this->employees->view_employee_history($employee_id);
+				$data['appraisals'] = $this->employees->get_appraise_employees($employee_id);
+
+
+				//$this->load->view('log/view_logs', $data);
+
+				$this->load->view('employee_self_service/appraise_employee', $data);
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+
+	public function respond_appraisal_supervisor(){
+
+		$appraisal_id = $this->uri->segment(2);
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+
+				$data['questions'] = $this->employees->get_appraisal_questions($appraisal_id);
+				$data['appraisal_id'] = $appraisal_id;
+
+
+				//$this->load->view('log/view_logs', $data);
+
+				$this->load->view('employee_self_service/respond_appraisal_supervisor', $data);
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function answer_questions_supervisor(){
+
+		$appraisal_id = $this->input->post('appraisal_id');
+
+		if(empty($appraisal_id)):
+
+			redirect('error_404');
+
+		else:
+
+				$questions = $this->employees->get_appraisal_questions($appraisal_id);
+
+				$count = 0;
+				foreach($questions as $question):
+
+					if($question->employee_appraisal_result_type == 2 || $question->employee_appraisal_result_type == 3 || $question->employee_appraisal_result_type == 4 ):
+
+					$answer = $this->input->post($question->employee_appraisal_result_id);
+
+					$answer_array = array(
+						'employee_appraisal_result_answer' => $answer
+					);
+
+					$this->employees->answer_question($question->employee_appraisal_result_id, $answer_array);
+					$count++;
+
+					endif;
+				endforeach;
+
+				if($count >0):
+
+					$appraisal_data = array(
+						'employee_appraisal_supervisor'=> 1,
+						'employee_appraisal_qualitative '=> 1,
+						'employee_appraisal_quantitative'=>1
+						);
+
+					$this->employees->update_appraisal($appraisal_id, $appraisal_data);
+
+					$check_appraisal= $this->employees->get_appraisal($appraisal_id);
+
+					if($check_appraisal->employee_appraisal_supervisor == 1 && $check_appraisal->employee_appraisal_qualitative == 1 && $check_appraisal->employee_appraisal_quantitative == 1 && $check_appraisal->employee_appraisal_self == 1 ):
+						$appraisal_data = array(
+
+							'employee_appraisal_status'=>1
+						);
+
+						$this->employees->update_appraisal($appraisal_id, $appraisal_data);
+						endif;
+
+					$msg = array(
+						'msg'=> 'Appraisal Completed',
+						'location' => site_url('employee_main'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+					endif;
+
+		endif;
+
+	}
+
+	public function respond_appraisal_self(){
+
+		$appraisal_id = $this->uri->segment(2);
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+
+				$data['questions'] = $this->employees->get_appraisal_questions($appraisal_id);
+				$data['appraisal_id'] = $appraisal_id;
+
+
+				//$this->load->view('log/view_logs', $data);
+
+				$this->load->view('employee_self_service/respond_appraisal_self', $data);
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function answer_questions_self(){
+
+		$appraisal_id = $this->input->post('appraisal_id');
+
+		if(empty($appraisal_id)):
+
+			redirect('error_404');
+
+		else:
+
+			$questions = $this->employees->get_appraisal_questions($appraisal_id);
+
+			$count = 0;
+			foreach($questions as $question):
+
+				if($question->employee_appraisal_result_type == 1):
+
+					$answer = $this->input->post($question->employee_appraisal_result_id);
+
+					$answer_array = array(
+						'employee_appraisal_result_answer' => $answer
+					);
+
+					$this->employees->answer_question($question->employee_appraisal_result_id, $answer_array);
+					$count++;
+
+				endif;
+			endforeach;
+
+			if($count >0):
+
+				$appraisal_data = array(
+					'employee_appraisal_self'=>1
+				);
+
+				$this->employees->update_appraisal($appraisal_id, $appraisal_data);
+
+				$check_appraisal= $this->employees->get_appraisal($appraisal_id);
+
+				if($check_appraisal->employee_appraisal_supervisor == 1 && $check_appraisal->employee_appraisal_qualitative == 1 && $check_appraisal->employee_appraisal_quantitative == 1 && $check_appraisal->employee_appraisal_self == 1 ):
+					$appraisal_data = array(
+
+						'employee_appraisal_status'=>1
+					);
+
+					$this->employees->update_appraisal($appraisal_id, $appraisal_data);
+				endif;
+
+				$msg = array(
+					'msg'=> 'Appraisal Completed',
+					'location' => site_url('employee_main'),
+					'type' => 'success'
+
+				);
+				$this->load->view('swal', $msg);
+			endif;
+
+		endif;
+
+	}
+
+
+
+	public function check_appraisal_results(){
+
+		$appraisal_id = $this->uri->segment(2);
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+
+				$data['questions'] = $this->employees->get_appraisal_questions($appraisal_id);
+				$data['appraisal_id'] = $appraisal_id;
+
+
+				$questions = $this->employees->get_appraisal_questions($appraisal_id);
+
+				$this->load->view('employee_self_service/appraisal_result', $data);
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
 }

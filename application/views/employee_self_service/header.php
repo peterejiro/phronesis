@@ -217,9 +217,11 @@
 				<a href="features-activities.html" class="dropdown-item has-icon">
 					<i class="fas fa-bolt"></i> Activities
 				</a>
-				<a href="features-settings.html" class="dropdown-item has-icon">
-					<i class="fas fa-cog"></i> Settings
-				</a>
+				<?php if($user_data->user_type == 3): ?>
+					<a href="<?php echo base_url(); ?>" class="dropdown-item has-icon">
+						<i class="fas fa-cog"></i> Switch to Administrator
+					</a>
+				<?php endif; ?>
 				<div class="dropdown-divider"></div>
 				<a href="<?php echo site_url('logout'); ?>" class="dropdown-item has-icon text-danger">
 					<i class="fas fa-sign-out-alt"></i> Logout

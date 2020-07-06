@@ -208,9 +208,11 @@
 				<a href="features-activities.html" class="dropdown-item has-icon">
 					<i class="fas fa-bolt"></i> Activities
 				</a>
-				<a href="features-settings.html" class="dropdown-item has-icon">
-					<i class="fas fa-cog"></i> Settings
+				<?php if($user_data->user_type == 3): ?>
+				<a href="<?php echo base_url('employee_main') ?>" class="dropdown-item has-icon">
+					<i class="fas fa-cog"></i> Switch to Self Service
 				</a>
+				<?php endif; ?>
 				<div class="dropdown-divider"></div>
 				<a href="<?php echo site_url('logout'); ?>" class="dropdown-item has-icon text-danger">
 					<i class="fas fa-sign-out-alt"></i> Logout
