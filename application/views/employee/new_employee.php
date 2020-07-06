@@ -279,7 +279,7 @@
                             <input id="paye-number" name="employee_paye_number" type="text" class="form-control"/>
                           </div>
                           <div class="col-sm-6">
-                            <label for="employee_pensionable">Pensionable?</label>
+                            <label for="employee_pensionable">Pensionable?</label><span style="color: red"> *</span>
                             <select class="select2 form-control" required name="employee_pensionable" onchange="pensionable()" id="employee_pensionable" style="width: 100%; height:42px !important;">
                               <option value="">Select</option>
                               <option value="0"> No </option>
