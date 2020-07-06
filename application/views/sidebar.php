@@ -52,7 +52,10 @@
       $this->uri->segment(1) == 'payroll_report' ||
       $this->uri->segment(1) == 'emolument' ||
       $this->uri->segment(1) == 'emolument_report' ||
-      $this->uri->segment(1) == 'deduction' ? 'active' : '';
+      $this->uri->segment(1) == 'deduction' ||
+      $this->uri->segment(1) == 'deduction_report' ||
+      $this->uri->segment(1) == 'pay_order' ||
+      $this->uri->segment(1) == 'pay_order_report' ? 'active' : '';
 			?>">
       <?php if($payroll_management == 1){  ?>
       <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-money-bill-wave"></i><span>Payroll</span></a>
@@ -62,7 +65,7 @@
         <li class="<?php echo $this->uri->segment(1) == 'approve_variational_payment' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('approve_variational_payment') ?>">Approve Payments</a></li>
         <li class="<?php echo $this->uri->segment(1) == 'payroll_routine' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payroll_routine') ?>"> Payroll Routine</a></li>
         <li class="<?php echo $this->uri->segment(1) == 'approve_payroll_routine' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('approve_payroll_routine') ?>"> Approve Routine </a></li>
-        <li class="<?php echo $this->uri->segment(1) == 'payroll_report' || $this->uri->segment(1) == 'emolument' || $this->uri->segment(1) == 'emolument_report' || $this->uri->segment(1) == 'deduction' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payroll_report') ?>"> Payroll Reports </a></li>
+        <li class="<?php echo $this->uri->segment(1) == 'payroll_report' || $this->uri->segment(1) == 'emolument' || $this->uri->segment(1) == 'emolument_report' || $this->uri->segment(1) == 'deduction' || $this->uri->segment(1) == 'deduction_report' || $this->uri->segment(1) == 'pay_order' || $this->uri->segment(1) == 'pay_order_report' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payroll_report') ?>"> Payroll Reports </a></li>
       </ul>
       <?php  } ?>
 			</li>
