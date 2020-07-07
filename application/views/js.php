@@ -65,7 +65,8 @@
             $this->uri->segment(1) != 'emolument' &&
             $this->uri->segment(1) != 'deduction' &&
             $this->uri->segment(1) != 'pay_order' &&
-            $this->uri->segment(1) != 'new_loan'
+            $this->uri->segment(1) != 'new_loan' &&
+            $this->uri->segment(1) != 'edit_loan'
         ):
       ?>
         <script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
