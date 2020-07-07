@@ -42,7 +42,7 @@ $(document).ready(function() {
 
     let table2 = $('#datatable-buttons-2').DataTable({
         lengthChange: false,
-        buttons: [
+		buttons: [
             {
                 extend: 'copy',
                 text: "<i class='fa fa-copy'></i> Copy",

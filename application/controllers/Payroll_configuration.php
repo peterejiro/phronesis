@@ -26,6 +26,9 @@ class Payroll_configuration extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
@@ -37,9 +40,7 @@ class Payroll_configuration extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['tax_rates'] = $this->payroll_configurations->view_tax_rates();
@@ -188,7 +189,9 @@ class Payroll_configuration extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -200,9 +203,7 @@ class Payroll_configuration extends CI_Controller
 
 			if($permission->payroll_configuration == 1):
 
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['tax_rates'] = $this->payroll_configurations->view_tax_rates();
@@ -239,7 +240,9 @@ class Payroll_configuration extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -250,9 +253,7 @@ class Payroll_configuration extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 
 				//$data['tax_rates'] = $this->payroll_configurations->view_tax_rates();
@@ -381,7 +382,9 @@ class Payroll_configuration extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -392,9 +395,7 @@ class Payroll_configuration extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['payment_definition'] = $this->payroll_configurations->view_payment_definition($payment_definition_id);
@@ -528,7 +529,9 @@ class Payroll_configuration extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -539,9 +542,7 @@ class Payroll_configuration extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
@@ -689,7 +690,9 @@ class Payroll_configuration extends CI_Controller
 		$allowance_id = $this->uri->segment(2);
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -700,9 +703,7 @@ class Payroll_configuration extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
@@ -749,7 +750,9 @@ class Payroll_configuration extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -760,9 +763,7 @@ class Payroll_configuration extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
@@ -797,7 +798,9 @@ class Payroll_configuration extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -808,9 +811,7 @@ class Payroll_configuration extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
@@ -913,7 +914,9 @@ class Payroll_configuration extends CI_Controller
 		$allowance_id = $this->uri->segment(2);
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -924,9 +927,7 @@ class Payroll_configuration extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
@@ -1033,7 +1034,9 @@ class Payroll_configuration extends CI_Controller
 		$employee_id = $this->uri->segment(2);
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -1044,9 +1047,7 @@ class Payroll_configuration extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 
 				$data['employee'] = $this->employees->get_employee($employee_id);
 
@@ -1103,7 +1104,9 @@ class Payroll_configuration extends CI_Controller
 		//$employee_id = $this->uri->segment(2);
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -1114,9 +1117,7 @@ class Payroll_configuration extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 
 				$data['user_data'] = $this->users->get_user($username);
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
@@ -1300,7 +1301,9 @@ class Payroll_configuration extends CI_Controller
 		//$employee_id = $this->uri->segment(2);
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -1312,9 +1315,7 @@ class Payroll_configuration extends CI_Controller
 
 			if($permission->payroll_configuration == 1):
 
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 
 				$data['user_data'] = $this->users->get_user($username);
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
@@ -1496,7 +1497,9 @@ class Payroll_configuration extends CI_Controller
 		//$employee_id = $this->uri->segment(2);
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -1507,9 +1510,7 @@ class Payroll_configuration extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 
 				$data['user_data'] = $this->users->get_user($username);
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
