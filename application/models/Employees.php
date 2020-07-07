@@ -328,6 +328,14 @@ class Employees extends CI_Model
 		return $this->db->get()->row();
 	}
 
+	public function _get_appraisal($appraisal_id){
+		$this->db->select('*');
+		$this->db->from('employee_appraisal');
+		$this->db->where('employee_appraisal.employee_appraisal_id', $appraisal_id);
+		$this->db->join('employee', 'employee.employee_id = employee_appraisal.employee_appraisal_supervisor_id');
+		return $this->db->get()->row();
+	}
+
 	public function answer_question($question_id, $answer_data){
 		$this->db->where('employee_appraisal_result.employee_appraisal_result_id', $question_id);
 		$this->db->update('employee_appraisal_result', $answer_data);

@@ -7,6 +7,7 @@ class Loan extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->database();
+		$this->load->library('user_agent');
 		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->load->helper('security');
@@ -24,7 +25,9 @@ class Loan extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -35,9 +38,7 @@ class Loan extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['loans'] = $this->loans->view_loans();
@@ -69,7 +70,9 @@ class Loan extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -80,9 +83,7 @@ class Loan extends CI_Controller
 			$data['hr_configuration'] = $permission->hr_configuration;
 
 			if($permission->payroll_configuration == 1):
-				$user_type = $this->users->get_user($username)->user_type;
 
-				if($user_type == 1 || $user_type == 3):
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['employees'] = $this->employees->view_employees();
@@ -559,6 +560,171 @@ class Loan extends CI_Controller
 
 		else:
 			redirect('/login');
+		endif;
+
+	}
+
+
+	public function approve_loan(){
+		$username = $this->session->userdata('user_username');
+
+		if($this->agent->referrer() !== site_url('loans')):
+
+			redirect('error_404');
+
+		else:
+
+			if(isset($username)):
+				$loan_id = $this->uri->segment(2);
+
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+					$data['user_data'] = $this->users->get_user($username);
+
+					$data['employees'] = $this->employees->view_employees();
+					$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+					$data['payroll'] = $this->payroll_configurations->get_payroll_month_year();
+
+
+					$loan_array = array(
+
+						'loan_status' => 0
+					);
+
+					$loan_array = $this->security->xss_clean($loan_array);
+
+
+
+					$query = $this->loans->update_loan($loan_id, $loan_array);
+
+					if($query == true):
+
+						$log_array = array(
+							'log_user_id' => $this->users->get_user($username)->user_id,
+							'log_description' => "Approved Loan"
+						);
+
+						$this->logs->add_log($log_array);
+						$msg = array(
+							'msg'=> 'Loan Approved',
+							'location' => site_url('loans'),
+							'type' => 'success'
+
+						);
+						$this->load->view('swal', $msg);
+
+					else:
+
+						echo "An Error Occurred";
+
+					endif;
+
+
+
+
+
+				else:
+
+					redirect('/access_denied');
+
+				endif;
+
+			else:
+				redirect('/login');
+			endif;
+
+		endif;
+
+	}
+
+	public function discard_loan(){
+		$username = $this->session->userdata('user_username');
+
+		if($this->agent->referrer() !== site_url('loans')):
+
+			redirect('error_404');
+
+		else:
+
+			if(isset($username)):
+				$loan_id = $this->uri->segment(2);
+
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+					$data['user_data'] = $this->users->get_user($username);
+
+					$data['employees'] = $this->employees->view_employees();
+					$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+					$data['payroll'] = $this->payroll_configurations->get_payroll_month_year();
+
+
+					$loan_array = array(
+
+						'loan_status' => 3
+					);
+
+					$loan_array = $this->security->xss_clean($loan_array);
+
+
+
+					$query = $this->loans->update_loan($loan_id, $loan_array);
+
+					if($query == true):
+
+						$log_array = array(
+							'log_user_id' => $this->users->get_user($username)->user_id,
+							'log_description' => "Discarded Loan"
+						);
+
+						$this->logs->add_log($log_array);
+						$msg = array(
+							'msg'=> 'Loan Discarded',
+							'location' => site_url('loans'),
+							'type' => 'success'
+
+						);
+						$this->load->view('swal', $msg);
+
+					else:
+
+						echo "An Error Occurred";
+
+					endif;
+
+
+
+
+
+				else:
+
+					redirect('/access_denied');
+
+				endif;
+
+			else:
+				redirect('/login');
+			endif;
+
 		endif;
 
 	}

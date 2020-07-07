@@ -36,6 +36,7 @@
                           <th>Employee Name</th>
                           <th>Loan Type</th>
                           <th>Amount</th>
+							<th>Balance</th>
                           <th>Loan Status</th>
                           <th>Action</th>
                         </tr>
@@ -49,19 +50,29 @@
                             <td><?php echo $loan->employee_last_name." ".$loan->employee_first_name." ".$loan->employee_other_name; ?></td>
                             <td><?php echo $loan->payment_definition_payment_name; ?></td>
                             <td>&#8358; <?php echo number_format($loan->loan_amount); ?></td>
+							  <td>&#8358; <?php echo number_format($loan->loan_balance); ?></td>
                             <td>
                               <?php if($loan->loan_status == 0): ?>
                                 <div class="badge badge-warning">Running</div>
-                              <?php else:?>
+							  <?php endif;?>
+                              <?php if($loan->loan_status == 1):?>
                                 <div class="badge badge-success">Paid Off</div>
                               <?php endif;?>
+								<?php if($loan->loan_status == 2):?>
+									<div class="badge badge-success">Pending</div>
+								<?php endif;?>
+								<?php if($loan->loan_status == 3):?>
+									<div class="badge badge-success">Discarded</div>
+								<?php endif;?>
                             </td>
                             <td class="text-center" style="width: 9px;">
                               <div class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu">
                                   <a class="dropdown-item has-icon" data-toggle="modal" data-target="#view_loan<?php echo $loan->loan_id ?>"><i class="fas fa-eye"></i>View Loan Details</a>
-                                  <a class="dropdown-item has-icon" href="<?php echo site_url('edit_loan')."/".$loan->loan_id; ?>"><i class="fas fa-edit"></i>Reschedule Loan</a>
+									<?php if($loan->loan_status == 0):?>
+									<a class="dropdown-item has-icon" href="<?php echo site_url('edit_loan')."/".$loan->loan_id; ?>"><i class="fas fa-edit"></i>Reschedule Loan</a>
+									<?php endif; ?>
                                 </div>
                               </div>
                             </td>
@@ -134,12 +145,18 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-normal">Current Status</span>
                 </div>
-                <input type="text" disabled value="<?php if($loan->loan_status == 0){ echo "Running"; } else { echo "Paid Off"; } ?>" class="form-control" aria-label="Normal" aria-describedby="inputGroup-sizing-sm">
+                <input type="text" disabled value="<?php if($loan->loan_status == 0){ echo "Running"; } if($loan->loan_status == 1){ echo "Paid Off"; } if($loan->loan_status == 2){ echo "Pending"; } if($loan->loan_status == 3){ echo "Discarded"; } ?>" class="form-control" aria-label="Normal" aria-describedby="inputGroup-sizing-sm">
               </div>
             </div>
 					</div>
 					<div class="modal-footer bg-whitesmoke">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+						<?php if($loan->loan_status == 2):  ?>
+						<button onclick="location.href='<?php echo site_url('discard_loan')."/".$loan->loan_id;?>'" type="button" class="btn btn-warning" data-dismiss="modal">Discard Loan</button>
+						<button onclick="location.href='<?php echo site_url('approve_loan')."/".$loan->loan_id;;?>'" type="button" class="btn btn-success" data-dismiss="modal">Approve Loan</button>
+
+						<?php endif; ?>
 					</div>
 				</form>
 			</div>

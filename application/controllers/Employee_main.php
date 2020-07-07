@@ -16,6 +16,9 @@ class Employee_main extends CI_Controller
 		$this->load->model('employees');
 		$this->load->model('hr_configurations');
 		$this->load->model('logs');
+		$this->load->model('salaries');
+		$this->load->model('loans');
+		$this->load->model('payroll_configurations');
 	}
 
 	public function index(){
@@ -621,24 +624,446 @@ class Employee_main extends CI_Controller
 
 			if($user_type == 2 || $user_type == 3):
 
+
+				$questions = $this->employees->get_appraisal_questions($appraisal_id);
+
+				if(empty($questions)):
+
+					redirect('error_404');
+
+				else:
+
+					$data['user_data'] = $this->users->get_user($username);
+
+					$data['employee'] = $this->employees->get_employee_by_unique($username);
+
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+					$data['questions'] = $questions;
+
+					$data['appraisal_id'] = $appraisal_id;
+
+
+
+					$this->load->view('employee_self_service/appraisal_result', $data);
+
+				endif;
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function pay_slip(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+
+
+
+					$data['user_data'] = $this->users->get_user($username);
+
+					$data['employee'] = $this->employees->get_employee_by_unique($username);
+
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$data['employee_id'] = $this->employees->get_employee_by_unique($username)->employee_id;
+
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+					$data['min_payroll_year'] = $this->salaries->view_min_payroll_year();
+
+					$this->load->view('employee_self_service/pay_slip', $data);
+
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+
+	public function pay_slips(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				$month = $this->input->post('month');
+				$year = $this->input->post('year');
+
+
+				if(empty($month) || empty($year)):
+
+
+					redirect('error_404');
+
+				else:
+
+					$check = $this->salaries->view_emolument_sheet();
+					$data['payroll_month'] = $month;
+					$data['payroll_year'] = $year;
+					$data['user_data'] = $this->users->get_user($username);
+
+					$data['employee'] = $this->employees->get_employee_by_unique($username);
+
+
+					$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+					if(empty($check)):
+
+
+						$payment_definitions = $this->payroll_configurations->view_payment_definitions_order();
+
+						foreach ($payment_definitions as $payment_definition):
+
+							$fields = array(
+								'payment_definition_'.$payment_definition->payment_definition_id => array('type' => 'TEXT')
+							);
+
+							$this->salaries->new_column($fields);
+						endforeach;
+
+
+						$employees = $this->employees->view_employees();
+
+						foreach ($employees as $employee):
+							if($employee->employee_id == $employee_id):
+							$emolument_data = array(
+
+								'emolument_report_employee_id' => $employee->employee_id
+
+							);
+
+							$this->salaries->insert_emolument($emolument_data);
+
+							$salaries = $this->salaries->view_salaries_emolument($employee->employee_id, $month, $year);
+
+							foreach ($salaries as $salary):
+
+								$emoluments_data = array(
+									'payment_definition_'.$salary->salary_payment_definition_id => $salary->salary_amount
+
+								);
+								//print_r($emoluments_data);
+
+								$this->salaries->update_emolument($employee->employee_id, $emoluments_data);
+
+							endforeach;
+						endif;
+						endforeach;
+
+
+						$data['emoluments'] = $this->salaries->view_emolument_sheet();
+
+						$this->load->view('employee_self_service/_pay_slip', $data);
+
+					else:
+
+						$this->salaries->clear_emolument();
+						$emolument_fields = $this->salaries->view_emolument_fields();
+
+						foreach($emolument_fields as $emolument_field):
+
+							$payment_definition_field = stristr($emolument_field,"payment_definition_");
+
+							if(!empty($payment_definition_field)):
+
+								$this->salaries->remove_field($payment_definition_field);
+
+
+							endif;
+
+						endforeach;
+
+
+						$payment_definitions = $this->payroll_configurations->view_payment_definitions_order();
+
+						foreach ($payment_definitions as $payment_definition):
+
+							$fields = array(
+								'payment_definition_'.$payment_definition->payment_definition_id => array('type' => 'TEXT')
+							);
+
+							$this->salaries->new_column($fields);
+						endforeach;
+
+
+						$employees = $this->employees->view_employees();
+
+						foreach ($employees as $employee):
+							if($employee->employee_id == $employee_id):
+								$emolument_data = array(
+
+									'emolument_report_employee_id' => $employee->employee_id
+
+								);
+
+								$this->salaries->insert_emolument($emolument_data);
+
+								$salaries = $this->salaries->view_salaries_emolument($employee->employee_id, $month, $year);
+
+								foreach ($salaries as $salary):
+
+									$emoluments_data = array(
+										'payment_definition_'.$salary->salary_payment_definition_id => $salary->salary_amount
+
+									);
+									//print_r($emoluments_data);
+
+									$this->salaries->update_emolument($employee->employee_id, $emoluments_data);
+
+								endforeach;
+							endif;
+						endforeach;
+
+
+						$data['emoluments'] = $this->salaries->view_emolument_sheet();
+
+						$this->load->view('employee_self_service/_pay_slip', $data);
+
+					endif;
+
+				endif;
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+	public function my_loan(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['employee'] = $this->employees->get_employee_by_unique($username);
 
+
+
+				$data['employee_id'] = $this->employees->get_employee_by_unique($username)->employee_id;
+				$data['loans'] = $this->loans->view_loans();
+
+				$data['employees'] = $this->employees->view_employees();
+				$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
+				$data['payroll'] = $this->payroll_configurations->get_payroll_month_year();
 
+				$this->load->view('employee_self_service/my_loan', $data);
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function my_new_loan(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+
+
+
+				$data['employee_id'] = $this->employees->get_employee_by_unique($username)->employee_id;
+
+
+
+				$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+				$data['payroll'] = $this->payroll_configurations->get_payroll_month_year();
+
+				$this->load->view('employee_self_service/my_new_loan', $data);
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+
+	public function apply_loan(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+
+				$payroll_month = $this->payroll_configurations->get_payroll_month_year()->payroll_month_year_month;
+				$payroll_year = $this->payroll_configurations->get_payroll_month_year()->payroll_month_year_year;
 
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+				$payment_definition = $this->input->post('payment_definition_id');
+				$start_month = $this->input->post('start_month');
+				$start_year = $this->input->post('start_year');
+				$end_month = $this->input->post('end_month');
+				$end_year = $this->input->post('end_year');
+				$amount = $this->input->post('amount');
+				$monthly_repayment = $this->input->post('repayment_amount');
+
+				if((empty($employee_id))|| (empty($payment_definition)) || (empty($start_month)) || (empty($start_year))
+					|| (empty($end_month)) || (empty($end_year)) || (empty($amount))):
+
+					redirect('error_404');
+
+				else:
+
+					$start_date = $start_year."-".$start_month;
+					$end_date = $end_year."-".$end_month;
+					$payroll_date = $payroll_year."-".$payroll_month;
+
+					$installments = floor((strtotime($end_date) - strtotime($start_date))/ (30*60*60*24))+1;
+
+					//echo $installments;
+
+					if((strtotime($end_date) > strtotime($start_date)) && (strtotime($start_date) > strtotime($payroll_date))):
+						$loan_array = array(
+							'loan_employee_id'=> $employee_id,
+							'loan_payment_definition_id'=>$payment_definition,
+							'loan_amount' => $amount,
+							'loan_start_year'=> $start_year,
+							'loan_start_month' => $start_month,
+							'loan_end_year' => $end_year,
+							'loan_end_month' => $end_month,
+							'loan_installments' => $installments,
+							'loan_monthly_repayment' => $monthly_repayment,
+							'loan_balance' => $amount,
+							'loan_status'=> 2
+
+						);
+
+						$loan_array = $this->security->xss_clean($loan_array);
+
+						//print_r($loan_array);
+						$query = $this->loans->add_loan($loan_array);
+
+						if(($query == true)):
+							$log_array = array(
+								'log_user_id' => $this->users->get_user($username)->user_id,
+								'log_description' => "Initiated Loan Application"
+							);
+
+							$this->logs->add_log($log_array);
+							$msg = array(
+								'msg'=> 'Loan Added Successfully',
+								'location' => site_url('my_loan'),
+								'type' => 'success'
+
+							);
+							$this->load->view('swal', $msg);
+
+						else:
+							echo "An Error Occurred";
+						endif;
+
+					else:
+						$msg = array(
+							'msg'=> 'Check year and Month Entry',
+							'location' => site_url('my_loan'),
+							'type' => 'error'
+
+						);
+						$this->load->view('swal', $msg);
+					endif;
 
 
-				$data['questions'] = $this->employees->get_appraisal_questions($appraisal_id);
-				$data['appraisal_id'] = $appraisal_id;
 
 
-				$questions = $this->employees->get_appraisal_questions($appraisal_id);
+				endif;
 
-				$this->load->view('employee_self_service/appraisal_result', $data);
+
 
 			elseif($user_type == 1):
 

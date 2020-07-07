@@ -23,9 +23,9 @@
 			<li class="nav-item dropdown">
 				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Finance</span></a>
 				<ul class="dropdown-menu">
-					<li class="nav-item"><a href="index-0.html" class="nav-link">Pay Slip</a></li>
-					<li class="nav-item"><a href="index-0.html" class="nav-link">Loan History</a></li>
-					<li class="nav-item"><a href="index-0.html" class="nav-link">Request Loan</a></li>
+					<li class="nav-item"><a href="<?php echo base_url('pay_slip') ?>" class="nav-link">Pay Slip</a></li>
+					<li class="nav-item"><a href="<?php echo base_url('my_loan') ?>" class="nav-link">Loan History</a></li>
+					<li class="nav-item"><a href="<?php echo base_url('my_new_loan');?>" class="nav-link">Request Loan</a></li>
 
 
 				</ul>
