@@ -191,8 +191,69 @@ class Payroll_report extends CI_Controller
 				$this->load->view('payroll_report/emolument_sheet', $data);
 
 				else:
+					$this->salaries->clear_emolument();
+					$emolument_fields = $this->salaries->view_emolument_fields();
+
+					foreach($emolument_fields as $emolument_field):
+
+						$payment_definition_field = stristr($emolument_field,"payment_definition_");
+
+						if(!empty($payment_definition_field)):
+
+							$this->salaries->remove_field($payment_definition_field);
+
+
+						endif;
+
+					endforeach;
+
+
+
+					$payment_definitions = $this->payroll_configurations->view_payment_definitions_order();
+
+					foreach ($payment_definitions as $payment_definition):
+
+						$fields = array(
+							'payment_definition_'.$payment_definition->payment_definition_id => array('type' => 'TEXT')
+						);
+
+						$this->salaries->new_column($fields);
+					endforeach;
+
+
+					$employees = $this->employees->view_employees();
+
+					foreach ($employees as $employee):
+						$emolument_data = array(
+
+							'emolument_report_employee_id' => $employee->employee_id
+
+						);
+
+						$this->salaries->insert_emolument($emolument_data);
+
+						$salaries = $this->salaries->view_salaries_emolument($employee->employee_id, $month, $year);
+
+						foreach ($salaries as $salary):
+
+							$emoluments_data = array(
+								'payment_definition_'.$salary->salary_payment_definition_id => $salary->salary_amount
+
+							);
+							//print_r($emoluments_data);
+
+							$this->salaries->update_emolument($employee->employee_id, $emoluments_data);
+
+						endforeach;
+
+					endforeach;
+
 
 					$data['emoluments'] = $this->salaries->view_emolument_sheet();
+
+
+
+
 
 					$this->load->view('payroll_report/emolument_sheet', $data);
 
@@ -223,16 +284,8 @@ class Payroll_report extends CI_Controller
 
 		if(isset($username)):
 
-			$permission = $this->users->check_permission($username);
-			$data['employee_management'] = $permission->employee_management;
-			$data['payroll_management'] = $permission->payroll_management;
-			$data['biometrics'] = $permission->biometrics;
-			$data['user_management'] = $permission->user_management;
-			$data['configuration'] = $permission->configuration;
-			$data['payroll_configuration'] = $permission->payroll_configuration;
-			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+
 
 				$data['user_data'] = $this->users->get_user($username);
 
@@ -256,11 +309,7 @@ class Payroll_report extends CI_Controller
 
 
 
-			else:
 
-				redirect('/access_denied');
-
-			endif;
 		else:
 			redirect('/login');
 		endif;

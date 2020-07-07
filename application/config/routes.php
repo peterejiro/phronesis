@@ -207,6 +207,8 @@ $route['add_new_loan'] = 'loan/add_new_loan';
 $route['loans'] = 'loan/loans';
 $route['edit_loan/:num'] = 'loan/edit_loan/$1';
 $route['update_loan'] = 'loan/update_loan';
+$route['approve_loan/:num'] = 'loan/approve_loan/$1';
+$route['discard_loan/:num'] = 'loan/discard_loan/$1';
 
 $route['payroll_routine'] = 'payroll/payroll_routine';
 $route['run_payroll_routine'] = 'payroll/run_payroll_routine';
@@ -236,6 +238,11 @@ $route['answer_questions_supervisor'] = 'employee_main/answer_questions_supervis
 $route['respond_appraisal_self/:num'] = 'employee_main/respond_appraisal_self/$1';
 $route['answer_questions_self'] = 'employee_main/answer_questions_self';
 $route['appraisal_result/:num'] = 'employee_main/check_appraisal_results/$1';
+$route['pay_slip'] = 'employee_main/pay_slip';
+$route['pay_slips'] = 'employee_main/pay_slips';
+$route['my_loan'] = 'employee_main/my_loan';
+$route['my_new_loan'] = 'employee_main/my_new_loan';
+$route['apply_loan'] = 'employee_main/apply_loan';
 
 
 
