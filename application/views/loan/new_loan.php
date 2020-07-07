@@ -120,7 +120,7 @@
                   </div>
                   <div class="card-footer text-right bg-whitesmoke">
                     <button type="button" id="compute_loan" onclick="add_months()" class="btn btn-primary">Compute Loan</button>
-                    <button type="submit" id="loan_button"  class="btn btn-primary">New Loan</button>
+                    <button type="submit" id="loan_button"  class="btn btn-primary" style="display: none">New Loan</button>
                     <button type="button" onclick="location.reload();" class="btn btn-secondary">Reset</button>
                   </div>
                 </div>
@@ -136,7 +136,7 @@
 <?php include(APPPATH.'\views\js.php'); ?>
 <script>
   window.onload = function(){
-    document.getElementById("loan_button").style.display='none';
+    // document.getElementById("loan_button").style.display='none';
   };
   function reset_form() {
     document.getElementById("loan_form").reset();
@@ -164,6 +164,10 @@
     return true;
   }
 
+  function validateAmounts() {
+    return !(document.forms['loan_form']['amount'].value <= 0 || document.forms['loan_form']['repayment_amount'] <= 0);
+  }
+
   function add_months(){
     let start_month = document.getElementById('start_month').value;
     let start_year = document.getElementById('start_year').value;
@@ -176,7 +180,9 @@
     let payroll_date = new Date(payroll_year, payroll_month-1);
     if (!validateForm()) {
       swal("Sorry!", "Please fill in all required fields to enable loan computation", "error");
-    } else if(start_date <= payroll_date){
+    } else if (!validateAmounts()){
+      swal("Sorry!", "Please loan amounts must be greater than zero", "error");
+    } else if (start_date <= payroll_date){
       swal("Sorry!", "Start date must be later than the current payroll date", "error").then(closedAlert => {
         if(closedAlert) location.reload();
       });

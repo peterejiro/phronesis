@@ -70,9 +70,9 @@
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu">
                                   <a class="dropdown-item has-icon" data-toggle="modal" data-target="#view_loan<?php echo $loan->loan_id ?>"><i class="fas fa-eye"></i>View Loan Details</a>
-									<?php if($loan->loan_status == 0):?>
-									<a class="dropdown-item has-icon" href="<?php echo site_url('edit_loan')."/".$loan->loan_id; ?>"><i class="fas fa-edit"></i>Reschedule Loan</a>
-									<?php endif; ?>
+                                  <?php if($loan->loan_status == 0):?>
+                                    <a class="dropdown-item has-icon" href="<?php echo site_url('edit_loan')."/".$loan->loan_id; ?>"><i class="fas fa-edit"></i>Reschedule Loan</a>
+                                  <?php endif; ?>
                                 </div>
                               </div>
                             </td>
@@ -113,7 +113,7 @@
 						<div class="form-group row">
 							<div class="col-sm-6">
 								<label>Employee ID</label>
-								<input type="text" class="form-control"  name="employee_name" required value="<?php echo $loan->employee_unique_id; ?>" placeholder="Enter Name of employee"/>
+								<input type="text" class="form-control"  name="employee_name" disabled value="<?php echo $loan->employee_unique_id; ?>" placeholder="Enter Name of employee"/>
 							</div>
 							<div class="col-sm-6">
 								<label>Department</label>
@@ -133,11 +133,11 @@
 						<div class="form-group row">
 							<div class="col-sm-6">
 								<label>Loan Type</label>
-								<input type="text" class="form-control"  name="employee_name" required value="<?php echo $loan->payment_definition_payment_name; ?>" placeholder="Enter Name of employee"/>
+								<input type="text" class="form-control"  name="employee_name" disabled required value="<?php echo $loan->payment_definition_payment_name; ?>"/>
 							</div>
 							<div class="col-sm-6">
 								<label>Balance</label>
-								<input type="text" class="form-control"  name="employee_name" required value="&#8358; <?php echo number_format($loan->loan_balance); ?>" placeholder="Enter Name of employee"/>
+								<input type="text" class="form-control"  name="employee_name" disabled required value="&#8358; <?php echo number_format($loan->loan_balance); ?>"/>
 							</div>
 						</div>
             <div class="form-group">
