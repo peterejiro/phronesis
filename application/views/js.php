@@ -67,7 +67,8 @@
             $this->uri->segment(1) != 'pay_order' &&
             $this->uri->segment(1) != 'new_loan' &&
             $this->uri->segment(1) != 'edit_loan' &&
-            $this->uri->segment(1) != 'new_user'
+            $this->uri->segment(1) != 'new_user' &&
+            $this->uri->segment(1) != 'manage_user'
         ):
       ?>
         <script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>

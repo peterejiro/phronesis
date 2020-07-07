@@ -88,11 +88,11 @@
 			</li>
 
 			<li class="menu-header">Admin Settings</li>
-			<li class="dropdown <?php echo $this->uri->segment(1) == 'user' || $this->uri->segment(1) == 'new_user' ? 'active' : ''; ?>">
+			<li class="dropdown <?php echo $this->uri->segment(1) == 'user' || $this->uri->segment(1) == 'new_user' || $this->uri->segment(1) == 'manage_user' ? 'active' : ''; ?>">
 				<?php if($user_management == 1){  ?>
 				<a href="#" class="nav-link has-dropdown"><i class="fas fa-user-plus"></i> <span>Users</span></a>
 				<ul class="dropdown-menu">
-					<li class="<?php echo $this->uri->segment(1) == 'user' || $this->uri->segment(1) == 'new_user' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('user') ?>">Manage Users</a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'user' || $this->uri->segment(1) == 'new_user' || $this->uri->segment(1) == 'manage_user' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('user') ?>">Manage Users</a></li>
 				</ul>
 				<?php } ?>
 			</li>

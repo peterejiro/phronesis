@@ -77,7 +77,7 @@
                       </div>
                       <div class="col-sm-6">
                         <label>Status</label><span style="color: red"> *</span>
-                        <select name="status" class="select2 form-control" required>
+                        <select name="status" class="select2 form-control" required style="width: 100%; height:42px !important;">
                           <option value="">-- Select --</option>
                           <option value="1"> Active </option>
                           <option value="0"> Inactive </option>
@@ -147,19 +147,6 @@
     } else {
       passwordInput.type='password';
       passStatus.className='fas fa-eye';
-    }
-  }
-
-  function enablePassword() {
-    let passwordInput = document.getElementById('password-field');
-    let passwordActive = document.getElementById('pass-active');
-    if(passwordInput.disabled == false) {
-      passwordInput.value = null;
-      passwordInput.disabled = true;
-      passwordActive.className = 'mdi mdi-toggle-switch';
-    } else {
-      passwordInput.disabled = false;
-      passwordActive.className = 'mdi mdi-toggle-switch-off';
     }
   }
 </script>
