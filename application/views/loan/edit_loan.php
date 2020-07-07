@@ -176,7 +176,7 @@
                       <div class="card-footer text-right bg-whitesmoke">
                         <button type="button" id="compute_loan" onclick="add_months()" class="btn btn-primary">Compute Loan</button>
                         <button type="submit" id="loan_button"  class="btn btn-primary" style="display: none">Update Repayment Loan</button>
-                        <input type="reset" class="btn btn-secondary" />
+                        <button type="button" id="reset_button" onclick="reset_form()" class="btn btn-secondary">Reset</button>
                       </div>
                     </div>
                   </form>
@@ -219,9 +219,10 @@
 <script>
 
 	function reset_form() {
-		//document.getElementById("loan_form").reset();
+		document.getElementById("loan_form_2").reset();
 		document.getElementById("loan_button").style.display='none';
-		document.getElementById("compute_loan").style.display='block';
+		document.getElementById("compute_loan").style.removeProperty('display');
+		document.getElementById("new_repayment_amount").removeAttribute('readonly');
 	}
 
 	function addMonths(date, months) {
@@ -264,6 +265,7 @@
       // document.getElementById("loan_button").style.display='block';
       document.getElementById("loan_button").style.removeProperty('display');
       document.getElementById("compute_loan").style.display='none';
+      document.getElementById("new_repayment_amount").setAttribute('readonly', 'readonly');
     }
 	}
 </script>
