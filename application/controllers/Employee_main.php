@@ -1077,4 +1077,147 @@ class Employee_main extends CI_Controller
 		endif;
 
 	}
+
+	public function employee_resignation()
+	{
+
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+				$check_resignation_attempts = $this->employees->get_employee_resignations($employee_id);
+
+				$count = 0;
+
+				foreach ($check_resignation_attempts as $check_resignation_attempt):
+
+					if($check_resignation_attempt->resignation_status == 0 || $check_resignation_attempt->resignation_status == 2):
+
+						$count++;
+
+						endif;
+
+
+					endforeach;
+
+					if($count > 0):
+
+						$msg = array(
+							'msg'=> 'You have resigned already',
+							'location' => site_url('employee_main'),
+							'type' => 'warning'
+
+						);
+						$this->load->view('swal', $msg);
+
+					else:
+
+
+				$data['employee_id'] = $this->employees->get_employee_by_unique($username)->employee_id;
+
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+				//$data['payroll'] = $this->payroll_configurations->get_payroll_month_year();
+
+				$this->load->view('employee_self_service/employee_resignation', $data);
+
+				endif;
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function resignation()
+	{
+		$username = $this->session->userdata('user_username');
+
+		if (isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if ($user_type == 2 || $user_type == 3):
+
+					$resignation_employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+					$resignation_reason = $this->input->post('resignation_reason');
+					$resignation_effective_date = $this->input->post('resignation_effective_date');
+
+					$_resignation_effective = strtotime($resignation_effective_date);
+					$_now = time();
+
+					if($_resignation_effective <= $_now):
+
+						$msg = array(
+							'msg' => 'Choose a date greater than today',
+							'location' => site_url('employee_resignation'),
+							'type' => 'error'
+						);
+						$this->load->view('swal', $msg);
+
+
+					else:
+
+						$resignation_array = array(
+							'resignation_employee_id' => $resignation_employee_id,
+							'resignation_reason' => $resignation_reason,
+							'resignation_effective_date' => $resignation_effective_date
+						);
+
+						$resignation_array = $this->security->xss_clean($resignation_array);
+
+						$query = $this->employees->insert_resignation($resignation_array);
+
+
+						if($query == true):
+
+							$msg = array(
+								'msg' => 'Employment Termination Notice Sent',
+								'location' => site_url('employee_main'),
+								'type' => 'success'
+							);
+							$this->load->view('swal', $msg);
+
+
+						else:
+
+							echo "An Error Occurred";
+						endif;
+
+					endif;
+
+
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
 }

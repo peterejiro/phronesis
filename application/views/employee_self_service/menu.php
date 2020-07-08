@@ -32,11 +32,11 @@
 			</li>
 
 			<li class="nav-item dropdown">
-				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Appraisal</span></a>
+				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Performance</span></a>
 				<ul class="dropdown-menu">
 					<li class="nav-item"><a href="<?php echo base_url('appraisals') ?>" class="nav-link">View Appraisals</a></li>
 					<li class="nav-item"><a href="<?php echo base_url('appraise_employee') ?>" class="nav-link">Appraise Employee</a></li>
-
+					<li class="nav-item"><a href="<?php echo base_url('employee_resignation') ?>" class="nav-link">Resign</a></li>
 				</ul>
 			</li>
 

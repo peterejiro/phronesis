@@ -343,6 +343,51 @@ class Employees extends CI_Model
 
 	}
 
+	public function insert_termination($termination_data){
 
+		$this->db->insert('termination', $termination_data);
+		return true;
+	}
+
+	public function get_terminations(){
+		$this->db->select('*');
+		$this->db->from('termination');
+		$this->db->join('employee', 'employee.employee_id = termination.termination_employee_id');
+		return $this->db->get()->result();
+	}
+
+	public function insert_resignation($resignation_data){
+
+		$this->db->insert('resignation', $resignation_data);
+		return true;
+	}
+
+	public function get_employee_resignations($employee_id){
+		$this->db->select('*');
+		$this->db->from('resignation');
+		$this->db->where('resignation.resignation_employee_id', $employee_id);
+		return $this->db->get()->result();
+	}
+	public function get_resignations(){
+		$this->db->select('*');
+		$this->db->from('resignation');
+		$this->db->join('employee', 'employee.employee_id = resignation.resignation_employee_id');
+		return $this->db->get()->result();
+	}
+
+	public function update_resignation($resignation_id, $resignation_data){
+		$this->db->where('resignation.resignation_id', $resignation_id);
+		$this->db->update('resignation', $resignation_data);
+		return true;
+
+	}
+
+	public function get_resignation($resignation_id){
+		$this->db->select('*');
+		$this->db->from('resignation');
+		$this->db->where('resignation.resignation_id', $resignation_id);
+		return $this->db->get()->row();
+
+	}
 
 }

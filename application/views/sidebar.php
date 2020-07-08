@@ -24,6 +24,7 @@
       $this->uri->segment(1) == 'employee_leave' ||
       $this->uri->segment(1) == 'extend_leave' ||
       $this->uri->segment(1) == 'new_employee_transfer' ||
+
       $this->uri->segment(1) == 'employee_transfer' ? 'active' : '';
 			?>">
 			<?php if($employee_management == 1){  ?>
@@ -36,6 +37,22 @@
 		  <li class="<?php echo $this->uri->segment(1) == 'employee_appraisal' || $this->uri->segment(1) == 'new_employee_leave' || $this->uri->segment(1) == 'extend_leave' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee_appraisal') ?>"> Employee Appraisal</a></li>
 				</ul>
       <?php } ?>
+			</li>
+
+			<li class="dropdown <?php echo
+
+			$this->uri->segment(1) == 'resignations' ||
+			$this->uri->segment(1) == 'employee_appraisal' ||
+			$this->uri->segment(1) == 'terminations' ? 'active' : '';
+			?>">
+				<?php if($employee_management == 1){  ?>
+					<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span> Performances </span></a>
+					<ul class="dropdown-menu">
+						<li class="<?php echo $this->uri->segment(1) == 'employee_appraisal' || $this->uri->segment(1) == 'new_employee_leave' || $this->uri->segment(1) == 'extend_leave' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee_appraisal') ?>"> Employee Appraisal</a></li>
+						<li class="<?php echo $this->uri->segment(1) == 'terminations'  ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('terminations') ?>"> Employee Terminations</a></li>
+						<li class="<?php echo $this->uri->segment(1) == 'resignations'  ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('resignations') ?>"> Employee Resignations</a></li>
+					</ul>
+				<?php } ?>
 			</li>
 
 			<li class="menu-header">Finance</li>
