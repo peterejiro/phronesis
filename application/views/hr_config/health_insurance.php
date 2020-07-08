@@ -88,15 +88,14 @@
 							<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 						</div>
 						<div class="modal-footer bg-whitesmoke">
-							<button type="submit" class="btn btn-primary">Add New HMO</button>
+							<button type="submit" class="btn btn-primary">Add HMO</button>
               <input type="reset" class="btn btn-secondary">
-							<button type="reset" class="btn btn-danger ml-2" data-dismiss="modal">Close</button>
+							<button type="reset" class="btn btn-danger" data-dismiss="modal">Close</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-
 
 		<?php foreach($health_insurances as $health_insurance): ?>
 			<div class="modal fade" id="edit_health_insurance<?php echo $health_insurance->health_insurance_id ?>" tabindex="-1" role="dialog" aria-hidden="true">
@@ -121,9 +120,9 @@
 								<input type="hidden" name="health_insurance_id" value="<?php echo $health_insurance->health_insurance_id;?>" />
 							</div>
 							<div class="modal-footer bg-whitesmoke">
-								<button type="submit" class="btn btn-primary">Update HMO</button>
+								<button type="submit" class="btn btn-primary">Edit HMO</button>
                 <input type="reset" class="btn btn-secondary">
-								<button type="reset" class="btn btn-danger ml-2" data-dismiss="modal">Close</button>
+								<button type="reset" class="btn btn-danger" data-dismiss="modal">Close</button>
 							</div>
 						</form>
 					</div>

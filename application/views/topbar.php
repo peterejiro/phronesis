@@ -201,7 +201,7 @@
 				<img alt="image" src="<?php echo base_url() ?>/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
 				<div class="d-sm-none d-lg-inline-block">Hi, <?php echo $user_data->user_name; ?></div></a>
 			<div class="dropdown-menu dropdown-menu-right">
-				<div class="dropdown-title">Logged in for <br/> <?php echo timespan($this->session->userdata('login_time'), time(), 2)?></div>
+				<div class="dropdown-title">Logged in for <i class="fas fa-angle-down"></i> <br/> <?php echo timespan($this->session->userdata('login_time'), time(), 2)?></div>
 				<a href="features-profile.html" class="dropdown-item has-icon">
 					<i class="far fa-user"></i> Profile
 				</a>

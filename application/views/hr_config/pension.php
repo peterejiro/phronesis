@@ -46,7 +46,7 @@
                               <div class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu">
-                                  <a class="dropdown-item has-icon" href="#" data-toggle="modal" data-target="#edit_pension<?php echo $pension->pension_id ?>"><i class="fas fa-edit"></i>Edit Bank</a>
+                                  <a class="dropdown-item has-icon" href="#" data-toggle="modal" data-target="#edit_pension<?php echo $pension->pension_id ?>"><i class="fas fa-edit"></i>Edit Pension</a>
                                 </div>
                               </div>
                             </td>
@@ -87,7 +87,7 @@
 							<div class="modal-footer bg-whitesmoke">
 								<button type="submit" class="btn btn-primary">Add Pension</button>
                 <input type="reset" class="btn btn-secondary">
-								<button type="reset" class="btn btn-danger ml-2" data-dismiss="modal">Close</button>
+								<button type="reset" class="btn btn-danger" data-dismiss="modal">Close</button>
 							</div>
 						</form>
 					</div>
@@ -99,7 +99,7 @@
 					<div class="modal-dialog modal-dialog-centered" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLongTitle2">Update Pension</h5>
+								<h5 class="modal-title" id="exampleModalLongTitle2">Edit Pension</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true" class="text-dark">&times;</span>
 								</button>
@@ -117,9 +117,9 @@
 									<input type="hidden" name="pension_id" value="<?php echo $pension->pension_id;?>" />
 								</div>
 								<div class="modal-footer bg-whitesmoke">
-									<button type="submit" class="btn btn-primary">Update Pension</button>
+									<button type="submit" class="btn btn-primary">Edit Pension</button>
                   <input type="reset" class="btn btn-secondary">
-									<button type="reset" class="btn btn-danger ml-2" data-dismiss="modal">Close</button>
+									<button type="reset" class="btn btn-danger" data-dismiss="modal">Close</button>
 								</div>
 							</form>
 						</div>

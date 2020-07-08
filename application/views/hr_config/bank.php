@@ -93,7 +93,8 @@
 						<div class="modal-footer bg-whitesmoke">
 							<button type="submit" class="btn btn-primary">Add Bank</button>
               <input type="reset" class="btn btn-secondary">
-						</div>
+              <button type="reset" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
 					</form>
 				</div>
 			</div>
@@ -128,7 +129,8 @@
 							<div class="modal-footer bg-whitesmoke">
 								<button type="submit" class="btn btn-primary">Update Bank</button>
                 <input type="reset" class="btn btn-secondary">
-							</div>
+                <button type="reset" class="btn btn-danger" data-dismiss="modal">Close</button>
+              </div>
 						</form>
 					</div>
 				</div>
