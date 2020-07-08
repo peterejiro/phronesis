@@ -137,7 +137,7 @@
 								</div>
 								<div class="form-group">
 									<label>Department</label><span style="color: red"> *</span>
-									<select name="department_id" class="select2 form-control" style="width: 100%; height:42px !important;">
+									<select name="department_id" class="select2 form-control" required style="width: 100%; height:42px !important;">
 										<option value="">-- Select --</option>
 										<?php foreach($departments as $department): ?>
 											<option value="<?php echo $department->department_id; ?>" <?php if($job_role->department_id == $department->department_id){ echo "selected"; } ?>> <?php echo $department->department_name; ?></option>
