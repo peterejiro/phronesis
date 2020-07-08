@@ -63,9 +63,13 @@
                               <div class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu">
-                                  <a class="dropdown-item has-icon" href="<?php echo site_url('view_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-eye"></i>View</a>
-                                  <a class="dropdown-item has-icon" href="<?php echo site_url('update_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-edit"></i>Update</a>
-                                </div>
+									<a class="dropdown-item has-icon" href="<?php echo site_url('view_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-eye"></i>View</a>
+									<?php if($status == 1 || $status == 2): ?>
+                                   <a class="dropdown-item has-icon" href="<?php echo site_url('update_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-edit"></i>Update</a>
+										<a class="dropdown-item has-icon" href="<?php echo site_url('terminate_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-eye"></i>Terminate Employee</a>
+										<a class="dropdown-item has-icon" href="<?php echo site_url('query_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-eye"></i>Queries</a>
+                                	<?php endif; ?>
+								</div>
                               </div>
                             </td>
                           </tr>
