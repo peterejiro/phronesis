@@ -105,7 +105,7 @@
 							</div>
 							<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 						</div>
-						<div class="modal-footer">
+						<div class="modal-footer bg-whitesmoke">
 							<button type="submit" class="btn btn-primary">Add Job Role</button>
               <input type="reset" class="btn btn-secondary">
 							<button type="reset" class="btn btn-danger ml-2" data-dismiss="modal">Close</button>
@@ -154,7 +154,7 @@
 								<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 								<input type="hidden" name="job_role_id" value="<?php echo $job_role->job_role_id;?>" />
 							</div>
-							<div class="modal-footer">
+							<div class="modal-footer bg-whitesmoke">
 								<button type="submit" class="btn btn-primary">Edit Job Role</button>
                 <input type="reset" class="btn btn-secondary">
 								<button type="reset" class="btn btn-danger ml-2" data-dismiss="modal">Close</button>

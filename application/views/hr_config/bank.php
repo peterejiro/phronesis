@@ -127,7 +127,7 @@
 								<input type="hidden" name="bank_id" value="<?php echo $bank->bank_id;?>" />
 							</div>
 							<div class="modal-footer bg-whitesmoke">
-								<button type="submit" class="btn btn-primary">Update Bank</button>
+								<button type="submit" class="btn btn-primary">Edit Bank</button>
                 <input type="reset" class="btn btn-secondary">
                 <button type="reset" class="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
