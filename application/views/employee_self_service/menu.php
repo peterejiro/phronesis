@@ -43,7 +43,7 @@
 			<li class="nav-item dropdown">
 				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Queries</span></a>
 				<ul class="dropdown-menu">
-					<li class="nav-item"><a href="index-0.html" class="nav-link">View Queries</a></li>
+					<li class="nav-item"><a href="<?php echo base_url('my_queries'); ?>" class="nav-link">View Queries</a></li>
 
 				</ul>
 			</li>
