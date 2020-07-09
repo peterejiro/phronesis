@@ -160,6 +160,14 @@ $route['terminations'] = 'employee/terminations';
 $route['resignations'] = 'employee/resignations';
 $route['approve_resignation/:num'] = 'employee/approve_resignation/$1';
 $route['discard_resignation/:num'] = 'employee/discard_resignation/$1';
+$route['query_employee/:num'] = 'employee/query_employee/$1';
+$route['new_query'] = 'employee/new_query';
+$route['view_query/:num'] = 'employee/view_query/$1';
+$route['new_response'] = 'employee/new_response';
+$route['close_query/:num'] = 'employee/close_query/$1';
+$route['memo'] = 'employee/memo';
+$route['add_memo'] = 'employee/add_memo';
+$route['update_memo'] = 'employee/update_memo';
 
 
 $route['tax_rates'] = 'payroll_configuration/tax_rate';
@@ -253,6 +261,8 @@ $route['my_new_loan'] = 'employee_main/my_new_loan';
 $route['apply_loan'] = 'employee_main/apply_loan';
 $route['employee_resignation'] = 'employee_main/employee_resignation';
 $route['resignation'] = 'employee_main/resignation';
+$route['my_queries'] = 'employee_main/my_queries';
+$route['view_my_query/:num'] = 'employee_main/view_my_query/$1';
 
 
 

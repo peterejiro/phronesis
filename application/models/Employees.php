@@ -356,6 +356,13 @@ class Employees extends CI_Model
 		return $this->db->get()->result();
 	}
 
+	public function get_employee_terminations($employee_id){
+		$this->db->select('*');
+		$this->db->from('termination');
+		$this->db->where('termination.termination_employee_id', $employee_id);
+		return $this->db->get()->result();
+	}
+
 	public function insert_resignation($resignation_data){
 
 		$this->db->insert('resignation', $resignation_data);
@@ -387,6 +394,69 @@ class Employees extends CI_Model
 		$this->db->from('resignation');
 		$this->db->where('resignation.resignation_id', $resignation_id);
 		return $this->db->get()->row();
+
+	}
+
+	public function get_queries_employee($employee_id){
+		$this->db->select('*');
+		$this->db->from('query');
+		$this->db->where('query.query_employee_id', $employee_id);
+		return $this->db->get()->result();
+
+	}
+
+	public function insert_query($query_data){
+
+		$this->db->insert('query', $query_data);
+		return true;
+	}
+
+	public function get_query($query_id){
+		$this->db->select('*');
+		$this->db->from('query');
+		$this->db->join('employee', 'employee.employee_id = query.query_employee_id');
+		$this->db->where('query.query_id', $query_id);
+		return $this->db->get()->row();
+
+	}
+
+	public function get_query_response($query_id){
+		$this->db->select('*');
+		$this->db->from('query_response');
+		//$this->db->join('employee', 'employee.employee_id = query_response.query_response_responder_id');
+		$this->db->where('query_response.query_response_query_id', $query_id);
+		return $this->db->get()->result();
+
+	}
+
+	public function insert_query_response($query_response_data){
+		$this->db->insert('query_response', $query_response_data);
+		return true;
+	}
+
+	public function update_query($query_id, $query_data){
+		$this->db->where('query.query_id', $query_id);
+		$this->db->update('query', $query_data);
+		return true;
+
+	}
+
+
+	public function insert_memo($memo_data){
+		$this->db->insert('memo', $memo_data);
+		return true;
+	}
+
+	public function get_memos(){
+		$this->db->select('*');
+		$this->db->from('memo');
+		return $this->db->get()->result();
+	}
+
+	public function update_memo($memo_id, $memo_data){
+		$this->db->where('memo.memo_id', $memo_id);
+		$this->db->update('memo', $memo_data);
+		return true;
 
 	}
 
