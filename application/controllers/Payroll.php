@@ -448,10 +448,12 @@ class Payroll extends CI_Controller
 
 					if($salary_structure_type == 0):
 
+						if(!empty($payment_definition)):
+
+
 						if($data['employee']->employee_salary_structure_category == 0):
 
 							$this->payroll_configurations->remove_from_personalized($employee_id);
-
 
 						endif;
 
@@ -477,6 +479,7 @@ class Payroll extends CI_Controller
 						$allowance_amount = $this->input->post('allowance_amount');
 
 
+
 						$i = 0;
 
 						while($i < count($payment_definition)):
@@ -488,6 +491,8 @@ class Payroll extends CI_Controller
 
 							);
 							$personalized_array = $this->security->xss_clean($personalized_array);
+
+//							print_r($personalized_array);
 
 							$query_p = $this->payroll_configurations->insert_personalized($personalized_array);
 
@@ -527,8 +532,21 @@ class Payroll extends CI_Controller
 							echo "An Error Occurred";
 						endif;
 
+						else:
+
+							$msg = array(
+								'msg'=> 'Payment Definitions empty',
+								'location' => site_url('employee_salary_structure'),
+								'type' => 'error'
+
+							);
+							$this->load->view('swal', $msg);
+
+						endif;
 
 					endif;
+
+
 
 					if($salary_structure_type == 1):
 
@@ -569,6 +587,7 @@ class Payroll extends CI_Controller
 						else:
 							echo "An Error Occurred";
 						endif;
+
 
 					endif;
 

@@ -49,6 +49,7 @@
                         <option value="1" <?php if($employee->employee_salary_structure_category == 1) { echo "selected"; } ?>> Categorised </option>
                       </select>
                     </div>
+
                     <div class="form-group" id="salary_structure_category" style="display: <?php if($employee->employee_salary_structure_category > 0){ echo " block"; } else{ echo "none"; } ?>">
                       <label> Salary Structure Category</label>
                       <select id="payment_type" class="select2 form-control mb-3 custom-select"  required name="salary_structure_category" style="width: 100%;">
@@ -58,7 +59,9 @@
 		                    <?php endforeach; ?>
                       </select>
                     </div>
+
                     <div id="allowances" style="display: <?php if($employee->employee_salary_structure_category == 0) { echo "block";} else{ echo "none"; } ?>">
+
 	                    <?php if(!empty($personalized_allowances)):
 		                    foreach ($personalized_allowances as $personalized_allowance): ?>
                           <div class="form-group row" id="allowance">
@@ -93,9 +96,14 @@
                             <label>Payment Definition</label>
                             <select class="form-control" id="payment_definition" required name="payment_definition[]" style="width: 100%; height: 42px !important;">
                               <option disabled> -- Select -- </option>
-					                    <?php foreach ($payment_definitionss as $payment_definition): ?>
+
+					                    <?php foreach ($payment_definitionss as $payment_definition):
+											if($payment_definition->payment_definition_variant == 0 && $payment_definition->payment_definition_desc == 0 ):
+											?>
                                 <option value="<?php echo $payment_definition->payment_definition_id ?>" > <?php echo $payment_definition->payment_definition_payment_name." (".$payment_definition->payment_definition_payment_code.")"; ?> </option>
-					                    <?php endforeach; ?>
+					                    <?php
+					                    endif;
+					                    endforeach; ?>
                             </select>
                             <div class="invalid-feedback">
                               please select a payment definition

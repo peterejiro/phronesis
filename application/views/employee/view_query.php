@@ -90,7 +90,7 @@ $CI->load->model('hr_configurations');
 
 												<div class="ticket-divider"></div>
 
-
+<div id="query">
 												<?php
 												if(!empty($responses)):
 
@@ -128,7 +128,7 @@ $CI->load->model('hr_configurations');
 												endif;
 												?>
 
-
+</div>
 
 												<?php if($query->query_status == 1):  ?>
 
@@ -167,6 +167,10 @@ $CI->load->model('hr_configurations');
 
 <script>
 	$(document).ready(function(){
+		setInterval(timestamp, 1000);
+		function timestamp() {
+			$("#query").load(location.href + " #query");
+		}
 		$("#response_button").click(function(e){
 			e.preventDefault();
 
@@ -180,7 +184,7 @@ $CI->load->model('hr_configurations');
 				data: {query_id:query_id,query_response:query_response, query_responder_id:query_responder_id},
 				success:function(data)
 				{
-					$("#app").load(location.href + " #app");
+					$("#query").load(location.href + " #query");
 				},
 				error:function()
 				{
