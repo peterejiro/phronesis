@@ -450,6 +450,7 @@ class Employees extends CI_Model
 	public function get_memos(){
 		$this->db->select('*');
 		$this->db->from('memo');
+		$this->db->order_by('memo_date', 'DESC');
 		return $this->db->get()->result();
 	}
 

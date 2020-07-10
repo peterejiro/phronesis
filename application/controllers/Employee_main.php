@@ -112,13 +112,15 @@ class Employee_main extends CI_Controller
 			else:
 
 				$data['user_data'] = $this->users->get_user($username);
+				$data['queries'] = $this->employees->get_queries_employee($employee_id);
 
 				$data['employee'] = $this->employees->get_employee_by_unique($username);
+				$data['memos'] = $this->employees->get_memos();
 
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
 
-				$this->load->view('employee_self_service/home', $data);
+				$this->load->view('employee_self_service/dashboard', $data);
 
 			endif;
 
@@ -127,6 +129,121 @@ class Employee_main extends CI_Controller
 					redirect('/access_denied');
 
 					endif;
+
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function personal_information(){
+		$username = $this->session->userdata('user_username');
+
+
+
+		if(isset($username)):
+
+
+//				//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+				$terminations = $this->employees->get_employee_terminations($employee_id);
+
+				if(!empty($terminations)):
+
+					$count_termination = 0;
+
+					foreach ($terminations as $termination):
+
+						if(strtotime($termination->termination_effective_date) <= time()):
+
+							$count_termination++;
+						endif;
+
+					endforeach;
+
+				endif;
+
+
+				$resignations = $this->employees->get_employee_resignations($employee_id);
+
+				if(!empty($resignations)):
+
+					$count_resignation = 0;
+
+					foreach ($resignations as $resignation):
+
+						if($resignation->resignation_status == 1):
+
+							if(strtotime($resignation->resignation_effective_date) <= time()):
+
+								$count_resignation++;
+							endif;
+
+						endif;
+
+					endforeach;
+
+				endif;
+
+
+				if(@$count_termination > 0 || @$count_resignation > 0):
+
+					$employee_data = array(
+						'employee_status' => 0,
+						'employee_stop_date' => date("Y-m-d")
+					);
+
+					$query_ = $this->employees->update_employee($employee_id, $employee_data);
+
+					$user_id = $this->users->get_user($username)->user_id;
+
+					$user_data = array(
+
+						'user_status'=> 0
+
+					);
+
+					$_query = $this->users->update_user($user_id, $user_data);
+
+					if($_query == true && $query_ == true):
+
+						$msg = array(
+							'msg' => 'Your Employment has been Terminated',
+							'location' => site_url('logout'),
+							'type' => 'error'
+						);
+						$this->load->view('swal', $msg);
+
+					endif;
+
+				else:
+
+					$data['user_data'] = $this->users->get_user($username);
+
+					$data['employee'] = $this->employees->get_employee_by_unique($username);
+
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$this->load->view('employee_self_service/home', $data);
+
+				endif;
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
 
 
 
@@ -1387,6 +1504,47 @@ class Employee_main extends CI_Controller
 					redirect('error_404');
 
 				endif;
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function my_memos(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+
+				$data['employee_id'] = $employee_id;
+
+
+
+				$data['memos'] = $this->employees->get_memos();
+
+				$this->load->view('employee_self_service/my_memos', $data);
+
 
 			elseif($user_type == 1):
 

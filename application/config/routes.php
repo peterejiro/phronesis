@@ -153,6 +153,7 @@ $route['discard_leave/:num'] = 'employee/discard_employee_leave/$1';
 $route['extend_employee_leave'] = 'employee/extend_employee_leave';
 $route['employee_appraisal'] = 'employee/employee_appraisal';
 $route['new_employee_appraisal'] = 'employee/new_employee_appraisal';
+$route['check_appraisal_result/:num'] = 'employee/check_appraisal_result/$1';
 $route['add_new_employee_appraisal'] = 'employee/add_new_employee_appraisal';
 $route['terminate_employee/:num'] = 'employee/terminate_employee/$1';
 $route['terminate'] = 'employee/terminate';
@@ -263,6 +264,8 @@ $route['employee_resignation'] = 'employee_main/employee_resignation';
 $route['resignation'] = 'employee_main/resignation';
 $route['my_queries'] = 'employee_main/my_queries';
 $route['view_my_query/:num'] = 'employee_main/view_my_query/$1';
+$route['personal_information'] = 'employee_main/personal_information';
+$route['my_memos'] = 'employee_main/my_memos';
 
 
 

@@ -560,10 +560,6 @@ class Payroll extends CI_Controller
 
 						endif;
 
-
-
-
-
 						$employee_array = array(
 
 							'employee_salary_structure_setup' => 1,

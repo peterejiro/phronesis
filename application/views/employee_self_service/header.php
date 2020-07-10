@@ -211,10 +211,10 @@
 				<div class="d-sm-none d-lg-inline-block">Hi,  <?php echo $user_data->user_name; ?></div></a>
 			<div class="dropdown-menu dropdown-menu-right">
 				<div class="dropdown-title">Logged in <?php echo timespan($this->session->userdata('login_time'), time(), 2)?> ago</div>
-				<a href="features-profile.html" class="dropdown-item has-icon">
+				<a href="<?php echo base_url('personal_information') ?>" class="dropdown-item has-icon">
 					<i class="far fa-user"></i> Profile
 				</a>
-				<a href="features-activities.html" class="dropdown-item has-icon">
+				<a href="<?php echo base_url('employee_history') ?>" class="dropdown-item has-icon">
 					<i class="fas fa-bolt"></i> Activities
 				</a>
 				<?php if($user_data->user_type == 3): ?>
