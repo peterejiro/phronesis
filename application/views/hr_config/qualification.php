@@ -58,6 +58,7 @@
                    </table>
                  </div>
                 </div>
+                <div class="card-footer bg-whitesmoke"></div>
               </div>
             </div>
           </div>
