@@ -9,7 +9,12 @@ $(document).ready(function() {
     $('#datatable').DataTable();
     //Buttons examples
     let table = $('#datatable-buttons').DataTable({
-        lengthChange: false,
+        // lengthChange: false,
+        // dom: "Blf<'clear'>rtip",
+        dom:
+          "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +
+          "<'row'<'col-sm-12'tr>>" +
+          "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
         buttons: [
             {
                 extend: 'copy',
@@ -41,7 +46,11 @@ $(document).ready(function() {
     table.buttons().container().appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
 
     let table2 = $('#datatable-buttons-2').DataTable({
-        lengthChange: false,
+        // lengthChange: false,
+    dom:
+      "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +
+      "<'row'<'col-sm-12'tr>>" +
+      "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
 		buttons: [
             {
                 extend: 'copy',

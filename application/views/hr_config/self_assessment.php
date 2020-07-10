@@ -46,7 +46,7 @@
 			                  foreach($questions as $question):
 				                  ?>
                           <tr>
-                            <td><?php echo $sn; ?></td>
+                            <td class="text-center" style="width: 9px;"><?php echo $sn; ?></td>
                             <td><?php echo $question->self_appraisee_question; ?></td>
                             <td class="text-center" style="width: 9px">
                               <div class="dropdown">
@@ -114,9 +114,7 @@
 								<div class="modal-body">
 									<div class="form-group">
 										<label>Question</label><span style="color: red"> *</span>
-										<textarea class="form-control" name="question" required>
-                      <?php echo $question->self_appraisee_question; ?>
-                    </textarea>
+										<textarea class="form-control summernote-simple" name="question" required><?php echo $question->self_appraisee_question; ?></textarea>
                     <div class="invalid-feedback">
                       please fill in a question
                     </div>

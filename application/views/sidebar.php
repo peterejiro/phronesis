@@ -142,6 +142,8 @@
       $this->uri->segment(1) == 'appraisal_setup' ||
       $this->uri->segment(1) == 'self_assessment' ||
       $this->uri->segment(1) == 'quantitative_assessment' ||
+      $this->uri->segment(1) == 'view_quantitative_assessment' ||
+      $this->uri->segment(1) == 'qualitative_assessment' ||
       $this->uri->segment(1) == 'qualification' ? 'active' : '';
 			?>">
 			<?php if($hr_configuration == 1){  ?>
@@ -154,16 +156,18 @@
 					<li class="<?php echo $this->uri->segment(1) == 'grade' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('grade') ?>">Grade Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'job_role' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('job_role') ?>">Job Roles Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'location' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('location') ?>">Location Setup</a></li>
-					<li class="<?php echo $this->uri->segment(1) == 'appraisal_setup' || $this->uri->segment(1) == 'self_assessment' || $this->uri->segment(1) == 'quantitative_assessment' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('appraisal_setup') ?>">Appraisal Setup</a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'appraisal_setup' || $this->uri->segment(1) == 'self_assessment' || $this->uri->segment(1) == 'quantitative_assessment' || $this->uri->segment(1) == 'view_quantitative_assessment' || $this->uri->segment(1) == 'qualitative_assessment' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('appraisal_setup') ?>">Appraisal Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'qualification' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('qualification') ?>">Qualification Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'subsidiary' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('subsidiary') ?>">Subsidiary Setup</a></li>
-					<li class="<?php echo $this->uri->segment(1) == 'leave' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('leave') ?>">Leave Setup</a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'leave' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('leave') ?>">Leave Type Setup</a></li>
 				</ul>
 			<?php } ?>
 			</li>
 
 			<li class="dropdown <?php echo
       $this->uri->segment(1) == 'payment_definition' ||
+      $this->uri->segment(1) == 'new_payment_definition' ||
+      $this->uri->segment(1) == 'edit_payment_definition' ||
       $this->uri->segment(1) == 'tax_rates' ||
       $this->uri->segment(1) == 'salary_structure' ||
       $this->uri->segment(1) == 'allowance' ||
@@ -174,7 +178,7 @@
       <?php if($payroll_configuration == 1){  ?>
         <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-check"></i> <span>Payroll Config</span></a>
         <ul class="dropdown-menu">
-          <li class="<?php echo $this->uri->segment(1) == 'payment_definition' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payment_definition') ?>">Payment Definition</a></li>
+          <li class="<?php echo $this->uri->segment(1) == 'payment_definition' || $this->uri->segment(1) == 'new_payment_definition' || $this->uri->segment(1) == 'edit_payment_definition' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payment_definition') ?>">Payment Definition</a></li>
           <li class="<?php echo $this->uri->segment(1) == 'tax_rates' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('tax_rates') ?>">Tax Rates</a></li>
           <li class="<?php echo $this->uri->segment(1) == 'salary_structure' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('salary_structure') ?>">Salary Structure</a></li>
           <li class="<?php echo $this->uri->segment(1) == 'allowance' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('allowance') ?>">Salary Allowances</a></li>

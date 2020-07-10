@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group">
                       <label>Salary Structure Type</label>
-                      <select id="salary_structure_type" class="select2 form-control mb-3" required onchange="check_salary_structure_type()" name="salary_structure_type" style="width: 100%; height:200px;">
+                      <select id="salary_structure_type" class="select2 form-control mb-3" required onchange="check_salary_structure_type()" name="salary_structure_type" style="width: 100%; height:42px !important;">
                         <option disabled value="2"> -- Select -- </option>
                         <option value="0" <?php if($employee->employee_salary_structure_category == 0) { echo "selected"; } ?>> Personalized </option>
                         <option value="1" <?php if($employee->employee_salary_structure_category == 1) { echo "selected"; } ?>> Categorised </option>
