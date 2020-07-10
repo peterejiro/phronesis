@@ -35,7 +35,7 @@
                         <th>S/N</th>
                         <th>Pay Code</th>
                         <th>Payment Name </th>
-                        <th>Taxable?</th>
+                        <th>Taxable</th>
                         <th>Payment Type</th>
                         <th>Actions</th>
                       </tr>
@@ -49,8 +49,20 @@
                             <td class="text-center" style="width: 9px;"><?php echo $i; ?></td>
                             <td><?php echo $payment_definition->payment_definition_payment_code; ?></td>
                             <td><?php echo $payment_definition->payment_definition_payment_name; ?></td>
-                            <td><?php if($payment_definition->payment_definition_taxable == 1){ echo "Yes" ;}if($payment_definition->payment_definition_taxable == 0){ echo "No" ;} ?></td>
-                            <td><?php if($payment_definition->payment_definition_type == 1){ echo "Income" ;}if($payment_definition->payment_definition_type == 0){ echo "Deduction" ;} ?></td>
+                            <td>
+                              <?php if($payment_definition->payment_definition_taxable == 1):?>
+                                <div class="badge badge-success">Yes</div>
+                              <?php elseif($payment_definition->payment_definition_taxable == 0):?>
+                                <div class="badge badge-danger">No</div>
+                              <?php endif;?>
+                            </td>
+                            <td>
+                              <?php if($payment_definition->payment_definition_type == 1): ?>
+                                <div class="badge badge-primary">Income</div>
+                              <?php elseif($payment_definition->payment_definition_type == 0): ?>
+                                <div class="badge badge-warning">Deduction</div>
+                              <?php endif;?>
+                            </td>
                             <td class="text-center" style="width: 9px">
                               <div class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>

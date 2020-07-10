@@ -70,6 +70,7 @@
             $this->uri->segment(1) != 'new_user' &&
             $this->uri->segment(1) != 'manage_user' &&
             $this->uri->segment(1) != 'new_payment_definition' &&
+            $this->uri->segment(1) != 'edit_payment_definition' &&
             $this->uri->segment(1) != 'job_role'
         ):
       ?>

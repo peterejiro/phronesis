@@ -88,7 +88,7 @@
                       <div class="col-sm-6">
                         <label>Payment Description</label>
                         <select id="paymentdesc" class="select2 form-control" name="payment_definition_desc" style="width: 100%; height:42px !important;">
-                          <option value="0"> -- Select --</option>
+                          <option value="0"> N/A </option>
                           <option value="1"> Loan </option>
                           <option value="2"> Tax </option>
                           <option value="3">Pension </option>
