@@ -20,7 +20,6 @@
             <div class="breadcrumb-item">Quantitative Assessment Questions</div>
           </div>
         </div>
-
         <div class="section-body">
           <div class="section-title">All About <?php echo $job_role->job_name." (".$job_role->department_name.")"?>  Quantitative Assessment Questions</div>
           <p class="section-lead">You can add and edit quantitative assessment questions for this job role here</p>
