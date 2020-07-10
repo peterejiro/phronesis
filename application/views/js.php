@@ -55,12 +55,30 @@
 			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/select2/dist/js/select2.full.min.js"></script>
-			<script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+      <?php
+        if (
+            $this->uri->segment(1) != 'edit_employee_salary_structure' &&
+            $this->uri->segment(1) != 'setup_salary_structure' &&
+            $this->uri->segment(1) != 'new_employee' &&
+            $this->uri->segment(1) != 'new_variational_payment' &&
+	          $this->uri->segment(1) != 'recall_month' &&
+            $this->uri->segment(1) != 'emolument' &&
+            $this->uri->segment(1) != 'deduction' &&
+            $this->uri->segment(1) != 'pay_order' &&
+            $this->uri->segment(1) != 'new_loan' &&
+            $this->uri->segment(1) != 'edit_loan' &&
+            $this->uri->segment(1) != 'new_user' &&
+            $this->uri->segment(1) != 'manage_user' &&
+            $this->uri->segment(1) != 'job_role'
+        ):
+      ?>
+        <script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+      <?php endif;?>
 
 			<script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/codemirror/lib/codemirror.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/codemirror/mode/javascript/javascript.js"></script>
-			<script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/jquery-selectric/jquery.selectric.min.js"></script>-->
 <!--			<script src="http://maps.google.com/maps/api/js?key=AIzaSyB55Np3_WsZwUQ9NS7DP-HnneleZLYZDNw&amp;sensor=true"></script>-->
 <!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/gmaps.js"></script>-->
 
@@ -107,14 +125,14 @@
 			<script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js"></script>
 
 			<script src="<?php echo base_url(); ?>assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
-			<script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/jquery-selectric/jquery.selectric.min.js"></script>-->
 
 			<script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
-			<script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/jquery-selectric/jquery.selectric.min.js"></script>-->
 			<script src="<?php echo base_url(); ?>assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
 
-			<script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
+<!--			<script src="--><?php //echo base_url(); ?><!--assets/modules/jquery-selectric/jquery.selectric.min.js"></script>-->
 
 			<script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
 

@@ -33,7 +33,7 @@ class Users extends CI_Model
 	public function get_user($username){
 		$this->db->select('*');
 		$this->db->from('user');
-		$this->db->where('user_status >', 0);
+		//$this->db->where('user_status >', 0);
 		$this->db->where('user_username', $username);
 		$query = $this->db->get();
 		return $query->row();

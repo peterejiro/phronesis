@@ -23,7 +23,9 @@ class Log extends CI_Controller
 		//$employee_id = $this->uri->segment(2);
 
 		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
 
+			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
 			$data['payroll_management'] = $permission->payroll_management;
@@ -40,7 +42,9 @@ class Log extends CI_Controller
 
 
 				$this->load->view('log/view_logs', $data);
-
+				else:
+					redirect('/access_denied');
+				endif;
 			else:
 
 				redirect('/access_denied');

@@ -28,24 +28,35 @@ class Home extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
-			$permission = $this->users->check_permission($username);
-			$data['employee_management'] = $permission->employee_management;
-			$data['payroll_management'] = $permission->payroll_management;
-			$data['biometrics'] = $permission->biometrics;
-			$data['user_management'] = $permission->user_management;
-			$data['configuration'] = $permission->configuration;
-			$data['payroll_configuration'] = $permission->payroll_configuration;
-			$data['hr_configuration'] = $permission->hr_configuration;
-			$data['configuration'] = $permission->configuration;
-			$data['user_data'] = $this->users->get_user($username);
-
-			$data['employees'] = $this->employees->view_employees();
-			$data['users'] = $this->users->view_users();
-			$data['departments'] = $this->hr_configurations->view_departments();
-			$data['leaves'] = $this->employees->get_employees_leaves();
 
 
-			$this->load->view('index', $data);
+
+			if($this->users->get_user($username)->user_type == 1 || $this->users->get_user($username)->user_type == 3):
+
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+				$data['configuration'] = $permission->configuration;
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['employees'] = $this->employees->view_employees();
+				$data['users'] = $this->users->view_users();
+				$data['departments'] = $this->hr_configurations->view_departments();
+				$data['leaves'] = $this->employees->get_employees_leaves();
+				$this->load->view('index', $data);
+
+			elseif($this->users->get_user($username)->user_type == 2):
+
+				redirect('employee_main');
+			endif;
+
+
+
 		else:
 			redirect('login');
 		endif;
@@ -99,8 +110,8 @@ class Home extends CI_Controller
 			$user_token_data = $this->security->xss_clean($user_token_data);
 			$query = $this->users->update_token($user_username, $user_token_data);
 			$this->session->unset_userdata('user_username');
-      $this->session->unset_userdata('login_time');
-      $this->session->sess_destroy();
+			  $this->session->unset_userdata('login_time');
+			  $this->session->sess_destroy();
 			redirect('/login');
 			endif;
 
@@ -144,59 +155,88 @@ class Home extends CI_Controller
 				$query = $this->users->login($data);
 				$time = time();
 				if($query == true):
-					$check_user_login = $this->users->check_user_login($username);
-					$user_token = $check_user_login->user_token;
+					if($this->users->get_user($username)->user_status > 0):
 
-					if(empty($user_token)):
-						$user_token_data = array(
-							'user_token' => $time
-						);
-						$user_token_data = $this->security->xss_clean($user_token_data);
-						$query = $this->users->update_token($username, $user_token_data);
-						if($query == true):
-							$log_array = array(
-								'log_user_id' => $this->users->get_user($username)->user_id,
-								'log_description' => "Logged In"
-							);
+						$check_user_login = $this->users->check_user_login($username);
+						$user_token = $check_user_login->user_token;
 
-							$this->logs->add_log($log_array);
-							redirect('home');
-						endif;
-					else:
-						$diff = $time - $user_token;
-
-						if($diff < 1800):
-							$this->session->unset_userdata('user_username');
-							$this->session->sess_destroy();
-							$errormsg = 'You are Already Logged in';
-							$error_msg = array(
-							'error' => $errormsg
-							);
-
-							$data['error'] = $errormsg;
-
-							$data['csrf_name'] = $this->security->get_csrf_token_name();
-							$data['csrf_hash'] = $this->security->get_csrf_hash();
-
-							$this->load->view('auth/login', $data);
-						elseif ($diff >=1800):
+						if(empty($user_token)):
 							$user_token_data = array(
 								'user_token' => $time
 							);
 							$user_token_data = $this->security->xss_clean($user_token_data);
 							$query = $this->users->update_token($username, $user_token_data);
 							if($query == true):
-
-
 								$log_array = array(
 									'log_user_id' => $this->users->get_user($username)->user_id,
 									'log_description' => "Logged In"
 								);
 
 								$this->logs->add_log($log_array);
+								if($this->users->get_user($username)->user_type == 1 || $this->users->get_user($username)->user_type == 3):
+
 								redirect('home');
+								elseif($this->users->get_user($username)->user_type == 2):
+
+									redirect('employee_main');
+								endif;
 							endif;
+						else:
+							$diff = $time - $user_token;
+
+							if($diff < 1800):
+								$this->session->unset_userdata('user_username');
+								$this->session->sess_destroy();
+								$errormsg = 'You are Already Logged in';
+								$error_msg = array(
+								'error' => $errormsg
+								);
+
+								$data['error'] = $errormsg;
+
+								$data['csrf_name'] = $this->security->get_csrf_token_name();
+								$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+								$this->load->view('auth/login', $data);
+							elseif ($diff >=1800):
+								$user_token_data = array(
+									'user_token' => $time
+								);
+								$user_token_data = $this->security->xss_clean($user_token_data);
+								$query = $this->users->update_token($username, $user_token_data);
+								if($query == true):
+
+
+									$log_array = array(
+										'log_user_id' => $this->users->get_user($username)->user_id,
+										'log_description' => "Logged In"
+									);
+
+									$this->logs->add_log($log_array);
+									if($this->users->get_user($username)->user_type == 1 || $this->users->get_user($username)->user_type == 3):
+
+										redirect('home');
+
+
+									elseif($this->users->get_user($username)->user_type == 2):
+
+										redirect('employee_main');
+									endif;
+								endif;
+							endif;
+
 						endif;
+					else:
+						$errormsg = 'Account Deactivated';
+						$error_msg = array(
+							'error' => $errormsg
+						);
+						$data['error'] = $errormsg;
+
+						$data['csrf_name'] = $this->security->get_csrf_token_name();
+						$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+						$this->load->view('auth/login', $data);
 
 					endif;
 				else:

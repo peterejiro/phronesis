@@ -1,8 +1,6 @@
 <?php include(APPPATH.'\views\stylesheet.php'); ?>
 
-
 <body>
-<!-- Begin page -->
 <div id="app">
 	<div class="main-wrapper">
 		<div class="navbar-bg"></div>
@@ -21,7 +19,7 @@
           <div class="section-title">All About Managing Employees</div>
           <p class="section-lead">You can manage employee information here</p>
           <div class="row">
-            <div class="col-12 col-md-12 col-lg-12">
+            <div class="col-12">
               <div class="card">
                 <div class="card-header">
                   <h4>All Employees</h4>
@@ -49,8 +47,9 @@
                             <td><?php echo $employee->employee_last_name." ".$employee->employee_first_name." ".$employee->employee_other_name; ?></td>
                             <td><?php echo $employee->department_name; ?></td>
                             <td><?php echo $employee->job_name; ?></td>
-                            <td><?php $status = $employee->employee_status;?>
-                              <?php if($status == 0):?>
+                            <td>
+                              <?php $status = $employee->employee_status;
+                              if($status == 0):?>
                                 <div class="badge badge-danger">Fired</div>
                               <?php elseif($status == 1):?>
                                 <div class="badge badge-info">Probationary</div>
@@ -64,9 +63,13 @@
                               <div class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu">
-                                  <a class="dropdown-item has-icon" href="<?php echo site_url('view_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-eye"></i>View</a>
-                                  <a class="dropdown-item has-icon" href="<?php echo site_url('update_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-edit"></i>Update</a>
-                                </div>
+									<a class="dropdown-item has-icon" href="<?php echo site_url('view_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-eye"></i>View</a>
+									<?php if($status == 1 || $status == 2): ?>
+                                   <a class="dropdown-item has-icon" href="<?php echo site_url('update_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-edit"></i>Update</a>
+										<a class="dropdown-item has-icon" href="<?php echo site_url('terminate_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-eye"></i>Terminate Employee</a>
+										<a class="dropdown-item has-icon" href="<?php echo site_url('query_employee').'/'.$employee->employee_id; ?>"><i class="fas fa-eye"></i>Queries</a>
+                                	<?php endif; ?>
+								</div>
                               </div>
                             </td>
                           </tr>

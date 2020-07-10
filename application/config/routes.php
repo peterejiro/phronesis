@@ -109,6 +109,8 @@ $route['self_assessment'] = 'hr_configuration/self_assessment';
 $route['add_self_assessment'] = 'hr_configuration/add_self_assessment';
 $route['update_self_assessment'] = 'hr_configuration/update_self_assessment';
 
+$route['appraisals'] = 'employee_main/appraisals';
+
 
 $route['quantitative_assessment'] = 'hr_configuration/quantitative_assessment';
 $route['add_quantitative_assessment'] = 'hr_configuration/add_quantitative_assessment';
@@ -145,8 +147,27 @@ $route['employee_leave'] = 'employee/employee_leave';
 $route['new_employee_leave'] = 'employee/new_employee_leave';
 $route['add_new_employee_leave'] = 'employee/add_new_employee_leave';
 $route['extend_leave/:num'] = 'employee/extend_leave/$1';
-$route['extend_employee_leave'] = 'employee/extend_employee_leave';
+$route['approve_leave/:num'] = 'employee/approve_employee_leave/$1';
+$route['discard_leave/:num'] = 'employee/discard_employee_leave/$1';
 
+$route['extend_employee_leave'] = 'employee/extend_employee_leave';
+$route['employee_appraisal'] = 'employee/employee_appraisal';
+$route['new_employee_appraisal'] = 'employee/new_employee_appraisal';
+$route['add_new_employee_appraisal'] = 'employee/add_new_employee_appraisal';
+$route['terminate_employee/:num'] = 'employee/terminate_employee/$1';
+$route['terminate'] = 'employee/terminate';
+$route['terminations'] = 'employee/terminations';
+$route['resignations'] = 'employee/resignations';
+$route['approve_resignation/:num'] = 'employee/approve_resignation/$1';
+$route['discard_resignation/:num'] = 'employee/discard_resignation/$1';
+$route['query_employee/:num'] = 'employee/query_employee/$1';
+$route['new_query'] = 'employee/new_query';
+$route['view_query/:num'] = 'employee/view_query/$1';
+$route['new_response'] = 'employee/new_response';
+$route['close_query/:num'] = 'employee/close_query/$1';
+$route['memo'] = 'employee/memo';
+$route['add_memo'] = 'employee/add_memo';
+$route['update_memo'] = 'employee/update_memo';
 
 
 $route['tax_rates'] = 'payroll_configuration/tax_rate';
@@ -200,6 +221,8 @@ $route['add_new_loan'] = 'loan/add_new_loan';
 $route['loans'] = 'loan/loans';
 $route['edit_loan/:num'] = 'loan/edit_loan/$1';
 $route['update_loan'] = 'loan/update_loan';
+$route['approve_loan/:num'] = 'loan/approve_loan/$1';
+$route['discard_loan/:num'] = 'loan/discard_loan/$1';
 
 $route['payroll_routine'] = 'payroll/payroll_routine';
 $route['run_payroll_routine'] = 'payroll/run_payroll_routine';
@@ -216,8 +239,30 @@ $route['pay_order'] = 'payroll_report/pay_order';
 $route['pay_order_report'] = 'payroll_report/pay_order_report';
 
 
+
+
 $route['view_log'] = 'log/view_log';
 
+
+$route['employee_history'] = 'employee_main/employee_history';
+$route['request_leave'] = 'employee_main/request_leave';
+$route['request_new_leave'] = 'employee_main/request_new_leave';
+$route['my_leave'] = 'employee_main/my_leave';
+$route['appraise_employee'] = 'employee_main/appraise_employee';
+$route['respond_appraisal_supervisor/:num'] = 'employee_main/respond_appraisal_supervisor/$1';
+$route['answer_questions_supervisor'] = 'employee_main/answer_questions_supervisor';
+$route['respond_appraisal_self/:num'] = 'employee_main/respond_appraisal_self/$1';
+$route['answer_questions_self'] = 'employee_main/answer_questions_self';
+$route['appraisal_result/:num'] = 'employee_main/check_appraisal_results/$1';
+$route['pay_slip'] = 'employee_main/pay_slip';
+$route['pay_slips'] = 'employee_main/pay_slips';
+$route['my_loan'] = 'employee_main/my_loan';
+$route['my_new_loan'] = 'employee_main/my_new_loan';
+$route['apply_loan'] = 'employee_main/apply_loan';
+$route['employee_resignation'] = 'employee_main/employee_resignation';
+$route['resignation'] = 'employee_main/resignation';
+$route['my_queries'] = 'employee_main/my_queries';
+$route['view_my_query/:num'] = 'employee_main/view_my_query/$1';
 
 
 

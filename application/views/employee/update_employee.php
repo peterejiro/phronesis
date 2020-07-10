@@ -302,10 +302,10 @@
                           <div class="col-sm-6">
                             <label>Employment Status</label>
                             <select class="selectric form-control mb-3 custom-select" required  name="employment_status" style="width: 100%; height:56px;">
-                              <option value="0" <?php if($employee->employee_status == 0){echo "selected" ;} ?>> Fired </option>
+
                               <option value="1"  <?php if($employee->employee_status == 1){echo "selected" ;} ?>> Probationary </option>
                               <option value="2"  <?php if($employee->employee_status == 2){echo "selected" ;} ?>> Confirmed  </option>
-                              <option value="3"  <?php if($employee->employee_status == 3){echo "selected" ;} ?>>Retired</option>
+
                             </select>
                           </div>
                         </div>
