@@ -17,19 +17,14 @@ $CI->load->model('payroll_configurations');?>
 				<div class="main-content">
 					<section class="section">
 						<div class="section-header">
-							<h1>Personal Information</h1>
+							<h1>Your Information</h1>
 							<div class="section-header-breadcrumb">
-								<div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
+								<div class="breadcrumb-item active"><a href="<?php echo base_url('employee_main'); ?>">Dashboard</a></div>
 
 							</div>
 						</div>
 						<div class="section-body">
-							<div class="hero bg-primary text-white">
-								<div class="hero-inner">
-									<h2>Welcome, <?php echo $user_data->user_name; ?> </h2>
-									<p class="lead" id="timestamp"></p>
-								</div>
-							</div>
+
 							<div class="row">
 								<div class="col-12 col-sm-12 col-lg-12">
 									<div class="card">

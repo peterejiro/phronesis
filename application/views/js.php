@@ -74,7 +74,7 @@
       ?>
         <script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
       <?php endif;?>
-
+<script src="<?php echo base_url(); ?>assets/modules/printThis.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/codemirror/lib/codemirror.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/codemirror/mode/javascript/javascript.js"></script>

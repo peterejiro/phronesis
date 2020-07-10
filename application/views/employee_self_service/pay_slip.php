@@ -22,7 +22,7 @@ $CI->load->model('employees');
 			<section class="section">
 				<div class="section-header">
 					<div class="section-header-back">
-						<a href="<?php echo site_url('payroll_report')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+						<a href="<?php echo site_url('employee_main')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
 					</div>
 					<h1> Pay Slip</h1>
 					<div class="section-header-breadcrumb">

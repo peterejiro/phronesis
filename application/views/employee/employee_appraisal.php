@@ -68,7 +68,7 @@ $CI->load->model('employees');
                                 <div class="dropdown">
                                   <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                   <div class="dropdown-menu">
-                                    <a class="dropdown-item has-icon" href="<?php echo site_url('appraisal_result').'/'.$appraisal->employee_appraisal_id; ?>"><i class="fas fa-file-prescription"></i>Check Appraisal Result</a>
+                                    <a class="dropdown-item has-icon" href="<?php echo site_url('check_appraisal_result').'/'.$appraisal->employee_appraisal_id; ?>"><i class="fas fa-file-prescription"></i>Check Appraisal Result</a>
                                   </div>
                                 </div>
                               <?php endif; ?>

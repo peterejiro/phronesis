@@ -4,7 +4,8 @@
 			<li class="nav-item dropdown">
 				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
 				<ul class="dropdown-menu">
-					<li class="nav-item"><a href="<?php echo base_url(); ?>" class="nav-link">Personal Information</a></li>
+					<li class="nav-item"><a href="<?php echo base_url('employee_main'); ?>" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="<?php echo base_url('personal_information'); ?>" class="nav-link">Personal Information</a></li>
 					<li class="nav-item"><a href="<?php echo base_url('employee_history') ?>" class="nav-link">Employee History</a></li>
 
 				</ul>
