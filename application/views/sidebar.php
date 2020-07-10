@@ -166,6 +166,7 @@
 
 			<li class="dropdown <?php echo
       $this->uri->segment(1) == 'payment_definition' ||
+      $this->uri->segment(1) == 'new_payment_definition' ||
       $this->uri->segment(1) == 'tax_rates' ||
       $this->uri->segment(1) == 'salary_structure' ||
       $this->uri->segment(1) == 'allowance' ||
@@ -176,7 +177,7 @@
       <?php if($payroll_configuration == 1){  ?>
         <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-check"></i> <span>Payroll Config</span></a>
         <ul class="dropdown-menu">
-          <li class="<?php echo $this->uri->segment(1) == 'payment_definition' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payment_definition') ?>">Payment Definition</a></li>
+          <li class="<?php echo $this->uri->segment(1) == 'payment_definition' || $this->uri->segment(1) == 'new_payment_definition' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payment_definition') ?>">Payment Definition</a></li>
           <li class="<?php echo $this->uri->segment(1) == 'tax_rates' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('tax_rates') ?>">Tax Rates</a></li>
           <li class="<?php echo $this->uri->segment(1) == 'salary_structure' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('salary_structure') ?>">Salary Structure</a></li>
           <li class="<?php echo $this->uri->segment(1) == 'allowance' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('allowance') ?>">Salary Allowances</a></li>

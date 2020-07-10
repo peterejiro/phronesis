@@ -17,7 +17,7 @@
 				</div>
         <div class="section-body">
           <div class="section-title">All About Payment Definitions</div>
-          <p class="section-lead">You can manage educational qualification information here</p>
+          <p class="section-lead">You can manage payment definitions here</p>
           <div class="row">
             <div class="col-12">
               <div class="card">
