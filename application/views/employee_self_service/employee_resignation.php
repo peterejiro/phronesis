@@ -30,6 +30,7 @@ $CI->load->model('employees');
 				<div class="section-body">
 					<div class="section-title">All About Terminating your appointment</div>
 					<p class="section-lead">You can terminate your appointment here</p>
+
 					<div class="row">
 						<div class="col-md-7">
 							<form method="post" action="<?php echo site_url('resignation'); ?>" class="needs-validation" novalidate id="resignation_form">
@@ -67,8 +68,54 @@ $CI->load->model('employees');
 										</div>
 									</div>
 							</form>
+
+							<div class="card-body">
+								<div class="table-responsive">
+									<div class="section-title">Resignation Attempts</div>
+									<table  class="table table-bordered table-striped table-md">
+										<thead>
+										<tr>
+											<th>#</th>
+											<th>Date</th>
+											<th> Effective Date</th>
+											<th>Status</th>
+
+										</tr>
+										</thead>
+										<tbody>
+										<?php if(!empty($resignations)):
+											$count = 1;
+											foreach($resignations as $resignation):
+												if($resignation->resignation_employee_id == $employee_id):
+												?>
+												<tr>
+													<td><?php echo $count; ?></td>
+													<td><?php echo $resignation->resignation_date ; ?></td>
+													<td><?php echo $resignation->resignation_effective_date; ?></td>
+													<td><?php if($resignation->resignation_status == 2){ echo "Discarded" ;}
+
+														if($resignation->resignation_status == 1){ echo "Approved" ;}
+													?></td>
+
+
+												</tr>
+												<?php
+													$count++;
+												endif;
+
+
+											endforeach;
+										endif; ?>
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
+
+
 					</div>
+
+
 				</div>
 			</section>
 		</div>
@@ -83,6 +130,8 @@ $CI->load->model('employees');
 <?php include(APPPATH.'\views\js.php'); ?>
 </body>
 </html>
+
+
 
 <script>
 	$(document).ready(function () {

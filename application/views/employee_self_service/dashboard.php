@@ -65,7 +65,7 @@ $CI->load->model('payroll_configurations');?>
 								<div class="col-lg-6 col-md-12 col-12 col-sm-12">
 									<div class="card">
 										<div class="card-header">
-											<h4>Recent Memos</h4>
+											<h4>Recent Announcements</h4>
 										</div>
 										<div class="card-body">
 											<ul class="list-unstyled list-unstyled-border">
@@ -101,6 +101,50 @@ $CI->load->model('payroll_configurations');?>
 											</ul>
 											<div class="text-center pt-1 pb-1">
 												<a href="<?php echo site_url('my_memos'); ?>" class="btn btn-primary btn-lg btn-round">
+													View All
+												</a>
+											</div>
+										</div>
+									</div>
+
+									<div class="card">
+										<div class="card-header">
+											<h4>Recent Memos</h4>
+										</div>
+										<div class="card-body">
+											<ul class="list-unstyled list-unstyled-border">
+
+												<?php if(!empty($specific_memos)):
+
+													$count = 1;
+													foreach($specific_memos as $memo):
+														?>
+
+
+														<li class="media">
+
+															<div class="media-body">
+																<div class="float-right text-primary"><?php echo $memo->specific_memo_date; ?></div>
+																<div class="media-title"><?php echo $memo->specific_memo_subject; ?></div>
+																<span class="text-small text-muted"><?php echo $memo->specific_memo_body; ?></span>
+															</div>
+														</li>
+
+														<?php
+														if($count == 5 ):
+
+															break;
+
+														endif;
+
+														$count++;
+													endforeach;
+												endif;
+												?>
+
+											</ul>
+											<div class="text-center pt-1 pb-1">
+												<a href="<?php echo site_url('my_specific_memos'); ?>" class="btn btn-primary btn-lg btn-round">
 													View All
 												</a>
 											</div>

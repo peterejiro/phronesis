@@ -37,6 +37,7 @@ $CI->load->model('hr_configurations');
                       <tr>
                         <th>Employee Name</th>
                         <th>Leave Type</th>
+						  <th>Number of Days</th>
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Status</th>
@@ -50,6 +51,12 @@ $CI->load->model('hr_configurations');
                           <tr>
                             <td><?php echo $leave->employee_last_name." ".$leave->employee_first_name; ?></td>
                             <td><?php echo $leave->leave_name; ?></td>
+							  <td> <?php
+								  $date_diff = strtotime($leave->leave_end_date) - strtotime($leave->leave_start_date);
+
+								  echo round($date_diff/(60*60*24))."days";
+
+								  ?></td>
                             <td><?php echo date('l, j F Y', strtotime($leave->leave_start_date));?></td>
                             <td><?php echo date('l, j F Y', strtotime($leave->leave_end_date));?></td>
                             <td>

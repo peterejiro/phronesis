@@ -34,6 +34,7 @@
                       <tr>
                         <th>Username</th>
                         <th>User</th>
+						 <th>User Type</th>
                         <th>Status</th>
                         <th>Action</th>
                       </tr>
@@ -45,6 +46,10 @@
                             <tr>
                               <td><?php echo $user->user_username; ?></td>
                               <td><?php echo $user->user_name; ?></td>
+								<td> <?php if($user->user_type == 1){ echo "Administrator"; }
+									if($user->user_type == 2){ echo "Employee"; }
+									if($user->user_type == 3){ echo "Moderator"; }
+								?></td>
                               <td>
                                 <?php $status = $user->user_status;
                                 if ($status == 1):?>

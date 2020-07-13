@@ -461,4 +461,35 @@ class Employees extends CI_Model
 
 	}
 
+	public function insert_specific_memo($memo_data){
+		$this->db->insert('specific_memo', $memo_data);
+		return true;
+	}
+
+	public function get_specific_memos(){
+		$this->db->select('*');
+		$this->db->from('specific_memo');
+		$this->db->join('employee', 'employee.employee_id = specific_memo.specific_memo_employee_id');
+		$this->db->order_by('specific_memo_date', 'DESC');
+		return $this->db->get()->result();
+	}
+
+	public function update_specific_memo($memo_id, $memo_data){
+		$this->db->where('specific_memo.specific_memo_id', $memo_id);
+		$this->db->update('memo', $memo_data);
+		return true;
+
+	}
+
+	public function get_my_memo($employee_id){
+		$this->db->select('*');
+		$this->db->from('specific_memo');
+		$this->db->where('specific_memo.specific_memo_employee_id', $employee_id);
+		$this->db->order_by('specific_memo_date', 'DESC');
+		return $this->db->get()->result();
+
+	}
+
+
+
 }

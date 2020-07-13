@@ -128,14 +128,17 @@ $CI->load->model('employees');
 
 													<?php endforeach;
 												endif;
+
 												?>
+
+	<input type="hidden" id="query_status" value="<?php echo $query->query_status; ?>">
 </div>
 
 
-
+<div id="query_form">
 												<?php if($query->query_status == 1):  ?>
 
-													<div class="ticket-form">
+													<div class="ticket-form" >
 														<form action="" id="response_form" method="post">
 															<div class="form-group">
 																<textarea class="summernote form-control" id="query_response" name="query_response" placeholder="Type a reply ..."></textarea>
@@ -152,6 +155,7 @@ $CI->load->model('employees');
 													</div>
 
 												<?php endif; ?>
+</div>
 											</div>
 										</div>
 									</div>
@@ -178,6 +182,12 @@ $CI->load->model('employees');
 		setInterval(timestamp, 1000);
 		function timestamp() {
 			$("#query").load(location.href + " #query");
+
+			var query_status = $("#query_status").val();
+
+			if(query_status == 0){
+				$("#query_form").hide();
+			}
 		}
 		$("#response_button").click(function(e){
 			e.preventDefault();

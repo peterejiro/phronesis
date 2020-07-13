@@ -55,9 +55,17 @@
 				<?php } ?>
 			</li>
 			<?php if($employee_management == 1){  ?>
-			<li class="<?php echo $this->uri->segment(1) == 'memo'  ? 'active' : ''; ?>">
-				<a class="nav-link" href="<?php echo site_url('memo') ?>"> <i class="fa fa-mail-forward"></i> <span>Memo </span></a>
+			<li class="dropdown <?php echo $this->uri->segment(1) == 'memo'  ? 'active' : ''; ?>">
+				<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span> Memos </span></a>
+				<ul class="dropdown-menu">
+					<li class="<?php echo $this->uri->segment(1) == 'memo'  ? 'active' : ''; ?>">
+						<a class="nav-link" href="<?php echo site_url('memo') ?>"> <span>Announcements </span></a>
+					</li>
 
+					<li class="<?php echo $this->uri->segment(1) == 'memo'  ? 'active' : ''; ?>">
+						<a class="nav-link" href="<?php echo site_url('specific_memo') ?>"> <span>Memos </span></a>
+					</li>
+				</ul>
 
 
 			</li>

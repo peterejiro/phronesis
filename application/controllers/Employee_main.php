@@ -116,6 +116,7 @@ class Employee_main extends CI_Controller
 
 				$data['employee'] = $this->employees->get_employee_by_unique($username);
 				$data['memos'] = $this->employees->get_memos();
+				$data['specific_memos'] = $this->employees->get_my_memo($employee_id);
 
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
@@ -946,6 +947,8 @@ class Employee_main extends CI_Controller
 
 					if(empty($check)):
 
+						$this->salaries->optimize_emolument_report();
+
 
 						$payment_definitions = $this->payroll_configurations->view_payment_definitions_order();
 
@@ -955,15 +958,18 @@ class Employee_main extends CI_Controller
 								'payment_definition_'.$payment_definition->payment_definition_id => array('type' => 'TEXT')
 							);
 
+
 							$this->salaries->new_column($fields);
 						endforeach;
+						
 
 
 						$employees = $this->employees->view_employees();
 
 						foreach ($employees as $employee):
 							if($employee->employee_id == $employee_id):
-							$emolument_data = array(
+
+								$emolument_data = array(
 
 								'emolument_report_employee_id' => $employee->employee_id
 
@@ -995,6 +1001,7 @@ class Employee_main extends CI_Controller
 					else:
 
 						$this->salaries->clear_emolument();
+						$this->salaries->optimize_emolument_report();
 						$emolument_fields = $this->salaries->view_emolument_fields();
 
 						foreach($emolument_fields as $emolument_field):
@@ -1303,7 +1310,7 @@ class Employee_main extends CI_Controller
 
 				foreach ($check_resignation_attempts as $check_resignation_attempt):
 
-					if($check_resignation_attempt->resignation_status == 0 || $check_resignation_attempt->resignation_status == 2):
+					if($check_resignation_attempt->resignation_status == 0):
 
 						$count++;
 
@@ -1315,7 +1322,7 @@ class Employee_main extends CI_Controller
 					if($count > 0):
 
 						$msg = array(
-							'msg'=> 'You have resigned already',
+							'msg'=> 'You have a Pending Resignation',
 							'location' => site_url('employee_main'),
 							'type' => 'warning'
 
@@ -1326,6 +1333,7 @@ class Employee_main extends CI_Controller
 
 
 				$data['employee_id'] = $this->employees->get_employee_by_unique($username)->employee_id;
+					$data['resignations'] = $this->employees->get_resignations();
 
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
@@ -1544,6 +1552,47 @@ class Employee_main extends CI_Controller
 				$data['memos'] = $this->employees->get_memos();
 
 				$this->load->view('employee_self_service/my_memos', $data);
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function my_specific_memos(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+
+				$data['employee_id'] = $employee_id;
+
+
+
+				$data['memos'] = $this->employees->get_my_memo($employee_id);
+
+				$this->load->view('employee_self_service/my_specific_memos', $data);
 
 
 			elseif($user_type == 1):
