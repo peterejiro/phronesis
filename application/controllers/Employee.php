@@ -811,6 +811,9 @@ class Employee extends CI_Controller
 			if ($permission->employee_management == 1):
 				$employee_id = $this->input->post('employee_id');
 				$transfer_type = $this->input->post('transfer_type');
+
+
+
 				$subsidiary_id = $this->input->post('subsidiary_id');
 
 
@@ -819,6 +822,11 @@ class Employee extends CI_Controller
 				$employee = $this->employees->get_employee($employee_id);
 
 
+				if(empty($employee_id) || empty($transfer_type)):
+
+					redirect('error_404');
+
+				else:
 				if ($transfer_type == 0):
 					$transfer_from = $employee->employee_location_id;
 					$transfer_to = $location_id;
@@ -959,7 +967,7 @@ class Employee extends CI_Controller
 					endif;
 				endif;
 
-
+				endif;
 			//$this->load->view('employee/new_employee_transfer',$data);
 
 
@@ -2724,6 +2732,272 @@ class Employee extends CI_Controller
 		endif;
 
 	}
+
+	public function specific_memo()
+	{
+
+		$username = $this->session->userdata('user_username');
+
+		if (isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if ($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+
+				if ($permission->employee_management == 1):
+
+					$data['user_data'] = $this->users->get_user($username);
+
+
+
+
+
+					$data['memos'] = $this->employees->get_specific_memos();
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$this->load->view('employee/specific_memos', $data);
+
+
+
+
+
+				else:
+					redirect('/access_denied');
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function new_specific_memo(){
+		$username = $this->session->userdata('user_username');
+		//$employee_id = $this->uri->segment(2);
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+
+
+					$data['user_data'] = $this->users->get_user($username);
+
+					$data['departments'] = $this->hr_configurations->view_departments();
+					$data['employees'] = $this->employees->view_employees();
+
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$this->load->view('employee/new_specific_memo', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+	public function add_specific_memo()
+	{
+
+		$username = $this->session->userdata('user_username');
+
+		if (isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if ($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+
+				if ($permission->employee_management == 1):
+
+					extract($_POST);
+
+
+					if($category == 1):
+
+						$employees = $this->employees->get_employees_by_department($department_id);
+						foreach ($employees as $employee):
+							$memo_array = array(
+								'specific_memo_employee_id' => $employee->employee_id,
+								'specific_memo_subject' => $memo_subject,
+								'specific_memo_body' => $memo_body,
+
+							);
+							$memo_array = $this->security->xss_clean($memo_array);
+							//print_r($variational_payment);
+							$query = $this->employees->insert_specific_memo($memo_array);
+						endforeach;
+
+						endif;
+
+					if($category == 2):
+
+						$employees = $this->input->post('employee_ids');
+						foreach ($employees as $employee):
+							$memo_array = array(
+								'specific_memo_employee_id' => $employee,
+								'specific_memo_subject' => $memo_subject,
+								'specific_memo_body' => $memo_body,
+
+							);
+							$memo_array = $this->security->xss_clean($memo_array);
+
+							//print_r($variational_payment);
+							$query = $this->employees->insert_specific_memo($memo_array);
+						endforeach;
+					endif;
+
+
+
+				if($query == true):
+
+						$msg = array(
+							'msg' => 'Memo Sent',
+							'location' => site_url('specific_memo'),
+							'type' => 'success'
+						);
+						$this->load->view('swal', $msg);
+
+
+					else:
+
+					endif;
+
+
+				else:
+					redirect('/access_denied');
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+
+
+	public function update_specific_memo()
+	{
+
+		$username = $this->session->userdata('user_username');
+
+		if (isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if ($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+
+				if ($permission->employee_management == 1):
+
+					$method = $this->input->server('REQUEST_METHOD');
+					if($method == 'POST' || $method == 'Post' || $method == 'post'):
+
+						extract($_POST);
+
+						$memo_array = array(
+							'specific_memo_subject' => $memo_subject,
+							'specific_memo_body' => $memo_body
+
+						);
+
+
+						$memo_array = $this->security->xss_clean($memo_array);
+						$query = $this->employees->update_specific_memo($memo_id, $memo_array);
+
+						if($query == true):
+
+							$msg = array(
+								'msg' => 'Memo Updated',
+								'location' => site_url('specific_memo'),
+								'type' => 'success'
+							);
+							$this->load->view('swal', $msg);
+
+
+						else:
+
+						endif;
+					else:
+
+						redirect('error_404');
+					endif;
+
+
+
+
+
+
+				else:
+					redirect('/access_denied');
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
 
 
 

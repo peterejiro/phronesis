@@ -169,6 +169,10 @@ $route['close_query/:num'] = 'employee/close_query/$1';
 $route['memo'] = 'employee/memo';
 $route['add_memo'] = 'employee/add_memo';
 $route['update_memo'] = 'employee/update_memo';
+$route['specific_memo'] = 'employee/specific_memo';
+$route['new_specific_memo'] = 'employee/new_specific_memo';
+$route['add_specific_memo'] = 'employee/add_specific_memo';
+$route['update_specific_memo'] = 'employee/update_specific_memo';
 
 
 $route['tax_rates'] = 'payroll_configuration/tax_rate';
@@ -266,6 +270,7 @@ $route['my_queries'] = 'employee_main/my_queries';
 $route['view_my_query/:num'] = 'employee_main/view_my_query/$1';
 $route['personal_information'] = 'employee_main/personal_information';
 $route['my_memos'] = 'employee_main/my_memos';
+$route['my_specific_memos'] = 'employee_main/my_specific_memos';
 
 
 

@@ -129,7 +129,7 @@ $CI->load->model('employees');
 
 														</table>
 
-										<h3> <b>Gross Pay:</b> &#8358; <?php echo number_format($gross_pay - $total_deduction); ?> </h3>
+										<h3> <b>Net Pay:</b> &#8358; <?php echo number_format($gross_pay - $total_deduction); ?> </h3>
 
 
 										<div class="text-md-right">

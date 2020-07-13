@@ -58,9 +58,9 @@
                             </td>
                             <td>
                               <?php if($payment_definition->payment_definition_type == 1): ?>
-                                <div class="badge badge-primary">Income</div>
+                                <b>Income</b>
                               <?php elseif($payment_definition->payment_definition_type == 0): ?>
-                                <div class="badge badge-warning">Deduction</div>
+                                <b>Deduction</b>
                               <?php endif;?>
                             </td>
                             <td class="text-center" style="width: 9px">

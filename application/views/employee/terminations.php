@@ -22,10 +22,9 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4>All Loans</h4>
+                  <h4>Terminations</h4>
                   <div class="card-header-action">
-                    <button onclick="location.href='<?php echo site_url('employee');?>'" type="button" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> Terminate Employee</button>
-                  </div>
+                   </div>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
