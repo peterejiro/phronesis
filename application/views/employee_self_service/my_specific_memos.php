@@ -21,20 +21,20 @@ $CI->load->model('employees');
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1><?php echo $employee->employee_last_name." ".$employee->employee_first_name; ?> Announcements</h1>
+					<h1><?php echo $employee->employee_last_name." ".$employee->employee_first_name; ?> memos</h1>
 					<div class="section-header-breadcrumb">
 						<div class="breadcrumb-item active"><a href="<?php echo base_url('employee_main'); ?>">Dashboard</a></div>
-						<div class="breadcrumb-item">Announcements</div>
+						<div class="breadcrumb-item">My memos</div>
 					</div>
 				</div>
 				<div class="section-body">
-					<div class="section-title">All About Announcements</div>
-					<p class="section-lead">You can view Announcements</p>
+					<div class="section-title">All About your memos</div>
+					<p class="section-lead">You can manage your memos here</p>
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h4>Announcements</h4>
+									<h4>Your memos</h4>
 									<div class="card-header-action">
 
 
@@ -46,9 +46,9 @@ $CI->load->model('employees');
 											<thead>
 											<tr>
 
-												<th>Announcement Subject</th>
-												<th>Announcement Body </th>
-												<th>Announcement Date</th>
+												<th>memo Subject</th>
+												<th>memo Body </th>
+												<th>memo Date</th>
 
 											</tr>
 											</thead>
@@ -58,10 +58,10 @@ $CI->load->model('employees');
 													?>
 													<tr>
 
-														<td><?php echo $memo->memo_subject; ?></td>
-														<td><?php echo $memo->memo_body; ?></td>
+														<td><?php echo $memo->specific_memo_subject; ?></td>
+														<td><?php echo $memo->specific_memo_body; ?></td>
 
-														<td><?php echo date("Y-m-d", strtotime($memo->memo_date));?></td>
+														<td><?php echo date("Y-m-d", strtotime($memo->specific_memo_date));?></td>
 
 													</tr>
 												<?php endforeach;

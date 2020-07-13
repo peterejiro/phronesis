@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2020 at 09:57 AM
+-- Generation Time: Jul 13, 2020 at 04:25 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -40,7 +40,8 @@ CREATE TABLE `bank` (
 INSERT INTO `bank` (`bank_id`, `bank_code`, `bank_name`) VALUES
 (2, '506', 'First Bank of Nigeria'),
 (6, '', 'Heritage Bank of Nigeria'),
-(7, '000013', 'GT Bank');
+(7, '000013', 'GT Bank'),
+(8, '1200', 'Fidelity Banks');
 
 -- --------------------------------------------------------
 
@@ -70,8 +71,22 @@ INSERT INTO `department` (`department_id`, `department_name`) VALUES
 
 CREATE TABLE `emolument_report` (
   `emolument_report_id` int(11) NOT NULL,
-  `emolument_report_employee_id` text NOT NULL
+  `emolument_report_employee_id` text NOT NULL,
+  `payment_definition_1` text DEFAULT NULL,
+  `payment_definition_2` text DEFAULT NULL,
+  `payment_definition_3` text DEFAULT NULL,
+  `payment_definition_5` text DEFAULT NULL,
+  `payment_definition_6` text DEFAULT NULL,
+  `payment_definition_7` text DEFAULT NULL,
+  `payment_definition_8` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `emolument_report`
+--
+
+INSERT INTO `emolument_report` (`emolument_report_id`, `emolument_report_employee_id`, `payment_definition_1`, `payment_definition_2`, `payment_definition_3`, `payment_definition_5`, `payment_definition_6`, `payment_definition_7`, `payment_definition_8`) VALUES
+(106, '10', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -118,10 +133,10 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`employee_id`, `employee_unique_id`, `employee_first_name`, `employee_other_name`, `employee_last_name`, `employee_dob`, `employee_personal_email`, `employee_official_email`, `employee_phone_number`, `employee_qualification`, `employee_address`, `employee_location_id`, `employee_subsidiary_id`, `employee_job_role_id`, `employee_grade_id`, `employee_account_number`, `employee_bank_id`, `employee_hmo_number`, `employee_hmo_id`, `employee_pensionable`, `employee_pension_number`, `employee_pension_id`, `employee_paye_number`, `employee_passport`, `employee_nysc_details`, `employee_nysc_document`, `employee_employment_date`, `employee_status`, `employee_stop_date`, `employee_salary_structure_setup`, `employee_salary_structure_category`) VALUES
-(7, 'ihumane_qt5', 'Ejiroghene', '', 'Oki-petereeeee', '1996-06-16', 'peterejiro96@gmail.com', 'oki-peter@connexxiongroup.com', '(080) 9094-5451', '[\"1\"]', 'bwari', '1', '1', '1', '2', '0150176481', '2', 'pc_fct_3571', '1', 1, '0154175960', '1', '01501746575', '252221390125c3f1a435c6e2c0ad793a.jpg', 'FC19B3571', 'c6ea91ed4f42920eccc280ee0317124a.pdf', '2020-05-14', 2, '2020-06-07', 1, 1),
+(7, 'ihumane_qt5', 'Ejiroghene', '', 'Oki-petereeeee', '1996-06-16', 'peterejiro96@gmail.com', 'oki-peter@connexxiongroup.com', '(080) 9094-5451', '[\"1\"]', 'bwari', '1', '1', '1', '2', '0150176481', '2', 'pc_fct_3571', '1', 1, '0154175960', '1', '01501746575', '252221390125c3f1a435c6e2c0ad793a.jpg', 'FC19B3571', 'c6ea91ed4f42920eccc280ee0317124a.pdf', '2020-05-14', 0, '2020-06-07', 1, 1),
 (8, 'ihumane_3ag', 'Ogheneovie', '', 'Oki-Peter', '1998-05-02', 'ovie@gmail.com', 'ovie@test.com', '(080) 3355-3769', '[\"1\"]', 'Bwari - Fct', '1', '1', '2', '1', '0150176489', '6', 'oki-91', '1', 1, '21321321321', '1', '2321321321321', 'd5a4062d6904d862eb2cc8f13d141d49.png', 'FC19B3571', '170e02227fc749d5ffbfd7090746d4bd.pdf', '2020-05-25', 2, '2020-06-07', 1, 1),
 (9, 'ihumane_IRE', 'Olalekan', 'Sulaiman', 'Hassan', '1996-06-16', 'haslek@gmail.com', 'has@connexxiongroup.com', '(070) 6076-4410', '[\"1\"]', 'asaba', '1', '1', '2', '1', '0150176481', '7', '', '0', 1, '0150176481', '1', '', 'fdb1e14fac1f80d55ec080d61dac47e6.png', 'nysc2343_ben', '07d9aeea60e044fbcd27a688df0e75d9.png', '2020-06-08', 1, '0000-00-00', 1, 0),
-(10, 'ihumane_Xxd', 'Rachael', '', 'Ashaolu', '2020-06-29', 'rachaelashaolu@gmail.com', 'ashaolu.rachael@connexxiongroup.com', '0803 355 3769', '[\"1\"]', 'Ibadan, Nigeria', '2', '1', '2', '1', '0150176481', '7', '', '0', 0, '', '', '', '78479059bd78977bee2a2fe2b6d3e987.jpeg', 'test', '2b998afbe75ede7178e793f95b2a70d0.pdf', '2020-06-29', 2, '2020-07-09', 0, 0);
+(10, 'ihumane_Xxd', 'Rachael', '', 'Ashaolu', '1996-07-11', 'rachaelashaolu@gmail.com', 'ashaolu.rachael@connexxiongroup.com', '0803 355 3769', '[\"1\"]', 'Ibadan, Nigeria', '2', '1', '2', '1', '0150176481', '7', '', '0', 0, '', '', '', '78479059bd78977bee2a2fe2b6d3e987.jpeg', 'test', '2b998afbe75ede7178e793f95b2a70d0.pdf', '2020-06-29', 2, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -147,7 +162,8 @@ CREATE TABLE `employee_appraisal` (
 --
 
 INSERT INTO `employee_appraisal` (`employee_appraisal_id`, `employee_appraisal_employee_id`, `employee_appraisal_period_from`, `employee_appraisal_period_to`, `employee_appraisal_supervisor_id`, `employee_appraisal_self`, `employee_appraisal_supervisor`, `employee_appraisal_qualitative`, `employee_appraisal_quantitative`, `employee_appraisal_status`) VALUES
-(2, 10, '2020-07-03', '2021-07-12', 7, 1, 1, 1, 1, 1);
+(2, 10, '2020-07-03', '2021-07-12', 7, 1, 1, 1, 1, 1),
+(3, 7, '2020-07-11', '2021-07-16', 10, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -173,7 +189,12 @@ INSERT INTO `employee_appraisal_result` (`employee_appraisal_result_id`, `employ
 (3, 2, '2', '   <p>    <i><b>Which language is most difficult for you;</b></i></p><p>C or PHP?<br></p>', '5'),
 (4, 2, '2', ' What is your favorite style of programming?<br>', '4'),
 (5, 2, '3', '  Quality of Work - Accuracy skill, thoroughness, neatness, error free etc<br>', '3'),
-(6, 2, '4', '  What is your impression of this employees?<br>', 'good');
+(6, 2, '4', '  What is your impression of this employees?<br>', 'good'),
+(7, 3, '1', 'State the various jobs you handled during the appraisal period?', 'Marketing'),
+(8, 3, '1', '<p> Which aspect of your job experience do you find most challenging and interesting?</p>', 'Car'),
+(9, 3, '2', ' Active Directory performance, phone answer service<br>', '2'),
+(10, 3, '3', '  Quality of Work - Accuracy skill, thoroughness, neatness, error free etc<br>', '2'),
+(11, 3, '4', '  What is your impression of this employees?<br>', 'fair');
 
 -- --------------------------------------------------------
 
@@ -196,7 +217,12 @@ INSERT INTO `employee_history` (`employee_history_id`, `employee_history_employe
 (1, 10, 'Leave Application', '2020-07-02'),
 (2, 10, 'Leave Application', '2020-07-02'),
 (3, 10, 'Leave Updated', '2020-07-03'),
-(4, 10, 'Leave Discarded', '2020-07-03');
+(4, 10, 'Leave Discarded', '2020-07-03'),
+(5, 7, 'Leave Application', '2020-07-10'),
+(6, 7, 'Leave Discarded', '2020-07-10'),
+(7, 10, 'Leave Discarded', '2020-07-13'),
+(8, 0, 'Transfer', '2020-07-13'),
+(9, 0, 'Transfer', '2020-07-13');
 
 -- --------------------------------------------------------
 
@@ -220,7 +246,8 @@ CREATE TABLE `employee_leave` (
 INSERT INTO `employee_leave` (`employee_leave_id`, `leave_employee_id`, `leave_leave_type`, `leave_start_date`, `leave_end_date`, `leave_status`) VALUES
 (1, 9, '1', '2020-05-25', '2020-07-31', '1'),
 (2, 8, '1', '2020-06-26', '2020-06-25', '1'),
-(4, 10, '1', '2020-07-02', '2020-07-31', '0');
+(4, 10, '1', '2020-07-02', '2020-07-31', '3'),
+(5, 7, '2', '2020-07-20', '2021-01-11', '3');
 
 -- --------------------------------------------------------
 
@@ -700,7 +727,45 @@ INSERT INTO `logs` (`log_id`, `log_user_id`, `log_description`, `log_date`) VALU
 (259, '4', 'Logged Out', '2020-07-10 08:53:08'),
 (260, '4', 'Logged In', '2020-07-10 08:53:11'),
 (261, '6', 'Logged In', '2020-07-10 08:53:17'),
-(262, '4', 'Logged Out', '2020-07-10 08:56:11');
+(262, '4', 'Logged Out', '2020-07-10 08:56:11'),
+(263, '4', 'Logged In', '2020-07-10 09:05:07'),
+(264, '6', 'Logged Out', '2020-07-10 11:12:47'),
+(265, '4', 'Logged Out', '2020-07-10 11:12:58'),
+(266, '6', 'Logged In', '2020-07-10 11:13:13'),
+(267, '7', 'Logged In', '2020-07-10 12:14:09'),
+(268, '6', 'Logged Out', '2020-07-10 12:31:09'),
+(269, '4', 'Logged In', '2020-07-10 12:31:16'),
+(270, '4', 'Logged In', '2020-07-10 15:03:21'),
+(271, '4', 'Logged Out', '2020-07-10 16:14:02'),
+(272, '4', 'Logged In', '2020-07-10 16:17:19'),
+(273, '5', 'Logged In', '2020-07-10 16:17:24'),
+(274, '4', 'Logged In', '2020-07-10 16:19:02'),
+(275, '5', 'Added A New Bank', '2020-07-10 16:21:53'),
+(276, '5', 'Updated Bank Details', '2020-07-10 16:22:10'),
+(277, '6', 'Logged In', '2020-07-10 16:32:36'),
+(278, '7', 'Logged In', '2020-07-10 16:34:50'),
+(279, '7', 'Initiated Employee Transfer', '2020-07-10 16:41:23'),
+(280, '5', 'Discarded Employee Leave', '2020-07-10 16:43:27'),
+(281, '7', 'Logged Out', '2020-07-10 16:56:21'),
+(282, '7', 'Logged In', '2020-07-10 16:56:44'),
+(283, '5', 'Updated User', '2020-07-10 17:01:09'),
+(284, '6', 'Logged Out', '2020-07-10 17:07:01'),
+(285, '6', 'Logged In', '2020-07-10 17:07:29'),
+(286, '6', 'Logged Out', '2020-07-10 17:07:36'),
+(287, '6', 'Logged In', '2020-07-10 17:10:39'),
+(288, '5', 'Logged Out', '2020-07-10 17:16:26'),
+(289, '6', 'Logged In', '2020-07-10 17:18:03'),
+(290, '6', 'Logged Out', '2020-07-10 19:51:49'),
+(291, '4', 'Logged In', '2020-07-10 19:52:03'),
+(292, '6', 'Logged In', '2020-07-10 19:58:20'),
+(293, '6', 'Logged In', '2020-07-11 08:06:21'),
+(294, '6', 'Logged Out', '2020-07-11 08:06:38'),
+(295, '4', 'Logged In', '2020-07-11 08:07:25'),
+(296, '4', 'Logged In', '2020-07-13 11:11:51'),
+(297, '6', 'Logged In', '2020-07-13 11:24:41'),
+(298, '4', 'Discarded Employee Leave', '2020-07-13 11:40:26'),
+(299, '4', 'Initiated Employee Transfer', '2020-07-13 12:51:20'),
+(300, '4', 'Initiated Employee Transfer', '2020-07-13 12:51:31');
 
 -- --------------------------------------------------------
 
@@ -712,7 +777,7 @@ CREATE TABLE `memo` (
   `memo_id` int(11) NOT NULL,
   `memo_subject` text NOT NULL,
   `memo_body` text NOT NULL,
-  `memo_date` date NOT NULL DEFAULT current_timestamp()
+  `memo_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -720,7 +785,9 @@ CREATE TABLE `memo` (
 --
 
 INSERT INTO `memo` (`memo_id`, `memo_subject`, `memo_body`, `memo_date`) VALUES
-(1, 'Felicitation - oki-Peter', ' <p><img xss=\"removed\" k=\" data-filename=\"></p><p><br></p><p>This finally works<br></p><p> </p><p> </p> <p></p> ', '2020-07-09');
+(1, 'Felicitation - oki-Peter', '  <p><img xss=\"removed\" k=\" data-filename=\"><b>This finally works, I am not happy - lol</b><br></p><p> </p><p> </p> <p></p>  ', '2020-07-09 00:00:00'),
+(2, '999 - I miss you bruv', ' The Man, The Legend, The Myth and remember to stay 4164<br>', '2020-07-10 00:00:00'),
+(3, 'Energy Saving', 'awsdasdasdas ', '2020-07-10 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -872,7 +939,8 @@ CREATE TABLE `permission` (
 INSERT INTO `permission` (`permission_id`, `username`, `employee_management`, `payroll_management`, `biometrics`, `configuration`, `hr_configuration`, `payroll_configuration`, `user_management`) VALUES
 (2, 'administrator', 1, 1, 1, 1, 1, 1, 1),
 (3, 'peterejiro', 1, 1, 1, 1, 1, 1, 1),
-(4, 'ihumane_Xxd', 1, 0, 0, 0, 0, 0, 0);
+(4, 'ihumane_Xxd', 1, 0, 0, 0, 0, 0, 0),
+(5, 'ihumane_qt5', 1, 0, 0, NULL, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -977,7 +1045,8 @@ CREATE TABLE `query` (
 --
 
 INSERT INTO `query` (`query_id`, `query_employee_id`, `query_subject`, `query_body`, `query_type`, `query_date`, `query_status`) VALUES
-(1, 10, 'Why So fine', '<p><br></p><p>why so fine<br></p><p><br></p>', 0, '2020-07-09', 1);
+(1, 10, 'Why So fine', '<p><br></p><p>why so fine<br></p><p><br></p>', 0, '2020-07-09', 0),
+(2, 10, 'Late', ' why so late<br>', 0, '2020-07-10', 0);
 
 -- --------------------------------------------------------
 
@@ -1010,7 +1079,12 @@ INSERT INTO `query_response` (`query_response_id`, `query_response_query_id`, `q
 (14, 1, 0, '<p>you<br></p>', '2020-07-09 20:02:31'),
 (15, 1, 10, '<p>you are mad</p>', '2020-07-09 20:02:53'),
 (16, 1, 10, '<p>you</p>', '2020-07-10 08:53:55'),
-(17, 1, 0, '<p>Me</p>', '2020-07-10 08:54:07');
+(17, 1, 0, '<p>Me</p>', '2020-07-10 08:54:07'),
+(18, 2, 10, '<p>it was raining</p>', '2020-07-10 16:37:09'),
+(19, 2, 0, '<p>not an excuse<br></p>', '2020-07-10 16:37:25'),
+(20, 1, 10, '<p>good morning ma</p>', '2020-07-13 11:25:19'),
+(21, 1, 10, '<p>good morning ma</p>', '2020-07-13 11:26:16'),
+(22, 1, 0, '<p>heoo<br></p>', '2020-07-13 11:28:33');
 
 -- --------------------------------------------------------
 
@@ -1032,7 +1106,8 @@ CREATE TABLE `resignation` (
 --
 
 INSERT INTO `resignation` (`resignation_id`, `resignation_employee_id`, `resignation_reason`, `resignation_effective_date`, `resignation_date`, `resignation_status`) VALUES
-(1, 10, '<p> i am tired, i am not doing again    <br></p>', '2020-07-09', '2022-07-08', 0);
+(1, 10, '<p> i am tired, i am not doing again    <br></p>', '2020-07-09', '2022-07-08', 2),
+(2, 7, 'I am now running away, on to the next level', '2020-07-30', '2020-07-10', 0);
 
 -- --------------------------------------------------------
 
@@ -1133,6 +1208,29 @@ CREATE TABLE `self_appraisee` (
 INSERT INTO `self_appraisee` (`self_appraisee_id`, `self_appraisee_question`) VALUES
 (1, 'State the various jobs you handled during the appraisal period?'),
 (2, '<p> Which aspect of your job experience do you find most challenging and interesting?</p>');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `specific_memo`
+--
+
+CREATE TABLE `specific_memo` (
+  `specific_memo_id` int(11) NOT NULL,
+  `specific_memo_employee_id` int(11) NOT NULL,
+  `specific_memo_subject` text NOT NULL,
+  `specific_memo_body` text NOT NULL,
+  `specific_memo_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `specific_memo`
+--
+
+INSERT INTO `specific_memo` (`specific_memo_id`, `specific_memo_employee_id`, `specific_memo_subject`, `specific_memo_body`, `specific_memo_date`) VALUES
+(1, 8, 'i Just Tested to see if Olarenwaju', '<p>Ema Sun re Dagba o.</p><p><br></p><p>Won ni loto ko ni ku si kpo ika  </p>', '2020-07-13 15:02:11'),
+(2, 9, 'i Just Tested to see if Olarenwaju', '<p>Ema Sun re Dagba o.</p><p><br></p><p>Won ni loto ko ni ku si kpo ika  </p>', '2020-07-13 15:02:11'),
+(3, 10, 'i Just Tested to see if Olarenwaju', '<p>Ema Sun re Dagba o.</p><p><br></p><p>Won ni loto ko ni ku si kpo ika  </p>', '2020-07-13 15:02:11');
 
 -- --------------------------------------------------------
 
@@ -1240,7 +1338,9 @@ CREATE TABLE `transfer` (
 
 INSERT INTO `transfer` (`transfer_id`, `transfer_employee_id`, `transfer_type`, `transfer_from`, `transfer_to`, `transfer_date`) VALUES
 (3, 7, 0, '1', '3', '2020-06-30'),
-(4, 7, 0, '3', '1', '2020-06-30');
+(4, 7, 0, '3', '1', '2020-06-30'),
+(5, 0, 0, '', '0', '2020-07-13'),
+(6, 0, 0, '', '0', '2020-07-13');
 
 -- --------------------------------------------------------
 
@@ -1264,10 +1364,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_username`, `user_email`, `user_password`, `user_type`, `user_token`, `user_name`, `user_status`) VALUES
-(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', 1, '', 'Administrator Administrator', '1'),
-(5, 'peterejiro', 'peterejiro96@gmail.com', '$2y$10$7OLmMpkXuTEhrMdIIsdnoO4GCUs7yB/Hm7qL6rRAmHEA1lzikvOjW', 1, '1593619997', 'Oki-Peter Ejiroghene', '1'),
-(6, 'ihumane_Xxd', 'ashaolu.rachael@connexxiongroup.com', '$2y$10$5PWarziFP.tywKLcI2Moje0n.IwHcDxb7/lvf5qND0Ng0/elMhOnq', 3, '1594367597', 'Ashaolu Rachael', '1'),
-(7, 'ihumane_qt5', 'oki-peter@connexxiongroup.com', '$2y$10$5PWarziFP.tywKLcI2Moje0n.IwHcDxb7/lvf5qND0Ng0/elMhOnq', 2, '1594127889', 'Oki - Peter Ejirogehene', '1');
+(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', 1, '1594635111', 'Administrator Administrator', '1'),
+(5, 'peterejiro', 'peterejiro96@gmail.com', '$2y$10$7OLmMpkXuTEhrMdIIsdnoO4GCUs7yB/Hm7qL6rRAmHEA1lzikvOjW', 1, '', 'Oki-Peter Ejiroghene', '1'),
+(6, 'ihumane_Xxd', 'ashaolu.rachael@connexxiongroup.com', '$2y$10$5PWarziFP.tywKLcI2Moje0n.IwHcDxb7/lvf5qND0Ng0/elMhOnq', 2, '1594635881', 'Ashaolu Rachael', '1'),
+(7, 'ihumane_qt5', 'oki-peter@connexxiongroup.com', '$2y$10$5PWarziFP.tywKLcI2Moje0n.IwHcDxb7/lvf5qND0Ng0/elMhOnq', 2, '', 'Oki - Peter Ejirogehene', '1');
 
 -- --------------------------------------------------------
 
@@ -1559,6 +1659,12 @@ ALTER TABLE `self_appraisee`
   ADD PRIMARY KEY (`self_appraisee_id`);
 
 --
+-- Indexes for table `specific_memo`
+--
+ALTER TABLE `specific_memo`
+  ADD PRIMARY KEY (`specific_memo_id`);
+
+--
 -- Indexes for table `subsidiary`
 --
 ALTER TABLE `subsidiary`
@@ -1623,7 +1729,7 @@ ALTER TABLE `work_experience`
 -- AUTO_INCREMENT for table `bank`
 --
 ALTER TABLE `bank`
-  MODIFY `bank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `bank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `department`
@@ -1635,7 +1741,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `emolument_report`
 --
 ALTER TABLE `emolument_report`
-  MODIFY `emolument_report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `emolument_report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `employee`
@@ -1647,25 +1753,25 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `employee_appraisal`
 --
 ALTER TABLE `employee_appraisal`
-  MODIFY `employee_appraisal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `employee_appraisal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employee_appraisal_result`
 --
 ALTER TABLE `employee_appraisal_result`
-  MODIFY `employee_appraisal_result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `employee_appraisal_result_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `employee_history`
 --
 ALTER TABLE `employee_history`
-  MODIFY `employee_history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `employee_history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `employee_leave`
 --
 ALTER TABLE `employee_leave`
-  MODIFY `employee_leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `employee_leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `grade`
@@ -1725,13 +1831,13 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=263;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
 
 --
 -- AUTO_INCREMENT for table `memo`
 --
 ALTER TABLE `memo`
-  MODIFY `memo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `memo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `minimum_tax_rate`
@@ -1773,7 +1879,7 @@ ALTER TABLE `pension_rate`
 -- AUTO_INCREMENT for table `permission`
 --
 ALTER TABLE `permission`
-  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `permission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `personalized_salary_structure`
@@ -1803,19 +1909,19 @@ ALTER TABLE `quantitative`
 -- AUTO_INCREMENT for table `query`
 --
 ALTER TABLE `query`
-  MODIFY `query_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `query_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `query_response`
 --
 ALTER TABLE `query_response`
-  MODIFY `query_response_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `query_response_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `resignation`
 --
 ALTER TABLE `resignation`
-  MODIFY `resignation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `resignation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `salary`
@@ -1840,6 +1946,12 @@ ALTER TABLE `salary_structure_category`
 --
 ALTER TABLE `self_appraisee`
   MODIFY `self_appraisee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `specific_memo`
+--
+ALTER TABLE `specific_memo`
+  MODIFY `specific_memo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `subsidiary`
@@ -1875,7 +1987,7 @@ ALTER TABLE `title`
 -- AUTO_INCREMENT for table `transfer`
 --
 ALTER TABLE `transfer`
-  MODIFY `transfer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `transfer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user`

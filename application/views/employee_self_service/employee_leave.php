@@ -43,6 +43,7 @@ $CI->load->model('payroll_configurations');?>
 											<tr>
 
 												<th>Leave Type</th>
+												<th> Number of Days</th>
 												<th>Start Date</th>
 												<th>End Date</th>
 												<th>Status</th>
@@ -56,6 +57,13 @@ $CI->load->model('payroll_configurations');?>
 													<tr>
 
 														<td><?php echo $leave->leave_name; ?></td>
+														<td> <?php
+															$date_diff = strtotime($leave->leave_end_date) - strtotime($leave->leave_start_date);
+
+															echo round($date_diff/(60*60*24))."days";
+
+															?></td>
+
 														<td><?php echo date('l, j F Y', strtotime($leave->leave_start_date));?></td>
 														<td><?php echo date('l, j F Y', strtotime($leave->leave_end_date));?></td>
 														<td>
@@ -63,8 +71,10 @@ $CI->load->model('payroll_configurations');?>
 																<div class="badge badge-warning">Pending</div>
 															<?php elseif ($leave->leave_status == 1):?>
 																<div class="badge badge-success">Started</div>
-															<?php else:?>
-																<div class="badge badge-dark">Finished</div>
+															<?php elseif ($leave->leave_status == 2):?>Finished
+																<div class="badge badge-success">Started</div>
+															<?php elseif ($leave->leave_status == 3):?>
+																<div class="badge badge-danger">Discarded</div>
 															<?php endif;?>
 														</td>
 

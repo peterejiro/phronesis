@@ -10,6 +10,7 @@ class Salaries extends CI_Model
 		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->load->dbforge();
+		$this->load->dbutil();
 
 	}
 	public function add_salary($salary_data){
@@ -105,6 +106,11 @@ class Salaries extends CI_Model
 	public function new_column($fields){
 
 		$this->dbforge->add_column('emolument_report', $fields);
+	}
+
+	public function optimize_emolument_report(){
+
+		$this->dbutil->optimize_table('emolument_report');
 	}
 
 	public function insert_emolument($emolument_data){

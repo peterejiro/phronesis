@@ -140,7 +140,7 @@ class Payroll_report extends CI_Controller
 				$data['payroll_year'] = $year;
 
 			if(empty($check)):
-
+					$this->salaries->optimize_emolument_report();
 
 				$payment_definitions = $this->payroll_configurations->view_payment_definitions_order();
 
@@ -192,6 +192,7 @@ class Payroll_report extends CI_Controller
 
 				else:
 					$this->salaries->clear_emolument();
+					$this->salaries->optimize_emolument_report();
 					$emolument_fields = $this->salaries->view_emolument_fields();
 
 					foreach($emolument_fields as $emolument_field):
