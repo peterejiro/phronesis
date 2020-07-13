@@ -1,160 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<?php include(APPPATH.'\views\stylesheet.php'); ?>
 
-
-
-	<?php include(APPPATH.'\views\stylesheet.php'); ?>
-	<!-- DataTables -->
-
-
-</head>
-
-
-<body class="fixed-left">
-<!-- Begin page -->
+<body>
 <div id="app">
 	<div class="main-wrapper">
 		<div class="navbar-bg"></div>
 		<?php include(APPPATH.'\views\topbar.php'); ?>
-
-
 		<?php include(APPPATH.'\views\sidebar.php'); ?>
-
-
-
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1> <?php echo $salary_structure_category->salary_structure_category_name." Allowances"; ?></h1>
+          <div class="section-header-back">
+            <a href="<?php echo site_url('salary_structure')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+          </div>
+          <h1>Salary Structure Allowances</h1>
+<!--					<h1> --><?php //echo $salary_structure_category->salary_structure_category_name." Allowances"; ?><!--</h1>-->
+          <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
+            <div class="breadcrumb-item active"><a href="<?php echo site_url('salary_structure'); ?>">Salary Structure Categories</a></div>
+            <div class="breadcrumb-item">Salary Structure Allowances</div>
+          </div>
 				</div>
-
-
-				<div class="row">
-					<div class="col-12 col-md-12 col-lg-12">
-						<div class="card">
-							<div class="card-body">
-
-
-								<table id="datatable-buttons"  class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-
-
-									<thead>
-
-
-
-									<tr>
-										<th>S/N</th>
-										<th>Payment Name</th>
-
-										<th>Pay Code</th>
-										<th>Amount</th>
-
-
-									</tr>
-									</thead>
-
-
-									<tbody>
-									<?php if(!empty($allowances)):
-										$i = 1;
-										foreach($allowances as $allowance):
-											?>
-											<tr>
-												<td><?php echo $i; ?></td>
-												<td><?php echo $allowance->payment_definition_payment_name; ?></td>
-
-												<td><?php echo $allowance->payment_definition_payment_code; ?></td>
-												<td><?php echo number_format($allowance->salary_structure_allowance_amount); ?></td>
-
-
-											</tr>
-
-											<?php
-											$i++;
-
-										endforeach;
-									endif; ?>
-
-									</tbody>
-
-								</table>
-
-
-
-
-
-							</div>
-
-
-						</div>
-					</div>
-
-
-			</section>
+        <div class="section-body">
+          <div class="section-title">All About <?php echo $salary_structure_category->salary_structure_category_name." Allowances"; ?></div>
+          <p class="section-lead">You can view allowances for this salary structure here</p>
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Salary Structure Allowances</h4>
+                  <div class="card-header-action">
+                    <button onclick="location.href='<?php echo site_url('allowance');?>'" type="button" class="btn btn-icon icon-left btn-primary"><i class="fa fa-list"></i> All Allowances</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table id="datatable-buttons"  class="table table-striped table-bordered" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                      <thead>
+                        <tr>
+                          <th>S/N</th>
+                          <th>Payment Name</th>
+                          <th>Pay Code</th>
+                          <th>Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+		                  <?php if(!empty($allowances)):
+			                  $i = 1;
+			                  foreach($allowances as $allowance):
+				                  ?>
+                          <tr>
+                            <td style="width: 9px;"><?php echo $i; ?></td>
+                            <td><?php echo $allowance->payment_definition_payment_name; ?></td>
+                            <td><?php echo $allowance->payment_definition_payment_code; ?></td>
+                            <td>&#8358; <?php echo number_format($allowance->salary_structure_allowance_amount); ?></td>
+                          </tr>
+				                  <?php
+				                  $i++;
+			                  endforeach;
+		                  endif; ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="card-footer bg-whitesmoke"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 		</div>
-
-
-
-
 	</div>
 </div>
-
-
-
-
-
-<!-- End Right content here -->
-
-</div>
-<!-- END wrapper -->
-
-
+<?php include(APPPATH.'\views\footer.php'); ?>
 <?php include(APPPATH.'\views\js.php'); ?>
 </body>
 </html>
-
-
-
-
-
-
-
-<script>
-
-	window.onload = function(){
-		document.getElementById("taxablediv").style.display='none';
-		document.getElementById("paymentdiv").style.display='none';
-	};
-
-	function check_taxable(){
-		var payment_type = document.getElementById('payment_type').value;
-
-		if(payment_type == 1){
-
-			document.getElementById("taxablediv").style.display='block';
-			document.getElementById('taxable').selectedIndex = "0";
-			document.getElementById('taxable').disabled = false;
-
-			document.getElementById("paymentdiv").style.display='none';
-			document.getElementById('paymentdesc').disabled = true;
-			document.getElementById('tienumber').disabled = true;
-		}
-
-		if( payment_type == 0){
-			document.getElementById("taxablediv").style.display='block';
-			document.getElementById('taxable').selectedIndex = "0";
-			document.getElementById('taxable').disabled = true;
-
-			document.getElementById("paymentdiv").style.display='block';
-			document.getElementById('paymentdesc').disabled = false;
-			document.getElementById('tienumber').disabled = false;
-			document.getElementById('tienumber').selectedIndex = "0";
-
-		}
-
-	}
-
-
-
-</script>

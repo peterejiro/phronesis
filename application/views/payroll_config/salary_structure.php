@@ -49,7 +49,7 @@
                               <div class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu">
-                                  <a class="dropdown-item has-icon" href="<?php echo site_url('view_salary_structure')."/".$salary_structure->salary_structure_id;?>"><i class="fas fa-eye"></i>View Category</a>
+                                  <a class="dropdown-item has-icon" href="<?php echo site_url('view_salary_structure')."/".$salary_structure->salary_structure_id;?>"><i class="fas fa-eye"></i>View Allowances</a>
                                   <a class="dropdown-item has-icon" href="#" data-toggle="modal" data-target="#edit_salary_structure<?php echo $salary_structure->salary_structure_id ?>"><i class="fas fa-edit"></i>Edit Category</a>
                                 </div>
                               </div>
