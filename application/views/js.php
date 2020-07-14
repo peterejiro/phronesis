@@ -71,12 +71,17 @@
             $this->uri->segment(1) != 'manage_user' &&
             $this->uri->segment(1) != 'new_payment_definition' &&
             $this->uri->segment(1) != 'edit_payment_definition' &&
+            $this->uri->segment(1) != 'new_salary_allowance' &&
+            $this->uri->segment(1) != 'edit_salary_allowance' &&
+            $this->uri->segment(1) != 'payroll_month_year' &&
+            $this->uri->segment(1) != 'new_employee_appraisal' &&
+            $this->uri->segment(1) != 'query_employee' &&
             $this->uri->segment(1) != 'job_role'
         ):
       ?>
         <script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
       <?php endif;?>
-<script src="<?php echo base_url(); ?>assets/modules/printThis.js"></script>
+      <script src="<?php echo base_url(); ?>assets/modules/printThis.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/codemirror/lib/codemirror.js"></script>
 			<script src="<?php echo base_url(); ?>assets/modules/codemirror/mode/javascript/javascript.js"></script>

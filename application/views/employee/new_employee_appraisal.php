@@ -28,14 +28,14 @@
             <form class="needs-validation" novalidate method="post" action="<?php echo site_url('add_new_employee_appraisal'); ?>" id="loan_form">
               <div class="card card-primary">
                 <div class="card-header">
-                  <h4>New appraisal Form</h4>
+                  <h4>New Appraisal Form</h4>
                 </div>
                 <div class="card-body">
                   <div class="form-group row">
                     <div class="col-sm-6">
                       <label>Employee</label><span style="color: red"> *</span>
-                      <select class="form-control mb-3 custom-select selectric" required name="employee_id" id="employee" onchange="compare_employee_supervisor()" style="width: 100%; height:56px;">
-                        <option value="" disabled selected> -- Select -- </option>
+                      <select class="select2 form-control" required name="employee_id" id="employee" onchange="compare_employee_supervisor()" style="width: 100%; height:42px !important;">
+                        <option value=""> -- Select -- </option>
                         <?php foreach ($employees as $employee):?>
                           <option value="<?php echo $employee->employee_id ?>"> <?php echo $employee->employee_unique_id." (".$employee->employee_last_name." ".$employee->employee_first_name.")"; ?> </option>
                         <?php endforeach; ?>
@@ -44,18 +44,18 @@
                         please select an employee
                       </div>
                     </div>
-					  <div class="col-sm-6">
-						  <label>Supervisor</label><span style="color: red"> *</span>
-						  <select class="form-control mb-3 custom-select selectric" required name="supervisor_id" id="supervisor" onchange="compare_employee_supervisor()" style="width: 100%; height:56px;">
-							  <option value="" disabled selected> -- Select -- </option>
-							  <?php foreach ($employees as $employee):?>
-								  <option value="<?php echo $employee->employee_id ?>"> <?php echo $employee->employee_unique_id." (".$employee->employee_last_name." ".$employee->employee_first_name.")"; ?> </option>
-							  <?php endforeach; ?>
-						  </select>
-						  <div class="invalid-feedback">
-							  please select a supervisor
-						  </div>
-					  </div>
+                    <div class="col-sm-6">
+                      <label>Supervisor</label><span style="color: red"> *</span>
+                      <select class="select2 form-control" required name="supervisor_id" id="supervisor" onchange="compare_employee_supervisor()" style="width: 100%; height:42px !important;">
+                        <option value=""> -- Select -- </option>
+                        <?php foreach ($employees as $employee):?>
+                          <option value="<?php echo $employee->employee_id ?>"> <?php echo $employee->employee_unique_id." (".$employee->employee_last_name." ".$employee->employee_first_name.")"; ?> </option>
+                        <?php endforeach; ?>
+                      </select>
+                      <div class="invalid-feedback">
+                        please select a supervisor
+                      </div>
+                    </div>
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6">
@@ -76,7 +76,7 @@
                   <input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
                 </div>
                 <div class="card-footer text-right bg-whitesmoke">
-                  <button type="submit" id="appraisal_button" disabled  class="btn btn-primary">Add appraisal</button>
+                  <button type="submit" id="appraisal_button" disabled  class="btn btn-primary">Add Appraisal</button>
                   <button onclick="location.href='<?php echo site_url('employee_appraisal');?>'" class="btn btn-danger" type="button">Go Back</button>
                 </div>
               </div>
@@ -96,20 +96,13 @@
 function compare_employee_supervisor() {
 	let employee_id = document.getElementById('employee').value;
 	let supervisor_id = document.getElementById('supervisor').value;
-
-
-
 	if(employee_id === supervisor_id){
-		alert('Employee and Supervisor Cannot be the same');
+		swal('Sorry!', 'Employee and Supervisor Cannot be the same!', 'error');
 		document.getElementById('appraisal_button').disabled = true;
-
 	} else{
 		document.getElementById('appraisal_button').disabled = !employee_id || !supervisor_id;
-
 	}
-
 }
-
 </script>
 
 
