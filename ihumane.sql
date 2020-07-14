@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2020 at 04:25 PM
+-- Generation Time: Jul 14, 2020 at 03:55 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -71,22 +71,8 @@ INSERT INTO `department` (`department_id`, `department_name`) VALUES
 
 CREATE TABLE `emolument_report` (
   `emolument_report_id` int(11) NOT NULL,
-  `emolument_report_employee_id` text NOT NULL,
-  `payment_definition_1` text DEFAULT NULL,
-  `payment_definition_2` text DEFAULT NULL,
-  `payment_definition_3` text DEFAULT NULL,
-  `payment_definition_5` text DEFAULT NULL,
-  `payment_definition_6` text DEFAULT NULL,
-  `payment_definition_7` text DEFAULT NULL,
-  `payment_definition_8` text DEFAULT NULL
+  `emolument_report_employee_id` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `emolument_report`
---
-
-INSERT INTO `emolument_report` (`emolument_report_id`, `emolument_report_employee_id`, `payment_definition_1`, `payment_definition_2`, `payment_definition_3`, `payment_definition_5`, `payment_definition_6`, `payment_definition_7`, `payment_definition_8`) VALUES
-(106, '10', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -222,7 +208,8 @@ INSERT INTO `employee_history` (`employee_history_id`, `employee_history_employe
 (6, 7, 'Leave Discarded', '2020-07-10'),
 (7, 10, 'Leave Discarded', '2020-07-13'),
 (8, 0, 'Transfer', '2020-07-13'),
-(9, 0, 'Transfer', '2020-07-13');
+(9, 0, 'Transfer', '2020-07-13'),
+(10, 10, 'Leave Updated', '2020-07-14');
 
 -- --------------------------------------------------------
 
@@ -247,7 +234,8 @@ INSERT INTO `employee_leave` (`employee_leave_id`, `leave_employee_id`, `leave_l
 (1, 9, '1', '2020-05-25', '2020-07-31', '1'),
 (2, 8, '1', '2020-06-26', '2020-06-25', '1'),
 (4, 10, '1', '2020-07-02', '2020-07-31', '3'),
-(5, 7, '2', '2020-07-20', '2021-01-11', '3');
+(5, 7, '2', '2020-07-20', '2021-01-11', '3'),
+(6, 10, '1', '2020-07-19', '2020-07-31', '1');
 
 -- --------------------------------------------------------
 
@@ -765,7 +753,11 @@ INSERT INTO `logs` (`log_id`, `log_user_id`, `log_description`, `log_date`) VALU
 (297, '6', 'Logged In', '2020-07-13 11:24:41'),
 (298, '4', 'Discarded Employee Leave', '2020-07-13 11:40:26'),
 (299, '4', 'Initiated Employee Transfer', '2020-07-13 12:51:20'),
-(300, '4', 'Initiated Employee Transfer', '2020-07-13 12:51:31');
+(300, '4', 'Initiated Employee Transfer', '2020-07-13 12:51:31'),
+(301, '4', 'Logged In', '2020-07-13 21:20:14'),
+(302, '6', 'Logged In', '2020-07-14 10:23:07'),
+(303, '4', 'Logged In', '2020-07-14 13:06:45'),
+(304, '4', 'Approved Employee Leave', '2020-07-14 13:06:54');
 
 -- --------------------------------------------------------
 
@@ -806,6 +798,33 @@ CREATE TABLE `minimum_tax_rate` (
 
 INSERT INTO `minimum_tax_rate` (`minimum_tax_rate_id`, `minimum_tax_rate`) VALUES
 (1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notification`
+--
+
+CREATE TABLE `notification` (
+  `notification_id` int(11) NOT NULL,
+  `notification_employee_id` int(11) NOT NULL,
+  `notification_type` text NOT NULL,
+  `notification_link` text NOT NULL,
+  `notification_status` int(11) NOT NULL,
+  `notification_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notification`
+--
+
+INSERT INTO `notification` (`notification_id`, `notification_employee_id`, `notification_type`, `notification_link`, `notification_status`, `notification_date`) VALUES
+(1, 10, 'New Query', 'leavesu', 1, '2020-07-14 10:30:20'),
+(2, 10, 'New Queries', 'leaves', 1, '2020-07-14 10:36:13'),
+(3, 10, 'better work', 'your ear', 1, '2020-07-14 10:39:49'),
+(4, 10, 'Leave Approved', 'my_leave', 1, '2020-07-14 13:06:54'),
+(5, 10, 'New Query', 'my_queries', 1, '2020-07-14 13:18:09'),
+(6, 10, 'Query Closed', 'my_queries', 0, '2020-07-14 13:21:27');
 
 -- --------------------------------------------------------
 
@@ -1046,7 +1065,8 @@ CREATE TABLE `query` (
 
 INSERT INTO `query` (`query_id`, `query_employee_id`, `query_subject`, `query_body`, `query_type`, `query_date`, `query_status`) VALUES
 (1, 10, 'Why So fine', '<p><br></p><p>why so fine<br></p><p><br></p>', 0, '2020-07-09', 0),
-(2, 10, 'Late', ' why so late<br>', 0, '2020-07-10', 0);
+(2, 10, 'Late', ' why so late<br>', 0, '2020-07-10', 0),
+(3, 10, 'Testing my notifications', ' really dont care if it works or not, ok fuvk it, i care<br>', 1, '2020-07-14', 0);
 
 -- --------------------------------------------------------
 
@@ -1228,7 +1248,7 @@ CREATE TABLE `specific_memo` (
 --
 
 INSERT INTO `specific_memo` (`specific_memo_id`, `specific_memo_employee_id`, `specific_memo_subject`, `specific_memo_body`, `specific_memo_date`) VALUES
-(1, 8, 'i Just Tested to see if Olarenwaju', '<p>Ema Sun re Dagba o.</p><p><br></p><p>Won ni loto ko ni ku si kpo ika  </p>', '2020-07-13 15:02:11'),
+(1, 8, 'i Just Tested to see if Olarenwaju', ' <p>Ema Sun re Dagba o.</p><p><br></p><p>Won ni loto ko ni ku si kpo ika olarenwaju omo me<br></p> ', '2020-07-13 15:02:11'),
 (2, 9, 'i Just Tested to see if Olarenwaju', '<p>Ema Sun re Dagba o.</p><p><br></p><p>Won ni loto ko ni ku si kpo ika  </p>', '2020-07-13 15:02:11'),
 (3, 10, 'i Just Tested to see if Olarenwaju', '<p>Ema Sun re Dagba o.</p><p><br></p><p>Won ni loto ko ni ku si kpo ika  </p>', '2020-07-13 15:02:11');
 
@@ -1364,9 +1384,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_username`, `user_email`, `user_password`, `user_type`, `user_token`, `user_name`, `user_status`) VALUES
-(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', 1, '1594635111', 'Administrator Administrator', '1'),
+(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', 1, '1594728405', 'Administrator Administrator', '1'),
 (5, 'peterejiro', 'peterejiro96@gmail.com', '$2y$10$7OLmMpkXuTEhrMdIIsdnoO4GCUs7yB/Hm7qL6rRAmHEA1lzikvOjW', 1, '', 'Oki-Peter Ejiroghene', '1'),
-(6, 'ihumane_Xxd', 'ashaolu.rachael@connexxiongroup.com', '$2y$10$5PWarziFP.tywKLcI2Moje0n.IwHcDxb7/lvf5qND0Ng0/elMhOnq', 2, '1594635881', 'Ashaolu Rachael', '1'),
+(6, 'ihumane_Xxd', 'ashaolu.rachael@connexxiongroup.com', '$2y$10$5PWarziFP.tywKLcI2Moje0n.IwHcDxb7/lvf5qND0Ng0/elMhOnq', 2, '1594718587', 'Ashaolu Rachael', '1'),
 (7, 'ihumane_qt5', 'oki-peter@connexxiongroup.com', '$2y$10$5PWarziFP.tywKLcI2Moje0n.IwHcDxb7/lvf5qND0Ng0/elMhOnq', 2, '', 'Oki - Peter Ejirogehene', '1');
 
 -- --------------------------------------------------------
@@ -1552,6 +1572,12 @@ ALTER TABLE `memo`
 --
 ALTER TABLE `minimum_tax_rate`
   ADD PRIMARY KEY (`minimum_tax_rate_id`);
+
+--
+-- Indexes for table `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`notification_id`);
 
 --
 -- Indexes for table `other_document`
@@ -1741,7 +1767,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `emolument_report`
 --
 ALTER TABLE `emolument_report`
-  MODIFY `emolument_report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `emolument_report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `employee`
@@ -1765,13 +1791,13 @@ ALTER TABLE `employee_appraisal_result`
 -- AUTO_INCREMENT for table `employee_history`
 --
 ALTER TABLE `employee_history`
-  MODIFY `employee_history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `employee_history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `employee_leave`
 --
 ALTER TABLE `employee_leave`
-  MODIFY `employee_leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `employee_leave_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `grade`
@@ -1831,7 +1857,7 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=301;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=305;
 
 --
 -- AUTO_INCREMENT for table `memo`
@@ -1844,6 +1870,12 @@ ALTER TABLE `memo`
 --
 ALTER TABLE `minimum_tax_rate`
   MODIFY `minimum_tax_rate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `other_document`
@@ -1909,7 +1941,7 @@ ALTER TABLE `quantitative`
 -- AUTO_INCREMENT for table `query`
 --
 ALTER TABLE `query`
-  MODIFY `query_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `query_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `query_response`

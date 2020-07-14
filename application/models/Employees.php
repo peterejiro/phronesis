@@ -476,7 +476,7 @@ class Employees extends CI_Model
 
 	public function update_specific_memo($memo_id, $memo_data){
 		$this->db->where('specific_memo.specific_memo_id', $memo_id);
-		$this->db->update('memo', $memo_data);
+		$this->db->update('specific_memo', $memo_data);
 		return true;
 
 	}
@@ -490,6 +490,36 @@ class Employees extends CI_Model
 
 	}
 
+	public function insert_notifications($notification_data){
+		$this->db->insert('notification', $notification_data);
+		return true;
+	}
+
+	public function get_notifications($employee_id){
+
+		$this->db->select('*');
+		$this->db->from('notification');
+		$this->db->where('notification.notification_employee_id', $employee_id);
+		$this->db->where('notification.notification_status', 0);
+		$this->db->order_by('notification_date', 'DESC');
+		return $this->db->get()->result();
+	}
+
+	public function get_notification($notification_id){
+
+		$this->db->select('*');
+		$this->db->from('notification');
+		$this->db->where('notification.notification_id', $notification_id);
+		return $this->db->get()->row();
+	}
+
+	public function update_notification($notification_id, $notification_data){
+
+		$this->db->where('notification.notification_id', $notification_id);
+		$this->db->update('notification', $notification_data);
+		return true;
+
+	}
 
 
 }
