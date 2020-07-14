@@ -271,6 +271,8 @@ $route['view_my_query/:num'] = 'employee_main/view_my_query/$1';
 $route['personal_information'] = 'employee_main/personal_information';
 $route['my_memos'] = 'employee_main/my_memos';
 $route['my_specific_memos'] = 'employee_main/my_specific_memos';
+$route['update_notification'] = 'employee_main/update_notification';
+$route['view_notification/:num'] = 'employee_main/view_notification/$1';
 
 
 

@@ -113,6 +113,7 @@ class Employee_main extends CI_Controller
 
 				$data['user_data'] = $this->users->get_user($username);
 				$data['queries'] = $this->employees->get_queries_employee($employee_id);
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
 
 				$data['employee'] = $this->employees->get_employee_by_unique($username);
 				$data['memos'] = $this->employees->get_memos();
@@ -230,6 +231,7 @@ class Employee_main extends CI_Controller
 				else:
 
 					$data['user_data'] = $this->users->get_user($username);
+					$data['notifications'] = $this->employees->get_notifications($employee_id);
 
 					$data['employee'] = $this->employees->get_employee_by_unique($username);
 
@@ -276,6 +278,7 @@ class Employee_main extends CI_Controller
 
 
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
 
 				$data['histories'] = $this->employees->view_employee_history($employee_id);
 
@@ -317,6 +320,7 @@ class Employee_main extends CI_Controller
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
 
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
 
 				$data['leaves'] = $this->employees-> check_existing_employee_leaves($employee_id);
 
@@ -356,6 +360,8 @@ class Employee_main extends CI_Controller
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
 				$data['employee'] = $this->employees->get_employee_by_unique($username);
 				$data['leaves'] = $this->hr_configurations->view_leaves();
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
 				//$data['employees'] = $this->employees->view_employees();
 
 
@@ -522,6 +528,8 @@ class Employee_main extends CI_Controller
 
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
+
 				$data['histories'] = $this->employees->view_employee_history($employee_id);
 				$data['appraisals'] = $this->employees->get_employee_appraisal($employee_id);
 
@@ -566,6 +574,7 @@ class Employee_main extends CI_Controller
 
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
 				$data['histories'] = $this->employees->view_employee_history($employee_id);
 				$data['appraisals'] = $this->employees->get_appraise_employees($employee_id);
 
@@ -613,6 +622,7 @@ class Employee_main extends CI_Controller
 
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
 
 				$data['questions'] = $this->employees->get_appraisal_questions($appraisal_id);
 				$data['appraisal_id'] = $appraisal_id;
@@ -724,6 +734,7 @@ class Employee_main extends CI_Controller
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 
 
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
 				$data['questions'] = $this->employees->get_appraisal_questions($appraisal_id);
 				$data['appraisal_id'] = $appraisal_id;
 
@@ -841,6 +852,8 @@ class Employee_main extends CI_Controller
 
 					$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 
+					$data['notifications'] = $this->employees->get_notifications($employee_id);
+
 					$data['questions'] = $questions;
 
 					$data['appraisal_id'] = $appraisal_id;
@@ -888,7 +901,8 @@ class Employee_main extends CI_Controller
 					$data['csrf_hash'] = $this->security->get_csrf_hash();
 
 					$data['employee_id'] = $this->employees->get_employee_by_unique($username)->employee_id;
-
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
 					$data['csrf_name'] = $this->security->get_csrf_token_name();
 					$data['csrf_hash'] = $this->security->get_csrf_hash();
 					$data['min_payroll_year'] = $this->salaries->view_min_payroll_year();
@@ -1058,7 +1072,8 @@ class Employee_main extends CI_Controller
 							endif;
 						endforeach;
 
-
+						$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+						$data['notifications'] = $this->employees->get_notifications($employee_id);
 						$data['emoluments'] = $this->salaries->view_emolument_sheet();
 
 						$this->load->view('employee_self_service/_pay_slip', $data);
@@ -1108,6 +1123,8 @@ class Employee_main extends CI_Controller
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
 				$data['payroll'] = $this->payroll_configurations->get_payroll_month_year();
 
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
 				$this->load->view('employee_self_service/my_loan', $data);
 
 
@@ -1151,6 +1168,8 @@ class Employee_main extends CI_Controller
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
 				$data['payroll'] = $this->payroll_configurations->get_payroll_month_year();
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
 
 				$this->load->view('employee_self_service/my_new_loan', $data);
 
@@ -1334,6 +1353,8 @@ class Employee_main extends CI_Controller
 
 				$data['employee_id'] = $this->employees->get_employee_by_unique($username)->employee_id;
 					$data['resignations'] = $this->employees->get_resignations();
+						$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+						$data['notifications'] = $this->employees->get_notifications($employee_id);
 
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
@@ -1446,6 +1467,7 @@ class Employee_main extends CI_Controller
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 
 
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
 				$data['employee_id'] = $employee_id;
 
 
@@ -1502,6 +1524,8 @@ class Employee_main extends CI_Controller
 
 
 					$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+					$data['notifications'] = $this->employees->get_notifications($employee_id);
 					$data['csrf_name'] = $this->security->get_csrf_token_name();
 					$data['csrf_hash'] = $this->security->get_csrf_hash();
 
@@ -1548,6 +1572,7 @@ class Employee_main extends CI_Controller
 				$data['employee_id'] = $employee_id;
 
 
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
 
 				$data['memos'] = $this->employees->get_memos();
 
@@ -1589,6 +1614,7 @@ class Employee_main extends CI_Controller
 				$data['employee_id'] = $employee_id;
 
 
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
 
 				$data['memos'] = $this->employees->get_my_memo($employee_id);
 
@@ -1607,6 +1633,38 @@ class Employee_main extends CI_Controller
 		endif;
 
 	}
+
+	public function view_notification(){
+		$username = $this->session->userdata('user_username');
+		if(isset($username)):
+		$notification_id = $query_id = $this->uri->segment(2);
+
+		$notification = $this->employees->get_notification($notification_id);
+		if(empty($notification)):
+
+			redirect('error_404');
+		else:
+
+			$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+		if($employee_id == $notification->notification_employee_id):
+
+			$notification_data = array(
+			'notification_status'=> 1
+			);
+
+		 $this->employees->update_notification($notification_id, $notification_data);
+		 redirect($notification->notification_link);
+		 else:
+			redirect('error_404');
+			endif;
+		 endif;
+
+		 else:
+				redirect('error_404');
+			 endif;
+	}
+
+
 
 
 }

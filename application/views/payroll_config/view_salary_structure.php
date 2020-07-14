@@ -13,7 +13,6 @@
             <a href="<?php echo site_url('salary_structure')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
           </div>
           <h1>Salary Structure Allowances</h1>
-<!--					<h1> --><?php //echo $salary_structure_category->salary_structure_category_name." Allowances"; ?><!--</h1>-->
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
             <div class="breadcrumb-item active"><a href="<?php echo site_url('salary_structure'); ?>">Salary Structure Categories</a></div>
@@ -34,7 +33,7 @@
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table id="datatable-buttons"  class="table table-striped table-bordered" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="datatable-buttons-2"  class="table table-striped table-bordered" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                       <thead>
                         <tr>
                           <th>S/N</th>
