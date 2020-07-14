@@ -1,6 +1,7 @@
-<?php include(APPPATH.'\views\stylesheet.php');
-$CI =& get_instance();
-$CI->load->model('hr_configurations');
+<?php
+  include(APPPATH.'\views\stylesheet.php');
+  $CI =& get_instance();
+  $CI->load->model('hr_configurations');
 ?>
 
 <body>
@@ -12,11 +13,14 @@ $CI->load->model('hr_configurations');
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1><?php echo $employee->employee_last_name." ".$employee->employee_first_name; ?> Queries</h1>
+          <div class="section-header-back">
+            <a href="<?php echo site_url('employee')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+          </div>
+          <h1>Employee Queries</h1>
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
-			  <div class="breadcrumb-item active"><a href="<?php echo base_url('employees'); ?>">Manage Employees</a></div>
-            <div class="breadcrumb-item">Queries</div>
+			      <div class="breadcrumb-item active"><a href="<?php echo base_url('employees'); ?>">Manage Employees</a></div>
+            <div class="breadcrumb-item">Employee Queries</div>
           </div>
 				</div>
         <div class="section-body">
@@ -26,26 +30,23 @@ $CI->load->model('hr_configurations');
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4>Employee Queries</h4>
+                  <h4>All Employee Queries</h4>
                   <div class="card-header-action">
-
-					  <button type="button" class="btn btn-icon icon-left btn-primary" data-toggle="modal" data-target="#new_query" aria-haspopup="true" aria-expanded="false" style="margin: 5vh">
-						  <i class="fa fa-plus"></i>New Query
-					  </button>
-				  </div>
+                    <button type="button" class="btn btn-icon icon-left btn-primary" data-toggle="modal" data-target="#new_query"><i class="fa fa-plus"></i> Start Query</button>
+                  </div>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table id="datatable-buttons" class="table table-bordered table-striped table-md">
                       <thead>
-                      <tr>
-                        <th>Employee Name</th>
-                        <th>Query Subject</th>
-                        <th>Query Type</th>
-                        <th>Query Date</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                      </tr>
+                        <tr>
+                          <th>Employee Name</th>
+                          <th>Query Subject</th>
+                          <th>Query Type</th>
+                          <th>Query Date</th>
+                          <th>Status</th>
+                          <th>Actions</th>
+                        </tr>
                       </thead>
                       <tbody>
                       <?php if(!empty($queries)):
@@ -54,28 +55,22 @@ $CI->load->model('hr_configurations');
                           <tr>
                             <td><?php echo $employee->employee_last_name." ".$employee->employee_first_name; ?></td>
                             <td><?php echo $query->query_subject; ?></td>
-                            <td><?php if($query->query_type == 0) { echo "warning";} if($query->query_type == 1) { echo "query";}  ?></td>
+                            <td><b><?php if($query->query_type == 0) { echo "Warning";} if($query->query_type == 1) { echo "Query";}?></b></td>
                             <td><?php echo date("Y-m-d", strtotime($query->query_date));?></td>
                             <td>
                               <?php if($query->query_status == 1): ?>
                                 <div class="badge badge-warning">Opened</div>
                               <?php elseif ($query->query_status == 0):?>
                                 <div class="badge badge-success">Closed</div>
-
                               <?php endif;?>
                             </td>
                             <td class="text-center" style="width: 9px">
-
-                                <div class="dropdown">
-                                  <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item has-icon" href="<?php echo site_url('view_query').'/'.$query->query_id; ?>"><i class="fas fa-eye"></i>View Query</a>
-                                  </div>
+                              <div class="dropdown">
+                                <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item has-icon" href="<?php echo site_url('view_query').'/'.$query->query_id; ?>"><i class="fas fa-eye"></i>View Query</a>
                                 </div>
-
-
-
-
+                              </div>
                             </td>
                           </tr>
                         <?php endforeach;
@@ -102,47 +97,44 @@ $CI->load->model('hr_configurations');
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="exampleModalLongTitle2">New Query</h4>
+				<h4 class="modal-title" id="exampleModalLongTitle2">Start Query</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true" class="text-dark">&times;</span>
 				</button>
 			</div>
-			<form class="" method="post" action="<?php echo site_url('new_query'); ?>">
+			<form class="needs-validation" novalidate method="post" action="<?php echo site_url('new_query'); ?>">
 				<div class="modal-body">
 					<div class="form-group">
 						<label>Subject</label><span style="color: red"> *</span>
-						<input type="text" class="form-control" name="query_subject" required value="" placeholder="Enter Query Subject"/>
+						<input type="text" class="form-control" name="query_subject" required/>
+            <div class="invalid-feedback">
+              please fill in a subject
+            </div>
 					</div>
-
-
 					<div class="form-group">
 						<label>Query Type</label><span style="color: red"> *</span>
-						<select class="select2 form-control"  required name="query_type" style="width: 100%; height:56px;">
-							<option value="0"> Warning </option>
+						<select class="select2 form-control"  required name="query_type" style="width: 100%; height:42px !important;">
+              <option value="">-- Select --</option>
+              <option value="0"> Warning </option>
 							<option value="1"> Query </option>
-
 						</select>
 						<div class="invalid-feedback">
-							please select a Type
+							please select a query type
 						</div>
 					</div>
-
-					<div class="form-group row">
-						<div class="col-sm-12">
-							<label>Query Body</label><span style="color: red"> *</span>
-							<textarea class="summernote-simple" required name="query_body"> </textarea>
-						</div>
-
+					<div class="form-group">
+            <label>Query Body</label><span style="color: red"> *</span>
+            <textarea class="summernote-simple" required name="query_body"></textarea>
+            <div class="invalid-feedback">
+              please fill in a query body
+            </div>
 					</div>
-						<input type="hidden" name="employee_id" value="<?php echo $employee->employee_id; ?>">
+          <input type="hidden" name="employee_id" value="<?php echo $employee->employee_id; ?>">
 					<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 				</div>
 				<div class="modal-footer bg-whitesmoke">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-
-					<button type="submit" class="btn btn-success">Submit</button>
-
-
+          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				</div>
 			</form>
 		</div>
