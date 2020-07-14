@@ -33,7 +33,7 @@
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table id="datatable-buttons"  class="table table-striped table-bordered" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="datatable-buttons-2"  class="table table-striped table-bordered" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                       <thead>
                         <tr>
                           <th>S/N</th>
