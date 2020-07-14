@@ -180,6 +180,8 @@
       $this->uri->segment(1) == 'salary_structure' ||
       $this->uri->segment(1) == 'view_salary_structure' ||
       $this->uri->segment(1) == 'allowance' ||
+      $this->uri->segment(1) == 'new_salary_allowance' ||
+      $this->uri->segment(1) == 'edit_salary_allowance' ||
       $this->uri->segment(1) == 'payroll_month_year' ||
       $this->uri->segment(1) == 'min_tax_rate' ||
       $this->uri->segment(1) == 'pension_rate' ? 'active' : '';
@@ -190,7 +192,7 @@
           <li class="<?php echo $this->uri->segment(1) == 'payment_definition' || $this->uri->segment(1) == 'new_payment_definition' || $this->uri->segment(1) == 'edit_payment_definition' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payment_definition') ?>">Payment Definition</a></li>
           <li class="<?php echo $this->uri->segment(1) == 'tax_rates' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('tax_rates') ?>">Tax Rates</a></li>
           <li class="<?php echo $this->uri->segment(1) == 'salary_structure' || $this->uri->segment(1) == 'view_salary_structure' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('salary_structure') ?>">Salary Structure</a></li>
-          <li class="<?php echo $this->uri->segment(1) == 'allowance' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('allowance') ?>">Salary Allowances</a></li>
+          <li class="<?php echo $this->uri->segment(1) == 'allowance' || $this->uri->segment(1) == 'new_salary_allowance' || $this->uri->segment(1) == 'edit_salary_allowance' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('allowance') ?>">Salary Allowances</a></li>
           <li class="<?php echo $this->uri->segment(1) == 'payroll_month_year' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payroll_month_year') ?>"> Payroll Month/Year </a></li>
           <li class="<?php echo $this->uri->segment(1) == 'min_tax_rate' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('min_tax_rate') ?>"> Minimum Tax Rate </a></li>
           <li class="<?php echo $this->uri->segment(1) == 'pension_rate' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('pension_rate') ?>"> Pension Rate </a></li>

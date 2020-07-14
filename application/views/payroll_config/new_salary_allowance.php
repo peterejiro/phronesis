@@ -39,6 +39,7 @@
                             <option value="<?php echo $salary_structure->salary_structure_id ?>>"> <?php echo $salary_structure->salary_structure_category_name; ?></option>
 				                  <?php endforeach; ?>
                         </select>
+                        <p class="form-text text-muted">Add a payment definition and it's corresponding amount for the selected salary structure</p>
                         <div class="invalid-feedback">
                           please select a salary structure category
                         </div>
@@ -47,8 +48,8 @@
                     <div id="allowances">
                       <div class="form-group row" id="allowance" style="display: none">
                         <div class="col-sm-5">
-                          <label>Payment Definition</label>
-                          <select class="form-control" id="payment_definition" required disabled="disabled" name="payment_definition[]" style="width: 100%; height:42px !important;">
+                          <label>Payment Definition</label><span style="color: red"> *</span>
+                          <select class="form-control" id="payment_definition" required name="payment_definition[]" style="width: 100%; height:42px !important;">
                             <option value=""> -- Select -- </option>
 					                  <?php foreach ($payment_definitions as $payment_definition):
 						                  if( ($payment_definition->payment_definition_desc == 0) && ($payment_definition->payment_definition_variant == 0)):?>
@@ -62,8 +63,8 @@
                           </div>
                         </div>
                         <div class="col-sm-5">
-                          <label>Amount</label>
-                          <input name="allowance_amount[]" type="number" disabled="disabled" required class="form-control"/>
+                          <label>Amount</label><span style="color: red"> *</span>
+                          <input name="allowance_amount[]" type="number" required class="form-control"/>
                           <div class="invalid-feedback">
                             please fill in an amount
                           </div>
@@ -104,8 +105,6 @@
       // elem.style.display = 'block';
       let inputs = elem.getElementsByTagName('input');
       let selects = elem.getElementsByTagName('select');
-      inputs[0].removeAttribute('disabled');
-      selects[0].removeAttribute('disabled');
       elem.style.removeProperty('display');
     } else{
       // Create a copy of it
@@ -129,8 +128,6 @@
     if(id == 'allowance' ){
       let inputs = e.parentElement.getElementsByTagName('input');
       let selects = e.parentElement.getElementsByTagName('select');
-      inputs[0].setAttribute('disabled', 'disabled');
-      selects[0].setAttribute('disabled', 'disabled');
       e.parentElement.style.display = 'none';
 
       // var elem = document.getElementById('allowance');

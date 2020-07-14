@@ -72,6 +72,7 @@
             $this->uri->segment(1) != 'new_payment_definition' &&
             $this->uri->segment(1) != 'edit_payment_definition' &&
             $this->uri->segment(1) != 'new_salary_allowance' &&
+            $this->uri->segment(1) != 'edit_salary_allowance' &&
             $this->uri->segment(1) != 'job_role'
         ):
       ?>
