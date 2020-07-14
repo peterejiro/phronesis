@@ -104,7 +104,7 @@
 					</div>
 					<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 				</div>
-				<div class="modal-footer">
+				<div class="modal-footer bg-whitesmoke">
 					<button type="submit" class="btn btn-primary">Add Month & Year</button>
 					<button type="reset" class="btn btn-danger ml-2" data-dismiss="modal">Close</button>
 				</div>
@@ -152,7 +152,7 @@ if(!empty($payroll_years)):
 							<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 							<input type="hidden" name="payroll_month_year_id" value="<?php echo $payroll_year->payroll_month_year_id; ?>">
 						</div>
-						<div class="modal-footer">
+						<div class="modal-footer bg-whitesmoke">
 							<button type="submit" class="btn btn-primary">Edit Month & Year</button>
 							<button type="reset" class="btn btn-danger ml-2" data-dismiss="modal">Close</button>
 						</div>
