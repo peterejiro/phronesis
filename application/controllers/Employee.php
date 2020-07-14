@@ -642,6 +642,15 @@ class Employee extends CI_Controller
 
 					$this->logs->add_log($log_array);
 
+					$notification_data = array(
+						'notification_employee_id'=> $employee_id,
+						'notification_link'=> 'personal_information',
+						'notification_type' => 'Information Updated',
+						'notification_status'=> 0
+					);
+
+					$this->employees->insert_notifications($notification_data);
+
 					$msg = array(
 						'msg' => 'Employee Updated Successfully',
 						'location' => site_url('employee'),
@@ -879,6 +888,15 @@ class Employee extends CI_Controller
 							);
 
 							$this->employees->insert_employee_history($employee_history_array);
+
+							$notification_data = array(
+								'notification_employee_id'=> $employee_id,
+								'notification_link'=> 'my_transfer',
+								'notification_type' => 'New Transfer',
+								'notification_status'=> 0
+							);
+
+							$this->employees->insert_notifications($notification_data);
 
 							$msg = array(
 								'msg' => 'Employee Transfer Successful',
@@ -1330,6 +1348,15 @@ class Employee extends CI_Controller
 
 							$this->employees->insert_employee_history($employee_history_array);
 
+							$notification_data = array(
+								'notification_employee_id'=> $leaf->leave_employee_id,
+								'notification_link'=> 'my_leave',
+								'notification_type' => 'Leave Extended',
+								'notification_status'=> 0
+							);
+
+							$this->employees->insert_notifications($notification_data);
+
 							$msg = array(
 								'msg' => 'Leave Updated',
 								'location' => site_url('employee_leave'),
@@ -1415,6 +1442,15 @@ class Employee extends CI_Controller
 								);
 
 								$this->employees->insert_employee_history($employee_history_array);
+
+								$notification_data = array(
+									'notification_employee_id'=> $leaf->leave_employee_id,
+									'notification_link'=> 'my_leave',
+									'notification_type' => 'Leave Approved',
+									'notification_status'=> 0
+								);
+
+								$this->employees->insert_notifications($notification_data);
 
 								$msg = array(
 									'msg' => 'Leave Approved',
@@ -1508,8 +1544,17 @@ class Employee extends CI_Controller
 
 								$this->employees->insert_employee_history($employee_history_array);
 
+								$notification_data = array(
+									'notification_employee_id'=> $leaf->leave_employee_id,
+									'notification_link'=> 'my_leave',
+									'notification_type' => 'Leave Discarded',
+									'notification_status'=> 0
+								);
+
+								$this->employees->insert_notifications($notification_data);
+
 								$msg = array(
-									'msg' => 'Leave Discaarded',
+									'msg' => 'Leave Discarded',
 									'location' => site_url('employee_leave'),
 									'type' => 'success'
 
@@ -1761,6 +1806,26 @@ class Employee extends CI_Controller
 						endforeach;
 
 						if ($query == true):
+
+
+
+							$notification_data = array(
+								'notification_employee_id'=> $employee_id,
+								'notification_link'=> 'appraisals',
+								'notification_type' => 'Appraisal Started',
+								'notification_status'=> 0
+							);
+
+							$this->employees->insert_notifications($notification_data);
+
+							$notification_data = array(
+								'notification_employee_id'=> $supervisor_id,
+								'notification_link'=> 'appraise_employee',
+								'notification_type' => 'New Employee to be Aprraised',
+								'notification_status'=> 0
+							);
+
+							$this->employees->insert_notifications($notification_data);
 							$msg = array(
 								'msg' => 'Appraisal Started',
 								'location' => site_url('employee_appraisal'),
@@ -1981,6 +2046,17 @@ class Employee extends CI_Controller
 
 					if($query == true):
 
+
+
+						$notification_data = array(
+							'notification_employee_id'=> $termination_employee_id,
+							'notification_link'=> 'employee_resignation',
+							'notification_type' => 'Termination Notice',
+							'notification_status'=> 0
+						);
+
+						$this->employees->insert_notifications($notification_data);
+
 						$msg = array(
 							'msg' => 'Employee Terminated',
 							'location' => site_url('employee'),
@@ -2141,6 +2217,18 @@ class Employee extends CI_Controller
 							$query = $this->employees->update_resignation($resignation_id, $resignation_array);
 
 							if($query == true):
+
+								$resignation = $this->employees->get_resignation($resignation_id);
+
+								$notification_data = array(
+									'notification_employee_id'=> $resignation->resignation_employee_id,
+									'notification_link'=> 'employee_resignation',
+									'notification_type' => 'Resignation Approved',
+									'notification_status'=> 0
+								);
+
+								$this->employees->insert_notifications($notification_data);
+
 								$msg = array(
 									'msg' => 'Resignation Approved',
 									'location' => site_url('resignations'),
@@ -2224,6 +2312,16 @@ class Employee extends CI_Controller
 							$query = $this->employees->update_resignation($resignation_id, $resignation_array);
 
 							if($query == true):
+								$resignation = $this->employees->get_resignation($resignation_id);
+
+								$notification_data = array(
+									'notification_employee_id'=> $resignation->resignation_employee_id,
+									'notification_link'=> 'employee_resignation',
+									'notification_type' => 'Resignation Discarded',
+									'notification_status'=> 0
+								);
+
+								$this->employees->insert_notifications($notification_data);
 								$msg = array(
 									'msg' => 'Resignation Discarded',
 									'location' => site_url('resignations'),
@@ -2353,6 +2451,15 @@ class Employee extends CI_Controller
 
 					if($query == true):
 
+						$notification_data = array(
+							'notification_employee_id'=> $employee_id,
+							'notification_link'=> 'my_queries',
+							'notification_type' => 'New Query',
+							'notification_status'=> 0
+						);
+
+					$this->employees->insert_notifications($notification_data);
+
 						$msg = array(
 							'msg' => 'Query Submitted',
 							'location' => site_url('query_employee').'/'.$employee_id,
@@ -2461,6 +2568,15 @@ class Employee extends CI_Controller
 
 		);
 
+		$notification_data = array(
+			'notification_employee_id'=> $query_responder_id,
+			'notification_link'=> 'view_my_query/'.$query_id,
+			'notification_type' => 'Respond to an Open Query',
+			'notification_status'=> 0
+		);
+
+		$this->employees->insert_notifications($notification_data);
+
 		echo $this->employees->insert_query_response($response_array);
 
 
@@ -2508,6 +2624,16 @@ class Employee extends CI_Controller
 						$query = $this->employees->update_query($query_id, $query_array);
 
 						if($query == true):
+							$queri = $this->employees->get_query($query_id);
+
+							$notification_data = array(
+								'notification_employee_id'=> $queri->query_employee_id,
+								'notification_link'=> 'my_queries',
+								'notification_type' => 'Query Closed',
+								'notification_status'=> 0
+							);
+
+							$this->employees->insert_notifications($notification_data);
 
 							$msg = array(
 								'msg' => 'Query closed',
@@ -2631,6 +2757,20 @@ class Employee extends CI_Controller
 
 					if($query == true):
 
+						$employees = $this->employees->view_employees();
+
+					foreach ($employees as $employee):
+
+						$notification_data = array(
+							'notification_employee_id'=> $employee->employee_id,
+							'notification_link'=> 'my_memos',
+							'notification_type' => 'New Announcement',
+							'notification_status'=> 0
+						);
+
+						$this->employees->insert_notifications($notification_data);
+
+					endforeach;
 						$msg = array(
 							'msg' => 'Memo Sent',
 							'location' => site_url('memo'),
@@ -2869,6 +3009,22 @@ class Employee extends CI_Controller
 							$memo_array = $this->security->xss_clean($memo_array);
 							//print_r($variational_payment);
 							$query = $this->employees->insert_specific_memo($memo_array);
+
+
+
+
+
+								$notification_data = array(
+									'notification_employee_id'=> $employee->employee_id,
+									'notification_link'=> 'my_specific_memos',
+									'notification_type' => 'New Memo',
+									'notification_status'=> 0
+								);
+
+								$this->employees->insert_notifications($notification_data);
+
+
+
 						endforeach;
 
 						endif;
@@ -2887,6 +3043,15 @@ class Employee extends CI_Controller
 
 							//print_r($variational_payment);
 							$query = $this->employees->insert_specific_memo($memo_array);
+
+							$notification_data = array(
+								'notification_employee_id'=> $employee->employee_id,
+								'notification_link'=> 'my_specific_memos',
+								'notification_type' => 'New Memo',
+								'notification_status'=> 0
+							);
+
+							$this->employees->insert_notifications($notification_data);
 						endforeach;
 					endif;
 
@@ -2997,11 +3162,6 @@ class Employee extends CI_Controller
 		endif;
 
 	}
-
-
-
-
-
 
 
 

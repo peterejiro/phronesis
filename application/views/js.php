@@ -216,3 +216,15 @@
 		<!-- Template JS File -->
 		<script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
+		<script>
+			$(document).ready(function(){
+				setInterval(timestamp, 7000);
+				function timestamp() {
+					$("#notifications").load(location.href + " #notifications");
+
+				}
+
+			});
+
+
+		</script>
