@@ -1,7 +1,8 @@
-<?php include(APPPATH.'\views\stylesheet.php');
-$CI =& get_instance();
-$CI->load->model('hr_configurations');
-$CI->load->model('employees');
+<?php
+  include(APPPATH.'\views\stylesheet.php');
+  $CI =& get_instance();
+  $CI->load->model('hr_configurations');
+  $CI->load->model('employees');
 ?>
 
 <body>
@@ -16,19 +17,19 @@ $CI->load->model('employees');
 					<h1>Employee Appraisal</h1>
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
-            <div class="breadcrumb-item">Employee </div>
+            <div class="breadcrumb-item">Employee Appraisal</div>
           </div>
 				</div>
         <div class="section-body">
-          <div class="section-title">All About Employee appraisals</div>
+          <div class="section-title">All About Employee Appraisals</div>
           <p class="section-lead">You can manage employee appraisals here</p>
           <div class="row">
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4>Employee appraisals</h4>
+                  <h4>All Appraisals</h4>
                   <div class="card-header-action">
-                    <button onclick="location.href='<?php echo site_url('new_employee_appraisal')?>'" type="button" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> Initiate appraisal</button>
+                    <button onclick="location.href='<?php echo site_url('new_employee_appraisal')?>'" type="button" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> Initiate Appraisal</button>
                   </div>
                 </div>
                 <div class="card-body">
@@ -38,7 +39,7 @@ $CI->load->model('employees');
                       <tr>
                         <th>Employee Name</th>
                         <th>Appraisal Period</th>
-						 <th> Supervisor Name </th>
+                        <th>Supervisor Name</th>
                         <th>Status</th>
                         <th>Actions</th>
                       </tr>
@@ -49,15 +50,17 @@ $CI->load->model('employees');
                           ?>
                           <tr>
                             <td><?php echo $appraisal->employee_last_name." ".$appraisal->employee_first_name; ?></td>
-							  <td><?php echo date("M Y", strtotime($appraisal->employee_appraisal_period_from))." - ".date("M Y", strtotime($appraisal->employee_appraisal_period_to)) ; ?></td>
-								<td> <?php $supervisor = $CI->employees->get_employee($appraisal->employee_appraisal_supervisor_id);
-									echo $supervisor->employee_last_name." ".$supervisor->employee_first_name;
-								?> </td>
-
-							  <td>
+                            <td><?php echo date("M Y", strtotime($appraisal->employee_appraisal_period_from))." - ".date("M Y", strtotime($appraisal->employee_appraisal_period_to)) ; ?></td>
+                            <td>
+                              <?php
+                                $supervisor = $CI->employees->get_employee($appraisal->employee_appraisal_supervisor_id);
+                                echo $supervisor->employee_last_name." ".$supervisor->employee_first_name;
+                              ?>
+                            </td>
+                            <td>
                               <?php if($appraisal->employee_appraisal_status == 0): ?>
                                 <div class="badge badge-warning">Running</div>
-                                     <?php else:?>
+                              <?php else:?>
                                 <div class="badge badge-dark">Finished</div>
                               <?php endif;?>
                             </td>
@@ -68,7 +71,7 @@ $CI->load->model('employees');
                                 <div class="dropdown">
                                   <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                   <div class="dropdown-menu">
-                                    <a class="dropdown-item has-icon" href="<?php echo site_url('check_appraisal_result').'/'.$appraisal->employee_appraisal_id; ?>"><i class="fas fa-file-prescription"></i>Check Appraisal Result</a>
+                                    <a class="dropdown-item has-icon" href="<?php echo site_url('check_appraisal_result').'/'.$appraisal->employee_appraisal_id; ?>"><i class="fa fa-eye"></i>View Appraisal Result</a>
                                   </div>
                                 </div>
                               <?php endif; ?>
