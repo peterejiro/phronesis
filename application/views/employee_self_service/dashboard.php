@@ -8,229 +8,160 @@ $CI->load->model('payroll_configurations');?>
 <div id="app">
 	<div class="main-wrapper container">
 		<div class="navbar-bg"></div>
-			<?php include('header.php'); ?>
+    <?php include('header.php'); ?>
+    <?php include('menu.php'); ?>
+    <div class="main-content">
+      <section class="section">
+        <div class="section-header">
+          <h1>Dashboard</h1>
+          <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="<?php echo site_url('employee_main'); ?>">Dashboard</a></div>
+          </div>
+        </div>
+        <div class="section-body">
+          <div class="row">
+            <div class="col-12 mb-4">
+              <div class="hero bg-primary text-white">
+                <div class="hero-inner">
+                  <h2> <?php
+                    $dob = $employee->employee_dob;
+                    $date = DateTime::createFromFormat("Y-m-d", $dob);
+                    $_dob = $date->format("m")."-".$date->format("d");
+                    $today = date('Y-m-d');
+                    $dates = DateTime::createFromFormat("Y-m-d", $today);
+                    $_today = $dates->format("m")."-".$dates->format("d");
+                    if($_dob == $_today){ echo "Happy Birthday,"; } else {
+                      echo "Welcome,";
+                    } ?> <?php echo $user_data->user_name; ?> </h2>
+                  <p class="lead" id="timestamp"></p>
+                </div>
+                <?php if($_dob == $_today){ ?>
+                  <canvas id="birthday" style="height: 50vh; display: inherit"></canvas>
+                <?php } ?>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 col-md-12 col-12 col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Recent Announcements</h4>
+                </div>
+                <div class="card-body">
+                  <ul class="list-unstyled list-unstyled-border">
+                    <?php if(!empty($memos)):
+                      $count = 1;
+                    foreach($memos as $memo):
+                    ?>
+                    <li class="media">
+                      <div class="media-body">
+                        <small class="float-right text-primary"><?php echo date('F j, Y', strtotime($memo->memo_date)); ?></small>
+                        <div class="media-title"><?php echo $memo->memo_subject; ?></div>
+                        <span class="text-small text-muted"><?php echo $memo->memo_body; ?></span>
+                      </div>
+                    </li>
+                    <?php
+                    if($count == 5 ):
+                      break;
+                    endif;
+                    $count++;
+                    endforeach;
+                    endif;
+                    ?>
+                  </ul>
+                  <div class="text-center pt-1 pb-1">
+                    <a href="<?php echo site_url('my_memos'); ?>" class="btn btn-primary btn-lg btn-round">
+                      View All
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h4>Recent Memos</h4>
+                </div>
+                <div class="card-body">
+                  <ul class="list-unstyled list-unstyled-border">
+                    <?php if(!empty($specific_memos)):
+                      $count = 1;
+                      foreach($specific_memos as $memo):
+                        ?>
+                        <li class="media">
+                          <div class="media-body">
+                            <small class="float-right text-primary"><?php echo date('F j, Y', strtotime($memo->specific_memo_date)); ?></small>
+                            <div class="media-title"><?php echo $memo->specific_memo_subject; ?></div>
+                            <span class="text-small text-muted"><?php echo $memo->specific_memo_body; ?></span>
+                          </div>
+                        </li>
+                        <?php
+                        if($count == 5 ):
+                          break;
+                        endif;
+                        $count++;
+                      endforeach;
+                    endif;
+                    ?>
+                  </ul>
+                  <div class="text-center pt-1 pb-1">
+                    <a href="<?php echo site_url('my_specific_memos'); ?>" class="btn btn-primary btn-lg btn-round">
+                      View All
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h4>Recent Queries</h4>
+                </div>
+                <div class="card-body">
+                  <ul class="list-unstyled list-unstyled-border">
+                    <?php if(!empty($queries)):
+                      $count = 0;
+                      foreach($queries as $query):
+                        ?>
+                        <li class="media">
+                          <div class="media-body">
+                            <small class="float-right text-primary"><?php echo date('F j, Y', strtotime($query->query_date)); ?></small>
+                            <div class="media-title"><?php echo $query->query_subject; ?> - <?php if($query->query_status == 1){ echo "Opened"; } if($query->query_status == 0){ echo "Closed"; } ?></div>
+                            <span class="text-small text-muted"><?php echo strip_tags($query->query_body); ?></span>
+                          </div>
+                        </li>
+                        <?php
+                        if($count == 5 ):
+                          break;
+                        endif;
 
-			<?php include('menu.php'); ?>
-
-		<!-- Main Content -->
-
-				<div class="main-content">
-					<section class="section">
-						<div class="section-header">
-							<h1>Dashboard</h1>
-							<div class="section-header-breadcrumb">
-								<div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
-
-							</div>
-						</div>
-						<div class="section-body">
-							<div class="hero bg-primary text-white">
-								<div class="hero-inner">
-									<h2> <?php
-										$dob = $employee->employee_dob;
-										$date = DateTime::createFromFormat("Y-m-d", $dob);
-										$_dob = $date->format("m")."-".$date->format("d");
-
-										$today = date('Y-m-d');
-										$dates = DateTime::createFromFormat("Y-m-d", $today);
-										$_today = $dates->format("m")."-".$dates->format("d");
-
-
-
-										if($_dob == $_today){ echo "Happy Birthday,"; } else {
-										echo "Welcome,";
-										} ?> <?php echo $user_data->user_name; ?> </h2>
-									<p class="lead" id="timestamp"></p>
-
-								</div>
-								<?php if($_dob == $_today){ ?>
-								<canvas id="birthday" style="height: 50vh; display: inherit"></canvas>
-
-								<?php } ?>
-							</div>
-
-<!--							<div class="hero bg-primary text-white">-->
-<!--								<div class="hero-inner">-->
-<!--									<h2>Happy Birthday </h2>-->
-<!--									</div>-->
-<!---->
-<!---->
-<!--							</div>-->
-
-
-
-
-
-							<div class="row">
-								<div class="col-lg-6 col-md-12 col-12 col-sm-12">
-									<div class="card">
-										<div class="card-header">
-											<h4>Recent Announcements</h4>
-										</div>
-										<div class="card-body">
-											<ul class="list-unstyled list-unstyled-border">
-
-												<?php if(!empty($memos)):
-
-													$count = 1;
-												foreach($memos as $memo):
-												?>
-
-
-												<li class="media">
-
-													<div class="media-body">
-														<div class="float-right text-primary"><?php echo $memo->memo_date; ?></div>
-														<div class="media-title"><?php echo $memo->memo_subject; ?></div>
-														<span class="text-small text-muted"><?php echo $memo->memo_body; ?></span>
-													</div>
-												</li>
-
-												<?php
-												if($count == 5 ):
-
-													break;
-
-												endif;
-
-												$count++;
-												endforeach;
-												endif;
-												?>
-
-											</ul>
-											<div class="text-center pt-1 pb-1">
-												<a href="<?php echo site_url('my_memos'); ?>" class="btn btn-primary btn-lg btn-round">
-													View All
-												</a>
-											</div>
-										</div>
-									</div>
-
-									<div class="card">
-										<div class="card-header">
-											<h4>Recent Memos</h4>
-										</div>
-										<div class="card-body">
-											<ul class="list-unstyled list-unstyled-border">
-
-												<?php if(!empty($specific_memos)):
-
-													$count = 1;
-													foreach($specific_memos as $memo):
-														?>
-
-
-														<li class="media">
-
-															<div class="media-body">
-																<div class="float-right text-primary"><?php echo $memo->specific_memo_date; ?></div>
-																<div class="media-title"><?php echo $memo->specific_memo_subject; ?></div>
-																<span class="text-small text-muted"><?php echo $memo->specific_memo_body; ?></span>
-															</div>
-														</li>
-
-														<?php
-														if($count == 5 ):
-
-															break;
-
-														endif;
-
-														$count++;
-													endforeach;
-												endif;
-												?>
-
-											</ul>
-											<div class="text-center pt-1 pb-1">
-												<a href="<?php echo site_url('my_specific_memos'); ?>" class="btn btn-primary btn-lg btn-round">
-													View All
-												</a>
-											</div>
-										</div>
-									</div>
-
-									<div class="card">
-										<div class="card-header">
-											<h4>Recent Queries</h4>
-										</div>
-										<div class="card-body">
-											<ul class="list-unstyled list-unstyled-border">
-												<?php if(!empty($queries)):
-													$count = 0;
-													foreach($queries as $query):
-														?>
-														<li class="media">
-
-															<div class="media-body">
-
-																<div class="float-right text-primary"><?php echo $query->query_date; ?></div>
-																<div class="media-title"><?php echo $query->query_subject; ?> - <?php if($query->query_status == 1){ echo "Opened"; } if($query->query_status == 0){ echo "Closed"; } ?></div>
-																<span class="text-small text-muted"><?php echo strip_tags($query->query_body); ?></span>
-															</div>
-														</li>
-
-														<?php
-														if($count == 5 ):
-
-															break;
-
-														endif;
-
-														$count++;
-													endforeach;
-												endif;
-												?>
-
-											</ul>
-											<div class="text-center pt-1 pb-1">
-												<a href="<?php echo site_url('my_queries'); ?>" class="btn btn-primary btn-lg btn-round">
-													View All
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-6 col-md-12 col-12 col-sm-12">
-									<div class="card">
-										<div class="card-header">
-											<h4>Calendar</h4>
-										</div>
-									<div class="card-body">
-										<div class="fc-overflow">
-											<div id="myEvent"></div>
-										</div>
-									</div>
-									</div>
-
-									<div class="card">
-										<div class="card-header">
-											<h4>Weather Forecast</h4>
-										</div>
-										<div class="card-body">
-											<script src="https://apps.elfsight.com/p/platform.js" defer></script>
-											<div class="elfsight-app-94db080b-fd1a-434a-a153-c96187c02ee5"></div>
-
-										</div>
-									</div>
-
-								</div>
-
-							</div>
-
-
-							<div class="row">
-
-								<div class="col-lg-6 col-md-12 col-12 col-sm-12">
-
-								</div>
-							</div>
-
-
-					</section>
-				</div>
-
+                        $count++;
+                      endforeach;
+                    endif;
+                    ?>
+                  </ul>
+                  <div class="text-center pt-1 pb-1">
+                    <a href="<?php echo site_url('my_queries'); ?>" class="btn btn-primary btn-lg btn-round">
+                      View All
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-12 col-sm-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Calendar</h4>
+                </div>
+                <div class="card-body">
+                  <div class="fc-overflow">
+                    <div id="myEvent"></div>
+                  </div>
+                </div>
+              </div>
+              <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+              <div class="elfsight-app-94db080b-fd1a-434a-a153-c96187c02ee5"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
 		<?php include(APPPATH.'\views\footer.php'); ?>
 	</div>
 </div>
