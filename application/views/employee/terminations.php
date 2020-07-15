@@ -9,10 +9,10 @@
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1> Terminations</h1>
+					<h1>Employee Terminations</h1>
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
-            <div class="breadcrumb-item">View Terminations</div>
+            <div class="breadcrumb-item">Employee Terminations</div>
           </div>
 				</div>
         <div class="section-body">
@@ -22,20 +22,17 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4>Terminations</h4>
-                  <div class="card-header-action">
-                   </div>
+                  <h4>All Terminations</h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table id="datatable-buttons" class="table table-striped table-bordered table-md">
+                    <table id="datatable-buttons-2" class="table table-striped table-bordered table-md">
                       <thead>
                         <tr>
                           <th>Employee ID</th>
                           <th>Employee Name</th>
                           <th>Termination Reason</th>
                           <th>Effective Date</th>
-
                         </tr>
                       </thead>
                       <tbody>
@@ -65,8 +62,6 @@
 		</div>
 	</div>
 </div>
-
-
 <?php include(APPPATH.'\views\footer.php'); ?>
 <?php include(APPPATH.'\views\js.php'); ?>
 </body>
