@@ -10,32 +10,30 @@
 			<section class="section">
 				<div class="section-header">
           <div class="section-header-back">
-            <a href="<?php echo site_url('variational_payment')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+            <a href="<?php echo site_url('specific_memo')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
           </div>
-					<h1>New specific memo</h1>
+					<h1>New Directive</h1>
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
-            <div class="breadcrumb-item active"><a href="<?php echo site_url('specific_memo')?>">specific memos</a></div>
-            <div class="breadcrumb-item">New Specific memo</div>
+            <div class="breadcrumb-item active"><a href="<?php echo site_url('specific_memo')?>">Directives</a></div>
+            <div class="breadcrumb-item">New Directive</div>
           </div>
 				</div>
         <div class="section-body">
-          <div class="section-title">New Specific memo</div>
-          <p class="section-lead">You can add a new specific memo for employees or departments here</p>
+          <div class="section-title">All About Creating New Directives</div>
+          <p class="section-lead">You can add a new directive memo for employees or departments here</p>
           <div class="row">
             <div class="col-12">
               <form class="needs-validation" novalidate method="post" action="<?php echo site_url('add_specific_memo'); ?>">
                 <div class="card card-primary">
                   <div class="card-header">
-                    <h4>New specific memo Form</h4>
-
+                    <h4>New Directive Memo Form</h4>
                   </div>
                   <div class="card-body">
                     <div class="form-group row">
-
                       <div class="col-sm-6">
                         <label> Category</label><span style="color: red"> *</span>
-                        <select id="category" class="selectric form-control mb-3 custom-select" required name="category" onchange="toogle_employee_department()" style="width: 100%; height:56px;">
+                        <select id="category" class="select2 form-control" required name="category" onchange="toogle_employee_department()" style="width: 100%; height:42px !important;">
                           <option value=""> -- Select -- </option>
                           <option value="1">  Department </option>
                           <option value="0">  Employees  </option>
@@ -46,7 +44,7 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <div class="col-sm-6" id="departments">
+                      <div class="col-sm-6" id="departments" style="display: none">
                         <label> Department</label>
                         <select id="payment_type" class="selectric form-control" name="department_id" style="width: 100%; height:42px !important;">
                           <option value=""> -- Select -- </option>
@@ -55,9 +53,9 @@
 				                  <?php endforeach; ?>
                         </select>
                       </div>
-                      <div class="col-sm-6" id="employees">
+                      <div class="col-sm-6" id="employees" style="display: none">
                         <label>Employees</label>
-                        <select class="selectric mb-3 select2-multiple" style="width: 100%" multiple data-placeholder="Choose" name="employee_ids[]">
+                        <select class="select2 select2-multiple" style="width: 100%; height: 42px !important;" multiple data-placeholder="Choose" name="employee_ids[]">
                           <option value="" disabled> -- Select -- </option>
 				                  <?php foreach ($employees as $employee):
 					                  if(($employee->employee_status == 0) or ($employee->employee_status == 3)):
@@ -68,25 +66,21 @@
 				                  endforeach; ?>
                         </select>
                       </div>
-
                     </div>
-
-					  <div class="form-group">
-						  <label>Memo Subject</label><span style="color: red"> *</span>
-						  <input type="text" class="form-control" name="memo_subject" required  placeholder="Enter Memo Subject"/>
-					  </div>
-
-
-					  <div class="form-group row">
-						  <div class="col-sm-12">
-							  <label>Memo Body</label><span style="color: #ff0000"> *</span>
-							  <textarea class="summernote" required name="memo_body">  </textarea>
-						  </div>
-
-					  </div>
-
-
-					  <input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
+                    <div class="form-group">
+                      <label>Memo Subject</label><span style="color: red"> *</span>
+                      <input type="text" class="form-control" name="memo_subject" required  placeholder="Enter Memo Subject"/>
+                      <div class="invalid-feedback">
+                        please fill in a subject
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-sm-12">
+                        <label>Memo Body</label><span style="color: #ff0000"> *</span>
+                        <textarea class="summernote" required name="memo_body"></textarea>
+                      </div>
+                    </div>
+        					  <input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
                   </div>
                   <div class="card-footer text-right bg-whitesmoke">
                     <button type="submit" class="btn btn-primary">Submit</button>
