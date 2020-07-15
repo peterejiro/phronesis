@@ -202,15 +202,15 @@
 				<div class="d-sm-none d-lg-inline-block">Hi, <?php echo $user_data->user_name; ?></div></a>
 			<div class="dropdown-menu dropdown-menu-right">
 				<div class="dropdown-title">Logged in for <br/><?php echo timespan($this->session->userdata('login_time'), time(), 2)?></div>
-				<a href="features-profile.html" class="dropdown-item has-icon">
-					<i class="far fa-user"></i> Profile
-				</a>
-				<a href="features-activities.html" class="dropdown-item has-icon">
+				<a href="<?php echo site_url('view_log')?>" class="dropdown-item has-icon">
 					<i class="fas fa-bolt"></i> Activities
+				</a>
+				<a href="#" class="dropdown-item has-icon">
+					<i class="fas fa-cog"></i> Settings
 				</a>
 				<?php if($user_data->user_type == 3): ?>
 				<a href="<?php echo base_url('employee_main') ?>" class="dropdown-item has-icon">
-					<i class="fas fa-cog"></i> Switch to Self Service
+					<i class="fas fa-arrow-circle-right"></i> Switch to Self-Service
 				</a>
 				<?php endif; ?>
 				<div class="dropdown-divider"></div>

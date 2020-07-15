@@ -1,6 +1,7 @@
-<?php include(APPPATH.'\views\stylesheet.php');
-$CI =& get_instance();
-$CI->load->model('hr_configurations');
+<?php
+  include(APPPATH.'\views\stylesheet.php');
+  $CI =& get_instance();
+  $CI->load->model('hr_configurations');
 ?>
 
 <body>
@@ -12,31 +13,27 @@ $CI->load->model('hr_configurations');
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
+          <div class="section-header-back">
+            <a href="<?php echo site_url('query_employee').'/'.$employee->employee_id; ?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+          </div>
 					<h1>View Query</h1>
 					<div class="section-header-breadcrumb">
 						<div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
-						<div class="breadcrumb-item active"><a href="<?php echo site_url('query_employee').'/'.$employee->employee_id; ?>">Manage Employee Queries</a></div>
-						<div class="breadcrumb-item">View Query Activity</div>
+						<div class="breadcrumb-item active"><a href="<?php echo site_url('employee'); ?>">Manage Employees</a></div>
+						<div class="breadcrumb-item active"><a href="<?php echo site_url('query_employee').'/'.$employee->employee_id; ?>">Employee Queries</a></div>
+						<div class="breadcrumb-item">View Query</div>
 					</div>
 				</div>
-
 				<div class="section-body">
-					<h2 class="section-title">View Query</h2>
-					<p class="section-lead">
-						You can respond to queries here
-					</p>
-
+					<h2 class="section-title">All About Viewing Queries</h2>
+					<p class="section-lead">You can view details of and respond to queries here</p>
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h4>Queries</h4>
+									<h4>Query Thread</h4>
 								</div>
 								<div class="card-body">
-									<a href="#" class="btn btn-primary btn-icon icon-left btn-lg btn-block mb-4 d-md-none" data-toggle-slide="#ticket-items">
-										<i class="fas fa-list"></i> All Tickets
-									</a>
-
 									<div class="tickets">
 										<div class="ticket-items" id="ticket-items">
 											<div class="ticket-item active">
@@ -46,14 +43,9 @@ $CI->load->model('hr_configurations');
 												<div class="ticket-desc">
 													<div><?php echo $employee->employee_first_name." ".$employee->employee_last_name; ?></div>
 													<div class="bullet"></div>
-													<div><?php echo $query->query_date ?></div>
-
-													<div class="bullet"></div>
-													<div><?php if($query->query_status == 1){ echo "Opened"; } if($query->query_status == 0){ echo "Closed"; } ?></div>
-
+													<div><?php echo date('F j, Y', strtotime($query->query_date));  ?></div>
 												</div>
 											</div>
-
 										</div>
 										<div class="ticket-content">
 											<div class="ticket-header">
@@ -67,71 +59,67 @@ $CI->load->model('hr_configurations');
 													<div class="ticket-info">
 														<div class="font-weight-600"><?php echo $employee->employee_first_name." ".$employee->employee_last_name; ?></div>
 														<div class="bullet"></div>
-														<div class="text-primary font-weight-600"><?php echo $query->query_date ?></div>
+														<div class="text-primary font-weight-600"><?php echo date('F j, Y', strtotime($query->query_date)) ?></div>
 														<div class="bullet"></div>
-														<div class="text-primary font-weight-600"><?php if($query->query_status == 1){ echo "Opened"; } if($query->query_status == 0){ echo "Closed"; } ?></div>
-														<div class="bullet"></div>
+														<?php if($query->query_status == 1): ?>
+                              <div class="text-primary font-weight-600">Open</div>
+                            <?php elseif ($query->query_status == 0):?>
+                              <div class="text-danger font-weight-600">Closed</div>
+                            <?php endif;?>
 														<?php if($query->query_status == 1):  ?>
-														<div class="text-primary font-weight-600">
-															<a href="<?php echo site_url('close_query').'/'.$query->query_id ?>"  class="btn btn-icon icon-left btn-primary" style="margin: 5vh">
-																<i class="fa fa-trash"></i>Close Query
+                              <div class="bullet"></div>
+                              <div class="text-primary font-weight-600">
+															<a href="<?php echo site_url('close_query').'/'.$query->query_id ?>"  class="btn btn-icon icon-left btn-danger">
+																<i class="fa fa-times"></i> Close Query
 															</a>
-
 														</div>
 														<?php endif; ?>
-
 													</div>
 												</div>
 											</div>
 											<div class="ticket-description">
 												<?php echo $query->query_body; ?>
-
-
-
 												<div class="ticket-divider"></div>
-
-<div id="query">
+                        <div id="query">
 												<?php
 												if(!empty($responses)):
-
 													foreach ($responses as $response): ?>
-
 												<div class="row">
 													<?php if($response->query_response_responder_id == 0): ?>
 													<div class="col-10 col-md-10 col-lg-10 offset-2">
-														<div class="card card-primary">
-															<div class="card-header">
-																<h4>Your Response - <?php echo $response->query_response_date; ?></h4>
-															</div>
-															<div class="card-body">
-																<p><?php echo $response->query_response_body; ?></p>
-															</div>
-														</div>
+                            <div class="card card-primary">
+                              <div class="card-body">
+                                <div class="d-flex w-100 justify-content-between">
+                                  <h5 class="mb-1">You</h5>
+                                  <small><?php echo timespan(strtotime($response->query_response_date), time(), 2)?> ago</small>
+                                </div>
+                                <p class="mb-1"><?php echo $response->query_response_body; ?></p>
+                                <small><?php echo date('F j, Y g:i:s a', strtotime($response->query_response_date));?></small>
+                              </div>
+                            </div>
 													</div>
 													<?php else: ?>
 													<div class="col-10 col-md-10 col-lg-10">
-														<div class="card card-primary">
-															<div class="card-header">
-																<h4>Employee Response - <?php echo $response->query_response_date; ?></h4>
-															</div>
+														<div class="card card-warning">
 															<div class="card-body">
-																<p><?php echo $response->query_response_body; ?></p>
+                                <div class="list-group">
+                                  <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"><?php echo $employee->employee_first_name?></h5>
+                                    <small><?php echo timespan(strtotime($response->query_response_date), time(), 2)?> ago</small>
+                                  </div>
+                                  <p class="mb-1"><?php echo $response->query_response_body; ?></p>
+                                  <small><?php echo date('F j, Y g:i:s a', strtotime($response->query_response_date));?></small>
+                                </div>
 															</div>
 														</div>
 													</div>
-
 													<?php endif; ?>
-
 												</div>
-
 												<?php endforeach;
 												endif;
 												?>
-
-</div>
-
+                      </div>
 												<?php if($query->query_status == 1):  ?>
-
 												<div class="ticket-form">
 													<form action="" id="response_form" method="post">
 														<div class="form-group">
@@ -146,12 +134,12 @@ $CI->load->model('hr_configurations');
 														</div>
 													</form>
 												</div>
-
 												<?php endif; ?>
 											</div>
 										</div>
 									</div>
-
+                </div>
+                <div class="card-footer bg-whitesmoke"></div>
 							</div>
 						</div>
 					</div>
