@@ -13,6 +13,7 @@ class User extends CI_Controller
 		$this->load->helper('array');
 		$this->load->model('users');
 		$this->load->model('logs');
+		$this->load->model('employees');
 	}
 
 	public function user (){
@@ -229,6 +230,8 @@ class User extends CI_Controller
 
 	public function manage_user(){
 
+		error_reporting(0);
+
 		$user_id = $this->uri->segment(2);
 		$username = $this->session->userdata('user_username');
 
@@ -265,6 +268,17 @@ class User extends CI_Controller
 							'error' => $errormsg
 						);
 						$data['error'] = $errormsg;
+
+						$check =  $this->employees->get_employee_by_unique($user_datum->user_username);
+
+						if(empty($check)):
+
+							$check = 0;
+						else:
+							$check = 1;
+							endif;
+
+							$data['check'] = $check;
 
 						$this->load->view('user/manage_user', $data);
 

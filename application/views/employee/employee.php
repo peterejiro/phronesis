@@ -36,7 +36,6 @@
                         <th>Department</th>
                         <th>Job Role</th>
                         <th>Employment Status</th>
-
                         <th class="text-center">Actions</th>
                       </tr>
                       </thead>
@@ -52,9 +51,8 @@
                               <?php
                               $status = $employee->employee_status;
                               if($status == 0):?>
-
                                 <div class="badge badge-danger">Employment Terminated</div>
-							  	<div> <p>Since: <?php echo $employee->employee_stop_date; ?></p></div>
+							  	              <div> <i>Since: <?php echo $employee->employee_stop_date; ?></i></div>
                               <?php elseif($status == 1):?>
                                 <div class="badge badge-info">Probationary</div>
                               <?php elseif($status == 2):?>

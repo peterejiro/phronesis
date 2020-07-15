@@ -76,6 +76,7 @@
             $this->uri->segment(1) != 'payroll_month_year' &&
             $this->uri->segment(1) != 'new_employee_appraisal' &&
             $this->uri->segment(1) != 'query_employee' &&
+            $this->uri->segment(1) != 'new_specific_memo' &&
             $this->uri->segment(1) != 'job_role'
         ):
       ?>

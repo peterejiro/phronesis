@@ -20,7 +20,7 @@
           </div>
 				</div>
         <div class="section-body">
-          <div class="section-title">Edit Employee Salary Structure</div>
+          <div class="section-title">All About Editing Employee Salary Structure</div>
           <p class="section-lead">You can edit an employee's salary structure here</p>
           <div class="row">
             <div class="col-md-7">
