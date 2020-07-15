@@ -8,7 +8,7 @@
 			<i class="fas fa-ellipsis-v"></i>
 		</a>
 		<ul class="navbar-nav">
-			<li class="nav-item active"><a href="#" class="nav-link">Application</a></li>
+			<li class="nav-item active"><a href="<?php echo site_url('employee_main'); ?>" class="nav-link">Application</a></li>
 			<li class="nav-item"><a href="#" class="nav-link">Help</a></li>
 			<li class="nav-item"><a href="#" class="nav-link">Docs</a></li>
 		</ul>
@@ -150,17 +150,15 @@
 
 		<?php $count = count($notifications); ?>
 		<li  class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg <?php if ($count > 0){echo "beep"; } ?>"><i class="far fa-bell"></i></a>
-
 			<div class="dropdown-menu dropdown-list dropdown-menu-right">
 				<div class="dropdown-header">Notifications
 <!--					<div class="float-right">-->
 <!--						<a href="#">Mark All As Read</a>-->
 <!--					</div>-->
 				</div>
+				<?php if(!empty($notifications)): ?>
 				<div class="dropdown-list-content dropdown-list-icons">
-					<?php if(!empty($notifications)):
-					foreach ($notifications as $notification):
-					?>
+					<?php foreach ($notifications as $notification): ?>
 					<a id="<?php echo $notification->notification_id; ?>" href="<?php echo site_url()."view_notification/".$notification->notification_id; ?>" class="dropdown-item dropdown-item-unread" onmouseover="view_notification()">
 						<div class="dropdown-item-icon bg-primary text-white">
 							<i class="fas fa-code"></i>
@@ -170,25 +168,21 @@
 							<div class="time text-primary"><?php echo $notification->notification_date; ?></div>
 						</div>
 					</a>
-					<?php endforeach;
-					else:
-
-						echo "No Notification";
-
-					endif;
-					?>
-
-
-
+					<?php endforeach; ?>
 				</div>
-
+				<?php endif; ?>
+        <?php if(empty($notifications)): ?>
+        <div class="dropdown-footer text-center">
+          No Notifications
+        </div>
+        <?php endif;?>
 			</div>
 		</li>
 		<li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
 				<img alt="image" src="<?php echo base_url(); ?>/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
 				<div class="d-sm-none d-lg-inline-block">Hi,  <?php echo $user_data->user_name; ?></div></a>
 			<div class="dropdown-menu dropdown-menu-right">
-				<div class="dropdown-title">Logged in <?php echo timespan($this->session->userdata('login_time'), time(), 2)?> ago</div>
+				<div class="dropdown-title">Logged in For <br> <?php echo timespan($this->session->userdata('login_time'), time(), 2)?></div>
 				<a href="<?php echo base_url('personal_information') ?>" class="dropdown-item has-icon">
 					<i class="far fa-user"></i> Profile
 				</a>
@@ -197,7 +191,7 @@
 				</a>
 				<?php if($user_data->user_type == 3): ?>
 					<a href="<?php echo base_url(); ?>" class="dropdown-item has-icon">
-						<i class="fas fa-cog"></i> Switch to Administrator
+						<i class="fas fa-arrow-circle-left"></i> Switch to Admin
 					</a>
 				<?php endif; ?>
 				<div class="dropdown-divider"></div>
