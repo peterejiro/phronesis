@@ -89,16 +89,12 @@
 													<div class="col-10 col-md-10 col-lg-10 offset-2">
                             <div class="card card-primary">
                               <div class="card-body">
-                                <div class="list-group">
-                                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                      <h5 class="mb-1">You</h5>
-                                      <small><?php echo timespan(strtotime($response->query_response_date), time(), 2)?> ago</small>
-                                    </div>
-                                    <p class="mb-1"><?php echo $response->query_response_body; ?></p>
-                                    <small><?php echo date('F j, Y g:i:s a', strtotime($response->query_response_date));?></small>
-                                  </a>
+                                <div class="d-flex w-100 justify-content-between">
+                                  <h5 class="mb-1">You</h5>
+                                  <small><?php echo timespan(strtotime($response->query_response_date), time(), 2)?> ago</small>
                                 </div>
+                                <p class="mb-1"><?php echo $response->query_response_body; ?></p>
+                                <small><?php echo date('F j, Y g:i:s a', strtotime($response->query_response_date));?></small>
                               </div>
                             </div>
 													</div>
@@ -107,14 +103,12 @@
 														<div class="card card-warning">
 															<div class="card-body">
                                 <div class="list-group">
-                                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                      <h5 class="mb-1"><?php echo $employee->employee_first_name?></h5>
-                                      <small><?php echo timespan(strtotime($response->query_response_date), time(), 2)?> ago</small>
-                                    </div>
-                                    <p class="mb-1"><?php echo $response->query_response_body; ?></p>
-                                    <small><?php echo date('F j, Y g:i:s a', strtotime($response->query_response_date));?></small>
-                                  </a>
+                                  <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"><?php echo $employee->employee_first_name?></h5>
+                                    <small><?php echo timespan(strtotime($response->query_response_date), time(), 2)?> ago</small>
+                                  </div>
+                                  <p class="mb-1"><?php echo $response->query_response_body; ?></p>
+                                  <small><?php echo date('F j, Y g:i:s a', strtotime($response->query_response_date));?></small>
                                 </div>
 															</div>
 														</div>
