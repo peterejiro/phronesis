@@ -84,12 +84,21 @@
                         </select>
                       </div>
                       <div class="col-sm-4">
+						  <?php  if ($check == 1):?>
                         <label>User Type</label>
                         <select name="user_type" required class="form-control select2" style="width: 100%; height:42px !important;">
                           <option value="1" <?php if($user_datum->user_type == 1){ echo "selected"; } ?>> Administrator </option>
                           <option value="2" <?php if($user_datum->user_type == 2){ echo "selected"; } ?>> Employee </option>
                           <option value="3" <?php if($user_datum->user_type == 3){ echo "selected"; } ?>>Moderator </option>
                         </select>
+						  <?php endif; ?>
+
+						  <?php  if ($check == 0):?>
+							  <label>User Type</label>
+							  <select name="user_type" required class="form-control select2" style="width: 100%; height:42px !important;">
+								  <option value="1" <?php if($user_datum->user_type == 1){ echo "selected"; } ?>> Administrator </option>
+								 </select>
+						  <?php endif; ?>
                       </div>
                     </div>
                     <div class="form-group">
