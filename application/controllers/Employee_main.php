@@ -953,7 +953,8 @@ class Employee_main extends CI_Controller
 					$data['payroll_month'] = $month;
 					$data['payroll_year'] = $year;
 					$data['user_data'] = $this->users->get_user($username);
-
+					$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+					$data['notifications'] = $this->employees->get_notifications($employee_id);
 					$data['employee'] = $this->employees->get_employee_by_unique($username);
 
 

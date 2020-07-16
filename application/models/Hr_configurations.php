@@ -504,4 +504,6 @@ class Hr_configurations extends CI_Model
 		return $query->row();
 
 	}
+
+
 }
