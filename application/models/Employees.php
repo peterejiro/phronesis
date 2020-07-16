@@ -521,5 +521,18 @@ class Employees extends CI_Model
 
 	}
 
+	public function get_my_leave_wallet($employee_id, $leave_id, $year){
+		$this->db->select('*');
+		$this->db->from('employee_leave');
+		$this->db->where('leave_employee_id', $employee_id);
+		$this->db->where('leave_leave_type', $leave_id);
+		$this->db->where('leave_status !=', 0);
+		$this->db->where('leave_status', 1);
+		$this->db->or_where('leave_status', 2);
+		$this->db->like('leave_start_date', $year);
+		return $this->db->get()->result();
+
+	}
+
 
 }
