@@ -98,8 +98,8 @@
                               <option disabled> -- Select -- </option>
 
 					                    <?php foreach ($payment_definitionss as $payment_definition):
-											if($payment_definition->payment_definition_variant == 0 && $payment_definition->payment_definition_desc == 0 ):
-											?>
+											          if($payment_definition->payment_definition_variant == 0 && $payment_definition->payment_definition_desc == 0 ):
+                              ?>
                                 <option value="<?php echo $payment_definition->payment_definition_id ?>" > <?php echo $payment_definition->payment_definition_payment_name." (".$payment_definition->payment_definition_payment_code.")"; ?> </option>
 					                    <?php
 					                    endif;
@@ -145,6 +145,19 @@
 <?php include(APPPATH.'\views\footer.php'); ?>
 <?php include(APPPATH.'\views\js.php'); ?>
 <script>
+  window.onload = function() {
+    let salary_structure_type = document.getElementById('salary_structure_type').value;
+    console.log(salary_structure_type);
+    if (salary_structure_type == 1) {
+      let elem = document.getElementById("allowances");
+      let inputs = elem.getElementsByTagName('input');
+      let selects = elem.getElementsByTagName('select');
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].setAttribute('disabled', 'disabled');
+        selects[i].setAttribute('disabled', 'disabled');
+      }
+    }
+  }
   let count = 1;
   function clone_div() {
     let elem = document.getElementById('allowance');
@@ -188,10 +201,24 @@
     if(salary_structure_type == 1){
       document.getElementById("allowances").style.display='none';
       document.getElementById("salary_structure_category").style.display='block';
+      let elem = document.getElementById("allowances");
+      let inputs = elem.getElementsByTagName('input');
+      let selects = elem.getElementsByTagName('select');
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].setAttribute('disabled', 'disabled');
+        selects[i].setAttribute('disabled', 'disabled');
+      }
     }
     if(salary_structure_type == 0){
       document.getElementById("salary_structure_category").style.display = 'none';
       document.getElementById("allowances").style.display='block';
+      let elem = document.getElementById("allowances");
+      let inputs = elem.getElementsByTagName('input');
+      let selects = elem.getElementsByTagName('select');
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].removeAttribute('disabled');
+        selects[i].removeAttribute('disabled');
+      }
     }
   }
 </script>

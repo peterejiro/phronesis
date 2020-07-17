@@ -91,7 +91,7 @@
                               <div class="card-body">
                                 <div class="d-flex w-100 justify-content-between">
                                   <h5 class="mb-1">You</h5>
-                                  <small><?php echo timespan(strtotime($response->query_response_date), time(), 2)?> ago</small>
+                                  <small><?php echo timespan(strtotime($response->query_response_date), now('Africa/Lagos'), 2)?> ago</small>
                                 </div>
                                 <p class="mb-1"><?php echo $response->query_response_body; ?></p>
                                 <small><?php echo date('F j, Y g:i:s a', strtotime($response->query_response_date));?></small>
@@ -105,7 +105,7 @@
                                 <div class="list-group">
                                   <div class="d-flex w-100 justify-content-between">
                                     <h5 class="mb-1"><?php echo $employee->employee_first_name?></h5>
-                                    <small><?php echo timespan(strtotime($response->query_response_date), time(), 2)?> ago</small>
+                                    <small><?php echo timespan(strtotime($response->query_response_date), now('Africa/Lagos'), 2)?> ago</small>
                                   </div>
                                   <p class="mb-1"><?php echo $response->query_response_body; ?></p>
                                   <small><?php echo date('F j, Y g:i:s a', strtotime($response->query_response_date));?></small>
