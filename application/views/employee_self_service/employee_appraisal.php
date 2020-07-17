@@ -18,7 +18,7 @@ $CI->load->model('payroll_configurations');?>
 				<div class="section-header">
 					<h1>Employee Appraisal</h1>
 					<div class="section-header-breadcrumb">
-						<div class="breadcrumb-item active"><a href="<?php echo base_url('employee_main'); ?>">Dashboard</a></div>
+						<div class="breadcrumb-item active"><a href="<?php echo site_url('employee_main'); ?>">Dashboard</a></div>
 						<div class="breadcrumb-item">Appraisals </div>
 					</div>
 				</div>

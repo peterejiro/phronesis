@@ -1,32 +1,25 @@
 
 
-<?php include(APPPATH.'\views\stylesheet.php');
-$CI =& get_instance();
-$CI->load->model('hr_configurations');
-$CI->load->model('payroll_configurations');
-$CI->load->model('employees');
+<?php
+  include(APPPATH.'\views\stylesheet.php');
+  $CI =& get_instance();
+  $CI->load->model('hr_configurations');
+  $CI->load->model('payroll_configurations');
+  $CI->load->model('employees');
 ?>
-
 
 <body class="layout-3">
 <div id="app">
 	<div class="main-wrapper container">
 		<div class="navbar-bg"></div>
 		<?php include('header.php'); ?>
-
 		<?php include('menu.php'); ?>
-
-		<!-- Main Content -->
-
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<div class="section-header-back">
-						<a href="<?php echo site_url()?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
-					</div>
 					<h1>New Leave</h1>
 					<div class="section-header-breadcrumb">
-						<div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
+						<div class="breadcrumb-item active"><a href="<?php echo site_url('employee_main'); ?>">Dashboard</a></div>
 						<div class="breadcrumb-item">New Leave</div>
 					</div>
 				</div>

@@ -23,7 +23,7 @@ $CI->load->model('employees');
 				<div class="section-header">
 					<h1> New Loan</h1>
 					<div class="section-header-breadcrumb">
-						<div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
+						<div class="breadcrumb-item active"><a href="<?php echo site_url('employee_main'); ?>">Dashboard</a></div>
 						<div class="breadcrumb-item">New Loan</div>
 					</div>
 				</div>
