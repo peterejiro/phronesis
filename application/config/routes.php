@@ -243,6 +243,8 @@ $route['deduction_report'] = 'payroll_report/deduction_report';
 $route['pay_order'] = 'payroll_report/pay_order';
 $route['pay_order_report'] = 'payroll_report/pay_order_report';
 
+$route['enroll_employee'] = 'biometrics/enroll_employee';
+
 
 
 
