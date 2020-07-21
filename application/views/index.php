@@ -6,7 +6,6 @@
 			<div class="navbar-bg"></div>
 			<?php include('topbar.php'); ?>
 			<?php include('sidebar.php'); ?>
-
 			<div class="main-content">
 				<section class="section">
 					<div class="section-header">
@@ -79,7 +78,7 @@
                       <h4>Online Users</h4>
                     </div>
                     <div class="card-body">
-                      47
+                      <?php echo count($online_users);?>
                     </div>
                   </div>
                 </div>
