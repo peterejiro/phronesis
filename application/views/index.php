@@ -91,10 +91,8 @@
                     <h4>Employees On Leave</h4>
                   </div>
                   <div class="card-body">
-
                     <?php foreach ($leaves as $leave):
                     if($leave->leave_status == 2):
-
                       endif;
 
                     if($leave->leave_status == 1):
@@ -107,7 +105,8 @@
                       ?>
 
                     <div class="mb-4">
-                      <div class="text-small float-right font-weight-bold text-muted"><?php echo number_format($percentage_leave, 1)."%" ?></div>
+                      <div class="text-small float-right font-weight-bold text-muted"><?php echo timespan($today, $leave_end_date->getTimestamp(), 2).' left' ?> (<?php echo number_format($percentage_leave)."%" ?> completed)</div>
+<!--                      <div class="text-small float-right font-weight-bold text-muted">--><?php //echo number_format($percentage_leave, 1)."%" ?><!--</div>-->
                       <div class="font-weight-bold mb-1"><?php echo $leave->employee_first_name." ".$leave->employee_last_name; ?></div>
                       <div class="progress" data-height="3">
                         <div class="progress-bar" role="progressbar" data-width="<?php echo $percentage_leave."%" ?>" aria-valuenow="<?php echo $percentage_leave; ?>" aria-valuemin="0" aria-valuemax="100"></div>
