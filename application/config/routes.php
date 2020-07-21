@@ -244,6 +244,11 @@ $route['pay_order'] = 'payroll_report/pay_order';
 $route['pay_order_report'] = 'payroll_report/pay_order_report';
 
 $route['enroll_employee'] = 'biometrics/enroll_employee';
+//$route['checkreg/:num/(:any)'] = 'biometrics/checkreg/$1/$2';
+$route['checkreg'] = 'biometrics/checkreg';
+$route['reg/:num'] = 'biometrics/reg/$1';
+$route['messages/(:any)'] = 'biometrics/messages/$1';
+$route['message/(:any)'] = 'biometrics/message/$1';
 
 
 

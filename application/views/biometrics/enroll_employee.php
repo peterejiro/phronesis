@@ -59,8 +59,11 @@ $CI->load->model('biometric');
 						<?php	else: ?>
 									<div class="badge badge-success">Enrolled</div>
 
-							<?php	endif; ?>
+							<?php	endif;
 
+
+							?>
+								<code id="<?php echo "user_finger_".$employee->employee_id; ?>"> <?php echo count($check_biometrics); ?></code>
 
 								</td>
 
@@ -148,21 +151,22 @@ $CI->load->model('biometric');
 		timer_register = $.timer(timeout, function() {
 			console.log("'"+user_name+"' registration checking...");
 			user_checkregister(user_id,$("#user_finger_"+user_id).html());
-			if (ct>=limit || regStats==1)
+			if (ct>=limit || regStats===1)
 			{
 				timer_register.stop();
 				console.log("'"+user_name+"' registration checking end");
-				if (ct>=limit && regStats==0)
+
+				if (ct>=limit && regStats===0)
 				{
 					alert("'"+user_name+"' registration fail!");
 					$('body').ajaxMask({ stop: true });
 				}
-				if (regStats==1)
+				if (regStats===1)
 				{
 					$("#user_finger_"+user_id).html(regCt);
 					alert("'"+user_name+"' registration success!");
 					$('body').ajaxMask({ stop: true });
-					load('user.php?action=index');
+					//load('user.php?action=index');
 				}
 			}
 			ct++;
@@ -171,19 +175,21 @@ $CI->load->model('biometric');
 
 	function user_checkregister(user_id, current) {
 		$.ajax({
-			url			:	"<?php echo site_url('checkreg') ?>/"+user_id+"/"+current,
+			url			:	"<?php echo site_url('checkreg') ?>",
 			//url			:	"user.php?action=checkreg&user_id="+user_id+"&current="+current,
 			type		:	"GET",
+			data: {username:user_id,current:current},
 			success		:	function(data)
 			{
 				try
 				{
-					var res = jQuery.parseJSON(data);
+					//var res = jQuery.parseJSON(data);
+					var res = data;
 					if (res.result)
 					{
 						regStats = 1;
 						$.each(res, function(key, value){
-							if (key=='current')
+							if (key ==='current')
 							{
 								regCt = value;
 							}

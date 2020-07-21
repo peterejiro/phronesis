@@ -63,25 +63,33 @@ class Biometrics extends CI_Controller
 
 	}
 
-	public function check_reg(){
+	public function checkreg(){
 
-		$employee_id = $this->uri->segment(2);
-		$current = $this->uri->segment(3);
+//		$employee_id = $this->uri->segment(2);
+//		$current = $this->uri->segment(3);
+
+		$employee_id = $_GET['username'];
+		$current = $_GET['current'];
+
+		$employee_id = 10;
+		$current = 0;
 
 		$ct = $this->biometric->get_employee_biometric($employee_id);
 
 		$ct = count($ct);
 		//$data1['ct'];
 
-		if (intval($ct) > intval($current)) {
+		if (intval($ct) > intval($current)) :
 			$res['result'] = true;
 			$res['current'] = intval($ct);
-		}
-		else
-		{
+
+		else:
+
 			$res['result'] = false;
-		}
-		echo json_encode($res);
+
+			echo json_encode($res);
+
+		endif;
 
 	}
 
@@ -109,8 +117,8 @@ class Biometrics extends CI_Controller
 			$regTemp 	= $data[3];
 
 			//$device = getDeviceBySn($sn);
-			$ac = '';
-			$vkey ='';
+			$ac = 'NWVBAFB710662F041883ANCK';
+			$vkey ='F70753028EDAB72D526F2BE2C549E473';
 
 			//$salt = md5($device[0]['ac'].$device[0]['vkey'].$regTemp.$sn.$employee_id);
 
@@ -182,32 +190,108 @@ class Biometrics extends CI_Controller
 	public function message(){
 
 		$employee_id = $this->uri->segment(2);
-
-
-		if (!empty($employee_id)) {
-
-			$time= date('Y-m-d H:i:s', strtotime($_GET['time']));
-
-			echo $employee_id." login success on ".date('Y-m-d H:i:s', strtotime($time));
-
-		}  else {
-
+		if($employee_id == 'a'){
 			$msg = "Parameter invalid..";
 
 			echo "$msg";
 
+		}else{
+			$time= date('Y-m-d H:i:s', time());
+
+			echo $employee_id." login success on ".date('Y-m-d H:i:s', strtotime($time));
+
 		}
+//		if (!empty($employee_id)) {
+//
+//			//$time= date('Y-m-d H:i:s', strtotime($_GET['time']));
+//			$time= date('Y-m-d H:i:s', time());
+//
+//			echo $employee_id." login success on ".date('Y-m-d H:i:s', strtotime($time));
+//
+//
+//		}  else {
+//
+//			$msg = "Parameter invalid..";
+//
+//			echo "$msg";
+//
+//		}
 
 	}
 
 	public function clock_in(){
 		$employee_id = $this->uri->segment(2);
 
-		//$user_id 	= $_GET['user_id'];
-		$finger		= getUserFinger($user_id);
-
-		echo "$user_id;".$finger[0]['finger_data'].";SecurityKey;".$time_limit_ver.";".$base_path."process_verification.php;".$base_path."getac.php".";extraParams";
+		$finger = $this->biometric->get_employee_biometric($employee_id);
 
 
+		$time_limit_ver = "10";
+//		echo "$employee_id;SecurityKey;".$time_limit_reg.";".site_url('process_register').";".site_url('getac');
+//		echo "$employee_id;".$finger[0]['finger_data'].";SecurityKey;".$time_limit_ver.";".$base_path."process_verification.php;".$base_path."getac.php".";extraParams";
+		echo "$employee_id;".$finger[0]->employee_biometrics_data.";SecurityKey;".$time_limit_ver.";".site_url('process_verification').";".site_url('getac').";extraParams";
+
+
+	}
+
+	public function process_verification(){
+		if (isset($_POST['VerPas']) && !empty($_POST['VerPas'])) {
+
+
+
+			$data 		= explode(";",$_POST['VerPas']);
+			$employee_id	= $data[0];
+			$vStamp 	= $data[1];
+			$time 		= $data[2];
+			$sn 		= $data[3];
+
+			$fingerData = $this->biometric->get_employee_biometric($employee_id);
+
+//			$device 	= getDeviceBySn($sn);
+//			$sql1 		= "SELECT * FROM demo_user WHERE user_id='".$user_id."'";
+//			$result1 	= mysql_query($sql1);
+//			$data 		= mysql_fetch_array($result1);
+			$user_name	= $employee_id;
+			$sn = 'C700F002328';
+			$vkey = 'F70753028EDAB72D526F2BE2C549E473';
+			$vc ='E44A32B335C4283';
+
+
+			$salt = md5($sn.$fingerData[0]->employee_biometrics_data.$vc.$time.$employee_id.$vkey);
+
+			if (strtoupper($vStamp) == strtoupper($salt)) {
+
+				$log = array(
+					'employee_biometrics_login_employee_id' => $employee_id
+				);
+
+				$query = $this->biometric->insert_login($log);
+
+				if ($query == true) {
+
+					echo site_url('message')."/".$employee_id;
+
+				} else {
+
+					echo site_url('message')."/a";
+
+				}
+
+			} else {
+
+				$msg = "Parameter invalid..";
+
+				echo site_url('message')."/a";
+
+			}
+		}
+
+	}
+
+	public function getac(){
+
+		//echo $data[0]['ac'].$data[0]['sn'];
+		$ac ='';
+		$sn ='';
+		echo $ac.$sn;
 	}
 }

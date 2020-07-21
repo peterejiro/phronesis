@@ -33,6 +33,12 @@ class Biometric extends CI_Model
 
 	}
 
+	public function insert_login($data){
+
+		$this->db->insert('employee_biometrics_login', $data);
+		return true;
+	}
+
 
 
 
