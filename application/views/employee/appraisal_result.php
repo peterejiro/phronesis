@@ -196,14 +196,6 @@
 										echo number_format($score * 100)."%";  ?></p>
 
 
-									<h3>Quantitative:</h3>
-
-									<p> <?php echo ((($quantitative_score/($count_quantitative * 5)))); ?></p>
-
-
-									<h3>Qualitative:</h3>
-
-									<p> <?php echo ((($qualitative_score/($count_qualitative * 5)) * (20/100))); ?></p>
 
 
 								</div>
