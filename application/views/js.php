@@ -222,6 +222,8 @@
 		<!-- Template JS File -->
 		<script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/ajaxmask.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/jquery.timer.js"></script>
 		<script>
 			$(document).ready(function(){
 				setInterval(timestamp, 7000);
