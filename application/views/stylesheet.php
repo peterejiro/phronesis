@@ -130,6 +130,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<!-- Template CSS -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/components.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/ajaxmask.css">
 	<!-- Start GA -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
 	<script>

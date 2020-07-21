@@ -448,7 +448,6 @@ class Payroll extends CI_Controller
 
 					if($salary_structure_type == 0):
 
-						if(!empty($payment_definition)):
 
 
 						if($data['employee']->employee_salary_structure_category == 0):
@@ -478,6 +477,7 @@ class Payroll extends CI_Controller
 						$payment_definition = $this->input->post('payment_definition');
 						$allowance_amount = $this->input->post('allowance_amount');
 
+						if(!empty($payment_definition)):
 
 
 						$i = 0;
