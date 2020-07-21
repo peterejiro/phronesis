@@ -72,7 +72,7 @@ $CI->load->model('employees');
 							</div>
 							<div class="row mt-4">
 								<div class="col-md-12">
-									<div class="section-title">Quantitative</div>
+									<div class="section-title">Quantitative (20%)</div>
 
 									<div class="table-responsive">
 										<table class="table table-striped table-hover table-md">
@@ -80,10 +80,14 @@ $CI->load->model('employees');
 
 												<th>Questions</th>
 												<th>Response</th>
+												<th> Score </th>
 
 											</tr>
 
-											<?php foreach ($questions as $question):
+											<?php
+											$count_quantitative = 0;
+											$quantitative_score = 0;
+											foreach ($questions as $question):
 												if($question->employee_appraisal_result_type == 2):
 													?>
 
@@ -98,10 +102,13 @@ $CI->load->model('employees');
 															if($answer == 4): echo "Good Performance"; endif;
 															if($answer == 5): echo "Excellent/Outstanding Performance"; endif;
 														?></td>
+														<td> <?php echo $answer; ?></td>
 
 													</tr>
 
 												<?php
+												$count_quantitative++;
+												$quantitative_score = $quantitative_score + $answer;
 												endif;
 											endforeach; ?>
 
@@ -113,7 +120,7 @@ $CI->load->model('employees');
 							</div>
 							<div class="row mt-4">
 								<div class="col-md-12">
-									<div class="section-title">Qualitative</div>
+									<div class="section-title">Qualitative (80%)</div>
 
 									<div class="table-responsive">
 										<table class="table table-striped table-hover table-md">
@@ -121,10 +128,14 @@ $CI->load->model('employees');
 
 												<th>Questions</th>
 												<th>Response</th>
+												<th>Score</th>
 
 											</tr>
 
-											<?php foreach ($questions as $question):
+											<?php
+											$count_qualitative = 0;
+											$qualitative_score = 0;
+											foreach ($questions as $question):
 												if($question->employee_appraisal_result_type == 3):
 													?>
 
@@ -139,9 +150,12 @@ $CI->load->model('employees');
 															if($answer == 4): echo "Good Performance"; endif;
 															if($answer == 5): echo "Excellent/Outstanding Performance"; endif;
 															?></td>
+														<td> <?php echo $answer; ?></td>
 													</tr>
 
 												<?php
+													$count_qualitative++;
+													$qualitative_score = $qualitative_score + $answer;
 												endif;
 											endforeach; ?>
 
@@ -185,7 +199,18 @@ $CI->load->model('employees');
 
 								</div>
 							</div>
+							<div class="text-md-right">
+								<div class="float-lg-left mb-lg-0 mb-3">
 
+									<h3>Total Score:</h3>
+
+									<p> <?php
+										$score = ((($quantitative_score/($count_quantitative * 5)) * (20/100)) + (($qualitative_score/($count_qualitative * 5)) * (80/100)));
+										echo number_format($score * 100)."%";
+										?></p>
+								</div>
+								<button class="btn btn-warning btn-icon icon-left" onclick="printDiv()"><i class="fas fa-print"></i> Print</button>
+							</div>
 
 						</div>
 						<hr>
