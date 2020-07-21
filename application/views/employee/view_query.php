@@ -32,6 +32,13 @@
 							<div class="card">
 								<div class="card-header">
 									<h4>Query Thread</h4>
+                  <?php if($query->query_status == 1):  ?>
+                    <div class="card-header-action">
+                      <a href="<?php echo site_url('close_query').'/'.$query->query_id ?>"  class="btn btn-icon icon-left btn-danger">
+                        <i class="fa fa-times"></i> Close Query
+                      </a>
+                    </div>
+                  <?php endif; ?>
 								</div>
 								<div class="card-body">
 									<div class="tickets">
@@ -62,18 +69,10 @@
 														<div class="text-primary font-weight-600"><?php echo date('F j, Y', strtotime($query->query_date)) ?></div>
 														<div class="bullet"></div>
 														<?php if($query->query_status == 1): ?>
-                              <div class="text-primary font-weight-600">Open</div>
+                              <div class="text-success font-weight-600">Open</div>
                             <?php elseif ($query->query_status == 0):?>
                               <div class="text-danger font-weight-600">Closed</div>
                             <?php endif;?>
-														<?php if($query->query_status == 1):  ?>
-                              <div class="bullet"></div>
-                              <div class="text-primary font-weight-600">
-															<a href="<?php echo site_url('close_query').'/'.$query->query_id ?>"  class="btn btn-icon icon-left btn-danger">
-																<i class="fa fa-times"></i> Close Query
-															</a>
-														</div>
-														<?php endif; ?>
 													</div>
 												</div>
 											</div>
