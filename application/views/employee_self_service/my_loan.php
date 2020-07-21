@@ -12,18 +12,13 @@ $CI->load->model('employees');
 	<div class="main-wrapper container">
 		<div class="navbar-bg"></div>
 		<?php include('header.php'); ?>
-
 		<?php include('menu.php'); ?>
-
-		<!-- Main Content -->
-
-
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
 					<h1> My Loans</h1>
 					<div class="section-header-breadcrumb">
-						<div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
+						<div class="breadcrumb-item active"><a href="<?php echo site_url('employee_main'); ?>">Dashboard</a></div>
 						<div class="breadcrumb-item">Manage Loans</div>
 					</div>
 				</div>

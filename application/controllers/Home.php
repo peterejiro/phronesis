@@ -48,8 +48,14 @@ class Home extends CI_Controller
 				$data['users'] = $this->users->view_users();
 				$data['departments'] = $this->hr_configurations->view_departments();
 				$data['leaves'] = $this->employees->get_employees_leaves();
+        $online_users = $this->users->view_online_users();
+        foreach ($online_users as $key => $user) {
+          if ($user->user_token == ''){
+            unset($online_users[$key]);
+          }
+        }
+        $data['online_users'] = $online_users;
 				$this->load->view('index', $data);
-
 			elseif($this->users->get_user($username)->user_type == 2):
 
 				redirect('employee_main');
