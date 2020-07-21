@@ -249,6 +249,11 @@ $route['checkreg'] = 'biometrics/checkreg';
 $route['reg/:num'] = 'biometrics/reg/$1';
 $route['messages/(:any)'] = 'biometrics/messages/$1';
 $route['message/(:any)'] = 'biometrics/message/$1';
+$route['getac'] = 'biometrics/getac';
+$route['clock_in/:num'] = 'biometrics/clock_in/$1';
+$route['process_register'] = 'biometrics/process_register';
+$route['process_verification'] = 'biometrics/process_verification';
+
 
 
 
