@@ -190,10 +190,10 @@
 
 									<h3>Total Score:</h3>
 
-									<p> <?php
+									<h4> <?php
 
 										$score = ((($quantitative_score/($count_quantitative * 5)) * (20/100)) + (($qualitative_score/($count_qualitative * 5)) * (80/100)));
-										echo number_format($score * 100)."%";  ?></p>
+										echo number_format($score * 100)."%";  ?></h4>
 
 
 

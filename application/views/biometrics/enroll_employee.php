@@ -73,7 +73,7 @@ $CI->load->model('biometric');
                                 <div class="dropdown-menu">
 
                                   <?php if(empty($check_biometrics)): ?>
-									 <?php $url_register = base64_encode(site_url('reg_employee').'/'.$employee->employee_id);
+									 <?php $url_register = base64_encode(site_url('reg').'/'.$employee->employee_id);
 
 									  $register = "<a class=\"dropdown-item has-icon\" href='finspot:FingerspotReg;$url_register' class='btn btn-xs btn-primary' onclick=\"user_register('".$employee->employee_id."','".$employee->employee_unique_id."')\"><i class=\"fas fa-edit\"></i>Enroll Fingerprint</a>";
 
@@ -150,7 +150,7 @@ $CI->load->model('biometric');
 
 		timer_register = $.timer(timeout, function() {
 			console.log("'"+user_name+"' registration checking...");
-			user_checkregister(user_id,$("#user_finger_"+user_id).html());
+			user_checkregister(user_id, $("#user_finger_"+user_id).html());
 			if (ct>=limit || regStats===1)
 			{
 				timer_register.stop();
