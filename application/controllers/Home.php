@@ -18,6 +18,7 @@ class Home extends CI_Controller
 		$this->load->model('hr_configurations');
 		$this->load->model('configurations');
 		$this->load->model('logs');
+		$this->load->model('biometric');
 
 	}
 
@@ -48,6 +49,9 @@ class Home extends CI_Controller
 				$data['users'] = $this->users->view_users();
 				$data['departments'] = $this->hr_configurations->view_departments();
 				$data['leaves'] = $this->employees->get_employees_leaves();
+
+				$date = date('Y-m-d', time());
+				$data['present_employees'] = $this->biometric->check_today_attendance($date);
         $online_users = $this->users->view_online_users();
         foreach ($online_users as $key => $user) {
           if ($user->user_token == ''){
