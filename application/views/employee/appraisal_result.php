@@ -67,17 +67,28 @@
 							</div>
 							<div class="row mt-4">
 								<div class="col-md-12">
-									<div class="section-title">Quantitative Assessment</div>
+									<div class="section-title">Quantitative (20%)</div>
+
 									<div class="table-responsive">
 										<table class="table table-striped table-hover table-md">
 											<tr>
+
 												<th>Questions</th>
 												<th>Response</th>
+												<th> Score </th>
+
 											</tr>
-											<?php foreach ($questions as $question):
-												if($question->employee_appraisal_result_type == 2):?>
+
+											<?php
+											$count_quantitative = 0;
+											$quantitative_score = 0;
+											foreach ($questions as $question):
+												if($question->employee_appraisal_result_type == 2):
+													?>
+
 													<tr>
-														<td style="width: 70%;"><?php echo $question-> 	employee_appraisal_result_question  ?></td>
+
+														<td><?php echo $question-> 	employee_appraisal_result_question  ?></td>
 														<td><?php  $answer = $question-> employee_appraisal_result_answer;
 															if($answer == 0): echo "Nonexistent Competence"; endif;
 															if($answer == 1): echo "Unsatisfactory Performance"; endif;
@@ -85,29 +96,50 @@
 															if($answer == 3): echo "Satisfactory Performance"; endif;
 															if($answer == 4): echo "Good Performance"; endif;
 															if($answer == 5): echo "Excellent/Outstanding Performance"; endif;
-															?>
-                            </td>
+															?></td>
+														<td> <?php echo $answer; ?></td>
+
 													</tr>
-												<?php
+
+													<?php
+													$count_quantitative++;
+													$quantitative_score = $quantitative_score + $answer;
 												endif;
-											endforeach; ?>
+											endforeach;
+
+
+											?>
+
+
 										</table>
 									</div>
+
 								</div>
 							</div>
 							<div class="row mt-4">
 								<div class="col-md-12">
-									<div class="section-title">Qualitative Assessment</div>
+									<div class="section-title">Qualitative (80%)</div>
+
 									<div class="table-responsive">
 										<table class="table table-striped table-hover table-md">
 											<tr>
+
 												<th>Questions</th>
 												<th>Response</th>
+												<th>Score</th>
+
 											</tr>
-											<?php foreach ($questions as $question):
-												if($question->employee_appraisal_result_type == 3):?>
+
+											<?php
+											$count_qualitative = 0;
+											$qualitative_score = 0;
+											foreach ($questions as $question):
+												if($question->employee_appraisal_result_type == 3):
+													?>
+
 													<tr>
-														<td style="width: 70%;"><?php echo $question-> 	employee_appraisal_result_question  ?></td>
+
+														<td><?php echo $question-> 	employee_appraisal_result_question  ?></td>
 														<td><?php $answer = $question-> employee_appraisal_result_answer;
 															if($answer == 0): echo "Nonexistent Competence"; endif;
 															if($answer == 1): echo "Unsatisfactory Performance"; endif;
@@ -115,14 +147,20 @@
 															if($answer == 3): echo "Satisfactory Performance"; endif;
 															if($answer == 4): echo "Good Performance"; endif;
 															if($answer == 5): echo "Excellent/Outstanding Performance"; endif;
-															?>
-                            </td>
+															?></td>
+														<td> <?php echo $answer; ?></td>
 													</tr>
-												<?php
+
+													<?php
+													$count_qualitative++;
+													$qualitative_score = $qualitative_score + $answer;
 												endif;
 											endforeach; ?>
+
+
 										</table>
 									</div>
+
 								</div>
 							</div>
 							<div class="row mt-4">
@@ -146,6 +184,22 @@
 										</table>
 									</div>
 								</div>
+							</div>
+							<div class="text-md-right">
+								<div class="float-lg-left mb-lg-0 mb-3">
+
+									<h3>Total Score:</h3>
+
+									<h4> <?php
+
+										$score = ((($quantitative_score/($count_quantitative * 5)) * (20/100)) + (($qualitative_score/($count_qualitative * 5)) * (80/100)));
+										echo number_format($score * 100)."%";  ?></h4>
+
+
+
+
+								</div>
+
 							</div>
 						</div>
 						<hr>
