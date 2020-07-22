@@ -195,7 +195,7 @@
                         <th>Value</th>
                       </tr>
                       <tr>
-                        <td style="width: 70%">Total Score</td>
+                        <td style="width: 70%">Total Score for Quantitative (20%) + Qualitative (80%) </td>
                         <td><?php
                           $score = ((($quantitative_score/($count_quantitative * 5)) * (20/100)) + (($qualitative_score/($count_qualitative * 5)) * (80/100)));
                           echo number_format($score * 100)."%";  ?></td>
