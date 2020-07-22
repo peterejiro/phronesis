@@ -1,10 +1,10 @@
 
-<?php include(APPPATH.'\views\stylesheet.php');
-$CI =& get_instance();
-$CI->load->model('hr_configurations');
-$CI->load->model('payroll_configurations');
-$CI->load->model('employees');
-
+<?php
+  include(APPPATH.'\views\stylesheet.php');
+  $CI =& get_instance();
+  $CI->load->model('hr_configurations');
+  $CI->load->model('payroll_configurations');
+  $CI->load->model('employees');
 ?>
 
 <body class="layout-3">
@@ -12,40 +12,27 @@ $CI->load->model('employees');
 	<div class="main-wrapper container">
 		<div class="navbar-bg"></div>
 		<?php include('header.php'); ?>
-
 		<?php include('menu.php'); ?>
-
-		<!-- Main Content -->
-
-
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
 					<h1>View Query</h1>
 					<div class="section-header-breadcrumb">
 						<div class="breadcrumb-item active"><a href="<?php echo base_url('employee_main'); ?>">Dashboard</a></div>
-						<div class="breadcrumb-item active"><a href="<?php echo site_url('my_queries'); ?>">Manage Employee Queries</a></div>
-						<div class="breadcrumb-item">View Query Activity</div>
+						<div class="breadcrumb-item active"><a href="<?php echo site_url('my_queries'); ?>">My Queries</a></div>
+						<div class="breadcrumb-item">View Query</div>
 					</div>
 				</div>
-
 				<div class="section-body">
 					<h2 class="section-title">View Query</h2>
-					<p class="section-lead">
-						You can respond to your queries here
-					</p>
-
+					<p class="section-lead">You can respond to your queries here</p>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<h4>Queries</h4>
+									<h4>Query Thread</h4>
 								</div>
 								<div class="card-body">
-									<a href="#" class="btn btn-primary btn-icon icon-left btn-lg btn-block mb-4 d-md-none" data-toggle-slide="#ticket-items">
-										<i class="fas fa-list"></i> All Tickets
-									</a>
-
 									<div class="tickets">
 										<div class="ticket-items" id="ticket-items">
 											<div class="ticket-item active">
@@ -55,14 +42,9 @@ $CI->load->model('employees');
 												<div class="ticket-desc">
 													<div><?php echo $employee->employee_first_name." ".$employee->employee_last_name; ?></div>
 													<div class="bullet"></div>
-													<div><?php echo $query->query_date ?></div>
-
-													<div class="bullet"></div>
-													<div><?php if($query->query_status == 1){ echo "Opened"; } if($query->query_status == 0){ echo "Closed"; } ?></div>
-
+                          <div><?php echo date('F j, Y', strtotime($query->query_date));  ?></div>
 												</div>
 											</div>
-
 										</div>
 										<div class="ticket-content">
 											<div class="ticket-header">
@@ -76,50 +58,68 @@ $CI->load->model('employees');
 													<div class="ticket-info">
 														<div class="font-weight-600"><?php echo $employee->employee_first_name." ".$employee->employee_last_name; ?></div>
 														<div class="bullet"></div>
-														<div class="text-primary font-weight-600"><?php echo $query->query_date ?></div>
+														<div class="text-primary font-weight-600"><?php echo date('F j, Y', strtotime($query->query_date)) ?></div>
 														<div class="bullet"></div>
-														<div class="text-primary font-weight-600"><?php if($query->query_status == 1){ echo "Opened"; } if($query->query_status == 0){ echo "Closed"; } ?></div>
-														<div class="bullet"></div>
-
-
+                            <?php if($query->query_status == 1): ?>
+                              <div class="text-success font-weight-600">Open</div>
+                            <?php elseif ($query->query_status == 0):?>
+                              <div class="text-danger font-weight-600">Closed</div>
+                            <?php endif;?>
 													</div>
 												</div>
 											</div>
 											<div class="ticket-description">
 												<?php echo $query->query_body; ?>
-
-
-
 												<div class="ticket-divider"></div>
-
-<div id="query">
+                        <div id="query">
 												<?php
 												if(!empty($responses)):
-
 													foreach ($responses as $response): ?>
-
 														<div class="row">
 															<?php if($response->query_response_responder_id == 0): ?>
 																<div class="col-10 col-md-10 col-lg-10 offset-2">
-																	<div class="card card-primary">
-																		<div class="card-header">
-																			<h4>Supervisor's Response - <?php echo $response->query_response_date; ?></h4>
-																		</div>
-																		<div class="card-body">
-																			<p><?php echo $response->query_response_body; ?></p>
-																		</div>
-																	</div>
+<!--																	<div class="card card-primary">-->
+<!--																		<div class="card-header">-->
+<!--																			<h4>Supervisor's Response - --><?php //echo $response->query_response_date; ?><!--</h4>-->
+<!--																		</div>-->
+<!--																		<div class="card-body">-->
+<!--																			<p>--><?php //echo $response->query_response_body; ?><!--</p>-->
+<!--																		</div>-->
+<!--																	</div>-->
+                                  <div class="card card-warning">
+                                    <div class="card-body">
+                                      <div class="list-group">
+                                        <div class="d-flex w-100 justify-content-between">
+                                          <h5 class="mb-1">Supervisor</h5>
+<!--                                          <h5 class="mb-1">--><?php //echo $employee->employee_first_name?><!--</h5>-->
+                                          <small><?php echo timespan(strtotime($response->query_response_date), now('Africa/Lagos'), 2)?> ago</small>
+                                        </div>
+                                        <p class="mb-1"><?php echo $response->query_response_body; ?></p>
+                                        <small><?php echo date('F j, Y g:i:s a', strtotime($response->query_response_date));?></small>
+                                      </div>
+                                    </div>
+                                  </div>
 																</div>
 															<?php else: ?>
 																<div class="col-10 col-md-10 col-lg-10">
-																	<div class="card card-primary">
-																		<div class="card-header">
-																			<h4>Your Response - <?php echo $response->query_response_date; ?></h4>
-																		</div>
-																		<div class="card-body">
-																			<p><?php echo $response->query_response_body; ?></p>
-																		</div>
-																	</div>
+<!--																	<div class="card card-primary">-->
+<!--																		<div class="card-header">-->
+<!--																			<h4>Your Response - --><?php //echo $response->query_response_date; ?><!--</h4>-->
+<!--																		</div>-->
+<!--																		<div class="card-body">-->
+<!--																			<p>--><?php //echo $response->query_response_body; ?><!--</p>-->
+<!--																		</div>-->
+<!--																	</div>-->
+                                  <div class="card card-primary">
+                                    <div class="card-body">
+                                      <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">You</h5>
+                                        <small><?php echo timespan(strtotime($response->query_response_date), now('Africa/Lagos'), 2)?> ago</small>
+                                      </div>
+                                      <p class="mb-1"><?php echo $response->query_response_body; ?></p>
+                                      <small><?php echo date('F j, Y g:i:s a', strtotime($response->query_response_date));?></small>
+                                    </div>
+                                  </div>
 																</div>
 
 															<?php endif; ?>
@@ -131,11 +131,9 @@ $CI->load->model('employees');
 
 												?>
 
-	<input type="hidden" id="query_status" value="<?php echo $query->query_status; ?>">
-</div>
-
-
-<div id="query_form">
+	                      <input type="hidden" id="query_status" value="<?php echo $query->query_status; ?>">
+                      </div>
+                      <div id="query_form">
 												<?php if($query->query_status == 1):  ?>
 
 													<div class="ticket-form" >
@@ -144,7 +142,6 @@ $CI->load->model('employees');
 																<textarea class="summernote form-control" id="query_response" name="query_response" placeholder="Type a reply ..."></textarea>
 																<input type="hidden" name="query_id" id="query_id" value="<?php echo $query->query_id; ?>">
 																<input type="hidden" name="employee_id" id="employee_id" value="<?php echo $employee->employee_id; ?>">
-
 															</div>
 															<div class="form-group text-right">
 																<button type="button" id="response_button" class="btn btn-primary btn-lg">
@@ -153,21 +150,19 @@ $CI->load->model('employees');
 															</div>
 														</form>
 													</div>
-
 												<?php endif; ?>
-</div>
+                        </div>
 											</div>
 										</div>
 									</div>
-
 								</div>
-							</div>
+                <div class="card-footer bg-whitesmoke"></div>
+
+              </div>
 						</div>
 					</div>
 			</section>
 		</div>
-
-
 		<?php include(APPPATH.'\views\footer.php'); ?>
 	</div>
 </div>

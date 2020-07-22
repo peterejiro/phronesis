@@ -88,16 +88,16 @@
 
 													<tr>
 
-														<td><?php echo $question-> 	employee_appraisal_result_question  ?></td>
+														<td style="width: 70%"><?php echo $question-> 	employee_appraisal_result_question  ?></td>
 														<td><?php  $answer = $question-> employee_appraisal_result_answer;
 															if($answer == 0): echo "Nonexistent Competence"; endif;
 															if($answer == 1): echo "Unsatisfactory Performance"; endif;
 															if($answer == 2): echo "Fair Performance"; endif;
 															if($answer == 3): echo "Satisfactory Performance"; endif;
 															if($answer == 4): echo "Good Performance"; endif;
-															if($answer == 5): echo "Excellent/Outstanding Performance"; endif;
+															if($answer == 5): echo "Outstanding Performance"; endif;
 															?></td>
-														<td> <?php echo $answer; ?></td>
+														<td> <?php echo $answer; ?>/5</td>
 
 													</tr>
 
@@ -139,7 +139,7 @@
 
 													<tr>
 
-														<td><?php echo $question-> 	employee_appraisal_result_question  ?></td>
+														<td style="width: 70%"><?php echo $question-> 	employee_appraisal_result_question  ?></td>
 														<td><?php $answer = $question-> employee_appraisal_result_answer;
 															if($answer == 0): echo "Nonexistent Competence"; endif;
 															if($answer == 1): echo "Unsatisfactory Performance"; endif;
@@ -148,7 +148,7 @@
 															if($answer == 4): echo "Good Performance"; endif;
 															if($answer == 5): echo "Excellent/Outstanding Performance"; endif;
 															?></td>
-														<td> <?php echo $answer; ?></td>
+														<td> <?php echo $answer; ?>/5</td>
 													</tr>
 
 													<?php
@@ -185,22 +185,33 @@
 									</div>
 								</div>
 							</div>
-							<div class="text-md-right">
-								<div class="float-lg-left mb-lg-0 mb-3">
-
-									<h3>Total Score:</h3>
-
-									<p> <?php
-
-										$score = ((($quantitative_score/($count_quantitative * 5)) * (20/100)) + (($qualitative_score/($count_qualitative * 5)) * (80/100)));
-										echo number_format($score * 100)."%";  ?></p>
-
-
-
-
-								</div>
-
-							</div>
+              <div class="row mt-4">
+                <div class="col-md-12">
+                  <div class="section-title">Summary</div>
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover table-md">
+                      <tr>
+                        <th>Detail</th>
+                        <th>Value</th>
+                      </tr>
+                      <tr>
+                        <td style="width: 70%">Total Score</td>
+                        <td><?php
+                          $score = ((($quantitative_score/($count_quantitative * 5)) * (20/100)) + (($qualitative_score/($count_qualitative * 5)) * (80/100)));
+                          echo number_format($score * 100)."%";  ?></td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+<!--							<div class="text-md-right">-->
+<!--								<div class="float-lg-left mb-lg-0 mb-3">-->
+<!--									<h3>Total Score:</h3>-->
+<!--									<h4> --><?php
+//										$score = ((($quantitative_score/($count_quantitative * 5)) * (20/100)) + (($qualitative_score/($count_qualitative * 5)) * (80/100)));
+//										echo number_format($score * 100)."%";  ?><!--</h4>-->
+<!--								</div>-->
+<!--							</div>-->
 						</div>
 						<hr>
 						<div class="text-md-right">

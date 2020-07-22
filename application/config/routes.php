@@ -251,9 +251,16 @@ $route['messages/(:any)'] = 'biometrics/messages/$1';
 $route['message/(:any)'] = 'biometrics/message/$1';
 $route['getac'] = 'biometrics/getac';
 $route['clock_in/:num'] = 'biometrics/clock_in/$1';
+$route['clockin'] = 'biometrics/clockin';
 $route['process_register'] = 'biometrics/process_register';
 $route['process_verification'] = 'biometrics/process_verification';
-
+$route['biometrics_report'] = 'biometrics/biometrics_report';
+$route['today_present'] = 'biometrics/today_present';
+$route['today_absent'] = 'biometrics/today_absent';
+$route['present_employee'] = 'biometrics/present_employee';
+$route['present_employeee'] = 'biometrics/present_employeee';
+$route['absent_employee'] = 'biometrics/absent_employee';
+$route['absent_employeee'] = 'biometrics/absent_employeee';
 
 
 
