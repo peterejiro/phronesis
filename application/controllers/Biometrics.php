@@ -71,9 +71,6 @@ class Biometrics extends CI_Controller
 		$employee_id = $_GET['username'];
 		$current = $_GET['current'];
 
-		$employee_id = 10;
-		$current = 0;
-
 		$ct = $this->biometric->get_employee_biometric($employee_id);
 
 		$ct = count($ct);
@@ -106,19 +103,23 @@ class Biometrics extends CI_Controller
 
 	public function process_register(){
 
+//		$time_limit_reg = "15";
+//		$employee_id = 10;
+//
+//		$posttemp = "$employee_id;SecurityKey;".$time_limit_reg.";".site_url('process_register').";".site_url('getac');
+
 		if (isset($_POST['RegTemp']) && !empty($_POST['RegTemp'])) {
 
-
-
 			$data 		= explode(";",$_POST['RegTemp']);
+				//$data 		= explode(";",$posttemp);
 			$vStamp 	= $data[0];
 			$sn 		= $data[1];
 			$employee_id	= $data[2];
 			$regTemp 	= $data[3];
 
 			//$device = getDeviceBySn($sn);
-			$ac = 'NWVBAFB710662F041883ANCK';
-			$vkey ='F70753028EDAB72D526F2BE2C549E473';
+			$ac = 'DGV0602B3056554A166725BH';
+			$vkey ='5960CA099F0C050F1109EB8BEADB5BFA';
 
 			//$salt = md5($device[0]['ac'].$device[0]['vkey'].$regTemp.$sn.$employee_id);
 
@@ -151,7 +152,7 @@ class Biometrics extends CI_Controller
 					$res['user_finger_'.$employee_id] = "Template already exist.";
 				}
 
-				echo "empty";
+
 
 			} else {
 
@@ -238,7 +239,7 @@ class Biometrics extends CI_Controller
 
 
 
-			$data 		= explode(";",$_POST['VerPas']);
+			$data 	= explode(";",$_POST['VerPas']);
 			$employee_id	= $data[0];
 			$vStamp 	= $data[1];
 			$time 		= $data[2];
@@ -251,9 +252,9 @@ class Biometrics extends CI_Controller
 //			$result1 	= mysql_query($sql1);
 //			$data 		= mysql_fetch_array($result1);
 			$user_name	= $employee_id;
-			$sn = 'C700F002328';
-			$vkey = 'F70753028EDAB72D526F2BE2C549E473';
-			$vc ='E44A32B335C4283';
+			$sn = 'DX00F000388';
+			$vkey = '5960CA099F0C050F1109EB8BEADB5BFA';
+			$vc ='42319B9B191739D';
 
 
 			$salt = md5($sn.$fingerData[0]->employee_biometrics_data.$vc.$time.$employee_id.$vkey);
@@ -290,8 +291,8 @@ class Biometrics extends CI_Controller
 	public function getac(){
 
 		//echo $data[0]['ac'].$data[0]['sn'];
-		$ac ='';
-		$sn ='';
+		$ac ='DGV0602B3056554A166725BH';
+		$sn ='DX00F000388';
 		echo $ac.$sn;
 	}
 }

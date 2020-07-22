@@ -204,10 +204,10 @@ $CI->load->model('employees');
 
 									<h3>Total Score:</h3>
 
-									<p> <?php
+									<h4> <?php
 										$score = ((($quantitative_score/($count_quantitative * 5)) * (20/100)) + (($qualitative_score/($count_qualitative * 5)) * (80/100)));
 										echo number_format($score * 100)."%";
-										?></p>
+										?></h4>
 								</div>
 								<button class="btn btn-warning btn-icon icon-left" onclick="printDiv()"><i class="fas fa-print"></i> Print</button>
 							</div>
