@@ -2463,7 +2463,7 @@ class Employee extends CI_Controller
 						$msg = array(
 							'msg' => 'Query Submitted',
 							'location' => site_url('query_employee').'/'.$employee_id,
-							'type' => 'error'
+							'type' => 'success'
 						);
 						$this->load->view('swal', $msg);
 
@@ -2638,7 +2638,7 @@ class Employee extends CI_Controller
 							$msg = array(
 								'msg' => 'Query closed',
 								'location' => site_url('view_query').'/'.$query_id,
-								'type' => 'error'
+								'type' => 'success'
 							);
 							$this->load->view('swal', $msg);
 
