@@ -117,6 +117,11 @@
                           </div>
                           <input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
                         </div>
+                        <div class="text-center">
+                          <span class="prv" style="cursor: not-allowed">previous </span>
+                          <div class="bullet"></div>
+                          <span class="text-primary nxt" style="cursor: pointer"> next</span>
+                        </div>
                       </div>
                       <div class="tab-pane p-3" id="job-information" role="tabpanel">
                         <div class="form-group row">
@@ -228,6 +233,11 @@
                             <i class="fas fa-plus"></i>
                           </button>
                         </div>
+                        <div class="text-center">
+                          <span class="text-primary prv" style="cursor: pointer" id="prv">previous</span>
+                          <div class="bullet"></div>
+                          <span class="text-primary nxt" style="cursor: pointer" id="nxt">next</span>
+                        </div>
                       </div>
                       <div class="tab-pane p-3" id="bank-information" role="tabpanel">
                         <div class="form-group row">
@@ -307,6 +317,11 @@
                             </div>
                           </div>
                         </div>
+                        <div class="text-center">
+                          <span class="text-primary prv" style="cursor: pointer" id="prv">previous</span>
+                          <div class="bullet"></div>
+                          <span class="text-primary nxt" style="cursor: pointer" id="nxt">next</span>
+                        </div>
                       </div>
                       <div class="tab-pane p-3" id="other-information" role="tabpanel">
                         <div class="form-group row">
@@ -374,6 +389,11 @@
                               </div>
                             </div>
                           </div>
+                        </div>
+                        <div class="text-center">
+                          <span class="text-primary prv" style="cursor: pointer" id="prv">previous</span>
+                          <div class="bullet"></div>
+                          <span class="nxt" style="cursor: not-allowed" id="nxt">next</span>
                         </div>
                       </div>
                     </div>
@@ -446,6 +466,31 @@
       document.getElementById("work_experiences").style.display='none';
       document.getElementById("pension_div").style.display='none';
     };
+
+    $('.nxt').on('click', function () {
+      moveTab('next');
+    });
+    $('.prv').on('click', function () {
+      moveTab('previous');
+    })
+
+    function moveTab(nextOrPrev){
+      var currentTab = "";
+      $('.nav-pills li a').each(function () {
+        if($(this).hasClass('active')) {
+          currentTab = $(this);
+        }
+      });
+      if(nextOrPrev == 'next'){
+        if(currentTab.parent().next().length){
+          currentTab.parent().next().children().trigger('click');
+        }
+      } else {
+        if(currentTab.parent().prev().length){
+          currentTab.parent().prev().children().trigger('click');
+        }
+      }
+    }
 
     function pensionable(){
       var pensionable = document.getElementById('employee_pensionable').value

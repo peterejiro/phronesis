@@ -24,37 +24,35 @@
           <p class="section-lead">You can fill in the form to start an employee leave here</p>
         </div>
         <div class="row">
-          <div class="col-12">
+          <div class="col-md-7">
             <form class="needs-validation" novalidate method="post" action="<?php echo site_url('add_new_employee_leave'); ?>" id="loan_form">
               <div class="card card-primary">
                 <div class="card-header">
                   <h4>New Leave Form</h4>
                 </div>
                 <div class="card-body">
-                  <div class="form-group row">
-                    <div class="col-sm-6">
-                      <label>Employee</label><span style="color: red"> *</span>
-                      <select class="form-control mb-3 custom-select selectric" required name="employee_id" style="width: 100%; height:56px;">
-                        <option value="" disabled selected> -- Select -- </option>
-                        <?php foreach ($employees as $employee):?>
-                          <option value="<?php echo $employee->employee_id ?>"> <?php echo $employee->employee_unique_id." (".$employee->employee_last_name." ".$employee->employee_first_name.")"; ?> </option>
-                        <?php endforeach; ?>
-                      </select>
-                      <div class="invalid-feedback">
-                        please select an employee
-                      </div>
+                  <div class="form-group">
+                    <label>Employee</label><span style="color: red"> *</span>
+                    <select class="form-control select2" required name="employee_id" style="width: 100%; height:42px !important;">
+                      <option value=""> -- Select -- </option>
+                      <?php foreach ($employees as $employee):?>
+                        <option value="<?php echo $employee->employee_id ?>"> <?php echo $employee->employee_unique_id." (".$employee->employee_last_name." ".$employee->employee_first_name.")"; ?> </option>
+                      <?php endforeach; ?>
+                    </select>
+                    <div class="invalid-feedback">
+                      please select an employee
                     </div>
-                    <div class="col-sm-6">
-                      <label>Leave Type</label><span style="color: red"> *</span>
-                      <select class="form-control mb-3 custom-select selectric" required name="leave_id">
-                        <option disabled selected value=""> -- Select -- </option>
-                        <?php foreach ($leaves as $leave):?>
-                          <option value="<?php echo $leave->leave_id ?>"> <?php echo $leave->leave_name; ?> </option>
-                        <?php endforeach; ?>
-                      </select>
-                      <div class="invalid-feedback">
-                        please select a leave type
-                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Leave Type</label><span style="color: red"> *</span>
+                    <select class="form-control select2" required name="leave_id" style="width: 100%; height:42px !important;">
+                      <option value=""> -- Select -- </option>
+                      <?php foreach ($leaves as $leave):?>
+                        <option value="<?php echo $leave->leave_id ?>"> <?php echo $leave->leave_name; ?> </option>
+                      <?php endforeach; ?>
+                    </select>
+                    <div class="invalid-feedback">
+                      please select a leave type
                     </div>
                   </div>
                   <div class="form-group row">

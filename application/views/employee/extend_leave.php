@@ -23,24 +23,22 @@
           <div class="section-title">Extend Employee Leave</div>
           <p class="section-lead">You can fill in the form to extend an employee leave here</p>
           <div class="row">
-            <div class="col-12">
+            <div class="col-md-7">
               <form class="needs-validation" novalidate action="<?php echo site_url('extend_employee_leave'); ?>" id="loan_form">
                 <div class="card card-primary">
                   <div class="card-header">
                     <h4>Extend Leave Form</h4>
                   </div>
                   <div class="card-body">
-                    <div class="form-group row">
-                      <div class="col-sm-6">
-                        <label>Employee</label>
-                        <input type="text" class="form-control"  disabled value="<?php echo $leave->employee_first_name." ".$leave->employee_last_name; ?>" />
-                      </div>
-                      <div class="col-sm-6">
-                        <label>Leave Type</label>
-                        <input type="text" class="form-control"  disabled value="<?php echo $leave->leave_name; ?>" />
-                      </div>
-                      <input type="hidden" name="leave_id" value="<?php echo $leave->employee_leave_id; ?>">
+                    <div class="form-group">
+                      <label>Employee</label>
+                      <input type="text" class="form-control"  disabled value="<?php echo $leave->employee_first_name." ".$leave->employee_last_name; ?>" />
                     </div>
+                    <div class="form-group">
+                      <label>Leave Type</label>
+                      <input type="text" class="form-control"  disabled value="<?php echo $leave->leave_name; ?>" />
+                    </div>
+                    <input type="hidden" name="leave_id" value="<?php echo $leave->employee_leave_id; ?>">
                     <div class="form-group row">
                       <div class="col-sm-6">
                         <label>Start Date</label>

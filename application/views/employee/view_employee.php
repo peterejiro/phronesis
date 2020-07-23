@@ -115,6 +115,11 @@
                           </div>
                           <input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
                         </div>
+                        <div class="text-center">
+                          <span class="prv" style="cursor: not-allowed" id="prv">previous</span>
+                          <div class="bullet"></div>
+                          <span class="text-primary nxt" style="cursor: pointer" id="nxt">next</span>
+                        </div>
                       </div>
                       <div class="tab-pane p-3" id="job-information" role="tabpanel">
                         <div class="form-group row">
@@ -201,6 +206,11 @@
                           <?php		}
                           } ?>
                         </div>
+                        <div class="text-center">
+                          <span class="text-primary prv" style="cursor: pointer" id="prv">previous</span>
+                          <div class="bullet"></div>
+                          <span class="text-primary nxt" style="cursor: pointer" id="nxt">next</span>
+                        </div>
                       </div>
                       <div class="tab-pane p-3" id="bank-information" role="tabpanel">
                         <div class="form-group row">
@@ -267,6 +277,11 @@
                           <?php
                           endif; ?>
                         </div>
+                        <div class="text-center">
+                          <span class="text-primary prv" style="cursor: pointer" id="prv">previous</span>
+                          <div class="bullet"></div>
+                          <span class="text-primary nxt" style="cursor: pointer" id="nxt">next</span>
+                        </div>
                       </div>
                       <div class="tab-pane p-3" id="other-information" role="tabpanel">
                         <div class="form-group row">
@@ -294,12 +309,18 @@
                             <input type="date" name="employment_stop_date" value="<?php echo $employee->employee_stop_date; ?>" disabled class="form-control">
                           </div>
                         </div>
-                        <div class="modal-footer"></div>
+                        <div class="text-center">
+                          <span class="text-primary prv" style="cursor: pointer" id="prv">previous</span>
+                          <div class="bullet"></div>
+                          <span class="nxt" style="cursor: not-allowed" id="nxt">next</span>
+                        </div>
                       </div>
                     </div>
                   </form>
                 </div>
-                <div class="card-footer bg-whitesmoke"></div>
+                <div class="card-footer text-right bg-whitesmoke">
+                  <button onclick="location.href='<?php echo site_url('employee');?>'" class="btn btn-danger" type="button">Go Back</button>
+                </div>
               </div>
             </div>
           </div>
@@ -357,5 +378,31 @@
 </div>
 <?php include(APPPATH.'\views\footer.php'); ?>
 <?php include(APPPATH.'\views\js.php'); ?>
+<script>
+  $('.nxt').on('click', function () {
+    moveTab('next');
+  });
+  $('.prv').on('click', function () {
+    moveTab('previous');
+  })
+
+  function moveTab(nextOrPrev){
+    var currentTab = "";
+    $('.nav-pills li a').each(function () {
+      if($(this).hasClass('active')) {
+        currentTab = $(this);
+      }
+    });
+    if(nextOrPrev == 'next'){
+      if(currentTab.parent().next().length){
+        currentTab.parent().next().children().trigger('click');
+      }
+    } else {
+      if(currentTab.parent().prev().length){
+        currentTab.parent().prev().children().trigger('click');
+      }
+    }
+  }
+</script>
 </body>
 </html>

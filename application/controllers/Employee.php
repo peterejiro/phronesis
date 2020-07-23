@@ -831,10 +831,8 @@ class Employee extends CI_Controller
 				$employee = $this->employees->get_employee($employee_id);
 
 
-				if(empty($employee_id) || empty($transfer_type)):
-
+				if(empty($employee_id) || $transfer_type == null):
 					redirect('error_404');
-
 				else:
 				if ($transfer_type == 0):
 					$transfer_from = $employee->employee_location_id;
@@ -2036,7 +2034,7 @@ class Employee extends CI_Controller
 					$termination_array = array(
 					'termination_employee_id' => $termination_employee_id,
 					'termination_reason' => $termination_reason,
-					'terminations_effective_date' => $termination_effective_date
+					'termination_effective_date' => $termination_effective_date
 					);
 
 					$termination_array = $this->security->xss_clean($termination_array);
