@@ -2034,7 +2034,7 @@ class Employee extends CI_Controller
 					$termination_array = array(
 					'termination_employee_id' => $termination_employee_id,
 					'termination_reason' => $termination_reason,
-					'terminations_effective_date' => $termination_effective_date
+					'termination_effective_date' => $termination_effective_date
 					);
 
 					$termination_array = $this->security->xss_clean($termination_array);

@@ -46,18 +46,18 @@
           </div>
           <div class="row mt-4">
             <div class="col-12">
-              <div class="card card-primary">
-                <div class="card-header">
-                  <h4>Employee Details</h4>
-                  <div class="card-header-action">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-icon icon-left btn-primary" data-toggle="modal" data-target=".bd-example-modal-form"><i class="fa fa-file"></i> View Documents</button>
-                      <button onclick="location.href='<?php echo site_url('view_employee').'/'.$employee->employee_id;?>'" type="button" class="btn btn-icon icon-left btn-primary"><i class="fa fa-eye"></i> View Employee</button>
+              <form class="needs-validation" novalidate method="post" action="<?php echo site_url('edit_employee'); ?>" enctype="multipart/form-data">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h4>Employee Details</h4>
+                    <div class="card-header-action">
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-icon icon-left btn-primary" data-toggle="modal" data-target=".bd-example-modal-form"><i class="fa fa-file"></i> View Documents</button>
+                        <button onclick="location.href='<?php echo site_url('view_employee').'/'.$employee->employee_id;?>'" type="button" class="btn btn-icon icon-left btn-primary"><i class="fa fa-eye"></i> View Employee</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="card-body">
-                  <form class="needs-validation" novalidate method="post" action="<?php echo site_url('edit_employee'); ?>" enctype="multipart/form-data">
+                  <div class="card-body">
                     <div class="tab-content">
                       <div class="tab-pane active p-3" id="personal-information" role="tabpanel">
                         <?php if($error != ' '): ?>
@@ -69,11 +69,15 @@
                           </div>
                         <?php endif; ?>
                         <div class="modal-body">
-                          <figure class="figure">
-                            <img src="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" alt="" class="figure-img img-fluid rounded mx-auto d-block w-80 img-thumbnail">
-                            <figcaption class="figure-caption">Most Recent Passport Photograph</figcaption>
-                          </figure>
-<!--                          <img src="--><?php //echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?><!--" alt="" class="rounded-circle  mx-auto d-block w-80">-->
+                          <div class="chocolat-parent">
+                            <a href="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" class="chocolat-image" title="Passport Photo">
+                              <figure class="figure">
+                                <img src="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" alt="" class="figure-img img-fluid rounded mx-auto d-block w-80 img-thumbnail">
+                                <figcaption class="figure-caption">Most Recent Passport Photograph</figcaption>
+                              </figure>
+                            </a>
+                          </div>
+                          <!--                          <img src="--><?php //echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?><!--" alt="" class="rounded-circle  mx-auto d-block w-80">-->
                           <div class="form-group">
                             <label>Employee ID</label>
                             <input type="text" class="form-control" readonly name="employee_unique_id" value="<?php echo $employee->employee_unique_id; ?>"/>
@@ -130,6 +134,11 @@
                           </div>
                           <input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
                           <input type="hidden" name="employee_id" value="<?php echo $employee->employee_id;?>"/>
+                        </div>
+                        <div class="text-center">
+                          <span class="prv" style="cursor: not-allowed" id="prv">previous</span>
+                          <div class="bullet"></div>
+                          <span class="text-primary nxt" style="cursor: pointer" id="nxt">next</span>
                         </div>
                       </div>
                       <div class="tab-pane p-3" id="job-information" role="tabpanel">
@@ -216,6 +225,11 @@
                           <?php		}
                           } ?>
                         </div>
+                        <div class="text-center">
+                          <span class="text-primary prv" style="cursor: pointer" id="prv">previous</span>
+                          <div class="bullet"></div>
+                          <span class="text-primary nxt" style="cursor: pointer" id="nxt">next</span>
+                        </div>
                       </div>
                       <div class="tab-pane p-3" id="bank-information" role="tabpanel">
                         <div class="form-group row">
@@ -292,6 +306,11 @@
                             </div>
                           </div>
                         </div>
+                        <div class="text-center">
+                          <span class="text-primary prv" style="cursor: pointer" id="prv">previous</span>
+                          <div class="bullet"></div>
+                          <span class="text-primary nxt" style="cursor: pointer" id="nxt">next</span>
+                        </div>
                       </div>
                       <div class="tab-pane p-3" id="other-information" role="tabpanel">
                         <div class="form-group row">
@@ -319,15 +338,20 @@
                             <input type="date" name="employment_stop_date" value="<?php echo $employee->employee_stop_date; ?>"  class="form-control" placeholder="mm/dd/yyyy">
                           </div>
                         </div>
-                        <div class="modal-footer">
-                          <button type="submit" class="btn btn-warning">Save Changes</button>
+                        <div class="text-center">
+                          <span class="text-primary prv" style="cursor: pointer" id="prv">previous</span>
+                          <div class="bullet"></div>
+                          <span class="nxt" style="cursor: not-allowed" id="nxt">next</span>
                         </div>
                       </div>
                     </div>
-                  </form>
+                  </div>
+                  <div class="card-footer text-right bg-whitesmoke">
+                    <button type="submit" class="btn btn-warning">Save Changes</button>
+                    <button onclick="location.href='<?php echo site_url('employee');?>'" class="btn btn-danger" type="button">Go Back</button>
+                  </div>
                 </div>
-                <div class="card-footer bg-whitesmoke"></div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
@@ -407,6 +431,31 @@
 
     if(pensionable == 1){
       document.getElementById("pensiondiv").style.display='block';
+    }
+  }
+
+  $('.nxt').on('click', function () {
+    moveTab('next');
+  });
+  $('.prv').on('click', function () {
+    moveTab('previous');
+  })
+
+  function moveTab(nextOrPrev){
+    var currentTab = "";
+    $('.nav-pills li a').each(function () {
+      if($(this).hasClass('active')) {
+        currentTab = $(this);
+      }
+    });
+    if(nextOrPrev == 'next'){
+      if(currentTab.parent().next().length){
+        currentTab.parent().next().children().trigger('click');
+      }
+    } else {
+      if(currentTab.parent().prev().length){
+        currentTab.parent().prev().children().trigger('click');
+      }
     }
   }
 </script>
