@@ -831,10 +831,8 @@ class Employee extends CI_Controller
 				$employee = $this->employees->get_employee($employee_id);
 
 
-				if(empty($employee_id) || empty($transfer_type)):
-
+				if(empty($employee_id) || $transfer_type == null):
 					redirect('error_404');
-
 				else:
 				if ($transfer_type == 0):
 					$transfer_from = $employee->employee_location_id;
