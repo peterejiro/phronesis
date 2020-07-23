@@ -2,5 +2,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/ihumane/public_html/
+    - export DEPLOYPATH=/home/ihumane/public_html/demo/
     - /bin/cp -R * $DEPLOYPATH
