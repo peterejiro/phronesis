@@ -37,7 +37,6 @@ class Employees extends CI_Model
 		$this->db->join('bank', 'bank.bank_id = employee.employee_bank_id');
 		$this->db->where('employee_id', $employee_id);
 		$query = $this->db->get()->row();
-
 		if($query->employee_salary_structure_category == 0):
 			return $query;
 		else:

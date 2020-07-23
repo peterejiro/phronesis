@@ -10,7 +10,7 @@
 			<section class="section">
 				<div class="section-header">
           <div class="section-header-back">
-            <a href="<?php echo site_url('payroll_report')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+            <a href="<?php echo site_url('employee')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
           </div>
 					<h1> Terminate Employee </h1>
           <div class="section-header-breadcrumb">
@@ -31,35 +31,31 @@
                   </div>
                   <div class="card-body">
                     <div class="form-group">
-						<label>Employee Name: </label><span style="color: red"> <b> <?php echo $employee->employee_first_name." ".$employee->employee_last_name; ?> </b></span>
-
-
+						          <label>Employee</label>
+                      <input type="text" class="form-control" readonly value="<?php echo $employee->employee_first_name." ".$employee->employee_last_name; ?>"/>
                     </div>
-
-					  <div class="form-group">
+                    <div class="form-group">
                       <label>Termination Reason</label><span style="color: red"> *</span>
-						  <textarea class="summernote-simple" name="termination_reason"> </textarea>
+                      <textarea class="form-control summernote-simple" name="termination_reason" autofocus></textarea>
                       <div class="invalid-feedback">
-                        please enter a reason
+                        please enter a termination reason
                       </div>
                     </div>
-
-					  <div class="form-group row">
-						  <div class="col-sm-4">
-							  <label for="employee-start-date">Effective Date</label><span style="color: red"> *</span>
-							  <input id="employee-start-date" type="date" name="termination_effective_date" required class="form-control" placeholder="mm/dd/yyyy">
-							  <div class="invalid-feedback">
-								  please fill in an effective date
-							  </div>
-						  </div>
-
-                    <input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
-						  <input type="hidden" name="termination_employee_id" value="<?php echo $employee_id;?>" />
+                    <div class="form-group row">
+                      <div class="col-sm-4">
+                        <label for="employee-start-date">Effective Date</label><span style="color: red"> *</span>
+                        <input id="employee-start-date" type="date" name="termination_effective_date" required class="form-control" placeholder="mm/dd/yyyy">
+                        <div class="invalid-feedback">
+                          please fill in an effective date
+                        </div>
+                      </div>
+                      <input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
+                      <input type="hidden" name="termination_employee_id" value="<?php echo $employee_id;?>" />
+                    </div>
                   </div>
                   <div class="card-footer text-right bg-whitesmoke">
-					  <button type="button" class="btn btn-primary" id="sa-paramss"><i class="fas fa-check"></i>Terminate Employee</button>
-<!--                    <button type="submit" id="loan_button" class="btn btn-primary">Terminate</button>-->
-<!--                    <button type="button" onclick="location.reload();" class="btn btn-secondary">Reset</button>-->
+                    <button type="button" class="btn btn-primary" id="sa-paramss">Terminate Employee</button>
+                    <button onclick="location.href='<?php echo site_url('employee');?>'" class="btn btn-danger" type="button">Go Back</button>
                   </div>
                 </div>
               </form>
