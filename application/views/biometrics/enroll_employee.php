@@ -95,7 +95,7 @@ $CI->load->model('biometric');
 
 <script type="text/javascript">
 
-	// $('title').html('User');
+	$('title').html('Biometric Enrollment - IHUMANE');
 
 	function user_delete(user_id, user_name) {
 
