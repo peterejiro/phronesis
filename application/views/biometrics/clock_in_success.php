@@ -1,4 +1,4 @@
-<?php include(APPPATH.'\views\stylesheet.php');
+<?php include(APPPATH.'/views/stylesheet.php');
 $CI =& get_instance();
 $CI->load->model('biometric');
 
@@ -62,8 +62,8 @@ $CI->load->model('biometric');
 		</div>
 	</div>
 </div>
-<?php include(APPPATH.'\views\footer.php'); ?>
-<?php include(APPPATH.'\views\js.php'); ?>
+<?php include(APPPATH.'/views/footer.php'); ?>
+<?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
 

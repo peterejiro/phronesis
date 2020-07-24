@@ -1,6 +1,6 @@
 
 <?php
-  include(APPPATH.'\views\stylesheet.php');
+  include(APPPATH.'/views/stylesheet.php');
   $CI =& get_instance();
   $CI->load->model('hr_configurations');
   $CI->load->model('payroll_configurations');
@@ -74,11 +74,11 @@
 		</div>
 
 
-		<?php include(APPPATH.'\views\footer.php'); ?>
+		<?php include(APPPATH.'/views/footer.php'); ?>
 	</div>
 </div>
 
-<?php include(APPPATH.'\views\js.php'); ?>
+<?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
 <script>
