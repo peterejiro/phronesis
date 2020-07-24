@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
 
-		<?php include(APPPATH.'\views\stylesheet.php'); ?>
+		<?php include(APPPATH.'/views/stylesheet.php'); ?>
 
     </head>
 
@@ -49,7 +49,7 @@
 	</div>
 
 
-	<?php include(APPPATH.'\views\js.php'); ?>
+	<?php include(APPPATH.'/views/js.php'); ?>
 
 
 
