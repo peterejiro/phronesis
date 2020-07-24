@@ -20,7 +20,7 @@
           </div>
 				</div>
         <div class="section-body">
-          <div class="section-title">New Variational Payment</div>
+          <div class="section-title">All About New Variational Payments</div>
           <p class="section-lead">You can add a new variational payment for employees or departments here</p>
           <div class="row">
             <div class="col-12">
@@ -51,7 +51,7 @@
                       </div>
                       <div class="col-sm-6">
                         <label> Category</label><span style="color: red"> *</span>
-                        <select id="category" class="select2 form-control mb-3 custom-select" required name="category" onchange="toogle_employee_department()" style="width: 100%; height:56px;">
+                        <select id="category" class="select2 form-control" required name="category" onchange="toogle_employee_department()" style="width: 100%; height:42px !important;">
                           <option value=""> -- Select -- </option>
                           <option value="1">  Department </option>
                           <option value="0">  Employees  </option>
@@ -62,7 +62,7 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <div class="col-sm-6" id="departments">
+                      <div class="col-sm-6" id="departments" style="display: none">
                         <label> Department</label>
                         <select id="payment_type" class="select2 form-control" name="department_id" style="width: 100%; height:42px !important;">
                           <option value=""> -- Select -- </option>
@@ -71,9 +71,9 @@
 				                  <?php endforeach; ?>
                         </select>
                       </div>
-                      <div class="col-sm-6" id="employees">
+                      <div class="col-sm-6" id="employees" style="display: none">
                         <label>Employees</label>
-                        <select class="select2 mb-3 select2-multiple" style="width: 100%" multiple data-placeholder="Choose" name="employee_ids[]">
+                        <select class="select2 select2-multiple" style="width: 100% height:42px !important;" multiple data-placeholder="Choose" name="employee_ids[]">
                           <option value="" disabled> -- Select -- </option>
 				                  <?php foreach ($employees as $employee):
 					                  if(($employee->employee_status == 0) or ($employee->employee_status == 3)):
@@ -107,6 +107,7 @@
                   <div class="card-footer text-right bg-whitesmoke">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="button" onclick="location.reload()" class="btn btn-secondary">Reset</button>
+                    <button onclick="location.href='<?php echo site_url('variational_payment');?>'" class="btn btn-danger" type="button">Go Back</button>
                   </div>
                 </div>
               </form>
@@ -122,11 +123,12 @@
 <?php include(APPPATH.'\views\js.php'); ?>
 <script>
   window.onload = function(){
-    document.getElementById("employees").style.display='none';
-    document.getElementById("departments").style.display='none';
+    // document.getElementById("employees").style.display='none';
+    // document.getElementById("departments").style.display='none';
   };
   function toogle_employee_department() {
     var value = document.getElementById('category').value;
+    console.log(value);
     if(value == 1){
       document.getElementById("employees").style.display='none';
       document.getElementById("departments").style.display='block';

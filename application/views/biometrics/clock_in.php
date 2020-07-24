@@ -20,14 +20,13 @@ $CI->load->model('biometric');
           </div>
 				</div>
         <div class="section-body">
-          <div class="section-title">All About Clocking Employees In</div>
-          <p class="section-lead">Employees can Clock in</p>
+          <div class="section-title">All About Clocking In Employees For Today - <?php echo date('l, j F Y', time()) ?></div>
+          <p class="section-lead">You can clock in all enrolled employees here</p>
           <div class="row">
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4>Absent Employees -> <?php echo date('Y-m-d', time()) ?></h4>
-
+                  <h4>Enrolled Employees</h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -37,73 +36,51 @@ $CI->load->model('biometric');
                         <th>Employee Name</th>
                         <th>Employee Unique Id</th>
                         <th>Enrollment Status</th>
-
                         <th class="text-center">Actions</th>
                       </tr>
                       </thead>
                       <tbody>
                       <?php
-					  $date = date('Y-m-d', time());
-					  if(!empty($employees)):
-                        foreach($employees as $employee):
-							$check_biometrics  = $CI->biometric->get_employee_biometric($employee->employee_id);
-					  if(!empty($check_biometrics)):
-							$check_login = $CI->biometric->check_clock_in($employee->employee_id, $date);
-
-					  		if(empty($check_login)):
-
+					              $date = date('Y-m-d', time());
+					              if(!empty($employees)):
+                          foreach($employees as $employee):
+							            $check_biometrics  = $CI->biometric->get_employee_biometric($employee->employee_id);
+					                if(!empty($check_biometrics)):
+                            $check_login = $CI->biometric->check_clock_in($employee->employee_id, $date);
+					  		            if(empty($check_login)):
                           ?>
                           <tr>
                             <td><?php echo $employee->employee_last_name." ".$employee->employee_first_name." ".$employee->employee_other_name; ?></td>
                             <td><?php echo $employee->employee_unique_id; ?></td>
                             <td><?php
-
-								$check_biometrics  = $CI->biometric->get_employee_biometric($employee->employee_id);
-
-								if(empty($check_biometrics)): ?>
-
-									<div class="badge badge-danger">Not Enrolled</div>
-
-						<?php	else: ?>
-									<div class="badge badge-success">Enrolled</div>
-
-							<?php	endif;
-
-
-							?>
-								<code id="<?php echo "user_finger_".$employee->employee_id; ?>"> <?php echo count($check_biometrics); ?></code>
-
-								</td>
-
+                              $check_biometrics  = $CI->biometric->get_employee_biometric($employee->employee_id);
+								              if(empty($check_biometrics)): ?>
+									              <div class="badge badge-danger">Not Enrolled</div>
+        						          <?php	else: ?>
+									              <div class="badge badge-success">Enrolled</div>
+                              <?php	endif; ?>
+                              <input type="hidden" id="<?php echo "user_finger_".$employee->employee_id; ?>" value="<?php echo count($check_biometrics); ?>">
+                            </td>
                             <td class="text-center" style="width: 9px">
                               <div class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu">
-
                                   <?php if(empty($check_biometrics)): ?>
-									 <?php $url_register = base64_encode(site_url('reg').'/'.$employee->employee_id);
-
-									  $register = "<a class=\"dropdown-item has-icon\" href='finspot:FingerspotReg;$url_register' class='btn btn-xs btn-primary' onclick=\"user_register('".$employee->employee_id."','".$employee->employee_unique_id."')\"><i class=\"fas fa-edit\"></i>Enroll Fingerprint</a>";
-
-									 echo "Not Yet Enrolled";
-
-
-									 else:
-										 $url_verification	= base64_encode(site_url('clock_in').'/'.$employee->employee_id);
-										 $verification = "<a class=\"dropdown-item has-icon\" href='finspot:FingerspotVer;$url_verification' class='btn btn-xs btn-primary'><i class=\"fas fa-edit\"></i>Clock In</a>";
-
-
-/*                                    <a class="dropdown-item has-icon" href="<?php echo site_url('clock_in').'/'.$employee->employee_id; ?>"><i class="fas fa-question"></i>Clock In</a>*/
-										echo $verification;
+                                    <?php $url_register = base64_encode(site_url('reg').'/'.$employee->employee_id);
+                                    $register = "<a class=\"dropdown-item has-icon\" href='finspot:FingerspotReg;$url_register' class='btn btn-xs btn-primary' onclick=\"user_register('".$employee->employee_id."','".$employee->employee_unique_id."')\"><i class=\"fas fa-edit\"></i>Enroll Fingerprint</a>";
+                                    echo "Not Yet Enrolled";
+									                else:
+										                $url_verification	= base64_encode(site_url('clock_in').'/'.$employee->employee_id);
+										                $verification = "<a class=\"dropdown-item has-icon\" href='finspot:FingerspotVer;$url_verification' class='btn btn-xs btn-primary'><i class=\"fas fa-edit\"></i>Clock In</a>";
+										                echo $verification;
                                  endif; ?>
                                 </div>
                               </div>
                             </td>
                           </tr>
-					  <?php
-					  endif;
-					  endif;
-
+                          <?php
+                          endif;
+                          endif;
                         endforeach;
                       endif; ?>
                       </tbody>
@@ -126,7 +103,7 @@ $CI->load->model('biometric');
 
 <script type="text/javascript">
 
-	$('title').html('User');
+  $('title').html('Clock In - IHUMANE');
 
 	function user_delete(user_id, user_name) {
 

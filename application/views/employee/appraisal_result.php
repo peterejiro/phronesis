@@ -97,7 +97,7 @@
 															if($answer == 4): echo "Good Performance"; endif;
 															if($answer == 5): echo "Outstanding Performance"; endif;
 															?></td>
-														<td> <?php echo $answer; ?>/5</td>
+														<td style="width: 9px;"> <?php echo $answer; ?>/5</td>
 
 													</tr>
 
@@ -148,7 +148,7 @@
 															if($answer == 4): echo "Good Performance"; endif;
 															if($answer == 5): echo "Excellent/Outstanding Performance"; endif;
 															?></td>
-														<td> <?php echo $answer; ?>/5</td>
+														<td style="width: 9px"> <?php echo $answer; ?>/5</td>
 													</tr>
 
 													<?php
@@ -192,13 +192,15 @@
                     <table class="table table-striped table-hover table-md">
                       <tr>
                         <th>Detail</th>
-                        <th>Value</th>
+                        <th>Total</th>
+                        <th>Score</th>
                       </tr>
                       <tr>
                         <td style="width: 70%">Total Score for Quantitative (20%) + Qualitative (80%) </td>
-                        <td><?php
+                        <td>100</td>
+                        <td style="width: 9px;"><?php
                           $score = ((($quantitative_score/($count_quantitative * 5)) * (20/100)) + (($qualitative_score/($count_qualitative * 5)) * (80/100)));
-                          echo number_format($score * 100)."%";  ?></td>
+                          echo number_format($score * 100);  ?></td>
                       </tr>
                     </table>
                   </div>

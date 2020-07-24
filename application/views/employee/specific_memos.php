@@ -58,7 +58,7 @@
                               <div class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu">
-                                  <a class="dropdown-item has-icon" class="btn btn-icon icon-left btn-primary" data-toggle="modal" data-target="#edit_memo<?php echo $memo->specific_memo_id; ?>" aria-haspopup="true" aria-expanded="false"><i class="fas fa-eye"></i>View memos</a>
+                                  <a class="dropdown-item has-icon btn btn-icon icon-left" data-toggle="modal" data-target="#edit_memo<?php echo $memo->specific_memo_id; ?>"><i class="fas fa-eye"></i> View Directive</a>
                                 </div>
                               </div>
                             </td>
