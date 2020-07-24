@@ -7,7 +7,7 @@
 <?php	$CI =& get_instance();
 	$CI->load->model('salaries');
 	?>
-	<?php include(APPPATH.'\views\stylesheet.php'); ?>
+	<?php include(APPPATH.'/views/stylesheet.php'); ?>
 	<!-- DataTables -->
 
 
@@ -19,10 +19,10 @@
 <div id="app">
 	<div class="main-wrapper">
 		<div class="navbar-bg"></div>
-		<?php include(APPPATH.'\views\topbar.php'); ?>
+		<?php include(APPPATH.'/views/topbar.php'); ?>
 
 
-		<?php include(APPPATH.'\views\sidebar.php'); ?>
+		<?php include(APPPATH.'/views/sidebar.php'); ?>
 
 
 
@@ -230,6 +230,6 @@
 
 </script>
 
-<?php include(APPPATH.'\views\js.php'); ?>
+<?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
