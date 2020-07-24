@@ -2,15 +2,15 @@
   $CI =& get_instance();
   $CI->load->model('salaries');
   $CI->load->model('payroll_configurations');
-  include(APPPATH.'\views\stylesheet.php');
+  include(APPPATH.'/views/stylesheet.php');
 ?>
 
 <body>
 <div id="app">
 	<div class="main-wrapper">
 		<div class="navbar-bg"></div>
-		<?php include(APPPATH.'\views\topbar.php'); ?>
-		<?php include(APPPATH.'\views\sidebar.php'); ?>
+		<?php include(APPPATH.'/views/topbar.php'); ?>
+		<?php include(APPPATH.'/views/sidebar.php'); ?>
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
@@ -78,8 +78,8 @@
 		</div>
 	</div>
 </div>
-<?php include(APPPATH.'\views\footer.php'); ?>
-<?php include(APPPATH.'\views\js.php'); ?>
+<?php include(APPPATH.'/views/footer.php'); ?>
+<?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
 

@@ -696,7 +696,7 @@
 			</div>
     </div>
 	</div>
-  <?php include(APPPATH.'\views\footer.php'); ?>
+  <?php include(APPPATH.'/views/footer.php'); ?>
   <?php include('js.php'); ?>
   <script>
     $(document).ready(function() {
