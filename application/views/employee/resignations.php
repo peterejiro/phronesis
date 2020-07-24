@@ -63,8 +63,8 @@
                               <div class="dropdown">
 																<a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
 																<div class="dropdown-menu">
-																		<a class="dropdown-item has-icon" href="<?php echo site_url('approve_resignation')."/".$resignation->resignation_id; ?>"><i class="fas fa-edit"></i>Approve</a>
-																		<a class="dropdown-item has-icon" href="<?php echo site_url('discard_resignation')."/".$resignation->resignation_id; ?>"><i class="fas fa-eye"></i>Discard</a>
+																		<a class="dropdown-item has-icon" href="<?php echo site_url('approve_resignation')."/".$resignation->resignation_id; ?>"><i class="fas fa-check"></i>Approve</a>
+																		<a class="dropdown-item has-icon" href="<?php echo site_url('discard_resignation')."/".$resignation->resignation_id; ?>"><i class="fas fa-times"></i>Discard</a>
 																</div>
 															</div>
 															<?php else: echo "No Actions"; endif; ?>
