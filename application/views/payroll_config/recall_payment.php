@@ -95,6 +95,7 @@
                   </div>
                   <div class="card-footer text-right bg-whitesmoke">
                     <button type="submit" class="btn btn-primary">Submit</button>
+                    <button onclick="location.href='<?php echo site_url('new_variational_payment');?>'" class="btn btn-danger" type="button">Go Back</button>
                   </div>
                 </div>
               </form>

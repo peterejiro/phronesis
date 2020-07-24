@@ -21,7 +21,7 @@
 				</div>
         <div class="section-body">
           <div class="section-title">All About Creating New Directives</div>
-          <p class="section-lead">You can add a new directive memo for employees or departments here</p>
+          <p class="section-lead">You can fill the form to add a new directive memo for employees or departments here</p>
           <div class="row">
             <div class="col-12">
               <form class="needs-validation" novalidate method="post" action="<?php echo site_url('add_specific_memo'); ?>">
@@ -46,7 +46,7 @@
                     <div class="form-group row">
                       <div class="col-sm-6" id="departments" style="display: none">
                         <label> Department</label>
-                        <select id="payment_type" class="selectric form-control" name="department_id" style="width: 100%; height:42px !important;">
+                        <select id="payment_type" class="select2 form-control" name="department_id" style="width: 100%; height:42px !important;">
                           <option value=""> -- Select -- </option>
 				                  <?php foreach ($departments as $department):?>
                             <option value="<?php echo $department->department_id ?>"> <?php echo $department->department_name; ?> </option>
@@ -85,6 +85,7 @@
                   <div class="card-footer text-right bg-whitesmoke">
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <button type="button" onclick="location.reload()" class="btn btn-secondary">Reset</button>
+                    <button onclick="location.href='<?php echo site_url('specific_memo');?>'" class="btn btn-danger" type="button">Go Back</button>
                   </div>
                 </div>
               </form>

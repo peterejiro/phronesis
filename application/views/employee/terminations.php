@@ -43,8 +43,7 @@
                             <td><?php echo $termination->employee_unique_id; ?></td>
                             <td><?php echo $termination->employee_last_name." ".$termination->employee_first_name." ".$termination->employee_other_name; ?></td>
                             <td><?php echo $termination->termination_reason; ?></td>
-                            <td><?php echo $termination->termination_effective_date; ?></td>
-
+                            <td><?php echo date('l, j F Y', strtotime($termination->termination_effective_date));?></td>
                           </tr>
 			                  <?php
 			                  endforeach;
