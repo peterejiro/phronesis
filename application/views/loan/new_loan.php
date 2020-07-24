@@ -120,7 +120,7 @@
                   </div>
                   <div class="card-footer text-right bg-whitesmoke">
                     <button type="button" id="compute_loan" onclick="add_months()" class="btn btn-primary">Compute Loan</button>
-                    <button type="submit" id="loan_button"  class="btn btn-primary" style="display: none">New Loan</button>
+                    <button type="submit" id="loan_button"  class="btn btn-primary" style="display: none">Confirm Loan</button>
                     <button type="button" onclick="location.reload();" class="btn btn-secondary">Reset</button>
                   </div>
                 </div>

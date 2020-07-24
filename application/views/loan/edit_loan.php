@@ -100,6 +100,7 @@
                       </div>
                       <div class="card-footer text-right bg-whitesmoke">
                         <button type="submit" class="btn btn-primary">Skip Month</button>
+                        <button onclick="location.href='<?php echo site_url('loans');?>'" class="btn btn-danger" type="button">Go Back</button>
                       </div>
                     </div>
                   </form>
@@ -177,6 +178,7 @@
                         <button type="button" id="compute_loan" onclick="add_months()" class="btn btn-primary">Compute Loan</button>
                         <button type="submit" id="loan_button"  class="btn btn-primary" style="display: none">Update Repayment Loan</button>
                         <button type="button" id="reset_button" onclick="reset_form()" class="btn btn-secondary">Reset</button>
+                        <button onclick="location.href='<?php echo site_url('loans');?>'" class="btn btn-danger" type="button">Go Back</button>
                       </div>
                     </div>
                   </form>

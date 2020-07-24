@@ -66,7 +66,6 @@
 			</li>
 			<?php } ?>
 
-
 			<li class="menu-header">Finance</li>
 			<li class="dropdown <?php echo
       $this->uri->segment(1) == 'employee_salary_structure' ||
@@ -108,17 +107,14 @@
 			<?php } ?>
 			</li>
 
-			<li class="dropdown <?php echo $this->uri->segment(2) == 'enroll_employee' || $this->uri->segment(2) == 'clockin' ? 'active' : ''; ?>">
+      <li class="menu-header">Biometrics</li>
+      <li class="dropdown <?php echo $this->uri->segment(1) == 'enroll_employee' || $this->uri->segment(1) == 'clockin' || $this->uri->segment(1) == 'biometrics_report' ? 'active' : ''; ?>">
 			<?php if($biometrics == 1){  ?>
 				<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-fingerprint"></i> <span>Biometrics</span></a>
 				<ul class="dropdown-menu">
-
-					<li class="<?php echo $this->uri->segment(1) == 'enroll_employee' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('enroll_employee') ?>"> Enroll Employee </a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'enroll_employee' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('enroll_employee') ?>"> Biometrics Enrollment </a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'clockin' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('clockin') ?>"> Clock In </a></li>
-
 					<li class="<?php echo $this->uri->segment(1) == 'biometrics_report' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('biometrics_report') ?>"> Biometrics Report </a></li>
-
-
 				</ul>
 				<?php } ?>
 			</li>

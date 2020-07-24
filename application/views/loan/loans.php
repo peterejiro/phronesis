@@ -36,7 +36,7 @@
                           <th>Employee Name</th>
                           <th>Loan Type</th>
                           <th>Amount</th>
-							<th>Balance</th>
+                          <th>Balance</th>
                           <th>Loan Status</th>
                           <th>Action</th>
                         </tr>
@@ -50,26 +50,26 @@
                             <td><?php echo $loan->employee_last_name." ".$loan->employee_first_name." ".$loan->employee_other_name; ?></td>
                             <td><?php echo $loan->payment_definition_payment_name; ?></td>
                             <td>&#8358; <?php echo number_format($loan->loan_amount); ?></td>
-							  <td>&#8358; <?php echo number_format($loan->loan_balance); ?></td>
+                            <td>&#8358; <?php echo number_format($loan->loan_balance); ?></td>
                             <td>
                               <?php if($loan->loan_status == 0): ?>
-                                <div class="badge badge-warning">Running</div>
-							  <?php endif;?>
+                                <div class="badge badge-primary">Running</div>
+                              <?php endif;?>
                               <?php if($loan->loan_status == 1):?>
                                 <div class="badge badge-success">Paid Off</div>
                               <?php endif;?>
-								<?php if($loan->loan_status == 2):?>
-									<div class="badge badge-success">Pending</div>
-								<?php endif;?>
-								<?php if($loan->loan_status == 3):?>
-									<div class="badge badge-success">Discarded</div>
-								<?php endif;?>
+                              <?php if($loan->loan_status == 2):?>
+                                <div class="badge badge-warning">Pending</div>
+                              <?php endif;?>
+                              <?php if($loan->loan_status == 3):?>
+                                <div class="badge badge-danger">Discarded</div>
+                              <?php endif;?>
                             </td>
                             <td class="text-center" style="width: 9px;">
                               <div class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu">
-                                  <a class="dropdown-item has-icon" data-toggle="modal" data-target="#view_loan<?php echo $loan->loan_id ?>"><i class="fas fa-eye"></i>View Loan Details</a>
+                                  <a class="dropdown-item has-icon btn" data-toggle="modal" data-target="#view_loan<?php echo $loan->loan_id ?>"><i class="fas fa-eye"></i>View Loan Details</a>
                                   <?php if($loan->loan_status == 0):?>
                                     <a class="dropdown-item has-icon" href="<?php echo site_url('edit_loan')."/".$loan->loan_id; ?>"><i class="fas fa-edit"></i>Reschedule Loan</a>
                                   <?php endif; ?>

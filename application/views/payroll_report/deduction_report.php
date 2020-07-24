@@ -90,6 +90,7 @@
                   <div class="card-footer text-right bg-whitesmoke">
                     <button type="submit" id="loan_button"  class="btn btn-primary">Generate Sheet</button>
                     <button type="button" onclick="location.reload();" class="btn btn-secondary">Reset</button>
+                    <button onclick="location.href='<?php echo site_url('payroll_report');?>'" class="btn btn-danger" type="button">Go Back</button>
                   </div>
                 </div>
               </form>

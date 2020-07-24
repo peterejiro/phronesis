@@ -60,10 +60,13 @@
                                 <div class="dropdown">
                                   <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                   <div class="dropdown-menu">
-                                    <a class="dropdown-item has-icon" href="<?php echo site_url('view_employee_salary_structure').'/'.$employee->employee_id; ?>"><i class="fas fa-eye"></i>View Structure</a>
-                                    <a class="dropdown-item has-icon" href="<?php echo site_url('edit_employee_salary_structure').'/'.$employee->employee_id; ?>"><i class="fas fa-edit"></i>Edit Structure</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item has-icon text-warning" href="<?php echo site_url('setup_salary_structure').'/'.$employee->employee_id; ?>"><i class="fas fa-cog"></i>Setup Structure</a>
+                                    <?php if($employee->employee_salary_structure_setup != 0 ):?>
+                                      <a class="dropdown-item has-icon" href="<?php echo site_url('view_employee_salary_structure').'/'.$employee->employee_id; ?>"><i class="fas fa-eye"></i>View Structure</a>
+                                      <a class="dropdown-item has-icon" href="<?php echo site_url('edit_employee_salary_structure').'/'.$employee->employee_id; ?>"><i class="fas fa-edit"></i>Edit Structure</a>
+                                    <?php endif;?>
+                                    <?php if($employee->employee_salary_structure_setup == 0 ):?>
+                                      <a class="dropdown-item has-icon text-warning" href="<?php echo site_url('setup_salary_structure').'/'.$employee->employee_id; ?>"><i class="fas fa-cog"></i>Setup Structure</a>
+                                    <?php endif;?>
                                   </div>
                                 </div>
                               </td>
