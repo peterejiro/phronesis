@@ -1,10 +1,10 @@
-<?php include(APPPATH.'\views\stylesheet.php'); ?>
+<?php include(APPPATH.'/views/stylesheet.php'); ?>
 <body>
 <div id="app">
 	<div class="main-wrapper">
 		<div class="navbar-bg"></div>
-		<?php include(APPPATH.'\views\topbar.php'); ?>
-		<?php include(APPPATH.'\views\sidebar.php'); ?>
+		<?php include(APPPATH.'/views/topbar.php'); ?>
+		<?php include(APPPATH.'/views/sidebar.php'); ?>
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
@@ -412,14 +412,14 @@
   </div>
 </div>
 
-<?php include(APPPATH.'\views\footer.php'); ?>
-<?php include(APPPATH.'\views\js.php'); ?>
+<?php include(APPPATH.'/views/footer.php'); ?>
+<?php include(APPPATH.'/views/js.php'); ?>
 
   <script>
     $(document).ready(function() {
       // show file names on file upload for nysc documents...
       $(".custom-file-input").on('change', function () {
-        let fileName = $(this).val().split('\\').pop();
+        let fileName = $(this).val().split('//').pop();
         $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
       });
       // accept phone number in nigerian format i.e. 0909 600 0024
