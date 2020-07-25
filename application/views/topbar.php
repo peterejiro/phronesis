@@ -1,6 +1,4 @@
 
-
-
 <nav class="navbar navbar-expand-lg main-navbar">
 	<form class="form-inline mr-auto">
 		<ul class="navbar-nav mr-3">
