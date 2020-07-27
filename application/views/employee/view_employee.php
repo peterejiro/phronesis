@@ -406,3 +406,6 @@
 </script>
 </body>
 </html>
+<script>
+  $('title').html('View Employee - IHUMANE')
+</script>

@@ -156,7 +156,9 @@
 </html>
 
 <script>
-	$(document).ready(function(){
+  $('title').html('View Query - IHUMANE')
+
+  $(document).ready(function(){
 		setInterval(timestamp, 1000);
 		function timestamp() {
 			$("#query").load(location.href + " #query");

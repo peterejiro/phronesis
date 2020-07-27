@@ -89,6 +89,9 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('New Employee Leave - IHUMANE')
+</script>
 
 
 

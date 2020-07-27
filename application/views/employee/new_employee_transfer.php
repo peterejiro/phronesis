@@ -98,6 +98,8 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
+  $('title').html('New Transfer - IHUMANE')
+
   window.onload = function(){
     // document.getElementById("subsidiary").style.display='none';
     // document.getElementById("location").style.display='none';

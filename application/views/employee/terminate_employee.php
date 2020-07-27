@@ -71,7 +71,9 @@
 </body>
 </html>
 <script>
-	$(document).ready(function () {
+  $('title').html('Terminate Employee - IHUMANE')
+
+  $(document).ready(function () {
 
 		$('#sa-paramss').click(function () {
 			swal({
