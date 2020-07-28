@@ -12,6 +12,7 @@
 					<h1>Questions Setup</h1>
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
+			  <div class="breadcrumb-item active"><a href="<?php echo base_url('trainings'); ?>">Trainings</a></div>
             <div class="breadcrumb-item">Questions Setup for <?php echo $training->training_name; ?></div>
           </div>
 				</div>

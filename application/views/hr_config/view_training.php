@@ -8,23 +8,23 @@
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1>Update Training</h1>
+					<h1><?php echo $training->training_name; ?></h1>
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
 			  <div class="breadcrumb-item active"><a href="<?php echo base_url('trainings'); ?>">Trainings</a></div>
-            <div class="breadcrumb-item">Update Training</div>
+            <div class="breadcrumb-item">View Training</div>
           </div>
 				</div>
         <div class="section-body">
-          <div class="section-title">All About Creating Trainings</div>
-          <p class="section-lead">You can complete the form to create a training here</p>
+          <div class="section-title"><?php echo $training->training_name; ?></div>
+          <p class="section-lead">You can view all about a training here</p>
 
           <div class="row mt-4">
             <div class="col-12">
-              <form method="post" action="<?php echo site_url('update_training'); ?>" enctype="multipart/form-data" class="needs-validation" novalidate>
+              <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
                 <div class="card card-primary">
                   <div class="card-header">
-                    <h4>Update Training </h4>
+                    <h4><?php echo $training->training_name; ?> </h4>
                   </div>
                   <div class="card-body">
                     <div class="tab-content">
@@ -76,9 +76,7 @@
 														src="<?php echo base_url()."/uploads/trainings/".$training_material->training_material_link; ?>?autoplay=false" height="700px" width="100%">
 												</iframe>
 												<div class="carousel-caption d-none d-md-block">
-													<h5><button type="button" id="<?php echo $training_material->training_material_id; ?>" onclick="remove_material(<?php echo $training_material->training_material_id; ?>)" class="btn btn-danger btn-lg">
-															Remove
-														</button></h5>
+
 
 												</div>
 											</div>
@@ -96,30 +94,7 @@
 									</div>
 								</div>
 							</div>
-							<div id="show_more">
-							<button type="button" onclick="show_more()" class="btn btn-primary btn-lg">
-								Upload New Materials
-							</button>
-							</div>
 
-							<div id="new_material">
-								<div class="form-group row">
-									<div class="col-sm-12">
-										<div id="myId" class="dropzone">
-											<div class="dz-message needsclick">
-												<i class="hi text-muted dripicons-cloud-upload"></i>
-												<h3>Drop all  relevant Training documents/videos here...</h3>
-											</div>
-										</div>
-									</div>
-								</div>
-
-							</div>
-						  <div id="hide_more">
-							<button type="button" onclick="hide_more()" class="btn btn-primary btn-lg">
-								Cancel Upload
-							</button>
-						  </div>
 
 							<input type="hidden" name="training_id" value="<?php echo $training->training_id; ?>">
 
@@ -131,12 +106,67 @@
 
                     </div>
                   </div>
-                  <div class="card-footer text-right bg-whitesmoke">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <input type="reset" class="btn btn-secondary">
-                  </div>
+
                 </div>
               </form>
+
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header">
+								<h4>All Questions for <?php echo $training->training_name; ?> </h4>
+
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="datatable-buttons" class="table table-striped table-bordered table-md">
+										<thead>
+										<tr>
+											<th>Questions</th>
+											<th>Options</th>
+											<th>Correct Answer</th>
+											<th>Action</th>
+										</tr>
+										</thead>
+										<tbody>
+										<?php if(!empty($training_questions)):
+											foreach($training_questions as $training_question):
+												?>
+												<tr>
+													<td><?php echo $training_question->training_question_question; ?></td>
+
+													<td> <?php echo "A ->". $training_question->training_question_option_a; ?> <br>
+														<?php echo "B ->". $training_question->training_question_option_b; ?> <br>
+														<?php echo "C ->". $training_question->training_question_option_c; ?> <br>
+														<?php echo "D ->". $training_question->training_question_option_d; ?> <br>
+
+
+
+													</td>
+													<td><?php echo $training_question->training_question_correct; ?></td>
+													<td class="text-center" style="width: 9px">
+														<div class="dropdown">
+															<a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
+															<div class="dropdown-menu">
+
+																<a class="dropdown-item has-icon" data-toggle="modal" data-target="#edit_question<?php echo $training_question->training_question_id; ?>"><i class="fas fa-edit"></i>Edit Question</a>
+																<a class="dropdown-item has-icon" href="<?php echo site_url('delete_question')."/".$training_question->training_question_id;?>"><i class="fas fa-edit"></i>Delete Question</a>
+															</div>
+														</div>
+													</td>
+												</tr>
+											<?php
+											endforeach;
+										endif; ?>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="card-footer bg-whitesmoke"></div>
+						</div>
+					</div>
+				</div>
+
             </div>
           </div>
         </div>

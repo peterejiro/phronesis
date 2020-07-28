@@ -11,6 +11,7 @@
 					<h1>New Training</h1>
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
+			  <div class="breadcrumb-item active"><a href="<?php echo base_url('trainings'); ?>">Trainings</a></div>
             <div class="breadcrumb-item">New Training</div>
           </div>
 				</div>
