@@ -30,6 +30,8 @@
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'appraisals' ? 'active':'' ?>"><a href="<?php echo base_url('appraisals') ?>" class="nav-link">View Appraisals</a></li>
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'appraise_employee' ? 'active':'' ?>"><a href="<?php echo base_url('appraise_employee') ?>" class="nav-link">Appraise Employee</a></li>
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'employee_resignation' ? 'active':'' ?>"><a href="<?php echo base_url('employee_resignation') ?>" class="nav-link">Resign</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_trainings' ? 'active':'' ?>"><a href="<?php echo base_url('my_trainings') ?>" class="nav-link"> Trainings </a></li>
+
 				</ul>
 			</li>
 			<li class="nav-item dropdown <?php echo $this->uri->segment(1) == 'my_queries' || $this->uri->segment(1) == 'view_my_query' || $this->uri->segment(1) == 'my_memos' || $this->uri->segment(1) == 'my_specific_memos' ? 'active':'' ?>">

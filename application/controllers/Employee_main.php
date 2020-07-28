@@ -1666,6 +1666,119 @@ class Employee_main extends CI_Controller
 	}
 
 
+	public function my_trainings(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+
+				$data['employee_id'] = $employee_id;
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
+
+				$data['trainings'] = $this->employees->get_employee_training($employee_id);
+
+
+
+				$this->load->view('employee_self_service/my_trainings', $data);
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function begin_training(){
+
+		$training_id = $this->uri->segment(2);
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				if(empty($training_id)):
+
+					redirect('error_404');
+
+				else:
+
+					$check_existing_training = $this->hr_configurations-> view_training($training_id);
+
+					if(empty($check_existing_training)):
+
+						redirect('error_404');
+
+					else:
+
+						$data['user_data'] = $this->users->get_user($username);
+						//$data['employees'] = $this->employees->get_employee_by_salary_setup();
+						$data['training'] = $check_existing_training;
+						$data['training_materials'] = $this->hr_configurations->view_training_materials($training_id);
+
+
+						$data['csrf_name'] = $this->security->get_csrf_token_name();
+						$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+
+
+
+
+						$data['employee'] = $this->employees->get_employee_by_unique($username);
+						$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+
+						$data['employee_id'] = $employee_id;
+						$data['notifications'] = $this->employees->get_notifications($employee_id);
+
+
+
+						$this->load->view('employee_self_service/view_training', $data);
+
+
+					endif;
+
+				endif;
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
 
 
 }
