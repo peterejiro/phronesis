@@ -110,3 +110,6 @@ $CI->load->model('hr_configurations');
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('Employee Leaves - IHUMANE')
+</script>

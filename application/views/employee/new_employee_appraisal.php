@@ -93,7 +93,8 @@
 </html>
 
 <script>
-function compare_employee_supervisor() {
+  $('title').html('New Appraisal - IHUMANE')
+  function compare_employee_supervisor() {
 	let employee_id = document.getElementById('employee').value;
 	let supervisor_id = document.getElementById('supervisor').value;
 	if(employee_id === supervisor_id){

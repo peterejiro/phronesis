@@ -94,6 +94,9 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('Employee Queries - IHUMANE');
+</script>
 
 <div class="modal fade bd-example-modal-lg" id="new_query" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">

@@ -410,6 +410,8 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
+  $('title').html('Update Employee - IHUMANE');
+
   window.onload = function(){
     let pensionable = document.getElementById('employee_pensionable').value
 

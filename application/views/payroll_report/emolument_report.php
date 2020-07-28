@@ -90,3 +90,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('Emolument Report - IHUMANE')
+</script>

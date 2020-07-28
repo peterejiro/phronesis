@@ -1,30 +1,32 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-      <meta content="IHUMANE" name="description" />
-      <meta content="Connexxion Group" name="author" />
 
-      <title>IHUMANE</title>
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+	<meta content="IHUMANE" name="description" />
+	<meta content="Connexxion Group" name="author" />
 
-      <!-- General CSS Files -->
-      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/bootstrap/css/bootstrap.min.css">
-      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/fontawesome/css/all.min.css">
+	<title>IHUMANE</title>
 
-      <!-- Template CSS -->
-      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
-      <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/components.css">
+	<!-- General CSS Files -->
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/fontawesome/css/all.min.css">
 
-    </head>
-	<body>
+	<!-- Template CSS -->
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/components.css">
+
+</head>
+
+<body>
 	<div id="app">
-		<section class="section" >
+		<section class="section">
 			<div class="d-flex flex-wrap align-items-stretch">
 				<div class="col-lg-4 col-md-6 col-12 order-lg-1 order-2 bg-white" style="height: 100vh; overflow: auto">
 					<div class="p-4 m-3">
@@ -51,9 +53,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</div>
 							</div>
 
-							<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
+							<input type="hidden" name="<?php echo $csrf_name; ?>" value="<?php echo $csrf_hash; ?>" />
 
-							<?php if($error != ' '): ?>
+							<?php if ($error != ' ') : ?>
 								<div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
 									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
@@ -92,7 +94,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<div class="mb-5 pb-3">
 								<h1 class="mb-2 display-4 font-weight-bold greeting">Good Morning</h1>
 								<h4 class="font-weight-normal text-muted-transparent">Abuja, Nigeria</h4>
-                <h6 id="timestamp"></h6>
+								<h6 id="timestamp"></h6>
 							</div>
 
 						</div>
@@ -102,40 +104,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</section>
 	</div>
 
-  <!-- General JS Scripts -->
-  <script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/popper.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/bootstrap/js/bootstrap.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/modules/moment.min.js"></script>
-  <script src="<?php echo base_url(); ?>assets/js/stisla.js"></script>
+	<!-- General JS Scripts -->
+	<script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/modules/popper.js"></script>
+	<script src="<?php echo base_url(); ?>assets/modules/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/modules/moment.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/stisla.js"></script>
 
-  <!-- Template JS File -->
-  <script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
-  <script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
-  <script>
-    $(document).ready(function () {
-      setInterval(timestamp, 1000);
-      let today = new Date();
-      let curHr = today.getHours();
-      if (curHr < 12) {
-        $('.greeting').html('Good Morning')
-      } else if (curHr < 18) {
-        $('.greeting').html('Good Afternoon')
-      } else {
-        $('.greeting').html('Good Evening')
-      }
-    });
+	<!-- Template JS File -->
+	<script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
+	<script>
+		$('title').html('Welcome - IHUMANE');
 
-    function timestamp() {
-      $.ajax({
-        url: '<?php echo site_url('timestamp')?>',
-        success: function (data) {
-          $('#timestamp').html(data);
-        }
-      })
-    }
-  </script>
+		$(document).ready(function() {
+			setInterval(timestamp, 1000);
+			let today = new Date();
+			let curHr = today.getHours();
+			if (curHr < 12) {
+				$('.greeting').html('Good Morning')
+			} else if (curHr < 18) {
+				$('.greeting').html('Good Afternoon')
+			} else {
+				$('.greeting').html('Good Evening')
+			}
+		});
+
+		function timestamp() {
+			$.ajax({
+				url: '<?php echo site_url('timestamp') ?>',
+				success: function(data) {
+					$('#timestamp').html(data);
+				}
+			})
+		}
+	</script>
 
 </body>
+
 </html>

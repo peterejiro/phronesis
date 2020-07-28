@@ -150,13 +150,11 @@
             </div>
 					</div>
 					<div class="modal-footer bg-whitesmoke">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-
-						<?php if($loan->loan_status == 2):  ?>
-						<button onclick="location.href='<?php echo site_url('discard_loan')."/".$loan->loan_id;?>'" type="button" class="btn btn-warning" data-dismiss="modal">Discard Loan</button>
-						<button onclick="location.href='<?php echo site_url('approve_loan')."/".$loan->loan_id;;?>'" type="button" class="btn btn-success" data-dismiss="modal">Approve Loan</button>
-
-						<?php endif; ?>
+            <?php if($loan->loan_status == 2):  ?>
+              <button onclick="location.href='<?php echo site_url('approve_loan')."/".$loan->loan_id;;?>'" type="button" class="btn btn-success" data-dismiss="modal">Approve Loan</button>
+              <button onclick="location.href='<?php echo site_url('discard_loan')."/".$loan->loan_id;?>'" type="button" class="btn btn-danger" data-dismiss="modal">Discard Loan</button>
+            <?php endif; ?>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					</div>
 				</form>
 			</div>
@@ -167,3 +165,7 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('Manage Loans - IHUMANE')
+</script>
+

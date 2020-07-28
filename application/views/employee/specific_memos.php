@@ -83,6 +83,9 @@
 </body>
 </html>
 
+<script>
+  $('title').html('Directives - IHUMANE')
+</script>
 
 <?php if(!empty($memos)):
 	foreach($memos as $memo):?>

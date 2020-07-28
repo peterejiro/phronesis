@@ -9,7 +9,7 @@
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1>Employee Resignation</h1>
+					<h1>Employee Resignations</h1>
 					<div class="section-header-breadcrumb">
 						<div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
 						<div class="breadcrumb-item">Employee Resignations</div>
@@ -87,9 +87,11 @@
 		</div>
 	</div>
 </div>
-
-
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+
+<script>
+  $('title').html('Employee Resignations - IHUMANE')
+</script>
