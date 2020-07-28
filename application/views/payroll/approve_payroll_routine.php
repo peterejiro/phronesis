@@ -13,7 +13,6 @@
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-
           <h1>Approve Payroll Routine</h1>
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
@@ -23,9 +22,9 @@
         <div class="section-body">
           <div class="section-title">All About Approving Payroll Routines</div>
 					<?php if($check_salary > 0): ?>
-            <p class="section-lead">Summary of Payroll Routine - <?php echo date("F", mktime(0, 0, 0, $payroll_month, 10))." ".$payroll_year; ?></p>
+            <p class="section-lead">Approve payroll routine run  - <?php echo date("F", mktime(0, 0, 0, $payroll_month, 10))." ".$payroll_year; ?></p>
 					<?php else: ?>
-            <p class="section-lead">No Routine Is Currently Available</p>
+            <p class="section-lead">No payroll routine is currently available to be approved</p>
 					<?php endif; ?>
           <div class="row">
             <div class="col-12">
@@ -115,6 +114,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
+  $('title').html('Approve Payroll Routine - IHUMANE')
   $(document).ready(function () {
     $('#sa-params').click(function () {
       swal({

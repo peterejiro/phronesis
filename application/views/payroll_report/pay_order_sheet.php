@@ -60,7 +60,6 @@
                             <td> <?php echo $employee->employee_account_number; ?></td>
                             <td> <?php echo $employee->employee_first_name." ".$employee->employee_last_name." ".$employee->employee_other_name; ?></td>
                             <td>
-                              &#8358;
 						                  <?php
   						                  $gross_pay = 0;
 						                    $salaries = $CI->salaries->get_employee_income($employee->employee_id, $payroll_month, $payroll_year, 1);
@@ -92,7 +91,9 @@
                     </table>
                   </div>
                 </div>
-                <div class="card-footer bg-whitesmoke"></div>
+                <div class="card-footer text-right bg-whitesmoke">
+                  <button onclick="location.href='<?php echo site_url('pay_order');?>'" class="btn btn-danger" type="button">Go Back</button>
+                </div>
               </div>
             </div>
           </div>
@@ -105,3 +106,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('Pay Order Sheet - IHUMANE')
+</script>

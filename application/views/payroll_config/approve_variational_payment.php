@@ -74,16 +74,6 @@
                                 <td><?php echo $variational_payment->department_name; ?></td>
                                 <td><?php echo $variational_payment->payment_definition_payment_name; ?></td>
                                 <td>&#8358; <?php echo number_format($variational_payment->variational_amount);?></td>
-                                <!--											<td>-->
-                                <!---->
-                                <!--												<div class="checkbox my-2">-->
-                                <!--													<div class="custom-control custom-checkbox">-->
-                                <!---->
-                                <!--														<input type="checkbox" class="custom-control-input" name="delete[]" value="--><?php //echo $variational_payment->variational_payment_id; ?><!--" id="delete--><?php //echo $i; ?><!--" data-parsley-multiple="groups" data-parsley-mincheck="0">-->
-                                <!--														<label class="custom-control-label" for="delete--><?php //echo $i; ?><!--">Delete</label>-->
-                                <!--													</div>-->
-                                <!--												</div></td>-->
-
                               </tr>
 
 		                        <?php
@@ -113,6 +103,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
+  $('title').html('Approve Variational Payments - IHUMANE')
   $(document).ready(function () {
     // clicking the master checkbox, checks all the children in the table
     $('.master-check').click(function () {
