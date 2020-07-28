@@ -90,7 +90,7 @@
 </body>
 </html>
 <script>
-  $('title').html('New Employee Leave - IHUMANE')
+  $('title').html('New Leave - IHUMANE')
 </script>
 
 
