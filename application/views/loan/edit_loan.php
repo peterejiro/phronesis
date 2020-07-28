@@ -176,7 +176,7 @@
                       </div>
                       <div class="card-footer text-right bg-whitesmoke">
                         <button type="button" id="compute_loan" onclick="add_months()" class="btn btn-primary">Compute Loan</button>
-                        <button type="submit" id="loan_button"  class="btn btn-primary" style="display: none">Update Repayment Loan</button>
+                        <button type="submit" id="loan_button"  class="btn btn-primary" style="display: none">Confirm New Amount</button>
                         <button type="button" id="reset_button" onclick="reset_form()" class="btn btn-secondary">Reset</button>
                         <button onclick="location.href='<?php echo site_url('loans');?>'" class="btn btn-danger" type="button">Go Back</button>
                       </div>
@@ -194,7 +194,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-
+  $('title').html('Reschedule Loan - IHUMANE')
   window.onload = function(){
     // document.getElementById("skip_month").style.display='none';
     // document.getElementById("reschedule_amount").style.display='none';
