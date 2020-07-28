@@ -60,7 +60,7 @@
 				                  $sn++;
 			                  endforeach; ?>
                         <tr>
-                          <td class="text-center" style="width: 9px"><b><?php echo $sn + 1; ?></b></td>
+                          <td class="text-center" style="width: 9px"><b style="display: none"><?php echo $sn + 1; ?></b></td>
                           <td><b>Total Deductions</b></td>
                           <td><b>&#8358; <?php echo number_format($total); ?></b></td>
                         </tr>
@@ -69,7 +69,9 @@
                     </table>
                   </div>
                 </div>
-                <div class="card-footer bg-whitesmoke"></div>
+                <div class="card-footer text-right bg-whitesmoke">
+                  <button onclick="location.href='<?php echo site_url('deduction');?>'" class="btn btn-danger" type="button">Go Back</button>
+                </div>
               </div>
             </div>
           </div>
@@ -82,4 +84,7 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('Deduction Sheet - IHUMANE')
+</script>
 

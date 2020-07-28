@@ -139,7 +139,9 @@
                     </table>
                   </div>
                 </div>
-                <div class="card-footer bg-whitesmoke"></div>
+                <div class="card-footer text-right bg-whitesmoke">
+                  <button onclick="location.href='<?php echo site_url('emolument');?>'" class="btn btn-danger" type="button">Go Back</button>
+                </div>
               </div>
             </div>
           </div>
@@ -151,6 +153,8 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
+  $('title').html('Emolument Sheet - IHUMANE')
+
   window.onbeforeunload = confirmExit;
   function confirmExit() {
     $.ajax({
