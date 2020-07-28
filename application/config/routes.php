@@ -126,6 +126,19 @@ $route['supervisor_assessment'] = 'hr_configuration/supervisor_assessment';
 $route['add_supervisor_assessment'] = 'hr_configuration/add_supervisor_assessment';
 $route['update_supervisor_assessment'] = 'hr_configuration/update_supervisor_assessment';
 
+$route['trainings'] = 'hr_configuration/trainings';
+$route['new_training'] = 'hr_configuration/new_training';
+$route['upload_training_materials'] = 'hr_configuration/upload_training_materials';
+$route['add_training'] = 'hr_configuration/add_training';
+$route['edit_training/:num'] = 'hr_configuration/edit_training/$1';
+$route['remove_material'] = 'hr_configuration/remove_material';
+$route['update_training'] = 'hr_configuration/update_training';
+$route['training_questions/:num'] = 'hr_configuration/training_questions/$1';
+$route['add_question'] = 'hr_configuration/add_question';
+$route['update_question'] = 'hr_configuration/update_question';
+$route['delete_question'] = 'hr_configuration/delete_question';
+$route['view_training/:num'] = 'hr_configuration/view_training/$1';
+
 
 $route['user'] = 'user/user';
 $route['new_user'] = 'user/new_user';
@@ -173,6 +186,9 @@ $route['specific_memo'] = 'employee/specific_memo';
 $route['new_specific_memo'] = 'employee/new_specific_memo';
 $route['add_specific_memo'] = 'employee/add_specific_memo';
 $route['update_specific_memo'] = 'employee/update_specific_memo';
+$route['employee_trainings'] = 'employee/employee_trainings';
+$route['new_employee_training'] = 'employee/new_employee_training';
+$route['add_new_employee_training'] = 'employee/add_new_employee_training';
 
 
 $route['tax_rates'] = 'payroll_configuration/tax_rate';
@@ -292,6 +308,8 @@ $route['my_memos'] = 'employee_main/my_memos';
 $route['my_specific_memos'] = 'employee_main/my_specific_memos';
 $route['update_notification'] = 'employee_main/update_notification';
 $route['view_notification/:num'] = 'employee_main/view_notification/$1';
+$route['my_trainings'] = 'employee_main/my_trainings';
+$route['begin_training/:num'] = 'employee_main/begin_training/$1';
 
 
 

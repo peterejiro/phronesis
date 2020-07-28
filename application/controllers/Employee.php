@@ -3162,6 +3162,215 @@ class Employee extends CI_Controller
 	}
 
 
+	public function employee_trainings(){
+		$username = $this->session->userdata('user_username');
+		//$employee_id = $this->uri->segment(2);
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+
+
+					$data['user_data'] = $this->users->get_user($username);
+
+					$data['trainings'] = $this->employees->get_trainings();
+					//$data['employees'] = $this->employees->view_employees();
+
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$this->load->view('employee/employee_trainings', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+
+	public function new_employee_training(){
+		$username = $this->session->userdata('user_username');
+		//$employee_id = $this->uri->segment(2);
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+
+
+					$data['user_data'] = $this->users->get_user($username);
+
+					$data['trainings'] = $this->hr_configurations->view_trainings();
+					$data['employees'] = $this->employees->view_employees();
+
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$this->load->view('employee/new_employee_training', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+	public function add_new_employee_training(){
+		$username = $this->session->userdata('user_username');
+		//$employee_id = $this->uri->segment(2);
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+
+					extract($_POST);
+
+					$employee_training_array = array(
+						'employee_training_employee_id' => $employee_id,
+						'employee_training_training_id' => $training_id,
+						'employee_training_start_date' => $start_date,
+						'employee_training_end_date' => $end_date
+
+					);
+
+					$employee_training_array = $this->security->xss_clean($employee_training_array);
+
+					$employee_training_id = $this->employees->insert_employee_training($employee_training_array);
+
+					$questions = $this->hr_configurations->view_training_questions($training_id);
+
+					$check = 0;
+
+					foreach ($questions as $question):
+
+						$result_array = array(
+							'training_result_employee_id' => $employee_id,
+							'training_result_training_id' => $training_id,
+							'training_result_employee_training_id' =>$employee_training_id,
+							'training_result_question_id' => $question->training_question_id,
+							'training_result_correct_answer' => $question->training_question_correct,
+							'training_result_answer' => 'E'
+						);
+
+						$result_array = $this->security->xss_clean($result_array);
+
+						$result_id = $this->employees->insert_training_result($result_array);
+
+						if(isset($result_id)):
+							$check ++;
+							endif;
+
+						endforeach;
+
+					if ($check > 0):
+
+						$notification_data = array(
+							'notification_employee_id'=> $employee_id,
+							'notification_link'=> 'my_trainings',
+							'notification_type' => 'New Training',
+							'notification_status'=> 0
+						);
+
+						$this->employees->insert_notifications($notification_data);
+
+						$log_array = array(
+							'log_user_id' => $this->users->get_user($username)->user_id,
+							'log_description' => "Updated Training "
+						);
+
+						$this->logs->add_log($log_array);
+
+
+						$msg = array(
+							'msg' => 'Training Initiated Successfully',
+							'location' => site_url('employee_trainings'),
+							'type' => 'success'
+
+						);
+						$this->load->view('swal', $msg);
+					else:
+						$msg = array(
+							'msg' => 'An Error Occurred',
+							'location' => site_url('employee_trainings'),
+							'type' => 'error'
+
+						);
+						$this->load->view('swal', $msg);
+
+					endif;
+
+
+				else:
+					redirect('/access_denied');
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+
 
 
 }

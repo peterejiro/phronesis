@@ -24,11 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     }
     /*Note, it is still possible to increment the number when you scroll inside the number input*/
   </style>
-  <script>
-    function resizeIframe(obj) {
-      obj.style.height = obj.contentWindow.document.Element.scrollHeight + 'px';
-    }
-  </script>
+
 
 	<!-- General CSS Files -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/bootstrap/css/bootstrap.min.css">

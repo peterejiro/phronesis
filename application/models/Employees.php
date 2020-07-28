@@ -533,5 +533,36 @@ class Employees extends CI_Model
 
 	}
 
+	public function get_trainings(){
+		$this->db->select('*');
+		$this->db->from('employee_training');
+		$this->db->join('employee', 'employee.employee_id = employee_training.employee_training_employee_id');
+		$this->db->join('training', 'training.training_id = employee_training.employee_training_training_id');
+		return $this->db->get()->result();
+
+	}
+
+
+	public function insert_employee_training($training_data){
+		$this->db->insert('employee_training', $training_data);
+		return $this->db->insert_id();
+	}
+
+	public function get_employee_training($employee_id){
+
+		$this->db->select('*');
+		$this->db->from('employee_training');
+		$this->db->join('training', 'training.training_id = employee_training.employee_training_training_id');
+		$this->db->where('employee_training.employee_training_employee_id', $employee_id);
+		return $this->db->get()->result();
+
+	}
+
+	public function insert_training_result($result_data){
+		$this->db->insert('training_result', $result_data);
+		return $this->db->insert_id();
+
+	}
+
 
 }

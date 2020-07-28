@@ -45,6 +45,7 @@
 			$this->uri->segment(1) == 'employee_appraisal' ||
 			$this->uri->segment(1) == 'check_appraisal_result' ||
 			$this->uri->segment(1) == 'new_employee_appraisal' ||
+			$this->uri->segment(1) == 'employee_trainings' ||
 			$this->uri->segment(1) == 'terminations' ? 'active' : '';
 			?>">
 				<?php if($employee_management == 1){  ?>
@@ -53,6 +54,7 @@
 						<li class="<?php echo $this->uri->segment(1) == 'employee_appraisal' || $this->uri->segment(1) == 'check_appraisal_result' || $this->uri->segment(1) == 'new_employee_appraisal' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee_appraisal') ?>">Employee Appraisal</a></li>
 						<li class="<?php echo $this->uri->segment(1) == 'terminations'  ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('terminations') ?>"> Employee Terminations</a></li>
 						<li class="<?php echo $this->uri->segment(1) == 'resignations'  ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('resignations') ?>"> Employee Resignations</a></li>
+						<li class="<?php echo $this->uri->segment(1) == 'employee_trainings'  ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('employee_trainings') ?>"> Employee Trainings</a></li>
 					</ul>
 				<?php } ?>
 			</li>
@@ -155,6 +157,7 @@
       $this->uri->segment(1) == 'quantitative_assessment' ||
       $this->uri->segment(1) == 'view_quantitative_assessment' ||
       $this->uri->segment(1) == 'qualitative_assessment' ||
+	  $this->uri->segment(1) == 'trainings' ||
       $this->uri->segment(1) == 'qualification' ? 'active' : '';
 			?>">
 			<?php if($hr_configuration == 1){  ?>
@@ -171,6 +174,7 @@
 					<li class="<?php echo $this->uri->segment(1) == 'qualification' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('qualification') ?>">Qualification Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'subsidiary' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('subsidiary') ?>">Subsidiary Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'leave' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('leave') ?>">Leave Type Setup</a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'trainings' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('trainings') ?>">Training Setup</a></li>
 				</ul>
 			<?php } ?>
 			</li>

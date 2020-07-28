@@ -505,5 +505,82 @@ class Hr_configurations extends CI_Model
 
 	}
 
+	public function view_trainings(){
+		$this->db->select('*');
+		$this->db->from('training');
+
+		return $this->db->get()->result();
+
+
+	}
+
+	public function view_training($training_id){
+		$this->db->select('*');
+		$this->db->from('training');
+		$this->db->where('training_id', $training_id);
+		$query = $this->db->get();
+		return $query->row();
+
+	}
+
+	public function add_training($training_data){
+
+		$this->db->insert('training', $training_data);
+		return $this->db->insert_id();
+	}
+
+	public function update_training($training_id, $training_data){
+
+		$this->db->where('training.training_id', $training_id);
+		$this->db->update('training', $training_data);
+		return true;
+
+
+	}
+
+	public function view_training_materials($training_id){
+		$this->db->select('*');
+		$this->db->from('training_material');
+		$this->db->where('training_material_training_id', $training_id);
+		return $this->db->get()->result();
+	}
+
+	public function add_training_materials($material_data){
+
+		$this->db->insert('training_material', $material_data);
+		return $this->db->insert_id();
+
+	}
+
+	public function remove_material($material_id){
+		$this->db->delete('training_material', array('training_material_id' => $material_id));
+		return true;
+	}
+
+	public function view_training_questions($training_id){
+		$this->db->select('*');
+		$this->db->from('training_question');
+		$this->db->where('training_question_training_id', $training_id);
+		return $this->db->get()->result();
+	}
+
+	public function add_question($question_data){
+
+		$this->db->insert('training_question', $question_data);
+		return $this->db->insert_id();
+
+	}
+
+	public function update_question($question_id, $question_data){
+
+		$this->db->where('training_question.training_question_id', $question_id);
+		$this->db->update('training_question', $question_data);
+		return true;
+
+
+	}
+
+
+
 
 }
