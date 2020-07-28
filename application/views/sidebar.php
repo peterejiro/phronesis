@@ -155,6 +155,7 @@
       $this->uri->segment(1) == 'quantitative_assessment' ||
       $this->uri->segment(1) == 'view_quantitative_assessment' ||
       $this->uri->segment(1) == 'qualitative_assessment' ||
+	  $this->uri->segment(1) == 'trainings' ||
       $this->uri->segment(1) == 'qualification' ? 'active' : '';
 			?>">
 			<?php if($hr_configuration == 1){  ?>
@@ -171,6 +172,7 @@
 					<li class="<?php echo $this->uri->segment(1) == 'qualification' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('qualification') ?>">Qualification Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'subsidiary' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('subsidiary') ?>">Subsidiary Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'leave' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('leave') ?>">Leave Type Setup</a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'trainings' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('trainings') ?>">Training Setup</a></li>
 				</ul>
 			<?php } ?>
 			</li>

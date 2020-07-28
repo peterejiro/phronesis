@@ -2344,6 +2344,585 @@ class Hr_configuration extends CI_Controller
 	}
 
 
+	public function trainings(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->hr_configuration == 1):
+
+
+					$data['user_data'] = $this->users->get_user($username);
+					//$data['employees'] = $this->employees->get_employee_by_salary_setup();
+					$data['trainings'] = $this->hr_configurations->view_trainings();
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$this->load->view('hr_config/trainings', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+	public function new_training(){
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->hr_configuration == 1):
+
+
+					$data['user_data'] = $this->users->get_user($username);
+					//$data['employees'] = $this->employees->get_employee_by_salary_setup();
+
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$this->load->view('hr_config/new_training', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+
+	public function upload_training_materials()
+	{
+
+		$config['upload_path'] = 'uploads/trainings';
+		$config['allowed_types'] = 'gif|jpg|jpeg|png|pdf|mov|mp4|mp3';
+		$config['max_size'] = '8000000';
+		$config['max_width'] = '102452';
+		$config['max_height'] = '768555';
+		$config['encrypt_name'] = TRUE;
+		//$config['overwrite'] = TRUE;
+
+		$this->load->library('upload', $config);
+		$this->upload->do_upload('file');
+
+
+		$file_data = $this->upload->data();
+		echo $file_data['file_name'];
+
+	}
+
+	public function add_training(){
+
+		error_reporting(0);
+		$username = $this->session->userdata('user_username');
+
+		if (isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if ($permission->employee_management == 1):
+
+				extract($_POST);
+
+				$training_data = array(
+					'training_name' => $training_name,
+					'training_about' => $training_about,
+					'training_duration_exam' => $training_exam_duration,
+				);
+
+
+				$training_data = $this->security->xss_clean($training_data);
+
+
+				$training_id = $this->hr_configurations->add_training($training_data);
+				$k = 0;
+
+				while ($k < count($training_materials)):
+					$training_material = $training_materials[$k];
+
+					$material_array = array(
+						'training_material_training_id' => $training_id,
+						'training_material_link' => $training_material
+					);
+
+					$this->hr_configurations->add_training_materials($material_array);
+					$k++;
+				endwhile;
+
+
+
+				if (isset($training_id)):
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Added New Training"
+					);
+
+					$this->logs->add_log($log_array);
+
+
+					$msg = array(
+						'msg' => 'New Training Added Successfully',
+						'location' => site_url('trainings'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+				else:
+					$msg = array(
+						'msg' => 'An Error Occurred',
+						'location' => site_url('new_training'),
+						'type' => 'error'
+
+					);
+					$this->load->view('swal', $msg);
+
+				endif;
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+
+	}
+
+	public function edit_training(){
+
+		$training_id = $this->uri->segment(2);
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+
+					if(empty($training_id)):
+
+						redirect('error_404');
+
+					else:
+
+						$check_existing_training = $this->hr_configurations-> view_training($training_id);
+
+						if(empty($check_existing_training)):
+
+							redirect('error_404');
+
+						else:
+
+							$data['user_data'] = $this->users->get_user($username);
+							//$data['employees'] = $this->employees->get_employee_by_salary_setup();
+							$data['training'] = $check_existing_training;
+							$data['training_materials'] = $this->hr_configurations->view_training_materials($training_id);
+							$data['csrf_name'] = $this->security->get_csrf_token_name();
+							$data['csrf_hash'] = $this->security->get_csrf_hash();
+							$this->load->view('hr_config/edit_training', $data);
+						endif;
+
+					endif;
+
+				else:
+
+					redirect('/access_denied');
+
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+	public function update_training(){
+
+		error_reporting(0);
+		$username = $this->session->userdata('user_username');
+
+		if (isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+
+			if ($permission->employee_management == 1):
+
+				extract($_POST);
+
+				$training_data = array(
+					'training_name' => $training_name,
+					'training_about' => $training_about,
+					'training_duration_exam' => $training_exam_duration,
+				);
+
+
+				$training_data = $this->security->xss_clean($training_data);
+
+
+				 $this->hr_configurations->update_training($training_id, $training_data);
+				$k = 0;
+
+				while ($k < count($training_materials)):
+					$training_material = $training_materials[$k];
+
+					$material_array = array(
+						'training_material_training_id' => $training_id,
+						'training_material_link' => $training_material
+					);
+
+					$this->hr_configurations->add_training_materials($material_array);
+					$k++;
+				endwhile;
+
+
+
+				if (isset($training_id)):
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Updated Training"
+					);
+
+					$this->logs->add_log($log_array);
+
+
+					$msg = array(
+						'msg' => 'Training Updated Successfully',
+						'location' => site_url('trainings'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+				else:
+					$msg = array(
+						'msg' => 'An Error Occurred',
+						'location' => site_url('trainings'),
+						'type' => 'error'
+
+					);
+					$this->load->view('swal', $msg);
+
+				endif;
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+
+	}
+
+	public function remove_material(){
+
+			$material_id = $_GET['material_id'];
+			$this->hr_configurations->remove_material($material_id);
+
+	}
+
+	public function training_questions(){
+
+		$training_id = $this->uri->segment(2);
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+
+					if(empty($training_id)):
+
+						redirect('error_404');
+
+					else:
+
+						$check_existing_training = $this->hr_configurations-> view_training($training_id);
+
+						if(empty($check_existing_training)):
+
+							redirect('error_404');
+
+						else:
+
+							$data['user_data'] = $this->users->get_user($username);
+							//$data['employees'] = $this->employees->get_employee_by_salary_setup();
+							$data['training'] = $check_existing_training;
+							$data['training_questions'] = $this->hr_configurations->view_training_questions($training_id);
+							$data['csrf_name'] = $this->security->get_csrf_token_name();
+							$data['csrf_hash'] = $this->security->get_csrf_hash();
+							$this->load->view('hr_config/training_questions', $data);
+						endif;
+
+					endif;
+
+				else:
+
+					redirect('/access_denied');
+
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+	public function add_question(){
+
+
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+
+					extract($_POST);
+
+				$question_array = array(
+					'training_question_training_id' => $training_id,
+					'training_question_question' => $training_question,
+					'training_question_option_a' => $option_a,
+					'training_question_option_b' => $option_b,
+					'training_question_option_c' => $option_c,
+					'training_question_option_d' => $option_d,
+					'training_question_correct' => strtoupper($correct)
+
+				);
+
+					$question_array = $this->security->xss_clean($question_array);
+
+					$response = $this->hr_configurations->add_question($question_array);
+
+					if (isset($response)):
+						$log_array = array(
+							'log_user_id' => $this->users->get_user($username)->user_id,
+							'log_description' => "Added New Question to Training"
+						);
+
+						$this->logs->add_log($log_array);
+
+
+						$msg = array(
+							'msg' => 'New Question Added Successfully',
+							'location' => site_url('training_questions')."/".$training_id,
+							'type' => 'success'
+
+						);
+						$this->load->view('swal', $msg);
+					else:
+						$msg = array(
+							'msg' => 'An Error Occurred',
+							'location' => site_url('training_questions')."/".$training_id,
+							'type' => 'error'
+
+						);
+						$this->load->view('swal', $msg);
+
+					endif;
+
+				else:
+
+					redirect('/access_denied');
+
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+
+	public function update_question(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+
+					extract($_POST);
+
+					$question_array = array(
+						'training_question_training_id' => $training_id,
+						'training_question_question' => $training_question,
+						'training_question_option_a' => $option_a,
+						'training_question_option_b' => $option_b,
+						'training_question_option_c' => $option_c,
+						'training_question_option_d' => $option_d,
+						'training_question_correct' => strtoupper($correct)
+
+					);
+
+					$question_array = $this->security->xss_clean($question_array);
+
+					$response = $this->hr_configurations->update_question($question_id, $question_array);
+
+					if ($response == true):
+						$log_array = array(
+							'log_user_id' => $this->users->get_user($username)->user_id,
+							'log_description' => "Updated Training "
+						);
+
+						$this->logs->add_log($log_array);
+
+
+						$msg = array(
+							'msg' => 'Question Updated Successfully',
+							'location' => site_url('training_questions')."/".$training_id,
+							'type' => 'success'
+
+						);
+						$this->load->view('swal', $msg);
+					else:
+						$msg = array(
+							'msg' => 'An Error Occurred',
+							'location' => site_url('training_questions')."/".$training_id,
+							'type' => 'error'
+
+						);
+						$this->load->view('swal', $msg);
+
+					endif;
+
+				else:
+
+					redirect('/access_denied');
+
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+
+
 
 	public function test(){
 

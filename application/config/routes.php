@@ -126,6 +126,18 @@ $route['supervisor_assessment'] = 'hr_configuration/supervisor_assessment';
 $route['add_supervisor_assessment'] = 'hr_configuration/add_supervisor_assessment';
 $route['update_supervisor_assessment'] = 'hr_configuration/update_supervisor_assessment';
 
+$route['trainings'] = 'hr_configuration/trainings';
+$route['new_training'] = 'hr_configuration/new_training';
+$route['upload_training_materials'] = 'hr_configuration/upload_training_materials';
+$route['add_training'] = 'hr_configuration/add_training';
+$route['edit_training/:num'] = 'hr_configuration/edit_training/$1';
+$route['remove_material'] = 'hr_configuration/remove_material';
+$route['update_training'] = 'hr_configuration/update_training';
+$route['training_questions/:num'] = 'hr_configuration/training_questions/$1';
+$route['add_question'] = 'hr_configuration/add_question';
+$route['update_question'] = 'hr_configuration/update_question';
+$route['delete_question'] = 'hr_configuration/delete_question';
+
 
 $route['user'] = 'user/user';
 $route['new_user'] = 'user/new_user';
