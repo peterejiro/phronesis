@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/components.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/ajaxmask.css">
+
 </head>
 
 	<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css"> -->
