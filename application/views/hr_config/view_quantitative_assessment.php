@@ -16,7 +16,7 @@
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
             <div class="breadcrumb-item active"><a href="<?php echo site_url('appraisal_setup'); ?>">Appraisal Setup</a></div>
-            <div class="breadcrumb-item active"><a href="<?php echo site_url('quantitative_assessment'); ?>">Quantitative Assessment</a></div>
+            <div class="breadcrumb-item active"><a href="<?php echo site_url('quantitative_assessment'); ?>">Quantitative Assessments</a></div>
             <div class="breadcrumb-item">Quantitative Assessment Questions</div>
           </div>
         </div>
@@ -66,7 +66,9 @@
                     </table>
                   </div>
                 </div>
-                <div class="card-footer bg-whitesmoke"></div>
+                <div class="card-footer text-right bg-whitesmoke">
+									<button onclick="location.href='<?php echo site_url('quantitative_assessment');?>'" class="btn btn-danger" type="button">Go Back</button>
+								</div>
               </div>
             </div>
           </div>
@@ -140,3 +142,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('Quanitative Assessment Questions - IHUMANE')
+</script>

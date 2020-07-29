@@ -17,15 +17,15 @@
 				</div>
         <div class="section-body">
           <div class="section-title">All About Training Setup</div>
-          <p class="section-lead">You can manage Training information here</p>
+          <p class="section-lead">You can manage training information here</p>
           <div class="row">
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
                   <h4>All Trainings</h4>
                   <div class="card-header-action">
-					  <button onclick="location.href='<?php echo site_url('new_training');?>'" type="button" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> New Training</button>
-				  </div>
+					          <button onclick="location.href='<?php echo site_url('new_training');?>'" type="button" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> New Training</button>
+				          </div>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -33,9 +33,9 @@
                       <thead>
                         <tr>
                           <th>Training</th>
-							<th>Training Description</th>
+							            <th>Training Description</th>
                           <th>Test Duration</th>
-							<th>Action</th>
+							            <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -44,17 +44,16 @@
 				                  ?>
                           <tr>
                             <td><?php echo $training->training_name; ?></td>
-
-							  <td> <?php echo $training->training_about; ?></td>
-							  <td><?php echo $training->training_duration_exam; ?></td>
+                            <td> <?php echo $training->training_about; ?></td>
+                            <td><?php echo $training->training_duration_exam; ?> mins</td>
                             <td class="text-center" style="width: 9px">
                               <div class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu">
                                   <a class="dropdown-item has-icon" href="<?php echo site_url('edit_training')."/".$training->training_id;?>"><i class="fas fa-edit"></i>Edit Training</a>
-									<a class="dropdown-item has-icon" href="<?php echo site_url('training_questions')."/".$training->training_id;?>"><i class="fas fa-edit"></i>Training Questions</a>
-									<a class="dropdown-item has-icon" href="<?php echo site_url('view_training')."/".$training->training_id;?>"><i class="fas fa-edit"></i>View Training</a>
-								</div>
+                                  <a class="dropdown-item has-icon" href="<?php echo site_url('training_questions')."/".$training->training_id;?>"><i class="fas fa-edit"></i>Training Questions</a>
+                                  <a class="dropdown-item has-icon" href="<?php echo site_url('view_training')."/".$training->training_id;?>"><i class="fas fa-edit"></i>View Training</a>
+                                </div>
                               </div>
                             </td>
                           </tr>
@@ -79,3 +78,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('Training Setup - IHUMANE')
+</script>
