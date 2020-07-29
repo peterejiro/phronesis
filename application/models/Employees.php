@@ -548,6 +548,12 @@ class Employees extends CI_Model
 		return $this->db->insert_id();
 	}
 
+	public function update_employee_training($employee_training_id, $training_data){
+		$this->db->where('employee_training.employee_training_id', $employee_training_id);
+		$this->db->update('employee_training', $training_data);
+		return true;
+	}
+
 	public function get_employee_training($employee_id){
 
 		$this->db->select('*');
@@ -558,10 +564,25 @@ class Employees extends CI_Model
 
 	}
 
+	public function get_employee_training_($employee_training_id){
+		$this->db->select('*');
+		$this->db->from('employee_training');
+		$this->db->where('employee_training.employee_training_id', $employee_training_id);
+		return $this->db->get()->row();
+
+	}
+
 	public function insert_training_result($result_data){
 		$this->db->insert('training_result', $result_data);
 		return $this->db->insert_id();
 
+	}
+
+	public function update_result($training_id, $employee_training_id, $result_data){
+		$this->db->where('training_result.training_result_training_id', $training_id);
+		$this->db->where('training_result.training_result_employee_training_id', $employee_training_id);
+		$this->db->update('training_result', $result_data);
+		return true;
 	}
 
 

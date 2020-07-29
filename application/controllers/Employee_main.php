@@ -1711,6 +1711,7 @@ class Employee_main extends CI_Controller
 	public function begin_training(){
 
 		$training_id = $this->uri->segment(2);
+		$employee_training_id = $this->uri->segment(3);
 
 		$username = $this->session->userdata('user_username');
 
@@ -1731,13 +1732,22 @@ class Employee_main extends CI_Controller
 
 					$check_existing_training = $this->hr_configurations-> view_training($training_id);
 
+					$check_existing_employee_training = $this->employees-> get_employee_training_($employee_training_id);
+
 					if(empty($check_existing_training)):
 
 						redirect('error_404');
 
 					else:
 
-						$data['user_data'] = $this->users->get_user($username);
+						if(empty($check_existing_employee_training)):
+
+							redirect('error_404');
+
+						else:
+
+
+							$data['user_data'] = $this->users->get_user($username);
 						//$data['employees'] = $this->employees->get_employee_by_salary_setup();
 						$data['training'] = $check_existing_training;
 						$data['training_materials'] = $this->hr_configurations->view_training_materials($training_id);
@@ -1745,6 +1755,8 @@ class Employee_main extends CI_Controller
 
 						$data['csrf_name'] = $this->security->get_csrf_token_name();
 						$data['csrf_hash'] = $this->security->get_csrf_hash();
+						$data['employee_training_id'] = $employee_training_id;
+
 
 
 
@@ -1761,7 +1773,7 @@ class Employee_main extends CI_Controller
 
 						$this->load->view('employee_self_service/view_training', $data);
 
-
+					endif;
 					endif;
 
 				endif;
@@ -1778,6 +1790,184 @@ class Employee_main extends CI_Controller
 			redirect('/login');
 		endif;
 
+	}
+
+
+	public function start_test(){
+
+		$training_id = $this->uri->segment(2);
+		$employee_training_id = $this->uri->segment(3);
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				if(empty($training_id)):
+
+					redirect('error_404');
+
+				else:
+
+					$check_existing_training = $this->hr_configurations-> view_training($training_id);
+
+					$check_existing_employee_training = $this->employees-> get_employee_training_($employee_training_id);
+
+					if(empty($check_existing_training)):
+
+						redirect('error_404');
+
+					else:
+
+						if(empty($check_existing_employee_training)):
+
+							redirect('error_404');
+
+						else:
+							$data['user_data'] = $this->users->get_user($username);
+							//$data['employees'] = $this->employees->get_employee_by_salary_setup();
+							$data['training'] = $check_existing_training;
+							$data['questions'] = $this->hr_configurations->view_training_questions($training_id);
+
+
+
+							$time = $this->session->userdata('exam_time');
+							if(isset($time)):
+								$data['exam_time'] = $time;
+
+							else:
+
+								$time = $check_existing_training->training_duration_exam;
+
+								$data_time = array(
+									'exam_time' => $time
+								);
+								$this->session->set_userdata($data_time);
+								$data['exam_time'] = $time;
+								endif;
+
+
+							$data['csrf_name'] = $this->security->get_csrf_token_name();
+							$data['csrf_hash'] = $this->security->get_csrf_hash();
+							$data['employee_training_id'] = $employee_training_id;
+							$data['employee'] = $this->employees->get_employee_by_unique($username);
+							$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+							$data['employee_id'] = $employee_id;
+							$data['notifications'] = $this->employees->get_notifications($employee_id);
+
+
+
+							$this->load->view('employee_self_service/start_test', $data);
+
+						endif;
+					endif;
+
+				endif;
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function score_test(){
+
+		$this->session->unset_userdata('exam_time');
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+			extract($_POST);
+
+			$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+			$questions = $this->hr_configurations->view_training_questions($training_id);
+
+			$score =0;
+
+			foreach ($questions as $question):
+				$given_answer = $this->input->post($question->training_question_id);
+				if(empty($given_answer)):
+					$given_answer = 'E';
+					endif;
+
+					if($given_answer == $question->training_question_correct):
+						$score++;
+						endif;
+
+				$answer_array = array(
+					'training_result_answer' => $given_answer,
+				);
+
+				$this->employees->update_result($training_id, $employee_training_id, $answer_array);
+
+				endforeach;
+
+			$total_score = ($score/count($questions) * 100);
+
+				$employee_training_array = array(
+					'employee_training_score' => $total_score,
+					'employee_training_status' => 1,
+					'employee_training_date' => date("Y-m-d H:i:s")
+
+				);
+
+			$query = $this->employees->update_employee_training($employee_training_id, $employee_training_array);
+
+			if($query == true):
+				$notification_data = array(
+					'notification_employee_id'=> $employee_id,
+					'notification_link'=> 'my_trainings',
+					'notification_type' => 'Training Completed, Result Ready',
+					'notification_status'=> 0
+				);
+
+				$this->employees->insert_notifications($notification_data);
+
+				$msg = array(
+					'msg' => 'Test Complete with a score of'.$total_score.'%',
+					'location' => site_url('my_trainings'),
+					'type' => 'success'
+				);
+				$this->load->view('swal', $msg);
+
+
+			else:
+
+				echo "An Error Occurred";
+			endif;
+
+
+
+
+
+			//echo $total_score." %";
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function update_time(){
+
+		$minutes = $_GET['minutes'];
+		$this->session->set_userdata('exam_time', $minutes);
 	}
 
 

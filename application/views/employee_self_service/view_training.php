@@ -42,7 +42,7 @@ $CI->load->model('employees');
 
 										<p> Test Duration(In Minutes): <?php echo $training->training_duration_exam; ?> </p>
 
-										<button onclick="location.href='<?php echo site_url('new_employee_training')?>'" type="button" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> Begin Test</button>
+										<button type="button" class="btn btn-primary" id="sa-params"><i class="fa fa-plus"></i> Start Test</button>
 									</div>
 									<div class="card-body">
 										<div class="tab-content">
@@ -123,10 +123,35 @@ $CI->load->model('employees');
 </html>
 
 
+<script>
+	//$('title').html('Approve Payroll Routine - IHUMANE')
+	$(document).ready(function () {
+		$('#sa-params').click(function () {
+			swal({
+				title: 'Are you sure?',
+				text: 'You Test Begins Immediately',
+				icon: 'warning',
+				buttons: true,
+				dangerMode: true,
+			}).then((willDelete) => {
+				if (willDelete) {
+					var params = [
+						'height='+screen.height,
+						'width='+screen.width,
+						'fullscreen=yes' // only works in IE, but here for completeness
+					].join(',');
+					//window.location="<?php //echo site_url('start_test')."/".$training->training_id."/".$employee_training_id; ?>//"
+					//window.open('<?php //echo site_url('start_test')."/".$training->training_id."/".$employee_training_id; ?>//','name','width=10000,height=400')
+					window.open('<?php echo site_url('start_test')."/".$training->training_id."/".$employee_training_id; ?>','popup_window', params)
+				} else {
+					swal('Test Canceled!', { icon: 'error' });
+				}
+			});
+		});
 
 
-
-
+	});
+</script>
 
 
 
