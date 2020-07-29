@@ -33,7 +33,7 @@
                       <thead>
                         <tr>
                           <th>Leave Type</th>
-							<th> Leave Duration</th>
+													<th>Leave Duration</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
@@ -43,7 +43,7 @@
 				                  ?>
                           <tr>
                             <td><?php echo $leave->leave_name; ?></td>
-							  <td> <?php echo $leave->leave_duration; ?></td>
+							  						<td><?php echo $leave->leave_duration; ?> days</td>
                             <td class="text-center" style="width: 9px">
                               <div class="dropdown">
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
@@ -134,3 +134,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('Leave Type Setup - IHUMANE')
+</script>

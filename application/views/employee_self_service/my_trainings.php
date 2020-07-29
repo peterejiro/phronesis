@@ -75,7 +75,7 @@ $CI->load->model('employees');
 																<div class="dropdown">
 																	<a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
 																	<div class="dropdown-menu">
-																		<a class="dropdown-item has-icon" href="<?php echo site_url('begin_training').'/'.$training->employee_training_training_id; ?>"><i class="fa fa-eye"></i>Begin Training</a>
+																		<a class="dropdown-item has-icon" href="<?php echo site_url('begin_training').'/'.$training->employee_training_training_id."/".$training->employee_training_id; ?>"><i class="fa fa-eye"></i>Begin Training</a>
 																	</div>
 																</div>
 															<?php else:?>

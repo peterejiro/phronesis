@@ -309,7 +309,11 @@ $route['my_specific_memos'] = 'employee_main/my_specific_memos';
 $route['update_notification'] = 'employee_main/update_notification';
 $route['view_notification/:num'] = 'employee_main/view_notification/$1';
 $route['my_trainings'] = 'employee_main/my_trainings';
-$route['begin_training/:num'] = 'employee_main/begin_training/$1';
+$route['begin_training/:num/:num'] = 'employee_main/begin_training/$1/$1';
+$route['start_test/:num/:num'] = 'employee_main/start_test/$1/$1';
+$route['score_test'] = 'employee_main/score_test';
+$route['update_time'] = 'employee_main/update_time';
+
 
 
 

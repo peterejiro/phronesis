@@ -170,4 +170,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
-
+<script>
+  $('title').html('Job Roles Setup - IHUMANE')
+</script>
