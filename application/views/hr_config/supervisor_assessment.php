@@ -65,7 +65,9 @@
                     </table>
                   </div>
                 </div>
-                <div class="card-footer bg-whitesmoke"></div>
+                <div class="card-footer text-right bg-whitesmoke">
+									<button onclick="location.href='<?php echo site_url('appraisal_setup');?>'" class="btn btn-danger" type="button">Go Back</button>
+                </div>
               </div>
             </div>
           </div>
@@ -137,3 +139,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('Supervisor Assessment Questions - IHUMANE')
+</script>

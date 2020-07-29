@@ -46,7 +46,7 @@
                              <div class="dropdown">
                                <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                <div class="dropdown-menu">
-                                 <a class="dropdown-item has-icon" href="#" data-toggle="modal" data-target="#edit_qualification<?php echo $qualification->qualification_id ?>"><i class="fas fa-edit"></i>Edit Bank</a>
+                                 <a class="dropdown-item has-icon" href="#" data-toggle="modal" data-target="#edit_qualification<?php echo $qualification->qualification_id ?>"><i class="fas fa-edit"></i>Edit Qualification</a>
                                </div>
                              </div>
                            </td>
@@ -133,3 +133,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('Qualification Setup - IHUMANE')
+</script>
