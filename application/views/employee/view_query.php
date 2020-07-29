@@ -140,7 +140,6 @@
                 </div>
                 <div class="card-footer text-right bg-whitesmoke">
                   <button onclick="location.href='<?php echo site_url('query_employee').'/'.$employee->employee_id;?>'" class="btn btn-danger" type="button">Go Back</button>
-
                 </div>
 							</div>
 						</div>

@@ -135,3 +135,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('HMO Setup - IHUMANE')
+</script>

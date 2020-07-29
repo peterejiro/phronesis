@@ -34,7 +34,7 @@
                       <tr>
                         <th>Username</th>
                         <th>User</th>
-						 <th>User Type</th>
+						            <th>User Type</th>
                         <th>Status</th>
                         <th>Action</th>
                       </tr>
@@ -46,10 +46,13 @@
                             <tr>
                               <td><?php echo $user->user_username; ?></td>
                               <td><?php echo $user->user_name; ?></td>
-								<td> <?php if($user->user_type == 1){ echo "Administrator"; }
-									if($user->user_type == 2){ echo "Employee"; }
-									if($user->user_type == 3){ echo "Moderator"; }
-								?></td>
+                              <td> 
+                                <?php 
+                                  if($user->user_type == 1){ echo "Administrator"; }
+                                  if($user->user_type == 2){ echo "Employee"; }
+                                  if($user->user_type == 3){ echo "Moderator"; }
+                                ?>
+                              </td>
                               <td>
                                 <?php $status = $user->user_status;
                                 if ($status == 1):?>
@@ -62,7 +65,7 @@
                                 <div class="dropdown">
                                   <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                   <div class="dropdown-menu">
-                                    <a class="dropdown-item has-icon" href="" data-toggle="modal" data-target="#view_user<?php echo $user->user_id ?>"><i class="fas fa-eye"></i>View User</a>
+                                    <a class="dropdown-item has-icon btn btn-icon" data-toggle="modal" data-target="#view_user<?php echo $user->user_id ?>"><i class="fas fa-eye"></i>View User</a>
                                     <a class="dropdown-item has-icon" href="<?php echo site_url('manage_user')."/".$user->user_id; ?>"><i class="fas fa-edit"></i>Manage User</a>
                                   </div>
                                 </div>
@@ -171,3 +174,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+  $('title').html('Manage Users - IHUMANE')
+</script>
