@@ -567,6 +567,8 @@ class Employees extends CI_Model
 	public function get_employee_training_($employee_training_id){
 		$this->db->select('*');
 		$this->db->from('employee_training');
+		$this->db->join('training', 'training.training_id = employee_training.employee_training_training_id');
+		$this->db->join('employee', 'employee.employee_id = employee_training.employee_training_employee_id');
 		$this->db->where('employee_training.employee_training_id', $employee_training_id);
 		return $this->db->get()->row();
 

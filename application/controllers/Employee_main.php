@@ -19,6 +19,7 @@ class Employee_main extends CI_Controller
 		$this->load->model('salaries');
 		$this->load->model('loans');
 		$this->load->model('payroll_configurations');
+		$this->load->model('chats');
 	}
 
 	public function index(){
@@ -1746,6 +1747,12 @@ class Employee_main extends CI_Controller
 
 						else:
 
+							if(!empty($check_existing_employee_training->employee_training_status)):
+
+								redirect('error_404');
+
+							else:
+
 
 							$data['user_data'] = $this->users->get_user($username);
 						//$data['employees'] = $this->employees->get_employee_by_salary_setup();
@@ -1772,6 +1779,8 @@ class Employee_main extends CI_Controller
 
 
 						$this->load->view('employee_self_service/view_training', $data);
+
+						endif;
 
 					endif;
 					endif;
@@ -1830,6 +1839,16 @@ class Employee_main extends CI_Controller
 							redirect('error_404');
 
 						else:
+
+							$employee_training_array = array(
+								'employee_training_status' => 1,
+								'employee_training_date' => date("Y-m-d H:i:s")
+
+							);
+
+							$query = $this->employees->update_employee_training($employee_training_id, $employee_training_array);
+
+
 							$data['user_data'] = $this->users->get_user($username);
 							//$data['employees'] = $this->employees->get_employee_by_salary_setup();
 							$data['training'] = $check_existing_training;
@@ -1841,10 +1860,10 @@ class Employee_main extends CI_Controller
 							if(isset($time)):
 								$data['exam_time'] = $time;
 
+
 							else:
 
 								$time = $check_existing_training->training_duration_exam;
-
 								$data_time = array(
 									'exam_time' => $time
 								);
@@ -1940,11 +1959,11 @@ class Employee_main extends CI_Controller
 				$this->employees->insert_notifications($notification_data);
 
 				$msg = array(
-					'msg' => 'Test Complete with a score of'.$total_score.'%',
-					'location' => site_url('my_trainings'),
+					'msg' => 'Test Complete with a score of  '.$total_score.'%',
+					'location' =>  site_url('my_trainings'),
 					'type' => 'success'
 				);
-				$this->load->view('swal', $msg);
+				$this->load->view('exam_swal', $msg);
 
 
 			else:
@@ -1964,10 +1983,244 @@ class Employee_main extends CI_Controller
 
 	}
 
+	public function check_training_result(){
+
+		$employee_training_id = $this->uri->segment(2);
+
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				if(empty($employee_training_id)):
+
+					redirect('error_404');
+
+				else:
+
+					//$check_existing_training = $this->hr_configurations-> view_training($training_id);
+
+					$check_existing_employee_training = $this->employees-> get_employee_training_($employee_training_id);
+
+					if(empty($check_existing_employee_training)):
+
+						redirect('error_404');
+
+					else:
+
+
+							$data['user_data'] = $this->users->get_user($username);
+							$data['employee_training'] = $check_existing_employee_training;
+							$data['csrf_name'] = $this->security->get_csrf_token_name();
+							$data['csrf_hash'] = $this->security->get_csrf_hash();
+							$data['employee'] = $this->employees->get_employee_by_unique($username);
+							$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+							$data['employee_id'] = $employee_id;
+							$data['notifications'] = $this->employees->get_notifications($employee_id);
+
+								//print_r($check_existing_employee_training);
+
+							$this->load->view('employee_self_service/test_result', $data);
+
+					endif;
+
+				endif;
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
 	public function update_time(){
 
 		$minutes = $_GET['minutes'];
 		$this->session->set_userdata('exam_time', $minutes);
+	}
+
+	public function my_chat(){
+
+
+
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+
+						$data['user_data'] = $this->users->get_user($username);
+
+						$data['csrf_name'] = $this->security->get_csrf_token_name();
+						$data['csrf_hash'] = $this->security->get_csrf_hash();
+						$data['employee'] = $this->employees->get_employee_by_unique($username);
+						$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+						$data['employee_id'] = $employee_id;
+						$data['users'] = $this->users->view_users();
+						$data['notifications'] = $this->employees->get_notifications($employee_id);
+
+						//print_r($check_existing_employee_training);
+
+						$this->load->view('employee_self_service/chat', $data);
+
+
+
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function send_chat(){
+
+		$sender_id = $_GET['sender_id'];
+		$reciever_id = $_GET['reciever_id'];
+		$message = $_GET['message'];
+
+		$chat_array = array(
+
+			'chat_sender_id' => $sender_id,
+			'chat_reciever_id' => $reciever_id,
+			'chat_body' => $message,
+		);
+
+		echo $this->chats->add_chat($chat_array);
+
+
+
+	}
+
+	public function get_chats(){
+		$sender_id = $_GET['sender_id'];
+		$reciever_id = $_GET['reciever_id'];
+
+	 	$chats = $this->chats->get_chat();
+
+	 	$employee = $this->employees->get_employee($sender_id);
+	 	$employee_details = $this->employees->get_employee($reciever_id);
+
+		foreach ($chats as $chat):
+		if($chat->chat_sender_id == $employee->employee_id && $chat->chat_reciever_id == $employee_details->employee_id): ?>
+		<div class="chat-item chat-right" style="">
+		<img src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee->employee_passport; ?>">
+			<div class="chat-details">
+			<div class="chat-text"><?php echo $chat->chat_body; ?></div>
+			<div class="chat-time"><?php echo $chat->chat_time; ?></div>
+						</div>
+		</div>
+	<?php
+		endif;
+		if($chat->chat_sender_id == $employee_details->employee_id && $chat->chat_reciever_id == $employee->employee_id):
+															?>
+			<div class="chat-item chat-left" style="">
+
+																<img src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee_details->employee_passport; ?>">
+
+																<div class="chat-details">
+																	<div class="chat-text"><?php echo $chat->chat_body; ?></div>
+																	<div class="chat-time"><?php echo $chat->chat_time; ?></div>
+																</div>
+
+
+
+															</div>
+
+		<?php
+		endif;
+
+		endforeach;
+	}
+
+	public function get_online(){
+
+
+		$employee_id = $_GET['sender_id'];
+		$users = $this->users->view_users();
+		foreach ($users as $user):
+											if($user->user_type == 2 || $user->user_type == 3):
+										if(!empty($user->user_token)):
+													$employee_details = @$this->employees->get_employee_by_unique($user->user_username);
+												if($employee_details->employee_id !== $employee_id):
+
+											?>
+
+										<li class="media">
+											<a class="link" href="#" data-rel="<?php echo $employee_details->employee_id; ?>">
+											<img alt="image" class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee_details->employee_passport; ?>">
+											<div class="media-body">
+												<div class="mt-0 mb-1 font-weight-bold"><?php echo $employee_details->employee_first_name." ". $employee_details->employee_last_name; ?></div>
+
+												<div class="text-success text-small font-600-bold"><i class="fas fa-circle"></i> Online</div>
+
+
+											</div>
+											</a>
+										</li>
+
+										<?php
+
+										endif;
+										endif;
+										endif;
+										endforeach;
+
+		foreach ($users as $user):
+			if($user->user_type == 2 || $user->user_type == 3):
+				if(empty($user->user_token)):
+					$employee_details = @$this->employees->get_employee_by_unique($user->user_username);
+					if($employee_details->employee_id !== $employee_id):
+
+						?>
+
+						<li class="media">
+							<a class="link" href="#" data-rel="<?php echo $employee_details->employee_id; ?>">
+								<img alt="image" class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee_details->employee_passport; ?>">
+								<div class="media-body">
+									<div class="mt-0 mb-1 font-weight-bold"><?php echo $employee_details->employee_first_name." ". $employee_details->employee_last_name; ?></div>
+
+									<div class="text-small font-weight-600 text-muted"><i class="fas fa-circle"></i> Offline</div>
+
+
+								</div>
+							</a>
+						</li>
+
+					<?php
+
+					endif;
+				endif;
+			endif;
+		endforeach;
 	}
 
 

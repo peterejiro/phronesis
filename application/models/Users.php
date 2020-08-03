@@ -25,8 +25,7 @@ class Users extends CI_Model
 		$this->db->from('user');
 		$this->db->join('permission', 'permission.username = user.user_username');
 		$this->db->where('user_status <', 5);
-		$query = $this->db->get()->result();
-		return $query;
+		return $this->db->get()->result();
 
 	}
 
@@ -35,8 +34,7 @@ class Users extends CI_Model
     $this->db->from('user');
     $this->db->where('user_token !=', ' ');
     $this->db->or_where('user_token !=', null);
-    $query = $this->db->get()->result();
-    return $query;
+	return $this->db->get()->result();
   }
 
 	public function get_user($username){

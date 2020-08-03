@@ -43,6 +43,8 @@ $CI->load->model('employees');
 										<p> Test Duration(In Minutes): <?php echo $training->training_duration_exam; ?> </p>
 
 										<button type="button" class="btn btn-primary" id="sa-params"><i class="fa fa-plus"></i> Start Test</button>
+										<button class="btn btn-primary" id="swal-8">Launch</button>
+
 									</div>
 									<div class="card-body">
 										<div class="tab-content">
@@ -126,6 +128,11 @@ $CI->load->model('employees');
 <script>
 	//$('title').html('Approve Payroll Routine - IHUMANE')
 	$(document).ready(function () {
+
+
+
+
+
 		$('#sa-params').click(function () {
 			swal({
 				title: 'Are you sure?',
@@ -148,6 +155,9 @@ $CI->load->model('employees');
 				}
 			});
 		});
+
+
+
 
 
 	});

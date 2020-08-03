@@ -3370,7 +3370,70 @@ class Employee extends CI_Controller
 
 	}
 
+	public function view_training_result(){
+		$username = $this->session->userdata('user_username');
+		$employee_training_id = $this->uri->segment(2);
 
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+
+					if(empty($employee_training_id)):
+
+						redirect('error_404');
+
+					else:
+
+						//$check_existing_training = $this->hr_configurations-> view_training($training_id);
+
+						$check_existing_employee_training = $this->employees-> get_employee_training_($employee_training_id);
+
+						if(empty($check_existing_employee_training)):
+
+							redirect('error_404');
+
+						else:
+
+							$data['user_data'] = $this->users->get_user($username);
+							$data['employee_training'] = $check_existing_employee_training;
+							$data['csrf_name'] = $this->security->get_csrf_token_name();
+							$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+
+
+
+							$this->load->view('employee/test_result', $data);
+
+						endif;
+
+					endif;
+
+				else:
+					redirect('/access_denied');
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
 
 
 }
