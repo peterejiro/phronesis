@@ -51,8 +51,8 @@
                                 <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                 <div class="dropdown-menu">
                                   <a class="dropdown-item has-icon" href="<?php echo site_url('edit_training')."/".$training->training_id;?>"><i class="fas fa-edit"></i>Edit Training</a>
-                                  <a class="dropdown-item has-icon" href="<?php echo site_url('training_questions')."/".$training->training_id;?>"><i class="fas fa-edit"></i>Training Questions</a>
-                                  <a class="dropdown-item has-icon" href="<?php echo site_url('view_training')."/".$training->training_id;?>"><i class="fas fa-edit"></i>View Training</a>
+																	<a class="dropdown-item has-icon" href="<?php echo site_url('view_training')."/".$training->training_id;?>"><i class="fas fa-eye"></i>View Training</a>
+																	<a class="dropdown-item has-icon" href="<?php echo site_url('training_questions')."/".$training->training_id;?>"><i class="fas fa-question"></i>Training Questions</a>
                                 </div>
                               </div>
                             </td>
