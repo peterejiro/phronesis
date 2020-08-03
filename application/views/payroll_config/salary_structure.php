@@ -139,3 +139,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+	$('title').html('Salary Structure Categories - IHUMANE')
+</script>

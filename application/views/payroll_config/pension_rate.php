@@ -139,5 +139,7 @@ endif;
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
-
+<script>
+	$('title').html('Pension Rate - IHUMANE')
+</script>
 

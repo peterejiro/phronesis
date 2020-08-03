@@ -39,7 +39,7 @@
                             <option value="<?php echo $salary_structure->salary_structure_id ?>>"> <?php echo $salary_structure->salary_structure_category_name; ?></option>
 				                  <?php endforeach; ?>
                         </select>
-                        <p class="form-text text-muted">Add a payment definition and it's corresponding amount for the selected salary structure</p>
+                        <p class="form-text text-muted">Add a payment definition, and it's corresponding amount below for the selected salary structure</p>
                         <div class="invalid-feedback">
                           please select a salary structure category
                         </div>
@@ -81,7 +81,8 @@
                   </div>
                   <div class="card-footer text-right bg-whitesmoke">
                     <button type="submit" class="btn btn-primary">Add Salary Allowance</button>
-                  </div>
+										<button onclick="location.href='<?php echo site_url('allowance');?>'" class="btn btn-danger" type="button">Go Back</button>
+									</div>
                 </div>
               </form>
           </div>
@@ -93,7 +94,8 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-  window.onload = function(){
+	$('title').html('Add Salary Allowance - IHUMANE')
+	window.onload = function(){
     // document.getElementById("allowance").style.display='none';
   };
 
