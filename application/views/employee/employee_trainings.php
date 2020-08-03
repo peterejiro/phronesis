@@ -74,7 +74,7 @@
                                 <div class="dropdown">
                                   <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
                                   <div class="dropdown-menu">
-                                    <a class="dropdown-item has-icon" href="<?php echo site_url('check_training_result').'/'.$training->employee_training_id; ?>"><i class="fa fa-eye"></i>View training Result</a>
+                                    <a class="dropdown-item has-icon" href="<?php echo site_url('view_training_result').'/'.$training->employee_training_id; ?>"><i class="fa fa-eye"></i>View training Result</a>
                                   </div>
                                 </div>
                               <?php endif; ?>

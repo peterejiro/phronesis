@@ -81,6 +81,7 @@
 		<script src="<?php echo base_url(); ?>assets/js/ajaxmask.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/jquery.timer.js"></script>
 		<script src="<?php echo base_url(); ?>assets/modules/visual-countdown-timer/js/script.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/page/components-chat-box.js"></script>
 		<script>
 			$(document).ready(function(){
 				setInterval(timestamp, 7000);

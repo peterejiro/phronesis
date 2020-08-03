@@ -453,7 +453,7 @@ $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array('employee_upload_others', 'add_employee', 'new_response', 'view_query', 'enroll_employee', 'checkreg', 'reg', 'process_register', 'message', 'message', 'clock_in', 'process_verification', 'getac', 'upload_training_materials', 'remove_material', 'update_time');
+$config['csrf_exclude_uris'] = array('employee_upload_others', 'add_employee', 'new_response', 'view_query', 'enroll_employee', 'checkreg', 'reg', 'process_register', 'message', 'message', 'clock_in', 'process_verification', 'getac', 'upload_training_materials', 'remove_material', 'update_time', 'send_chat', 'get_chats', 'get_online');
 
 /*
 |--------------------------------------------------------------------------
