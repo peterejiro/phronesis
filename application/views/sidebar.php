@@ -161,6 +161,8 @@
 	  	$this->uri->segment(1) == 'trainings' ||
 	  	$this->uri->segment(1) == 'new_training' ||
 	  	$this->uri->segment(1) == 'edit_training' ||
+	  	$this->uri->segment(1) == 'view_training' ||
+	  	$this->uri->segment(1) == 'training_questions' ||
       $this->uri->segment(1) == 'qualification' ? 'active' : '';
 			?>">
 			<?php if($hr_configuration == 1){  ?>
@@ -177,7 +179,10 @@
 					<li class="<?php echo $this->uri->segment(1) == 'qualification' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('qualification') ?>">Qualification Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'subsidiary' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('subsidiary') ?>">Subsidiary Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'leave' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('leave') ?>">Leave Type Setup</a></li>
-					<li class="<?php echo $this->uri->segment(1) == 'trainings' || $this->uri->segment(1) == 'new_training' || $this->uri->segment(1) == 'edit_training' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('trainings') ?>">Training Setup</a></li>
+
+				<li class="<?php echo $this->uri->segment(1) == 'trainings' || $this->uri->segment(1) == 'new_training' || $this->uri->segment(1) == 'edit_training' || $this->uri->segment(1) == 'view_training' || $this->uri->segment(1) == 'training_questions' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('trainings') ?>">Training Setup</a></li>
+      <li class="<?php echo $this->uri->segment(1) == 'trainings' || $this->uri->segment(1) == 'hr_documents' || $this->uri->segment(1) == 'hr_documents' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('hr_documents') ?>">Documents</a></li>
+
 				</ul>
 			<?php } ?>
 			</li>

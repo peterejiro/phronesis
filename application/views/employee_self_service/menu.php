@@ -40,6 +40,8 @@
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_queries' || $this->uri->segment(1) == 'view_my_query' ? 'active':'' ?>"><a href="<?php echo base_url('my_queries'); ?>" class="nav-link">Queries</a></li>
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_memos' ? 'active':'' ?>"><a href="<?php echo base_url('my_memos'); ?>" class="nav-link">Announcements</a></li>
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_specific_memos' ? 'active':'' ?>"><a href="<?php echo base_url('my_specific_memos'); ?>" class="nav-link">Memos</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_chat' ? 'active':'' ?>"><a href="<?php echo base_url('my_chat'); ?>" class="nav-link">Chat</a></li>
+
 				</ul>
 			</li>
 		</ul>

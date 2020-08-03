@@ -30,15 +30,23 @@ $CI->load->model('employees');
 								<div class="card-header">
 									<h4>Questions</h4>
 								</div>
+
 								<div class="card-body">
+									<div class="alert alert-warning alert-has-icon">
+										<div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+										<div class="alert-body">
+											<div id="countdown-a" class="alert-title">Warning</div>
+											<p> Do not Attempt to Reload the Page. </p>
+											<p> Do not Attempt to Leave this Screen during the Test Time. </p>
+											<p> If the timer times out before you submit, you test would be submitted.</p>
+											<p>Should you violate any of the first 2 conditions, your test would be submitted.</p>
+										</div>
+									</div>
+
 									<div class="row">
 										<div class="col-12 col-sm-12 col-md-4">
-<!--											<div class="countdown-bar" id="countdownID">-->
-<!--												<div></div>-->
-<!--												<div></div>-->
-<!--											</div>-->
 
-											<p id="countdown-a"></p>
+
 
 											<form action="<?php echo site_url('score_test'); ?>" id="assessment_form" method="post">
 											<ul class="nav nav-pills flex-column" id="myTab4" role="tablist">
@@ -182,15 +190,21 @@ $CI->load->model('employees');
 
 			}
 		});
+		if(seconds === 0){
 
-
-
-		if(seconds == 0){
-
-			alert("i finished");
 			clearInterval(x);
+
+
+			$('#assessment_form').submit();
+
 		}
+
+
 	}, 1000);
+
+
+
+
 </script>
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2020 at 10:24 AM
+-- Generation Time: Aug 03, 2020 at 01:54 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -42,6 +42,34 @@ INSERT INTO `bank` (`bank_id`, `bank_code`, `bank_name`) VALUES
 (6, '', 'Heritage Bank of Nigeria'),
 (7, '000013', 'GT Bank'),
 (8, '1200', 'Fidelity Banks');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat`
+--
+
+CREATE TABLE `chat` (
+  `chat_id` int(11) NOT NULL,
+  `chat_sender_id` int(11) NOT NULL,
+  `chat_reciever_id` int(11) NOT NULL,
+  `chat_body` text NOT NULL,
+  `chat_time` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `chat`
+--
+
+INSERT INTO `chat` (`chat_id`, `chat_sender_id`, `chat_reciever_id`, `chat_body`, `chat_time`) VALUES
+(67, 10, 7, 'new trial', '2020-08-03 10:08:41'),
+(68, 10, 7, 'dope', '2020-08-03 10:08:46'),
+(69, 10, 7, 'te', '2020-08-03 10:08:50'),
+(70, 10, 7, 'tr', '2020-08-03 10:08:52'),
+(71, 10, 7, 'leeeamao', '2020-08-03 10:08:59'),
+(72, 10, 7, 'hekki', '2020-08-03 10:35:53'),
+(73, 10, 11, '', '2020-08-03 10:46:28'),
+(74, 7, 10, 'stop na', '2020-08-03 11:19:23');
 
 -- --------------------------------------------------------
 
@@ -289,11 +317,11 @@ CREATE TABLE `employee_leave` (
 --
 
 INSERT INTO `employee_leave` (`employee_leave_id`, `leave_employee_id`, `leave_leave_type`, `leave_start_date`, `leave_end_date`, `leave_status`) VALUES
-(1, 9, '1', '2020-05-25', '2020-07-31', '1'),
+(1, 9, '1', '2020-05-25', '2020-07-31', '2'),
 (2, 8, '1', '2020-06-26', '2020-06-25', '1'),
-(4, 10, '1', '2020-07-02', '2020-07-31', '3'),
+(4, 10, '1', '2020-07-02', '2020-07-31', '2'),
 (5, 7, '2', '2020-07-20', '2021-01-11', '3'),
-(6, 10, '1', '2020-07-19', '2020-07-31', '1'),
+(6, 10, '1', '2020-07-19', '2020-07-31', '2'),
 (9, 12, '1', '2020-07-18', '2020-08-09', '1');
 
 -- --------------------------------------------------------
@@ -309,15 +337,16 @@ CREATE TABLE `employee_training` (
   `employee_training_start_date` date NOT NULL,
   `employee_training_end_date` date NOT NULL,
   `employee_training_score` double NOT NULL DEFAULT 0,
-  `employee_training_status` int(11) NOT NULL DEFAULT 0 COMMENT '0 == pending\r\n1 == completed \r\n\r\n2 == abandoned'
+  `employee_training_status` int(11) NOT NULL DEFAULT 0 COMMENT '0 == pending\r\n1 == completed \r\n\r\n2 == abandoned',
+  `employee_training_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `employee_training`
 --
 
-INSERT INTO `employee_training` (`employee_training_id`, `employee_training_employee_id`, `employee_training_training_id`, `employee_training_start_date`, `employee_training_end_date`, `employee_training_score`, `employee_training_status`) VALUES
-(1, 7, 6, '2020-07-28', '2020-08-09', 0, 0);
+INSERT INTO `employee_training` (`employee_training_id`, `employee_training_employee_id`, `employee_training_training_id`, `employee_training_start_date`, `employee_training_end_date`, `employee_training_score`, `employee_training_status`, `employee_training_date`) VALUES
+(1, 7, 6, '2020-07-28', '2020-08-09', 0, 1, '2020-07-31 09:42:51');
 
 -- --------------------------------------------------------
 
@@ -355,6 +384,20 @@ CREATE TABLE `health_insurance` (
 
 INSERT INTO `health_insurance` (`health_insurance_id`, `health_insurance_hmo`) VALUES
 (1, 'National Health Insurance Scheme');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hr_document`
+--
+
+CREATE TABLE `hr_document` (
+  `hr_document_id` int(11) NOT NULL,
+  `hr_document_name` text NOT NULL,
+  `hr_document_description` text NOT NULL,
+  `hr_document_link` text NOT NULL,
+  `hr_document_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -950,7 +993,23 @@ INSERT INTO `logs` (`log_id`, `log_user_id`, `log_description`, `log_date`) VALU
 (408, '6', 'Logged In', '2020-07-28 22:51:53'),
 (409, '7', 'Logged In', '2020-07-29 08:57:57'),
 (410, '4', 'Logged In', '2020-07-29 08:58:47'),
-(411, '4', 'Update Employee Record', '2020-07-29 08:59:25');
+(411, '4', 'Update Employee Record', '2020-07-29 08:59:25'),
+(412, '6', 'Logged In', '2020-07-29 11:52:58'),
+(413, '6', 'Logged Out', '2020-07-29 11:53:15'),
+(414, '7', 'Logged In', '2020-07-29 11:53:23'),
+(415, '6', 'Logged In', '2020-07-29 14:54:07'),
+(416, '4', 'Logged In', '2020-07-31 07:08:57'),
+(417, '4', 'Logged Out', '2020-07-31 07:09:05'),
+(418, '7', 'Logged In', '2020-07-31 07:09:13'),
+(419, '7', 'Logged In', '2020-08-01 10:10:39'),
+(420, '6', 'Logged In', '2020-08-01 11:57:55'),
+(421, '6', 'Logged In', '2020-08-03 09:28:57'),
+(422, '7', 'Logged In', '2020-08-03 09:57:44'),
+(423, '6', 'Logged Out', '2020-08-03 11:15:42'),
+(424, '7', 'Logged In', '2020-08-03 11:15:51'),
+(425, '7', 'Logged Out', '2020-08-03 11:20:37'),
+(426, '4', 'Logged In', '2020-08-03 11:20:48'),
+(427, '7', 'Logged In', '2020-08-03 11:26:34');
 
 -- --------------------------------------------------------
 
@@ -1029,9 +1088,24 @@ INSERT INTO `notification` (`notification_id`, `notification_employee_id`, `noti
 (15, 11, 'New Employee to be Aprraised', 'appraise_employee', 1, '2020-07-15 16:03:39'),
 (16, 12, 'Leave Approved', 'my_leave', 0, '2020-07-16 12:32:38'),
 (17, 12, 'Leave Approved', 'my_leave', 0, '2020-07-16 16:27:23'),
-(18, 7, 'New Training', 'my_trainings', 0, '2020-07-28 16:03:40'),
-(19, 7, 'Information Updated', 'personal_information', 0, '2020-07-29 08:59:25'),
-(20, 7, 'Resignation Discarded', 'employee_resignation', 0, '2020-07-29 09:03:37');
+(18, 7, 'New Training', 'my_trainings', 1, '2020-07-28 16:03:40'),
+(19, 7, 'Information Updated', 'personal_information', 1, '2020-07-29 08:59:25'),
+(20, 7, 'Resignation Discarded', 'employee_resignation', 1, '2020-07-29 09:03:37'),
+(21, 7, 'Training Completed, Result Ready', 'my_trainings', 1, '2020-07-29 14:57:11'),
+(22, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 07:34:00'),
+(23, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 07:43:26'),
+(24, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 07:44:36'),
+(25, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 07:49:39'),
+(26, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 07:50:17'),
+(27, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 07:53:49'),
+(28, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 07:54:30'),
+(29, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 08:00:20'),
+(30, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 08:01:31'),
+(31, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 08:26:12'),
+(32, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 08:27:49'),
+(33, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 08:35:17'),
+(34, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 08:36:56'),
+(35, 7, 'Training Completed, Result Ready', 'my_trainings', 0, '2020-07-31 08:42:51');
 
 -- --------------------------------------------------------
 
@@ -1718,12 +1792,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_username`, `user_email`, `user_password`, `user_type`, `user_token`, `user_name`, `user_status`) VALUES
-(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', 1, '1596009527', 'Administrator Administrator', '1'),
+(4, 'administrator', 'admin@admin.com', '$2y$10$SlMOyD3Vs./1je91yR3Nueq9/eFKDu9huAOQ54a5kXNpXBU9teadi', 1, '1596450048', 'Administrator Administrator', '1'),
 (5, 'peterejiro', 'peterejiro96@gmail.com', '$2y$10$7OLmMpkXuTEhrMdIIsdnoO4GCUs7yB/Hm7qL6rRAmHEA1lzikvOjW', 1, '', 'Oki-Peter Ejiroghene', '1'),
-(6, 'ihumane_Xxd', 'ashaolu.rachael@connexxiongroup.com', '$2y$10$5PWarziFP.tywKLcI2Moje0n.IwHcDxb7/lvf5qND0Ng0/elMhOnq', 2, '1595973113', 'Ashaolu Rachael', '1'),
-(7, 'ihumane_qt5', 'oki-peter@connexxiongroup.com', '$2y$10$5PWarziFP.tywKLcI2Moje0n.IwHcDxb7/lvf5qND0Ng0/elMhOnq', 2, '1596009477', 'Oki - Peter Ejirogehene', '1'),
+(6, 'ihumane_Xxd', 'ashaolu.rachael@connexxiongroup.com', '$2y$10$5PWarziFP.tywKLcI2Moje0n.IwHcDxb7/lvf5qND0Ng0/elMhOnq', 2, '', 'Ashaolu Rachael', '1'),
+(7, 'ihumane_qt5', 'oki-peter@connexxiongroup.com', '$2y$10$5PWarziFP.tywKLcI2Moje0n.IwHcDxb7/lvf5qND0Ng0/elMhOnq', 2, '1596450394', 'Oki - Peter Ejirogehene', '1'),
 (8, 'ihumane_ER4', 'janedoe@connexxiongroup.com', '$2y$10$X0FqzN0YBvcpJNRjcFkOD.tGSq/rTRAH/aj9Dkwi88m8dUjyCewHS', 3, '', 'Doe Jane', '1'),
-(9, 'ihumane_f2L', 'johndoe@connexxiongroup.com', '$2y$10$pI7/9wcTjLyT/iuo7FI0Ae4NuJ5wf709b/8J3HSnpzgQ/XwTZXXky', 2, '', 'Doe John', '1'),
 (10, 'ihumane_9b0', 'jon@connexx.com', '$2y$10$KJsYwsXUCmPY48dA.6XKfuYsm5QtO/JJIAQZZxHQIDRwF5Enz22Yy', 3, '1594895319', 'doe john', '1');
 
 -- --------------------------------------------------------
@@ -1791,6 +1864,12 @@ INSERT INTO `work_experience` (`work_experience_id`, `employee_id`, `company_nam
 ALTER TABLE `bank`
   ADD PRIMARY KEY (`bank_id`),
   ADD UNIQUE KEY `bank_name` (`bank_name`) USING HASH;
+
+--
+-- Indexes for table `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`chat_id`);
 
 --
 -- Indexes for table `department`
@@ -1869,6 +1948,12 @@ ALTER TABLE `grade`
 ALTER TABLE `health_insurance`
   ADD PRIMARY KEY (`health_insurance_id`),
   ADD UNIQUE KEY `health_insurance_hmo` (`health_insurance_hmo`) USING HASH;
+
+--
+-- Indexes for table `hr_document`
+--
+ALTER TABLE `hr_document`
+  ADD PRIMARY KEY (`hr_document_id`);
 
 --
 -- Indexes for table `incident`
@@ -2141,6 +2226,12 @@ ALTER TABLE `bank`
   MODIFY `bank_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+
+--
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
@@ -2213,6 +2304,12 @@ ALTER TABLE `health_insurance`
   MODIFY `health_insurance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `hr_document`
+--
+ALTER TABLE `hr_document`
+  MODIFY `hr_document_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `incident`
 --
 ALTER TABLE `incident`
@@ -2258,7 +2355,7 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=412;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=428;
 
 --
 -- AUTO_INCREMENT for table `memo`
@@ -2276,7 +2373,7 @@ ALTER TABLE `minimum_tax_rate`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `other_document`

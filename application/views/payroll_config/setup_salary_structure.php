@@ -21,7 +21,7 @@
 				</div>
         <div class="section-body">
           <div class="section-title">Setup Employee Salary Structure</div>
-          <p class="section-lead">You can setup an employee's salary structure here</p>
+          <p class="section-lead">You can set up an employee's salary structure here</p>
           <div class="row">
             <div class="col-md-7">
               <form method="post" action="<?php echo site_url('add_employee_salary_structure'); ?>" class="needs-validation" novalidate>
@@ -104,7 +104,9 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-  window.onload = function(){
+	$('title').html('Setup Salary Structure - IHUMANE')
+
+	window.onload = function(){
     document.getElementById("allowances").style.display='none';
     document.getElementById("salary_structure_category").style.display = 'none';
   };
