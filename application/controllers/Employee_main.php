@@ -2223,5 +2223,233 @@ class Employee_main extends CI_Controller
 		endforeach;
 	}
 
+	public function documents(){
+
+
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+			//$data['employees'] = $this->employees->view_employees();
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+				$data['employee_id'] = $employee_id;
+				$data['documents'] = $this->hr_configurations->view_hr_documents();
+
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
+
+				//print_r($check_existing_employee_training);
+
+				$this->load->view('employee_self_service/documents', $data);
+
+
+
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+	public function view_document(){
+
+		$document_id = $this->uri->segment(2);
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+				if(empty($document_id)):
+
+					redirect('error_404');
+
+				else:
+
+					$check_existing_document = $this->hr_configurations-> view_hr_document($document_id);
+
+					if(empty($check_existing_document)):
+
+						redirect('error_404');
+
+					else:
+				$data['user_data'] = $this->users->get_user($username);
+
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+				$data['employee_id'] = $employee_id;
+						$data['document'] = $check_existing_document;
+
+
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
+
+				//print_r($check_existing_employee_training);
+
+				$this->load->view('employee_self_service/view_document', $data);
+
+				endif;
+
+				endif;
+
+
+
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+
+
+	}
+
+	public function change_password(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+
+
+						$data['user_data'] = $this->users->get_user($username);
+
+						$data['csrf_name'] = $this->security->get_csrf_token_name();
+						$data['csrf_hash'] = $this->security->get_csrf_hash();
+						$data['employee'] = $this->employees->get_employee_by_unique($username);
+						$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+						$data['employee_id'] = $employee_id;
+
+
+						$data['notifications'] = $this->employees->get_notifications($employee_id);
+
+						//print_r($check_existing_employee_training);
+
+						$this->load->view('employee_self_service/change_password', $data);
+
+
+
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+
+
+	}
+
+	public function change_password_(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+
+
+
+			$user_type = $this->users->get_user($username)->user_type;
+
+
+			if($user_type == 2 || $user_type == 3):
+
+
+				extract($_POST);
+
+				$user_array = array(
+
+						'user_password'=> password_hash($password, PASSWORD_BCRYPT),
+
+				);
+
+				$user_array = $this->security->xss_clean($user_array);
+				$query_user = $this->users->update_user($user_id, $user_array);
+
+				if(($query_user == true)):
+
+					$msg = array(
+							'msg'=> 'Password Reset',
+							'location' => site_url('employee_main'),
+							'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+				else:
+					$msg = array(
+							'msg'=> 'An Error Occurred',
+							'location' => site_url('employee_main'),
+							'type' => 'error'
+
+					);
+					$this->load->view('swal', $msg);
+				endif;
+
+
+
+
+			elseif($user_type == 1):
+
+				redirect('/access_denied');
+
+			endif;
+
+
+		else:
+			redirect('/login');
+		endif;
+
+
+
+	}
+
+
 
 }

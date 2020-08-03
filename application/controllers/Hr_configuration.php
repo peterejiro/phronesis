@@ -2988,7 +2988,306 @@ class Hr_configuration extends CI_Controller
 
 	}
 
+	public function hr_documents(){
 
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->hr_configuration == 1):
+
+					$data['user_data'] = $this->users->get_user($username);
+					$data['documents'] = $this->hr_configurations->view_hr_documents();
+
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+
+
+					$this->load->view('hr_config/hr_document', $data);
+
+				else:
+					redirect('/access_denied');
+				endif;
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+
+	public function add_hr_document(){
+
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+
+					$config['upload_path'] = 'uploads/documents';
+					$config['allowed_types'] = 'gif|jpg|png|jpeg|pdf|doc|docx';
+					$config['max_size'] = '8000000';
+					$config['max_width'] = '102452';
+					$config['max_height'] = '768555';
+					//$config['overwrite'] = TRUE;
+					$config['encrypt_name'] = TRUE;
+
+					$this->load->library('upload', $config);
+					$upload = $this->upload->do_upload('hr_document');
+
+					if (!$upload):
+
+						$msg = array(
+							'msg' => $this->upload->display_errors(),
+							'location' => site_url('hr_documents'),
+							'type' => 'error'
+
+						);
+						$this->load->view('swal', $msg);
+
+
+					else:
+						$file_data = $this->upload->data();
+						$document_link = $file_data['file_name'];
+						extract($_POST);
+
+						$document_array = array(
+							'hr_document_name' => $document_name,
+							'hr_document_description' => $document_description,
+							'hr_document_link' => $document_link,
+
+
+						);
+
+						$document_array = $this->security->xss_clean($document_array);
+
+						$response = $this->hr_configurations->add_hr_document($document_array);
+
+						if (isset($response)):
+							$log_array = array(
+								'log_user_id' => $this->users->get_user($username)->user_id,
+								'log_description' => "Added New  Document"
+							);
+
+							$this->logs->add_log($log_array);
+
+
+							$msg = array(
+								'msg' => 'New Document Added Successfully',
+								'location' => site_url('hr_documents'),
+								'type' => 'success'
+
+							);
+							$this->load->view('swal', $msg);
+						else:
+							$msg = array(
+								'msg' => 'An Error Occurred',
+								'location' => site_url('hr_documents'),
+								'type' => 'error'
+
+							);
+							$this->load->view('swal', $msg);
+
+						endif;
+
+					endif;
+
+				else:
+
+					redirect('/access_denied');
+
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+
+	public function view_hr_document(){
+
+		$document_id = $this->uri->segment(2);
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+
+					if(empty($document_id)):
+
+						redirect('error_404');
+
+					else:
+
+						$check_existing_document = $this->hr_configurations-> view_hr_document($document_id);
+
+						if(empty($check_existing_document)):
+
+							redirect('error_404');
+
+						else:
+
+							$data['user_data'] = $this->users->get_user($username);
+
+							$data['document'] = $check_existing_document;
+
+							$data['csrf_name'] = $this->security->get_csrf_token_name();
+							$data['csrf_hash'] = $this->security->get_csrf_hash();
+							$this->load->view('hr_config/view_document', $data);
+						endif;
+
+					endif;
+
+				else:
+
+					redirect('/access_denied');
+
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+	public function delete_hr_document(){
+
+		$document_id = $this->uri->segment(2);
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if($permission->payroll_configuration == 1):
+
+					if(empty($document_id)):
+
+						redirect('error_404');
+
+					else:
+
+						$check_existing_document = $this->hr_configurations-> view_hr_document($document_id);
+
+						if(empty($check_existing_document)):
+
+							redirect('error_404');
+
+						else:
+
+							$response = $this->hr_configurations->remove_hr_document($document_id);
+
+							if ($response == true):
+								$log_array = array(
+									'log_user_id' => $this->users->get_user($username)->user_id,
+									'log_description' => "Deleted A Document"
+								);
+
+								$this->logs->add_log($log_array);
+
+
+								$msg = array(
+									'msg' => 'Document Deleted Successfully',
+									'location' => site_url('hr_documents'),
+									'type' => 'success'
+
+								);
+								$this->load->view('swal', $msg);
+							else:
+								$msg = array(
+									'msg' => 'An Error Occurred',
+									'location' => site_url('hr_documents'),
+									'type' => 'error'
+
+								);
+								$this->load->view('swal', $msg);
+
+							endif;
+
+
+						endif;
+
+					endif;
+
+				else:
+
+					redirect('/access_denied');
+
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
 
 
 	public function test(){

@@ -178,6 +178,7 @@
 					<li class="<?php echo $this->uri->segment(1) == 'subsidiary' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('subsidiary') ?>">Subsidiary Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'leave' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('leave') ?>">Leave Type Setup</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'trainings' || $this->uri->segment(1) == 'new_training' || $this->uri->segment(1) == 'edit_training' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('trainings') ?>">Training Setup</a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'trainings' || $this->uri->segment(1) == 'hr_documents' || $this->uri->segment(1) == 'hr_documents' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('hr_documents') ?>">Documents</a></li>
 				</ul>
 			<?php } ?>
 			</li>

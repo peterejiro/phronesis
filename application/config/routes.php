@@ -138,6 +138,10 @@ $route['add_question'] = 'hr_configuration/add_question';
 $route['update_question'] = 'hr_configuration/update_question';
 $route['delete_question'] = 'hr_configuration/delete_question';
 $route['view_training/:num'] = 'hr_configuration/view_training/$1';
+$route['hr_documents'] = 'hr_configuration/hr_documents';
+$route['add_hr_document'] = 'hr_configuration/add_hr_document';
+$route['view_hr_document/:num'] = 'hr_configuration/view_hr_document/$1';
+$route['delete_hr_document/:num'] = 'hr_configuration/delete_hr_document/$1';
 
 
 $route['user'] = 'user/user';
@@ -319,6 +323,10 @@ $route['my_chat'] = 'employee_main/my_chat';
 $route['send_chat'] = 'employee_main/send_chat';
 $route['get_chats'] = 'employee_main/get_chats';
 $route['get_online'] = 'employee_main/get_online';
+$route['documents'] = 'employee_main/documents';
+$route['view_document/:num'] = 'employee_main/view_document/$1';
+$route['change_password'] = 'employee_main/change_password';
+$route['change_password_'] = 'employee_main/change_password_';
 
 
 
