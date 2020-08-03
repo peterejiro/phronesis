@@ -153,3 +153,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+	$('title').html('Tax Rates - IHUMANE')
+</script>
