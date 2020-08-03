@@ -122,8 +122,8 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-
-  window.onload = function(){
+	$('title').html('Edit Payment Definition - IHUMANE')
+	window.onload = function(){
     var payment_type = document.getElementById('payment_type').value;
     if(payment_type == 1){
 

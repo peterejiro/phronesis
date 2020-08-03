@@ -73,7 +73,8 @@
                   </div>
                   <div class="card-footer text-right bg-whitesmoke">
                     <button type="submit" class="btn btn-primary">Update Salary Allowance</button>
-                  </div>
+										<button onclick="location.href='<?php echo site_url('allowance');?>'" class="btn btn-danger" type="button">Go Back</button>
+									</div>
                 </div>
               </form>
             </div>
@@ -86,3 +87,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+	$('title').html('Edit Salary Allowance - IHUMANE')
+</script>

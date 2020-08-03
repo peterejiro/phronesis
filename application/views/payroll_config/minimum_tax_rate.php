@@ -138,3 +138,6 @@ endif; ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+	$('title').html('Minimum Tax Rate - IHUMANE')
+</script>

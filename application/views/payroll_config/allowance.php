@@ -81,3 +81,6 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+	$('title').html('Salary Allowances - IHUMANE')
+</script>
