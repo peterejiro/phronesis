@@ -581,6 +581,33 @@ class Hr_configurations extends CI_Model
 	}
 
 
+	public function add_hr_document($document_data){
+
+		$this->db->insert('hr_document', $document_data);
+		return $this->db->insert_id();
+
+	}
+
+	public function view_hr_documents(){
+		$this->db->select('*');
+		$this->db->from('hr_document');
+		return $this->db->get()->result();
+	}
+
+	public function view_hr_document($document_id){
+			$this->db->select('*');
+			$this->db->from('hr_document');
+			$this->db->where('hr_document_id', $document_id);
+			return $this->db->get()->row();
+
+	}
+
+	public function remove_hr_document($document_id){
+		$this->db->delete('hr_document', array('hr_document_id' => $document_id));
+		return true;
+	}
+
+
 
 
 }

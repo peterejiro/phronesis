@@ -10,7 +10,7 @@
 		<ul class="navbar-nav">
 			<li class="nav-item active"><a href="<?php echo site_url('employee_main'); ?>" class="nav-link">Application</a></li>
 			<li class="nav-item"><a href="#" class="nav-link">Help</a></li>
-			<li class="nav-item"><a href="#" class="nav-link">Docs</a></li>
+			<li class="nav-item"><a href="<?php echo site_url('documents'); ?>" class="nav-link">Docs</a></li>
 		</ul>
 	</div>
 <!--	<form class="form-inline ml-auto">-->
@@ -185,6 +185,9 @@
 				<div class="dropdown-title">Logged in For <br> <?php echo timespan($this->session->userdata('login_time'), time(), 2)?></div>
 				<a href="<?php echo base_url('personal_information') ?>" class="dropdown-item has-icon">
 					<i class="far fa-user"></i> Profile
+				</a>
+				<a href="<?php echo base_url('change_password') ?>" class="dropdown-item has-icon">
+					<i class="fas fa-lock"></i> Change Password
 				</a>
 				<a href="<?php echo base_url('employee_history') ?>" class="dropdown-item has-icon">
 					<i class="fas fa-bolt"></i> Activities
