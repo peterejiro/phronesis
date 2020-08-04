@@ -48,6 +48,7 @@
 				$this->uri->segment(1) != 'new_specific_memo' &&
 				$this->uri->segment(1) != 'new_employee_transfer' &&
 				$this->uri->segment(1) != 'new_employee_leave' &&
+				$this->uri->segment(1) != 'new_employee_training' &&
 				$this->uri->segment(1) != 'job_role'
 			):
 		?>
