@@ -31,12 +31,9 @@
 										</div>
 										<div class="card-body">
 											<ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
-
 												<li class="media">
 													<img alt="image" class="mr-3 rounded-circle" width="50" src="<?php echo base_url() ?>/uploads/employee_passports/<?php echo $employee->employee_passport; ?>">
-
 												</li>
-
 												<li class="media">
 
 													<div class="media-body">
@@ -265,15 +262,5 @@
 </body>
 </html>
 <script>
-	$(document).ready(function() {
-		setInterval(timestamp, 1000);
-		function timestamp() {
-			$.ajax({
-				url: '<?php echo site_url('timestamp')?>',
-				success: function (data) {
-					$('#timestamp').html(data);
-				}
-			})
-		}
-	});
+	$('title').html('My Information - IHUMANE');
 </script>

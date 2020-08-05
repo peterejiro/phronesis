@@ -51,7 +51,7 @@
                           <tr>
                             <td><?php echo $training->employee_last_name." ".$training->employee_first_name; ?></td>
 							  						<td><?php echo $training->training_name; ?></td>
-                            <td><?php echo date("M Y", strtotime($training->employee_training_start_date))." - ".date("M Y", strtotime($training->employee_training_end_date)) ; ?></td>
+                            <td><?php echo date("j M Y", strtotime($training->employee_training_start_date))." - ".date("j M Y", strtotime($training->employee_training_end_date)) ; ?></td>
                             <td>
                               <?php if($training->employee_training_status == 0): ?>
                                 <div class="badge badge-warning">Pending</div>
