@@ -37,7 +37,7 @@ class Payroll_report extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 				$user_type = $this->users->get_user($username)->user_type;
 
 				if($user_type == 1 || $user_type == 3):
@@ -75,7 +75,7 @@ class Payroll_report extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 				$user_type = $this->users->get_user($username)->user_type;
 
 				if($user_type == 1 || $user_type == 3):
@@ -116,7 +116,7 @@ class Payroll_report extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 
 				$data['user_data'] = $this->users->get_user($username);
@@ -330,7 +330,7 @@ class Payroll_report extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 				$user_type = $this->users->get_user($username)->user_type;
 
 				if($user_type == 1 || $user_type == 3):
@@ -371,7 +371,7 @@ class Payroll_report extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 				$data['user_data'] = $this->users->get_user($username);
 
@@ -433,7 +433,7 @@ class Payroll_report extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 				$user_type = $this->users->get_user($username)->user_type;
 
 				if($user_type == 1 || $user_type == 3):
@@ -476,7 +476,7 @@ class Payroll_report extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 				$data['user_data'] = $this->users->get_user($username);
 

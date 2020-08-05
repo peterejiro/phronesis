@@ -17,7 +17,7 @@
 				</div>
         <div class="section-body">
           <div class="section-title">All About Documents Setup</div>
-          <p class="section-lead">You can manage Document information here</p>
+          <p class="section-lead">You can manage company documents here</p>
           <div class="row">
             <div class="col-12">
               <div class="card">
@@ -34,7 +34,7 @@
                       <tr>
                         <th>Document</th>
                         <th>Description</th>
-						  <th> Date Uploaded</th>
+						  					<th> Date Uploaded</th>
                         <th>Actions</th>
                       </tr>
                       </thead>
@@ -45,20 +45,17 @@
                           <tr>
                             <td><?php echo $document->hr_document_name; ?></td>
                             <td><?php echo $document->hr_document_description; ?></td>
-							  <td> <?php echo $document->hr_document_date; ?></td>
-							  <td class="text-center" style="width: 9px">
-								  <div class="dropdown">
-									  <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
-									  <div class="dropdown-menu">
-
-											  <a class="dropdown-item has-icon" href="<?php echo site_url('view_hr_document').'/'.$document->hr_document_id; ?>"><i class="fas fa-edit"></i>View Document</a>
-
-											  <div class="dropdown-divider"></div>
-											  <a class="dropdown-item has-icon text-danger" href="<?php echo site_url('delete_hr_document').'/'.$document->hr_document_id; ?>"><i class="fas fa-times"></i>Delete Document</a>
-
-									  </div>
-								  </div>
-							  </td>
+							  						<td><?php echo date('F j, Y g:i a', strtotime($document->hr_document_date)); ?></td>
+														<td class="text-center" style="width: 9px">
+															<div class="dropdown">
+																<a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
+																<div class="dropdown-menu">
+																		<a class="dropdown-item has-icon" href="<?php echo site_url('view_hr_document').'/'.$document->hr_document_id; ?>"><i class="fas fa-edit"></i>View Document</a>
+																		<div class="dropdown-divider"></div>
+																		<a class="dropdown-item has-icon text-danger" href="<?php echo site_url('delete_hr_document').'/'.$document->hr_document_id; ?>"><i class="fas fa-times"></i>Delete Document</a>
+																</div>
+															</div>
+														</td>
                           </tr>
 			                  <?php
 			                  endforeach;
@@ -85,13 +82,12 @@
 					</div>
 					<form class="needs-validation" novalidate method="post" action="<?php echo site_url('add_hr_document'); ?>" enctype="multipart/form-data">
 						<div class="modal-body">
-
-
 							<div class="form-group">
-								<label>Document Name:</label>
-								<input id="document_name" name="document_name" type="text" class="form-control" />
-
-
+								<label>Document Name</label><span style="color: red"> *</span>
+								<input id="document_name" name="document_name" type="text" class="form-control" required/>
+								<div class="invalid-feedback">
+									please fill in a document name
+								</div>
 							</div>
 							<div class="form-group">
 								<label>Document</label><span style="color: red"> *</span>
@@ -103,9 +99,7 @@
 									please upload a document
 								</div>
 								<p class="form-text text-muted">Upload document as either .docx, .pdf, .doc, .png, .jpeg, .jpg, .gif </p>
-
 							</div>
-
 							<div class="form-group">
 								<label>Description</label>
 								<textarea id="textarea" name="document_description" class="form-control" maxlength="225" rows="3"></textarea>
@@ -114,16 +108,13 @@
 						</div>
 						<div class="modal-footer bg-whitesmoke">
 							<button type="submit" class="btn btn-primary">Add Document</button>
-              					<input type="reset" class="btn btn-secondary">
+							<input type="reset" class="btn btn-secondary">
 							<button type="reset" class="btn btn-danger ml-2" data-dismiss="modal">Close</button>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
-
-
-
 	</div>
 </div>
 <?php include(APPPATH.'/views/footer.php'); ?>

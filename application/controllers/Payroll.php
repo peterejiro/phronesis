@@ -40,7 +40,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 
 
@@ -82,7 +82,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 				$employee_id = $this->input->post('employee_id');
 				$salary_structure_type = $this->input->post('salary_structure_type');
@@ -220,7 +220,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 
 				if((empty($employee_id))):
@@ -323,7 +323,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 				if((empty($employee_id))):
 
@@ -432,7 +432,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 
 				$employee_id = $this->input->post('employee_id');
@@ -620,7 +620,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 
 				$data['user_data'] = $this->users->get_user($username);
@@ -659,7 +659,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 
 
@@ -703,7 +703,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 				$data['user_data'] = $this->users->get_user($username);
 				$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
@@ -861,7 +861,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 
 				$data['user_data'] = $this->users->get_user($username);
@@ -903,7 +903,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 				$payroll_month = $this->payroll_configurations->get_payroll_month_year()->payroll_month_year_month;
 				$payroll_year = $this->payroll_configurations->get_payroll_month_year()->payroll_month_year_year;
@@ -1012,7 +1012,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 
 				$data['user_data'] = $this->users->get_user($username);
@@ -1073,7 +1073,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 
 
@@ -1143,7 +1143,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 				$data['user_data'] = $this->users->get_user($username);
 				$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
@@ -1569,7 +1569,7 @@ class Payroll extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 				$data['user_data'] = $this->users->get_user($username);
 				$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
@@ -1639,7 +1639,7 @@ class Payroll extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if($permission->payroll_configuration == 1):
+				if($permission->payroll_management == 1):
 
 					$data['user_data'] = $this->users->get_user($username);
 					$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
@@ -1795,7 +1795,7 @@ class Payroll extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if($permission->payroll_configuration == 1):
+				if($permission->payroll_management == 1):
 
 					$data['user_data'] = $this->users->get_user($username);
 					$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();

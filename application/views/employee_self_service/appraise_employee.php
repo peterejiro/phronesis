@@ -1,7 +1,9 @@
-<?php include(APPPATH.'/views/stylesheet.php');
-$CI =& get_instance();
-$CI->load->model('hr_configurations');
-$CI->load->model('payroll_configurations');?>
+<?php
+	include(APPPATH.'/views/stylesheet.php');
+	$CI =& get_instance();
+	$CI->load->model('hr_configurations');
+	$CI->load->model('payroll_configurations');
+?>
 
 <body class="layout-3">
 <div id="app">
@@ -16,20 +18,20 @@ $CI->load->model('payroll_configurations');?>
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1>Supervisor Appraisal</h1>
+					<h1>Appraise Employee</h1>
 					<div class="section-header-breadcrumb">
 						<div class="breadcrumb-item active"><a href="<?php echo base_url('employee_main'); ?>">Dashboard</a></div>
-						<div class="breadcrumb-item">Appraise Employee </div>
+						<div class="breadcrumb-item">Appraise Employee</div>
 					</div>
 				</div>
 				<div class="section-body">
 					<div class="section-title">All About Appraising Employees</div>
-					<p class="section-lead">You can respond to appraisals here</p>
+					<p class="section-lead">You can appraise employees here</p>
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h4>Appraisals</h4>
+									<h4>Employee Appraisals</h4>
 
 								</div>
 								<div class="card-body">
@@ -50,7 +52,6 @@ $CI->load->model('payroll_configurations');?>
 													<tr>
 														<td><?php echo $appraisal->employee_last_name." ".$appraisal->employee_first_name; ?></td>
 														<td><?php echo date("M Y", strtotime($appraisal->employee_appraisal_period_from))." - ".date("M Y", strtotime($appraisal->employee_appraisal_period_to)) ; ?></td>
-
 														<td>
 															<?php if($appraisal->employee_appraisal_status == 0): ?>
 																<div class="badge badge-warning">Running</div>
@@ -60,9 +61,8 @@ $CI->load->model('payroll_configurations');?>
 														</td>
 														<td class="text-center" style="width: 9px">
 															<?php if($appraisal->employee_appraisal_quantitative == 0 || $appraisal->employee_appraisal_qualitative == 0 || $appraisal->employee_appraisal_supervisor == 0 ): ?>
-
 																<a class="dropdown-item has-icon" href="<?php echo site_url('respond_appraisal_supervisor').'/'.$appraisal->employee_appraisal_id; ?>"><i class="fas fa-file-prescription"></i>Respond</a>
-														<?php	else:?>
+															<?php	else:?>
 																<div class="dropdown">
 																	<a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
 																	<div class="dropdown-menu">
@@ -95,17 +95,7 @@ $CI->load->model('payroll_configurations');?>
 </body>
 </html>
 <script>
-	$(document).ready(function() {
-		setInterval(timestamp, 1000);
-		function timestamp() {
-			$.ajax({
-				url: '<?php echo site_url('timestamp')?>',
-				success: function (data) {
-					$('#timestamp').html(data);
-				}
-			})
-		}
-	});
+	$('title').html('Appraise Employee - IHUMANE');
 </script>
 
 

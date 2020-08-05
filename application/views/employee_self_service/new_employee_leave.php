@@ -24,8 +24,8 @@
 					</div>
 				</div>
 				<div class="section-body">
-					<div class="section-title">New Leave</div>
-					<p class="section-lead">You can fill in the form to start your leave here</p>
+					<div class="section-title">All About New Leave Requests</div>
+					<p class="section-lead">You can fill in the form to request a leave here</p>
 				</div>
 				<div class="row">
 					<div class="col-12">
@@ -40,7 +40,7 @@
 											<div class="card card-hero">
 												<div class="card-header">
 													<div class="card-icon">
-														<i class="far fa-question-circle"></i>
+														<i class="fas fa-plane-departure"></i>
 													</div>
 													<h4>Leave Wallet</h4>
 													<div class="card-description">.</div>
@@ -48,63 +48,44 @@
 												<div class="card-body p-0">
 													<div class="tickets-list">
 														<?php
-														$wallet_array = array();
-														$leaves = $CI->hr_configurations->view_leaves();
-														$year =  date('Y');
-														$year = 2021;
-														foreach ($leaves as $leave):
-
-															$wallets = 	$CI->employees->get_my_leave_wallet($employee->employee_id, $leave->leave_id, $year);
-
-															$used_leaves = 0;
-
-															foreach ($wallets as $wallet):
-
-																$date_diff = strtotime($wallet->leave_end_date) - strtotime($wallet->leave_start_date);
-
-																$used_leave =  round($date_diff/(60*60*24));
-
-																$used_leaves = $used_leaves + $used_leave;
-
-
-															endforeach;
-															$remaining_leave = $leave->leave_duration - $used_leaves;?>
-
+															$wallet_array = array();
+															$leaves = $CI->hr_configurations->view_leaves();
+															$year =  date('Y');
+															$year = 2021;
+															foreach ($leaves as $leave):
+																$wallets = 	$CI->employees->get_my_leave_wallet($employee->employee_id, $leave->leave_id, $year);
+																$used_leaves = 0;
+																foreach ($wallets as $wallet):
+																	$date_diff = strtotime($wallet->leave_end_date) - strtotime($wallet->leave_start_date);
+																	$used_leave =  round($date_diff/(60*60*24));
+																	$used_leaves = $used_leaves + $used_leave;
+																endforeach;
+															$remaining_leave = $leave->leave_duration - $used_leaves;
+														?>
 															<div class="ticket-item">
 																<div class="ticket-title">
 																	<h4><?php echo $leave->leave_name; ?></h4>
 																</div>
 																<div class="ticket-info">
-																	<div><?php echo $remaining_leave." days";  ?></div>
-																	<div class="bullet"></div>
-																	<div class="text-primary">remaining</div>
+																	<div class="text-primary"><?php echo $remaining_leave." days remaining";  ?></div>
 																</div>
 															</div>
-
 														<?php
 															$wallet_array[$leave->leave_id] = $remaining_leave;
-
-														endforeach;
-
-
-
+															endforeach;
 														?>
-
-
 													</div>
 												</div>
 											</div>
 										</div>
-
 										<div class="col-sm-8">
-
 											<div class="form-group row">
 												<input type="hidden" name="employee_id" value="<?php echo $employee->employee_id; ?>">
 												<input type="hidden" id="leave_bal" value='<?php echo json_encode($wallet_array); ?>'>
 												<div class="col-sm-6">
 													<label>Leave Type</label><span style="color: red"> *</span>
-													<select class="form-control mb-3 custom-select selectric" id="leave_id" required name="leave_id">
-														<option disabled selected value=""> -- Select -- </option>
+													<select class="form-control select2" id="leave_id" required name="leave_id" style="width: 100%; height: 42px !important;">
+														<option value=""> -- Select -- </option>
 														<?php foreach ($leaves as $leave):?>
 															<option value="<?php echo $leave->leave_id ?>"> <?php echo $leave->leave_name; ?> </option>
 														<?php endforeach; ?>
@@ -113,15 +94,6 @@
 														please select a leave type
 													</div>
 												</div>
-
-												<div class="col-sm-6">
-
-
-
-
-
-												</div>
-
 											</div>
 											<div class="form-group row">
 												<div class="col-sm-6">
@@ -140,26 +112,18 @@
 												</div>
 											</div>
 											<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
-											<div class="card-footer text-right bg-whitesmoke">
-<!--												<button type="submit"  class="btn btn-primary">Add Leave</button>-->
-												<button onclick="location.href='<?php echo site_url();?>'" class="btn btn-danger" type="button">Go Back</button>
+											<div class="card-footer text-right">
 												<button type="button" onclick="compute_leave()"  class="btn btn-primary">Add Leave</button>
 											</div>
 										</div>
-
-
 									</div>
-
-
 								</div>
-
 							</div>
 						</form>
 					</div>
 				</div>
 			</section>
 		</div>
-
 		<?php include(APPPATH.'/views/footer.php'); ?>
 	</div>
 </div>
@@ -168,15 +132,14 @@
 </body>
 </html>
 <script>
+	$('title').html('New Leave - IHUMANE');
 
 	function compute_leave() {
 		let start_date = new Date(document.getElementById('start_date').value);
 		let end_date = new Date(document.getElementById('end_date').value);
 		let leave_id = document.getElementById('leave_id').value;
-
 		if(start_date === '' || leave_id === '' || end_date === '' ){
 			swal('Why are you here if you do not want a leave', { icon: 'error' });
-
 		}else{
 			let leave_day_policy = (end_date.getTime() - start_date.getTime()) / (1000 * 3600 * 24);
 

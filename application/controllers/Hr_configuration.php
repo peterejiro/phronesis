@@ -550,8 +550,10 @@ class Hr_configuration extends CI_Controller
 
 				$data['user_data'] = $this->users->get_user($username);
 				$leave_name = $this->input->post('leave_name');
+				$leave_duration = $this->input->post('leave_duration');
 				$leave_array = array(
-					'leave_name'=>$leave_name
+					'leave_name'=>$leave_name,
+					'leave_duration' => $leave_duration
 				);
 				$leave_array = $this->security->xss_clean($leave_array);
 				$query = $this->hr_configurations->add_leave($leave_array);
@@ -605,8 +607,10 @@ class Hr_configuration extends CI_Controller
 
 				$leave_id = $this->input->post('leave_id');
 				$leave_name = $this->input->post('leave_name');
+				$leave_duration = $this->input->post('leave_duration');
 				$leave_array = array(
-					'leave_name'=>$leave_name
+					'leave_name'=>$leave_name,
+					'leave_duration' => $leave_duration
 				);
 				$leave_array = $this->security->xss_clean($leave_array);
 				$query = $this->hr_configurations->update_leave($leave_id, $leave_array);
@@ -1604,7 +1608,7 @@ class Hr_configuration extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->hr_configuration == 1):
 
 
 				$data['user_data'] = $this->users->get_user($username);
@@ -1645,7 +1649,7 @@ class Hr_configuration extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->hr_configuration == 1):
 
 
 
@@ -1808,7 +1812,7 @@ class Hr_configuration extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->hr_configuration == 1):
 
 
 				$data['user_data'] = $this->users->get_user($username);
@@ -1853,7 +1857,7 @@ class Hr_configuration extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->hr_configuration == 1):
 
 				if(empty($job_role_id)):
 
@@ -2035,7 +2039,7 @@ class Hr_configuration extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->hr_configuration == 1):
 
 				$data['user_data'] = $this->users->get_user($username);
 				//$data['employees'] = $this->employees->get_employee_by_salary_setup();
@@ -2198,7 +2202,7 @@ class Hr_configuration extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->hr_configuration == 1):
 
 				$data['user_data'] = $this->users->get_user($username);
 				//$data['employees'] = $this->employees->get_employee_by_salary_setup();
@@ -2555,7 +2559,7 @@ class Hr_configuration extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if($permission->payroll_configuration == 1):
+				if($permission->hr_configuration == 1):
 
 					if(empty($training_id)):
 
@@ -2711,7 +2715,7 @@ class Hr_configuration extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if($permission->payroll_configuration == 1):
+				if($permission->hr_configuration == 1):
 
 					if(empty($training_id)):
 
@@ -2775,7 +2779,7 @@ class Hr_configuration extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if($permission->payroll_configuration == 1):
+				if($permission->hr_configuration == 1):
 
 					extract($_POST);
 
@@ -2857,7 +2861,7 @@ class Hr_configuration extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if($permission->payroll_configuration == 1):
+				if($permission->hr_configuration == 1):
 
 					extract($_POST);
 
@@ -2941,7 +2945,7 @@ class Hr_configuration extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if($permission->payroll_configuration == 1):
+				if($permission->hr_configuration == 1):
 
 					if(empty($training_id)):
 
@@ -3050,7 +3054,7 @@ class Hr_configuration extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if($permission->payroll_configuration == 1):
+				if($permission->hr_configuration == 1):
 
 					$config['upload_path'] = 'uploads/documents';
 					$config['allowed_types'] = 'gif|jpg|png|jpeg|pdf|doc|docx';
@@ -3157,7 +3161,7 @@ class Hr_configuration extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if($permission->payroll_configuration == 1):
+				if($permission->hr_configuration == 1):
 
 					if(empty($document_id)):
 
@@ -3221,7 +3225,7 @@ class Hr_configuration extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if($permission->payroll_configuration == 1):
+				if($permission->hr_configuration == 1):
 
 					if(empty($document_id)):
 

@@ -1,7 +1,9 @@
-<?php include(APPPATH.'/views/stylesheet.php');
-$CI =& get_instance();
-$CI->load->model('hr_configurations');
-$CI->load->model('payroll_configurations');?>
+<?php
+	include(APPPATH.'/views/stylesheet.php');
+	$CI =& get_instance();
+	$CI->load->model('hr_configurations');
+	$CI->load->model('payroll_configurations');
+?>
 
 <body class="layout-3">
 <div id="app">
@@ -16,21 +18,20 @@ $CI->load->model('payroll_configurations');?>
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1>Employee Appraisal</h1>
+					<h1>My Appraisals</h1>
 					<div class="section-header-breadcrumb">
 						<div class="breadcrumb-item active"><a href="<?php echo site_url('employee_main'); ?>">Dashboard</a></div>
-						<div class="breadcrumb-item">Appraisals </div>
+						<div class="breadcrumb-item">My Appraisals</div>
 					</div>
 				</div>
 				<div class="section-body">
-					<div class="section-title">All About Your Appraisals</div>
-					<p class="section-lead">You can respond to your appraisals here</p>
+					<div class="section-title">All About Appraisals</div>
+					<p class="section-lead">You can manage appraisals here</p>
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h4>Your appraisals</h4>
-
+									<h4>Your Appraisals</h4>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
@@ -50,7 +51,6 @@ $CI->load->model('payroll_configurations');?>
 													<tr>
 														<td><?php echo $appraisal->employee_last_name." ".$appraisal->employee_first_name; ?></td>
 														<td><?php echo date("M Y", strtotime($appraisal->employee_appraisal_period_from))." - ".date("M Y", strtotime($appraisal->employee_appraisal_period_to)) ; ?></td>
-
 														<td>
 															<?php if($appraisal->employee_appraisal_status == 0): ?>
 																<div class="badge badge-warning">Running</div>
@@ -86,7 +86,6 @@ $CI->load->model('payroll_configurations');?>
 				</div>
 			</section>
 		</div>
-
 		<?php include(APPPATH.'/views/footer.php'); ?>
 	</div>
 </div>
@@ -95,17 +94,7 @@ $CI->load->model('payroll_configurations');?>
 </body>
 </html>
 <script>
-	$(document).ready(function() {
-		setInterval(timestamp, 1000);
-		function timestamp() {
-			$.ajax({
-				url: '<?php echo site_url('timestamp')?>',
-				success: function (data) {
-					$('#timestamp').html(data);
-				}
-			})
-		}
-	});
+	$('title').html('My Appraisals - IHUMANE');
 </script>
 
 

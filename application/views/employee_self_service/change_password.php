@@ -1,10 +1,10 @@
 
-<?php include(APPPATH.'/views/stylesheet.php');
-$CI =& get_instance();
-$CI->load->model('hr_configurations');
-$CI->load->model('payroll_configurations');
-$CI->load->model('employees');
-
+<?php
+	include(APPPATH.'/views/stylesheet.php');
+	$CI =& get_instance();
+	$CI->load->model('hr_configurations');
+	$CI->load->model('payroll_configurations');
+	$CI->load->model('employees');
 ?>
 
 <body class="layout-3">
@@ -12,9 +12,7 @@ $CI->load->model('employees');
 	<div class="main-wrapper container">
 		<div class="navbar-bg"></div>
 		<?php include('header.php'); ?>
-
 		<?php include('menu.php'); ?>
-
 		<!-- Main Content -->
 		<div class="main-content">
 			<section class="section">
@@ -22,23 +20,17 @@ $CI->load->model('employees');
 					<h1>Change Password</h1>
 					<div class="section-header-breadcrumb">
 						<div class="breadcrumb-item active"><a href="<?php echo base_url('employee_main'); ?>">Dashboard</a></div>
-
 						<div class="breadcrumb-item">Change Password</div>
 					</div>
 				</div>
 				<div class="section-body">
-					<div class="section-title">Change Password</div>
 					<div class="row mt-4">
 						<div class="col-6 offset-3">
-
 							<div class="card-body">
-
 								<form method="post" action="<?php echo site_url('change_password_'); ?>">
 									<div class="form-group">
-
 										<input type="hidden" value="<?php echo $user_data->user_id; ?>"  class="form-control" name="user_id" >
 									</div>
-
 									<div class="form-group">
 										<label for="password">New Password</label>
 										<input id="password" type="password" onkeyup="check_password()" class="form-control pwstrength" data-indicator="pwindicator" name="password" tabindex="2" required>
@@ -50,7 +42,7 @@ $CI->load->model('employees');
 
 									<div class="form-group">
 										<label for="password_confirm">Confirm Password</label>
-										<input id="password_confirm" onkeyup="check_password()" type="password" class="form-control" name="confirm-password" tabindex="2" required>
+										<input id="password_confirm" onkeyup="check_password()" type="password" class="form-control" name="confirm_password" tabindex="2" required>
 									</div>
 									<div id="password_alert">
 									<div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert" >
@@ -76,18 +68,11 @@ $CI->load->model('employees');
 										</button>
 									</div>
 								</form>
-
-
-
 						</div>
 					</div>
-
-
 				</div>
 			</section>
 		</div>
-
-
 		<?php include(APPPATH.'/views/footer.php'); ?>
 	</div>
 </div>
@@ -97,6 +82,7 @@ $CI->load->model('employees');
 </html>
 
 <script>
+	$('title').html('Change Password - IHUMANE')
 
 	document.getElementById('password_success').style.display = 'none';
 	document.getElementById('submit_button').disabled = true;
