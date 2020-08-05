@@ -8,9 +8,9 @@
 			<i class="fas fa-ellipsis-v"></i>
 		</a>
 		<ul class="navbar-nav">
-			<li class="nav-item active"><a href="<?php echo site_url('employee_main'); ?>" class="nav-link">Application</a></li>
+			<li class="nav-item <?php echo $this->uri->segment(1) != 'documents' && $this->uri->segment(1) != 'view_document' ? 'active' : '' ?>"><a href="<?php echo site_url('employee_main'); ?>" class="nav-link">App</a></li>
+			<li class="nav-item <?php echo $this->uri->segment(1) == 'documents' || $this->uri->segment(1) == 'view_document' ? 'active' : '' ?>"><a href="<?php echo site_url('documents'); ?>" class="nav-link">Docs</a></li>
 			<li class="nav-item"><a href="#" class="nav-link">Help</a></li>
-			<li class="nav-item"><a href="<?php echo site_url('documents'); ?>" class="nav-link">Docs</a></li>
 		</ul>
 	</div>
 <!--	<form class="form-inline ml-auto">-->

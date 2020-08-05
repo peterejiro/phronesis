@@ -1,10 +1,10 @@
 
-<?php include(APPPATH.'/views/stylesheet.php');
-$CI =& get_instance();
-$CI->load->model('hr_configurations');
-$CI->load->model('payroll_configurations');
-$CI->load->model('employees');
-
+<?php
+	include(APPPATH.'/views/stylesheet.php');
+	$CI =& get_instance();
+	$CI->load->model('hr_configurations');
+	$CI->load->model('payroll_configurations');
+	$CI->load->model('employees');
 ?>
 
 <body class="layout-3">
@@ -12,38 +12,33 @@ $CI->load->model('employees');
 	<div class="main-wrapper container">
 		<div class="navbar-bg"></div>
 		<?php include('header.php'); ?>
-
 		<?php include('menu.php'); ?>
-
 		<!-- Main Content -->
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1><?php echo $employee->employee_last_name." ".$employee->employee_first_name; ?> Trainings</h1>
+					<h1>My Trainings</h1>
 					<div class="section-header-breadcrumb">
 						<div class="breadcrumb-item active"><a href="<?php echo base_url('employee_main'); ?>">Dashboard</a></div>
-						<div class="breadcrumb-item">Trainings</div>
+						<div class="breadcrumb-item">My Trainings</div>
 					</div>
 				</div>
 				<div class="section-body">
-					<div class="section-title">All About Your Trainings</div>
-					<p class="section-lead">You can view Trainings</p>
+					<div class="section-title">All About Trainings</div>
+					<p class="section-lead">You can view and take assigned trainings here</p>
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h4>All trainings</h4>
-
+									<h4>All Trainings</h4>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
 										<table id="datatable-buttons" class="table table-bordered table-striped table-md">
 											<thead>
 											<tr>
-
-												<th> Training </th>
+												<th>Training</th>
 												<th>Training Period</th>
-
 												<th>Status</th>
 												<th>Actions</th>
 											</tr>
@@ -53,10 +48,8 @@ $CI->load->model('employees');
 												foreach($trainings as $training):
 													?>
 													<tr>
-
 														<td><?php echo $training->training_name; ?></td>
-														<td><?php echo date("M Y", strtotime($training->employee_training_start_date))." - ".date("M Y", strtotime($training->employee_training_end_date)) ; ?></td>
-
+														<td><?php echo date("j M Y", strtotime($training->employee_training_start_date))." - ".date("j M Y", strtotime($training->employee_training_end_date)) ; ?></td>
 														<td>
 															<?php if($training->employee_training_status == 0): ?>
 																<div class="badge badge-warning">Pending</div>
@@ -75,14 +68,14 @@ $CI->load->model('employees');
 																<div class="dropdown">
 																	<a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
 																	<div class="dropdown-menu">
-																		<a class="dropdown-item has-icon" href="<?php echo site_url('begin_training').'/'.$training->employee_training_training_id."/".$training->employee_training_id; ?>"><i class="fa fa-eye"></i>Begin Training</a>
+																		<a class="dropdown-item has-icon" href="<?php echo site_url('begin_training').'/'.$training->employee_training_training_id."/".$training->employee_training_id; ?>"><i class="fa fa-book-reader"></i>Take Training</a>
 																	</div>
 																</div>
 															<?php else:?>
 																<div class="dropdown">
 																	<a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
 																	<div class="dropdown-menu">
-																		<a class="dropdown-item has-icon" href="<?php echo site_url('check_training_result').'/'.$training->employee_training_id; ?>"><i class="fa fa-eye"></i>View training Result</a>
+																		<a class="dropdown-item has-icon" href="<?php echo site_url('check_training_result').'/'.$training->employee_training_id; ?>"><i class="fa fa-eye"></i>View Test Result</a>
 																	</div>
 																</div>
 															<?php endif; ?>
@@ -102,15 +95,15 @@ $CI->load->model('employees');
 				</div>
 			</section>
 		</div>
-
-
 		<?php include(APPPATH.'/views/footer.php'); ?>
 	</div>
 </div>
-
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
+<script>
+	$('title').html('My Trainings - IHUMANE');
+</script>
 
 
 

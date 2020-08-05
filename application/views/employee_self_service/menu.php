@@ -24,22 +24,22 @@
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_new_loan' ? 'active':'' ?>"><a href="<?php echo base_url('my_new_loan');?>" class="nav-link">New Loan</a></li>
 				</ul>
 			</li>
-			<li class="nav-item dropdown <?php echo $this->uri->segment(1) == 'appraisals' || $this->uri->segment(1) == 'appraise_employee' || $this->uri->segment(1) == 'employee_resignation' || $this->uri->segment(1) == 'appraisal_result' ? 'active':'' ?>">
+			<li class="nav-item dropdown <?php echo $this->uri->segment(1) == 'appraisals' || $this->uri->segment(1) == 'appraise_employee' || $this->uri->segment(1) == 'employee_resignation' || $this->uri->segment(1) == 'appraisal_result' || $this->uri->segment(1) == 'my_trainings' || $this->uri->segment(1) =='begin_training' || $this->uri->segment(1) == 'check_training_result' ? 'active':'' ?>">
 				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-chart-line"></i><span>Performance</span></a>
 				<ul class="dropdown-menu">
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'appraisals' ? 'active':'' ?>"><a href="<?php echo base_url('appraisals') ?>" class="nav-link">My Appraisals</a></li>
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'appraise_employee' || $this->uri->segment(1) == 'appraisal_result' ? 'active':'' ?>"><a href="<?php echo base_url('appraise_employee') ?>" class="nav-link">Appraise Employee</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_trainings' || $this->uri->segment(1) == 'begin_training' || $this->uri->segment(1) == 'check_training_result' ? 'active':'' ?>"><a href="<?php echo base_url('my_trainings') ?>" class="nav-link">My Trainings</a></li>
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'employee_resignation' ? 'active':'' ?>"><a href="<?php echo base_url('employee_resignation') ?>" class="nav-link">Resign</a></li>
-					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_trainings' ? 'active':'' ?>"><a href="<?php echo base_url('my_trainings') ?>" class="nav-link"> Trainings </a></li>
 
 				</ul>
 			</li>
-			<li class="nav-item dropdown <?php echo $this->uri->segment(1) == 'my_queries' || $this->uri->segment(1) == 'view_my_query' || $this->uri->segment(1) == 'my_memos' || $this->uri->segment(1) == 'my_specific_memos' ? 'active':'' ?>">
+			<li class="nav-item dropdown <?php echo $this->uri->segment(1) == 'my_queries' || $this->uri->segment(1) == 'view_my_query' || $this->uri->segment(1) == 'my_memos' || $this->uri->segment(1) == 'my_specific_memos' || $this->uri->segment(1) == 'my_chat' ? 'active':'' ?>">
 				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-comments"></i><span>Communications</span></a>
 				<ul class="dropdown-menu">
-					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_queries' || $this->uri->segment(1) == 'view_my_query' ? 'active':'' ?>"><a href="<?php echo base_url('my_queries'); ?>" class="nav-link">Queries</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_queries' || $this->uri->segment(1) == 'view_my_query' ? 'active':'' ?>"><a href="<?php echo base_url('my_queries'); ?>" class="nav-link">My Queries</a></li>
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_memos' ? 'active':'' ?>"><a href="<?php echo base_url('my_memos'); ?>" class="nav-link">Announcements</a></li>
-					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_specific_memos' ? 'active':'' ?>"><a href="<?php echo base_url('my_specific_memos'); ?>" class="nav-link">Memos</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_specific_memos' ? 'active':'' ?>"><a href="<?php echo base_url('my_specific_memos'); ?>" class="nav-link">Directives</a></li>
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_chat' ? 'active':'' ?>"><a href="<?php echo base_url('my_chat'); ?>" class="nav-link">Chat</a></li>
 
 				</ul>

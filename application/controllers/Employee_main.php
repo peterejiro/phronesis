@@ -2135,7 +2135,7 @@ class Employee_main extends CI_Controller
 		<img src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee->employee_passport; ?>">
 			<div class="chat-details">
 			<div class="chat-text"><?php echo $chat->chat_body; ?></div>
-			<div class="chat-time"><?php echo $chat->chat_time; ?></div>
+			<div class="chat-time"><?php echo date('F j, Y g:i a', strtotime($chat->chat_time)); ?></div>
 						</div>
 		</div>
 	<?php
@@ -2148,7 +2148,7 @@ class Employee_main extends CI_Controller
 
 																<div class="chat-details">
 																	<div class="chat-text"><?php echo $chat->chat_body; ?></div>
-																	<div class="chat-time"><?php echo $chat->chat_time; ?></div>
+																	<div class="chat-time"><?php echo date('F j, Y g:i a', strtotime($chat->chat_time)); ?></div>
 																</div>
 
 

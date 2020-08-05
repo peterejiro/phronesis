@@ -16,6 +16,9 @@
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
+					<div class="section-header-back">
+						<a href="<?php echo site_url('my_queries')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+					</div>
 					<h1>View Query</h1>
 					<div class="section-header-breadcrumb">
 						<div class="breadcrumb-item active"><a href="<?php echo base_url('employee_main'); ?>">Dashboard</a></div>
@@ -173,6 +176,8 @@
 
 
 <script>
+	$('title').html('View Query - IHUMANE')
+
 	$(document).ready(function(){
 		setInterval(timestamp, 1000);
 		function timestamp() {

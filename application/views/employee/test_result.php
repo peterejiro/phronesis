@@ -26,13 +26,13 @@
 				</div>
 				<div class="section-body">
 					<div class="section-title">All About Employee Test Results</div>
-					<p class="section-lead">You can view and print employee test results here here</p>
+					<p class="section-lead">You can view and print employee test results here</p>
 					<div class="invoice">
 						<div class="invoice-print" id="results">
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="invoice-title">
-										<h3>Test Result</h3>
+										<h5>Test Result</h5>
 									</div>
 								</div>
 							</div>
