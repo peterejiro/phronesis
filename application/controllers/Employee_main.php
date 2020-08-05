@@ -2403,6 +2403,8 @@ class Employee_main extends CI_Controller
 
 				extract($_POST);
 
+			if($password === $confirm_password):
+
 				$user_array = array(
 
 						'user_password'=> password_hash($password, PASSWORD_BCRYPT),
@@ -2431,6 +2433,20 @@ class Employee_main extends CI_Controller
 					);
 					$this->load->view('swal', $msg);
 				endif;
+
+
+
+			else:
+				$msg = array(
+						'msg'=> 'Passwords do not match',
+						'location' => site_url('employee_main'),
+						'type' => 'error'
+
+				);
+				$this->load->view('swal', $msg);
+
+			endif;
+
 
 
 

@@ -37,7 +37,7 @@ class Loan extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 				$data['user_data'] = $this->users->get_user($username);
 
@@ -82,7 +82,7 @@ class Loan extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 
 				$data['user_data'] = $this->users->get_user($username);
 
@@ -126,7 +126,7 @@ class Loan extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 				$data['user_data'] = $this->users->get_user($username);
 
 
@@ -359,7 +359,7 @@ class Loan extends CI_Controller
 				redirect('error_404');
 			else:
 
-			if($permission->payroll_configuration == 1):
+			if($permission->payroll_management == 1):
 				$data['user_data'] = $this->users->get_user($username);
 
 				$data['employees'] = $this->employees->view_employees();
@@ -408,7 +408,7 @@ class Loan extends CI_Controller
 			$data['payroll_configuration'] = $permission->payroll_configuration;
 			$data['hr_configuration'] = $permission->hr_configuration;
 
-				if($permission->payroll_configuration == 1):
+				if($permission->payroll_management == 1):
 					$data['user_data'] = $this->users->get_user($username);
 
 					$data['employees'] = $this->employees->view_employees();
@@ -586,7 +586,7 @@ class Loan extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if($permission->payroll_configuration == 1):
+				if($permission->payroll_management == 1):
 					$data['user_data'] = $this->users->get_user($username);
 
 					$data['employees'] = $this->employees->view_employees();
@@ -668,7 +668,7 @@ class Loan extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if($permission->payroll_configuration == 1):
+				if($permission->payroll_management == 1):
 					$data['user_data'] = $this->users->get_user($username);
 
 					$data['employees'] = $this->employees->view_employees();

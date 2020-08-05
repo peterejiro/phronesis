@@ -84,6 +84,14 @@
                     please fill in a leave type
                   </div>
 								</div>
+
+								<div class="form-group">
+									<label>Leave Duration</label><span style="color: red"> *</span>
+									<input type="number" class="form-control"  name="leave_duration" required/>
+									<div class="invalid-feedback">
+										please fill in a leave type
+									</div>
+								</div>
 								<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 							</div>
               <div class="modal-footer bg-whitesmoke">
@@ -113,6 +121,14 @@
                     <div class="invalid-feedback">
                       please fill in a leave type
                     </div>
+									</div>
+
+									<div class="form-group">
+										<label>Leave Duration</label><span style="color: red"> *</span>
+										<input type="number" class="form-control"  name="leave_duration" value="<?php echo $leave->leave_duration; ?>" required/>
+										<div class="invalid-feedback">
+											please fill in a leave type
+										</div>
 									</div>
 									<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 									<input type="hidden" name="leave_id" value="<?php echo $leave->leave_id;?>" />

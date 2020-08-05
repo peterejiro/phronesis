@@ -39,7 +39,7 @@ class Biometrics extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if ($permission->employee_management == 1):
+				if ($permission->biometrics == 1):
 
 
 					$data['employees'] = $this->employees->view_employees();
@@ -81,7 +81,7 @@ class Biometrics extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if ($permission->employee_management == 1):
+				if ($permission->biometrics == 1):
 
 
 					$data['employees'] = $this->employees->view_employees();
@@ -121,7 +121,7 @@ class Biometrics extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if ($permission->employee_management == 1):
+				if ($permission->biometrics == 1):
 
 
 					$data['employees'] = $this->employees->view_employees();
@@ -165,7 +165,7 @@ class Biometrics extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if ($permission->employee_management == 1):
+				if ($permission->biometrics == 1):
 
 
 					$data['employees'] = $this->employees->view_employees();
@@ -209,7 +209,7 @@ class Biometrics extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if ($permission->employee_management == 1):
+				if ($permission->biometrics == 1):
 
 
 					$data['employees'] = $this->employees->view_employees();
@@ -254,7 +254,7 @@ class Biometrics extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if ($permission->employee_management == 1):
+				if ($permission->biometrics == 1):
 
 
 					$data['employees'] = $this->employees->view_employees();
@@ -300,7 +300,7 @@ class Biometrics extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if ($permission->employee_management == 1):
+				if ($permission->biometrics == 1):
 
 
 					$data['employees'] = $this->employees->view_employees();
@@ -343,7 +343,7 @@ class Biometrics extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if ($permission->employee_management == 1):
+				if ($permission->biometrics == 1):
 
 
 					$data['employees'] = $this->employees->view_employees();
@@ -393,7 +393,7 @@ class Biometrics extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 
-				if ($permission->employee_management == 1):
+				if ($permission->biometrics == 1):
 
 
 					$data['employees'] = $this->employees->view_employees();
