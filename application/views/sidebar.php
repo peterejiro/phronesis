@@ -14,7 +14,7 @@
 					<li class="<?php echo $this->uri->segment(1) == '' || $this->uri->segment(1) == 'home' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>">Dashboard</a></li>
 				</ul>
 			</li>
-			<li class="menu-header">Human Resources</li>
+			<li class="menu-header">Human Resource</li>
 			<li class="dropdown <?php echo
       $this->uri->segment(1) == 'new_employee' ||
       $this->uri->segment(1) == 'employee' ||
@@ -70,7 +70,7 @@
 			</li>
 			<?php } ?>
 
-			<li class="menu-header">Finance</li>
+			<li class="menu-header">Payroll System</li>
 			<li class="dropdown <?php echo
       $this->uri->segment(1) == 'employee_salary_structure' ||
       $this->uri->segment(1) == 'view_employee_salary_structure' ||
@@ -90,7 +90,7 @@
       $this->uri->segment(1) == 'pay_order_report' ? 'active' : '';
 			?>">
       <?php if($payroll_management == 1){  ?>
-      <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-money-bill-wave"></i><span>Payroll</span></a>
+      <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-money-bill-wave"></i><span>Payroll Process</span></a>
       <ul class="dropdown-menu">
         <li class="<?php echo $this->uri->segment(1) == 'employee_salary_structure' || $this->uri->segment(1) == 'view_employee_salary_structure' || $this->uri->segment(1) == 'edit_employee_salary_structure'  ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('employee_salary_structure') ?>">Salary Structures </a></li>
         <li class="<?php echo $this->uri->segment(1) == 'variational_payment' || $this->uri->segment(1) == 'new_variational_payment' || $this->uri->segment(1) == 'recall_month' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('variational_payment') ?>">Variational Payments</a></li>

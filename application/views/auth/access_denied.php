@@ -13,7 +13,7 @@
 		<div class="container mt-5">
 			<div class="page-error">
 				<div class="page-inner">
-					<h1>Opps</h1>
+					<h1>Oops</h1>
 					<div class="page-description">
 						Access Denied.
 					</div>

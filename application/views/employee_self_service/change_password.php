@@ -50,7 +50,7 @@ $CI->load->model('employees');
 
 									<div class="form-group">
 										<label for="password_confirm">Confirm Password</label>
-										<input id="password_confirm" onkeyup="check_password()" type="password" class="form-control" name="confirm-password" tabindex="2" required>
+										<input id="password_confirm" onkeyup="check_password()" type="password" class="form-control" name="confirm_password" tabindex="2" required>
 									</div>
 									<div id="password_alert">
 									<div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert" >
