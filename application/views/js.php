@@ -49,6 +49,8 @@
 				$this->uri->segment(1) != 'new_employee_transfer' &&
 				$this->uri->segment(1) != 'new_employee_leave' &&
 				$this->uri->segment(1) != 'new_employee_training' &&
+				$this->uri->segment(1) != 'request_leave' &&
+				$this->uri->segment(1) != 'pay_slip' &&
 				$this->uri->segment(1) != 'job_role'
 			):
 		?>
@@ -82,90 +84,91 @@
 		<script src="<?php echo base_url(); ?>assets/js/ajaxmask.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/jquery.timer.js"></script>
 		<script src="<?php echo base_url(); ?>assets/modules/visual-countdown-timer/js/script.js"></script>
-		<script src="<?php echo base_url(); ?>assets/js/page/components-chat-box.js"></script>
-		<script>
-			$(document).ready(function(){
-				setInterval(timestamp, 7000);
-				function timestamp() {
-					$("#notifications").load(location.href + " #notifications");
-				}
-			});
-		</script>
-		
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery.sparkline.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/simple-weather/jquery.simpleWeather.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jquery.vmap.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery-ui/jquery-ui.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery.sparkline.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jquery.vmap.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery-ui/jquery-ui.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/codemirror/lib/codemirror.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/codemirror/mode/javascript/javascript.js"></script> -->
-			<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/jquery-selectric/jquery.selectric.min.js"></script>-->
-			<!-- <script src="http://maps.google.com/maps/api/js?key=AIzaSyB55Np3_WsZwUQ9NS7DP-HnneleZLYZDNw&amp;sensor=true"></script>-->
-			<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/gmaps.js"></script>-->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script> -->
-			<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/datatables/datatables.min.js"></script>-->
-			<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>-->
-			<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>-->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery.sparkline.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/izitoast/js/iziToast.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/izitoast/js/iziToast.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jquery.vmap.min.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script> -->
-			<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/jquery-selectric/jquery.selectric.min.js"></script>-->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script> -->
-			<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/jquery-selectric/jquery.selectric.min.js"></script>-->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script> -->
-			<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/jquery-selectric/jquery.selectric.min.js"></script>-->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/codemirror/lib/codemirror.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/codemirror/mode/javascript/javascript.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script> -->
-		
-			<!-- Page Specific JS File -->
-			<!-- <script src="--><?php //echo base_url(); ?><!--assets/js/page/index.js"></script>-->
-			<!-- <script src="--><?php //echo base_url(); ?><!--assets/js/page/index-0.js"></script>-->
-			<!-- <script src="<?php echo base_url(); ?>assets/js/page/bootstrap-modal.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/js/page/components-chat-box.js"></script> -->
-			<!-- <script src="--><?php //echo base_url(); ?><!--assets/js/page/components-multiple-upload.js"></script>-->
-			<!-- <script src="<?php echo base_url(); ?>assets/js/page/components-statistic.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/js/page/components-table.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/js/page/components-user.js"></script> -->
-			<!-- <script src="<?php echo base_url(); ?>assets/js/page/forms-advanced-forms.js"></script> -->
-			<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-advanced-route.js"></script>-->
-			<!---->
-			<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-draggable-marker.js"></script>-->
-			<!---->
-			<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-geocoding.js"></script>-->
-			<!---->
-			<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-geolocation.js"></script>-->
-			<!---->
-			<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-marker.js"></script>-->
-			<!---->
-			<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-multiple-marker.js"></script>-->
-			<!---->
-			<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-route.js"></script>-->
-			<!---->
-			<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-simple.js"></script>-->
-			<!-- <script src="<?php echo base_url(); ?>assets/js/page/modules-calendar.js"></script> -->
+<!--		<script src="--><?php //echo base_url(); ?><!--assets/js/page/components-chat-box.js"></script>-->
+		<script src="<?php echo base_url(); ?>assets/js/page/modules-calendar.js"></script>
+		<?php if ($this->uri->segment(1) != 'pay_slips'):?>
+			<script>
+				$(document).ready(function(){
+					setInterval(timestamp, 7000);
+					function timestamp() {
+						$("#notifications").load(location.href + " #notifications");
+					}
+				});
+			</script>
+		<?php endif;?>
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery.sparkline.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/simple-weather/jquery.simpleWeather.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jquery.vmap.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery-ui/jquery-ui.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery.sparkline.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jquery.vmap.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery-ui/jquery-ui.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/codemirror/lib/codemirror.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/codemirror/mode/javascript/javascript.js"></script> -->
+		<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/jquery-selectric/jquery.selectric.min.js"></script>-->
+		<!-- <script src="http://maps.google.com/maps/api/js?key=AIzaSyB55Np3_WsZwUQ9NS7DP-HnneleZLYZDNw&amp;sensor=true"></script>-->
+		<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/gmaps.js"></script>-->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/chart.min.js"></script> -->
+		<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/datatables/datatables.min.js"></script>-->
+		<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>-->
+		<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>-->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery.sparkline.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/izitoast/js/iziToast.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/izitoast/js/iziToast.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/jquery.vmap.min.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jqvmap/dist/maps/jquery.vmap.indonesia.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script> -->
+		<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/jquery-selectric/jquery.selectric.min.js"></script>-->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script> -->
+		<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/jquery-selectric/jquery.selectric.min.js"></script>-->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script> -->
+		<!-- <script src="--><?php //echo base_url(); ?><!--assets/modules/jquery-selectric/jquery.selectric.min.js"></script>-->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/codemirror/lib/codemirror.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/codemirror/mode/javascript/javascript.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script> -->
+
+		<!-- Page Specific JS File -->
+		<!-- <script src="--><?php //echo base_url(); ?><!--assets/js/page/index.js"></script>-->
+		<!-- <script src="--><?php //echo base_url(); ?><!--assets/js/page/index-0.js"></script>-->
+		<!-- <script src="<?php echo base_url(); ?>assets/js/page/bootstrap-modal.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/js/page/components-chat-box.js"></script> -->
+		<!-- <script src="--><?php //echo base_url(); ?><!--assets/js/page/components-multiple-upload.js"></script>-->
+		<!-- <script src="<?php echo base_url(); ?>assets/js/page/components-statistic.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/js/page/components-table.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/js/page/components-user.js"></script> -->
+		<!-- <script src="<?php echo base_url(); ?>assets/js/page/forms-advanced-forms.js"></script> -->
+		<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-advanced-route.js"></script>-->
+		<!---->
+		<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-draggable-marker.js"></script>-->
+		<!---->
+		<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-geocoding.js"></script>-->
+		<!---->
+		<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-geolocation.js"></script>-->
+		<!---->
+		<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-marker.js"></script>-->
+		<!---->
+		<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-multiple-marker.js"></script>-->
+		<!---->
+		<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-route.js"></script>-->
+		<!---->
+		<!--			<script src="--><?php //echo base_url(); ?><!--assets/js/page/gmaps-simple.js"></script>-->
 			<!-- <script src="<?php echo base_url(); ?>assets/js/page/modules-chartjs.js"></script> -->
 			<!-- <script src="<?php echo base_url(); ?>assets/js/page/modules-datatables.js"></script> -->
 			<!-- <script src="<?php echo base_url(); ?>assets/js/page/modules-ion-icons.js"></script> -->

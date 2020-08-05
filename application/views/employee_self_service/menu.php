@@ -5,21 +5,21 @@
 				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Home</span></a>
 				<ul class="dropdown-menu">
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'employee_main' ? 'active':'' ?>"><a href="<?php echo base_url('employee_main'); ?>" class="nav-link">Dashboard</a></li>
-					<li class="nav-item <?php echo $this->uri->segment(1) == 'personal_information' ? 'active':'' ?>"><a href="<?php echo base_url('personal_information'); ?>" class="nav-link">Personal Information</a></li>
-					<li class="nav-item <?php echo $this->uri->segment(1) == 'employee_history' ? 'active':'' ?>"><a href="<?php echo base_url('employee_history') ?>" class="nav-link">Employee History</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'personal_information' ? 'active':'' ?>"><a href="<?php echo base_url('personal_information'); ?>" class="nav-link">My Information</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'employee_history' ? 'active':'' ?>"><a href="<?php echo base_url('employee_history') ?>" class="nav-link">My Activities</a></li>
 				</ul>
 			</li>
 			<li class="nav-item dropdown <?php echo $this->uri->segment(1) == 'my_leave' || $this->uri->segment(1) == 'request_leave' ? 'active':'' ?>">
 				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-plane-departure"></i><span>Leaves</span></a>
 				<ul class="dropdown-menu">
-					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_leave' ? 'active':'' ?>"><a href="<?php echo base_url('my_leave') ?>" class="nav-link">Leave History</a></li>
-					<li class="nav-item <?php echo $this->uri->segment(1) == 'request_leave' ? 'active':'' ?>"><a href="<?php echo base_url('request_leave') ?>" class="nav-link">Request Leave</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_leave' ? 'active':'' ?>"><a href="<?php echo base_url('my_leave') ?>" class="nav-link">My Leaves</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'request_leave' ? 'active':'' ?>"><a href="<?php echo base_url('request_leave') ?>" class="nav-link">New Leave</a></li>
 				</ul>
 			</li>
-			<li class="nav-item dropdown <?php echo $this->uri->segment(1) == 'pay_slip' || $this->uri->segment(1) == 'my_loan' || $this->uri->segment(1) == 'my_new_loan' ? 'active':'' ?>">
-				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-money-check"></i><span>Finance</span></a>
+			<li class="nav-item dropdown <?php echo $this->uri->segment(1) == 'pay_slip' || $this->uri->segment(1) == 'pay_slips' || $this->uri->segment(1) == 'my_loan' || $this->uri->segment(1) == 'my_new_loan' ? 'active':'' ?>">
+				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-money-check"></i><span>Payroll</span></a>
 				<ul class="dropdown-menu">
-					<li class="nav-item <?php echo $this->uri->segment(1) == 'pay_slip' ? 'active':'' ?>"><a href="<?php echo base_url('pay_slip') ?>" class="nav-link">Pay Slip</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'pay_slip' || $this->uri->segment(1) == 'pay_slips' ? 'active':'' ?>"><a href="<?php echo base_url('pay_slip') ?>" class="nav-link">Pay Slip</a></li>
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_loan' ? 'active':'' ?>"><a href="<?php echo base_url('my_loan') ?>" class="nav-link">Loan History</a></li>
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_new_loan' ? 'active':'' ?>"><a href="<?php echo base_url('my_new_loan');?>" class="nav-link">Request Loan</a></li>
 				</ul>

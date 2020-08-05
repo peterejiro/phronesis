@@ -59,21 +59,12 @@
 
 								endif;
 									?>
-
 								</div>
-
-
-
 							</div>
 						</div>
-
-
-
 					</div>
 			</section>
 		</div>
-
-
 		<?php include(APPPATH.'/views/footer.php'); ?>
 	</div>
 </div>
@@ -81,21 +72,9 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
-<script>
-	$(document).ready(function() {
-		setInterval(timestamp, 1000);
-		function timestamp() {
-			$.ajax({
-				url: '<?php echo site_url('timestamp')?>',
-				success: function (data) {
-					$('#timestamp').html(data);
-				}
-			})
-		}
-	});
-</script>
 
 <script>
+	$('title').html('My Activities - IHUMANE');
 
 	$( document ).ready(function () {
 		//$(".moreBox").slice(0, 3).show();

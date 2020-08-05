@@ -1,8 +1,20 @@
 
-<?php include(APPPATH.'/views/stylesheet.php');
-$CI =& get_instance();
-$CI->load->model('hr_configurations');
-$CI->load->model('payroll_configurations');?>
+<?php
+	include(APPPATH.'/views/stylesheet.php');
+	$CI =& get_instance();
+	$CI->load->model('hr_configurations');
+	$CI->load->model('payroll_configurations');
+	$location = 'Abuja';
+	$key = '4bbd388761052d71725bcd55680d1d0c';
+	$url = "https://api.openweathermap.org/data/2.5/weather?q=".$location."&appid=".$key."&units=metric";
+//"https://api.openweathermap.org/data/2.5/weather?q=Abuja&appid=4bbd388761052d71725bcd55680d1d0c&units=metric"
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_URL, $url);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	$response = curl_exec($curl);
+	$err = curl_error($curl);
+	curl_close($curl);
+?>
 
 <body class="layout-3">
 <div id="app">
@@ -33,6 +45,7 @@ $CI->load->model('payroll_configurations');?>
                     if($_dob == $_today){ echo "Happy Birthday,"; } else {
                       echo "Welcome,";
                     } ?> <?php echo $user_data->user_name; ?> </h2>
+									<p class="lead">The self-service portal provides you with access to the full range of human resource functions and responsibilities</p>
                   <p class="lead" id="timestamp"></p>
                 </div>
                 <?php if($_dob == $_today){ ?>
@@ -155,8 +168,69 @@ $CI->load->model('payroll_configurations');?>
                   </div>
                 </div>
               </div>
-              <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-              <div class="elfsight-app-94db080b-fd1a-434a-a153-c96187c02ee5"></div>
+<!--              <script src="https://apps.elfsight.com/p/platform.js" defer></script>-->
+<!--              <div class="elfsight-app-94db080b-fd1a-434a-a153-c96187c02ee5"></div>-->
+							<?php if($response): $response = json_decode($response); //print_r($response); ?>
+								<div class="card">
+									<div class="card-header">
+										<h4>Weather</h4>
+									</div>
+									<div class="card-body">
+										<ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
+											<li class="media">
+												<div class="media-body">
+													<div class="media-title"><?php echo $location?></div>
+													<div class="text-job text-muted"><?php echo $response->weather[0]->description?></div>
+													<h2><?php echo $response->main->temp?>&#176;</h2>
+												</div>
+											</li>
+											<li class="media">
+												<div class="media-body">
+													<div class="media-title"><?php echo date('g:i a', $response->sys->sunrise);?></div>
+													<div class="text-job text-muted">Sunrise</div>
+												</div>
+												<div class="media-body">
+													<div class="media-title"><?php echo date('g:i a', $response->sys->sunset);?></div>
+													<div class="text-job text-muted">Sunset</div>
+												</div>
+												<div class="media-body">
+													<div class="media-title"><?php echo $response->visibility ?> m</div>
+													<div class="text-job text-muted">Visibility</div>
+												</div>
+											</li>
+											<li class="media">
+												<div class="media-body">
+													<div class="media-title"><?php echo $response->main->temp_min?>&#176;</div>
+													<div class="text-job text-muted">Min Temp</div>
+												</div>
+												<div class="media-body">
+													<div class="media-title"><?php echo $response->main->temp_max?>&#176;</div>
+													<div class="text-job text-muted">Max Temp</div>
+												</div>
+												<div class="media-body">
+													<div class="media-title"><?php echo $response->main->feels_like?>&#176;</div>
+													<div class="text-job text-muted">Feels Like</div>
+												</div>
+											</li>
+											<li class="media">
+												<div class="media-body">
+													<div class="media-title"><?php echo $response->main->pressure?> hPa</div>
+													<div class="text-job text-muted">Pressure</div>
+												</div>
+												<div class="media-body">
+													<div class="media-title"><?php echo $response->main->humidity?> %</div>
+													<div class="text-job text-muted">Humidity</div>
+												</div>
+												<div class="media-body">
+													<div class="media-title"><?php echo $response->wind->speed?> mps</div>
+													<div class="text-job text-muted">Wind Speed</div>
+												</div>
+											</li>
+
+										</ul>
+									</div>
+								</div>
+							<?php endif;?>
             </div>
           </div>
         </div>
@@ -170,10 +244,9 @@ $CI->load->model('payroll_configurations');?>
 </body>
 </html>
 <script>
+	$('title').html('Dashboard - IHUMANE');
+
 	$(document).ready(function() {
-
-
-
 		setInterval(timestamp, 1000);
 		function timestamp() {
 			$.ajax({
@@ -184,41 +257,30 @@ $CI->load->model('payroll_configurations');?>
 			})
 		}
 	});
-
-
-
 	// helper functions
 	const PI2 = Math.PI * 2
 	const random = (min, max) => Math.random() * (max - min + 1) + min | 0
 	const time = _ => new Date().getTime()
-
 	// container
 	class Birthday {
 		constructor() {
 			this.resize()
-
 			// create a lovely place to store the firework
 			this.fireworks = []
 			this.counter = 0
-
 		}
-
 		resize() {
 			this.width = canvas.width = window.innerWidth
 			let center = this.width / 2 | 0
 			this.spawnA = center - center / 4 | 0
 			this.spawnB = center + center / 4 | 0
-
 			this.height = canvas.height = window.innerHeight
 			this.spawnC = this.height * .1
 			this.spawnD = this.height * .5
-
 		}
-
 		onClick(evt) {
 			let x = evt.clientX || evt.touches && evt.touches[0].pageX
 			let y = evt.clientY || evt.touches && evt.touches[0].pageY
-
 			let count = random(3,5)
 			for(let i = 0; i < count; i++) this.fireworks.push(new Firework(
 					random(this.spawnA, this.spawnB),
@@ -227,11 +289,8 @@ $CI->load->model('payroll_configurations');?>
 					y,
 					random(0, 260),
 					random(30, 110)))
-
 			this.counter = -1
-
 		}
-
 		update(delta) {
 			ctx.globalCompositeOperation = 'hard-light'
 			ctx.fillStyle = `rgba(20,20,20,${ 7 * delta })`

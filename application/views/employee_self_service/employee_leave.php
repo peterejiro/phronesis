@@ -23,8 +23,8 @@
 					</div>
 				</div>
 				<div class="section-body">
-					<div class="section-title">All About My Leaves</div>
-					<p class="section-lead">You can can view all your leaves here</p>
+					<div class="section-title">All About Leaves</div>
+					<p class="section-lead">You can manage your leaves here</p>
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
@@ -64,8 +64,8 @@
 																<div class="badge badge-warning">Pending</div>
 															<?php elseif ($leave->leave_status == 1):?>
 																<div class="badge badge-success">Started</div>
-															<?php elseif ($leave->leave_status == 2):?>Finished
-																<div class="badge badge-success">Started</div>
+															<?php elseif ($leave->leave_status == 2):?>
+																<div class="badge badge-success">Finished</div>
 															<?php elseif ($leave->leave_status == 3):?>
 																<div class="badge badge-danger">Discarded</div>
 															<?php endif;?>
@@ -95,6 +95,8 @@
 </body>
 </html>
 <script>
+	$('title').html('My Leave - IHUMANE');
+
 	$(document).ready(function() {
 		setInterval(timestamp, 1000);
 		function timestamp() {
