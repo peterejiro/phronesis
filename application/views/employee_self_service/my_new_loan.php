@@ -1,10 +1,10 @@
 
-<?php include(APPPATH.'/views/stylesheet.php');
-$CI =& get_instance();
-$CI->load->model('hr_configurations');
-$CI->load->model('payroll_configurations');
-$CI->load->model('employees');
-
+<?php
+	include(APPPATH.'/views/stylesheet.php');
+	$CI =& get_instance();
+	$CI->load->model('hr_configurations');
+	$CI->load->model('payroll_configurations');
+	$CI->load->model('employees');
 ?>
 
 <body class="layout-3">
@@ -12,12 +12,7 @@ $CI->load->model('employees');
 	<div class="main-wrapper container">
 		<div class="navbar-bg"></div>
 		<?php include('header.php'); ?>
-
 		<?php include('menu.php'); ?>
-
-		<!-- Main Content -->
-
-
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
@@ -39,10 +34,9 @@ $CI->load->model('employees');
 									</div>
 									<div class="card-body">
 										<div class="form-group row">
-
 											<div class="col-sm-6">
 												<label>Loan Type</label><span style="color: red"> *</span>
-												<select class="selectric form-control" required name="payment_definition_id" style="width: 100%; height:56px;">
+												<select class="select2 form-control" required name="payment_definition_id" style="width: 100%; height:42px !important;">
 													<option value=""> -- Select -- </option>
 													<?php foreach ($payment_definitions as $payment_definition):
 														if($payment_definition->payment_definition_desc == 1): ?>
@@ -75,7 +69,7 @@ $CI->load->model('employees');
 										<div class="form-group row">
 											<div class="col-sm-6">
 												<label>Start Year</label><span style="color: red"> *</span>
-												<select class="selectric form-control" id="start_year" required name="start_year" style="width: 100%; height:56px;">
+												<select class="select2 form-control" id="start_year" required name="start_year" style="width: 100%; height:42px !important;">
 													<option value=""> -- Select -- </option>
 													<option value="<?php echo date("Y"); ?>"> <?php echo date("Y"); ?> </option>
 													<option value="<?php echo date("Y")+1; ?>"> <?php echo date("Y")+1; ?> </option>
@@ -89,7 +83,7 @@ $CI->load->model('employees');
 											</div>
 											<div class="col-sm-6">
 												<label>Start Month</label><span style="color: red"> *</span>
-												<select class="selectric form-control" id="start_month" required name="start_month" style="width: 100%; height:56px;">
+												<select class="select2 form-control" id="start_month" required name="start_month" style="width: 100%; height:56px;">
 													<option value=""> -- Select -- </option>
 													<?php $month = date('n'); // current month
 													for ($x = 0; $x < 12; $x++): ?>
@@ -121,7 +115,7 @@ $CI->load->model('employees');
 									</div>
 									<div class="card-footer text-right bg-whitesmoke">
 										<button type="button" id="compute_loan" onclick="add_months()" class="btn btn-primary">Compute Loan</button>
-										<button type="submit" id="loan_button"  class="btn btn-primary">New Loan</button>
+										<button type="submit" id="loan_button"  class="btn btn-primary" style="display: none">Confirm</button>
 										<button type="button" onclick="location.reload();" class="btn btn-secondary">Reset</button>
 									</div>
 								</div>
@@ -131,19 +125,16 @@ $CI->load->model('employees');
 				</div>
 			</section>
 		</div>
-		</div>
-
 		<?php include(APPPATH.'/views/footer.php'); ?>
 	</div>
 </div>
-
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
 <script>
-	window.onload = function(){
-		document.getElementById("loan_button").style.display='none';
-	};
+	$('title').html('New Loan - IHUMANE');
+
+	window.onload = function(){};
 	function reset_form() {
 		document.getElementById("loan_form").reset();
 		document.getElementById("loan_button").style.display='none';

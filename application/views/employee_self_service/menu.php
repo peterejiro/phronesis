@@ -20,15 +20,15 @@
 				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-money-check"></i><span>Payroll</span></a>
 				<ul class="dropdown-menu">
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'pay_slip' || $this->uri->segment(1) == 'pay_slips' ? 'active':'' ?>"><a href="<?php echo base_url('pay_slip') ?>" class="nav-link">Pay Slip</a></li>
-					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_loan' ? 'active':'' ?>"><a href="<?php echo base_url('my_loan') ?>" class="nav-link">Loan History</a></li>
-					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_new_loan' ? 'active':'' ?>"><a href="<?php echo base_url('my_new_loan');?>" class="nav-link">Request Loan</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_loan' ? 'active':'' ?>"><a href="<?php echo base_url('my_loan') ?>" class="nav-link">My Loans</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_new_loan' ? 'active':'' ?>"><a href="<?php echo base_url('my_new_loan');?>" class="nav-link">New Loan</a></li>
 				</ul>
 			</li>
-			<li class="nav-item dropdown <?php echo $this->uri->segment(1) == 'appraisals' || $this->uri->segment(1) == 'appraise_employee' || $this->uri->segment(1) == 'employee_resignation' ? 'active':'' ?>">
+			<li class="nav-item dropdown <?php echo $this->uri->segment(1) == 'appraisals' || $this->uri->segment(1) == 'appraise_employee' || $this->uri->segment(1) == 'employee_resignation' || $this->uri->segment(1) == 'appraisal_result' ? 'active':'' ?>">
 				<a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-chart-line"></i><span>Performance</span></a>
 				<ul class="dropdown-menu">
-					<li class="nav-item <?php echo $this->uri->segment(1) == 'appraisals' ? 'active':'' ?>"><a href="<?php echo base_url('appraisals') ?>" class="nav-link">View Appraisals</a></li>
-					<li class="nav-item <?php echo $this->uri->segment(1) == 'appraise_employee' ? 'active':'' ?>"><a href="<?php echo base_url('appraise_employee') ?>" class="nav-link">Appraise Employee</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'appraisals' ? 'active':'' ?>"><a href="<?php echo base_url('appraisals') ?>" class="nav-link">My Appraisals</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'appraise_employee' || $this->uri->segment(1) == 'appraisal_result' ? 'active':'' ?>"><a href="<?php echo base_url('appraise_employee') ?>" class="nav-link">Appraise Employee</a></li>
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'employee_resignation' ? 'active':'' ?>"><a href="<?php echo base_url('employee_resignation') ?>" class="nav-link">Resign</a></li>
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_trainings' ? 'active':'' ?>"><a href="<?php echo base_url('my_trainings') ?>" class="nav-link"> Trainings </a></li>
 

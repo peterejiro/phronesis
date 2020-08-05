@@ -33,7 +33,7 @@
               <div class="row">
                 <div class="col-lg-12">
                   <div class="invoice-title">
-                    <h3>Appraisal Result</h3>
+                    <h5>Appraisal Result Sheet</h5>
                   </div>
                 </div>
               </div>
@@ -68,26 +68,20 @@
 							<div class="row mt-4">
 								<div class="col-md-12">
 									<div class="section-title">Quantitative (20%)</div>
-
 									<div class="table-responsive">
 										<table class="table table-striped table-hover table-md">
 											<tr>
-
 												<th>Questions</th>
 												<th>Response</th>
 												<th> Score </th>
-
 											</tr>
-
 											<?php
 											$count_quantitative = 0;
 											$quantitative_score = 0;
 											foreach ($questions as $question):
 												if($question->employee_appraisal_result_type == 2):
 													?>
-
 													<tr>
-
 														<td style="width: 70%"><?php echo $question-> 	employee_appraisal_result_question  ?></td>
 														<td><?php  $answer = $question-> employee_appraisal_result_answer;
 															if($answer == 0): echo "Nonexistent Competence"; endif;
@@ -98,45 +92,33 @@
 															if($answer == 5): echo "Outstanding Performance"; endif;
 															?></td>
 														<td style="width: 9px;"> <?php echo $answer; ?>/5</td>
-
 													</tr>
-
 													<?php
 													$count_quantitative++;
 													$quantitative_score = $quantitative_score + $answer;
 												endif;
 											endforeach;
-
-
 											?>
-
-
 										</table>
 									</div>
-
 								</div>
 							</div>
 							<div class="row mt-4">
 								<div class="col-md-12">
 									<div class="section-title">Qualitative (80%)</div>
-
 									<div class="table-responsive">
 										<table class="table table-striped table-hover table-md">
 											<tr>
-
 												<th>Questions</th>
 												<th>Response</th>
 												<th>Score</th>
-
 											</tr>
-
 											<?php
 											$count_qualitative = 0;
 											$qualitative_score = 0;
 											foreach ($questions as $question):
 												if($question->employee_appraisal_result_type == 3):
 													?>
-
 													<tr>
 
 														<td style="width: 70%"><?php echo $question-> 	employee_appraisal_result_question  ?></td>
@@ -150,14 +132,11 @@
 															?></td>
 														<td style="width: 9px"> <?php echo $answer; ?>/5</td>
 													</tr>
-
 													<?php
 													$count_qualitative++;
 													$qualitative_score = $qualitative_score + $answer;
 												endif;
 											endforeach; ?>
-
-
 										</table>
 									</div>
 
@@ -231,7 +210,9 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-  function printDiv() {
+	$('title').html('Appraisal Result - IHUMANE');
+
+	function printDiv() {
 
     $("#results").printThis({
       header: null,               // prefix to html

@@ -51,6 +51,7 @@
 				$this->uri->segment(1) != 'new_employee_training' &&
 				$this->uri->segment(1) != 'request_leave' &&
 				$this->uri->segment(1) != 'pay_slip' &&
+				$this->uri->segment(1) != 'my_new_loan' &&
 				$this->uri->segment(1) != 'job_role'
 			):
 		?>
