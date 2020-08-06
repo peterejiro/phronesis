@@ -1457,21 +1457,18 @@ class Payroll extends CI_Controller
 					$temp_tax_amount = $sum_taxable_income - $tax_relief;
 					$tax_rates = $this->payroll_configurations->view_tax_rates_asc();
 
-					foreach ($tax_rates as $tax_rate):
+				foreach ($tax_rates as $tax_rate):
 					if($sum_taxable_income > 0):
 
-						$x_diff = $temp_tax_amount - ($tax_rate->tax_rate_band/12);
+						if($temp_tax_amount >= $tax_rate->tax_rate_band/12):
+							$c_tax =  ($tax_rate->tax_rate_rate/100) * ($tax_rate->tax_rate_band/12);
+						else:
+							$c_tax = ($tax_rate->tax_rate_rate/100) * ($temp_tax_amount);
+							$total_tax_amount = $c_tax + $total_tax_amount;
+							break;
+						endif;
 
-							if($x_diff >= 0):
-
-								$c_tax =  ($tax_rate->tax_rate_rate/100) * ($tax_rate->tax_rate_band/12);
-							else:
-								$c_tax = ($tax_rate->tax_rate_rate/100) * ($temp_tax_amount);
-								break;
-							endif;
-
-							$temp_tax_amount = $x_diff;
-
+						$temp_tax_amount = $temp_tax_amount - ($tax_rate->tax_rate_band/12);
 					else:
 
 						$c_tax = ($minimum_tax_rate->minimum_tax_rate/100) * ($sum_taxable_income - $tax_relief);
@@ -1481,8 +1478,7 @@ class Payroll extends CI_Controller
 
 					$total_tax_amount = $c_tax + $total_tax_amount;
 
-//					echo "tax at this point is:".$c_tax.'<br>';
-					endforeach;
+				endforeach;
 
 				//endif;
 
@@ -1902,8 +1898,8 @@ class Payroll extends CI_Controller
 	public function tax_test(){
 
 		//$taxable_incomes = $this->salaries->get_taxable_incomes($employee->employee_id, $payroll_year, $payroll_month);
-
-		$sum_taxable_income = 160000;
+		//$gross = 200000;
+		$sum_taxable_income = 2400000/12;
 		$minimum_tax_rate = $this->payroll_configurations->get_minimum_tax_rate();
 
 
@@ -1924,18 +1920,15 @@ class Payroll extends CI_Controller
 		foreach ($tax_rates as $tax_rate):
 			if($sum_taxable_income > 0):
 
-				$x_diff = $temp_tax_amount - ($tax_rate->tax_rate_band/12);
-
-				if($x_diff >= 0):
-
+				if($temp_tax_amount >= $tax_rate->tax_rate_band/12):
 					$c_tax =  ($tax_rate->tax_rate_rate/100) * ($tax_rate->tax_rate_band/12);
 				else:
 					$c_tax = ($tax_rate->tax_rate_rate/100) * ($temp_tax_amount);
+					$total_tax_amount = $c_tax + $total_tax_amount;
 					break;
 				endif;
 
-				$temp_tax_amount = $x_diff;
-
+				$temp_tax_amount = $temp_tax_amount - ($tax_rate->tax_rate_band/12);
 			else:
 
 				$c_tax = ($minimum_tax_rate->minimum_tax_rate/100) * ($sum_taxable_income - $tax_relief);
@@ -1945,7 +1938,6 @@ class Payroll extends CI_Controller
 
 			$total_tax_amount = $c_tax + $total_tax_amount;
 
-//					echo "tax at this point is:".$c_tax.'<br>';
 		endforeach;
 
 		//endif;
@@ -1957,7 +1949,9 @@ class Payroll extends CI_Controller
 
 		endif;
 
-		echo $total_tax_amount;
+
+
+
 
 	}
 
