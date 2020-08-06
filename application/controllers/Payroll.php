@@ -1317,6 +1317,7 @@ class Payroll extends CI_Controller
 			//loan repayment if any
 
 				$employee_loans = $this->loans->view_loan_employee($employee->employee_id);
+
 				if(!empty($employee_loans)):
 
 				foreach ($employee_loans as $employee_loan):
@@ -1325,7 +1326,7 @@ class Payroll extends CI_Controller
 
 						$check_skip = $this->loans->view_loan_log($employee_loan->loan_id, $payroll_month, $payroll_year);
 
-						if(!empty($check_skip)):
+						if(empty($check_skip)):
 							$salary_array = array(
 
 								'salary_employee_id' => $employee->employee_id,
@@ -1895,6 +1896,68 @@ class Payroll extends CI_Controller
 		else:
 			redirect('/login');
 		endif;
+
+	}
+
+	public function tax_test(){
+
+		//$taxable_incomes = $this->salaries->get_taxable_incomes($employee->employee_id, $payroll_year, $payroll_month);
+
+		$sum_taxable_income = 160000;
+		$minimum_tax_rate = $this->payroll_configurations->get_minimum_tax_rate();
+
+
+		$tax_relief = ((20/100) * $sum_taxable_income) + (200000/12);
+
+		$minimum_tax = ($minimum_tax_rate->minimum_tax_rate/100) * ($sum_taxable_income - $tax_relief);
+
+		//if($tax_relief <= 0 or $tax_relief <= $minimum_tax):
+
+		//$tax_amount = $minimum_tax;
+
+		//else:
+
+		$total_tax_amount = 0;
+		$temp_tax_amount = $sum_taxable_income - $tax_relief;
+		$tax_rates = $this->payroll_configurations->view_tax_rates_asc();
+
+		foreach ($tax_rates as $tax_rate):
+			if($sum_taxable_income > 0):
+
+				$x_diff = $temp_tax_amount - ($tax_rate->tax_rate_band/12);
+
+				if($x_diff >= 0):
+
+					$c_tax =  ($tax_rate->tax_rate_rate/100) * ($tax_rate->tax_rate_band/12);
+				else:
+					$c_tax = ($tax_rate->tax_rate_rate/100) * ($temp_tax_amount);
+					break;
+				endif;
+
+				$temp_tax_amount = $x_diff;
+
+			else:
+
+				$c_tax = ($minimum_tax_rate->minimum_tax_rate/100) * ($sum_taxable_income - $tax_relief);
+
+
+			endif;
+
+			$total_tax_amount = $c_tax + $total_tax_amount;
+
+//					echo "tax at this point is:".$c_tax.'<br>';
+		endforeach;
+
+		//endif;
+
+
+		if($total_tax_amount <= $minimum_tax):
+
+			$total_tax_amount = $minimum_tax;
+
+		endif;
+
+		echo $total_tax_amount;
 
 	}
 
