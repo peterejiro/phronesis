@@ -273,6 +273,7 @@ $route['message/(:any)'] = 'biometrics/message/$1';
 $route['getac'] = 'biometrics/getac';
 $route['clock_in/:num'] = 'biometrics/clock_in/$1';
 $route['clockin'] = 'biometrics/clockin';
+$route['clock_attendance'] = 'biometrics/clock_attendance';
 $route['process_register'] = 'biometrics/process_register';
 $route['process_verification'] = 'biometrics/process_verification';
 $route['biometrics_report'] = 'biometrics/biometrics_report';
