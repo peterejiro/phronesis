@@ -42,6 +42,8 @@ $CI->load->model('biometric');
                       <tbody>
                       <?php if(!empty($employees)):
                         foreach($employees as $employee):
+							if($employee->employee_status == 1 || $employee->employee_status == 2):
+
                           ?>
                           <tr>
                             <td><?php echo $employee->employee_last_name." ".$employee->employee_first_name." ".$employee->employee_other_name; ?></td>
@@ -72,8 +74,9 @@ $CI->load->model('biometric');
                               </div>
                             </td>
                           </tr>
-                        <?php
-                        endforeach;
+					  <?php
+					  endif;
+					  endforeach;
                       endif; ?>
                       </tbody>
                     </table>
