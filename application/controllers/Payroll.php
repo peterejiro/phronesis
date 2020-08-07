@@ -1899,7 +1899,7 @@ class Payroll extends CI_Controller
 
 		//$taxable_incomes = $this->salaries->get_taxable_incomes($employee->employee_id, $payroll_year, $payroll_month);
 		//$gross = 200000;
-		$sum_taxable_income = 2400000/12;
+		$sum_taxable_income = 160000;
 		$minimum_tax_rate = $this->payroll_configurations->get_minimum_tax_rate();
 
 
@@ -1950,7 +1950,7 @@ class Payroll extends CI_Controller
 		endif;
 
 
-
+echo $total_tax_amount;
 
 
 	}

@@ -640,4 +640,14 @@ class Biometrics extends CI_Controller
 		$sn ='DX00F000388';
 		echo $ac.$sn;
 	}
+
+	public function clock_attendance(){
+		$data['employees'] = $this->employees->view_employees();
+
+		$data['csrf_name'] = $this->security->get_csrf_token_name();
+		$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+		$this->load->view('biometrics/clockin', $data);
+
+	}
 }
