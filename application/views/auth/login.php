@@ -84,6 +84,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									<a href="#">Privacy Policy</a>
 									<div class="bullet"></div>
 									<a href="#">Terms of Service</a>
+
+									<div class="bullet"></div>
+									<a href="<?php echo site_url('clock_attendance');?>" target="_blank">Clock In</a>
 								</div>
 							</div>
 					</div>
