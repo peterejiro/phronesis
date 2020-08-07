@@ -26,7 +26,7 @@
                       <div class="text-job text-muted"><?php echo $employee->job_name; ?></div>
 						<div class="text-job text-muted"><?php echo $employee->department_name; ?></div>
 
-						<div class="text-job text-muted"><?php $status =  $employee->employee_status; if($status == 1){ echo "Probationary"; } if($status == 2){ echo "Confirmed"; } ?></div>
+						<div class="text-job text-muted"><?php $status =  $employee->employee_status; if($status == 1){ echo "Probationary."; } if($status == 2){ echo "Confirmed."; } ?></div>
                       <div class="text-job text-muted"><?php echo date('F j, Y g:i a', strtotime($login_time)); ?></div>
                       <div class="user-cta">
                         <button onclick="location.href='<?php echo site_url('clockin');?>'" type="button" class="btn btn-icon icon-left btn-primary"><i class="fas fa-chevron-left"></i> Back</button>
