@@ -30,7 +30,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="d-flex flex-wrap align-items-stretch">
 				<div class="col-lg-4 col-md-6 col-12 order-lg-1 order-2 bg-white" style="height: 100vh; overflow: auto">
 					<div class="p-4 m-3">
-						<img src="<?php echo base_url() ?>/assets/img/stisla-fill.svg" alt="logo" width="80" class="shadow-light rounded-circle mb-5 mt-2">
+						<img src="<?php echo base_url() ?>/assets/img/ihumane-logo-1.png" alt="logo" width="120" class="shadow-light mb-5 mt-2">
 						<h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">IHUMANE</span></h4>
 						<p class="text-muted">Before you get started, please login with your credentials.</p>
 						<form method="POST" action="<?php echo site_url('login') ?>" class="needs-validation" novalidate="">
