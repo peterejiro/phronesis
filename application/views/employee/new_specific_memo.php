@@ -36,7 +36,7 @@
                         <select id="category" class="select2 form-control" required name="category" onchange="toogle_employee_department()" style="width: 100%; height:42px !important;">
                           <option value=""> -- Select -- </option>
                           <option value="1">  Department </option>
-                          <option value="0">  Employees  </option>
+                          <option value="2">  Employees  </option>
                         </select>
                         <div class="invalid-feedback">
                           please select a category
@@ -110,7 +110,7 @@
     if(value == 1){
       document.getElementById("employees").style.display='none';
       document.getElementById("departments").style.display='block';
-    } else if(value == 0){
+    } else if(value == 2){
       document.getElementById("employees").style.display='block';
       document.getElementById("departments").style.display='none';
     }

@@ -167,11 +167,10 @@ $(document).ready(function () {
 		{
 			document.getElementById('message'+reciever_id).value = "";
 
-
 		},
 		error:function()
 		{
-			alert(this.error);
+			// alert(this.error);
 
 			//console.log(this.error);
 		}
@@ -194,7 +193,7 @@ $(document).ready(function () {
 		},
 		error:function()
 		{
-			alert(this.error);
+			// alert(this.error);
 
 			//console.log(this.error);
 		}

@@ -3043,7 +3043,7 @@ class Employee extends CI_Controller
 							$query = $this->employees->insert_specific_memo($memo_array);
 
 							$notification_data = array(
-								'notification_employee_id'=> $employee->employee_id,
+								'notification_employee_id'=> $employee,
 								'notification_link'=> 'my_specific_memos',
 								'notification_type' => 'New Memo',
 								'notification_status'=> 0
@@ -3343,8 +3343,10 @@ class Employee extends CI_Controller
 						);
 						$this->load->view('swal', $msg);
 					else:
+
+						$this->employees->delete_employee_training($training_id);
 						$msg = array(
-							'msg' => 'An Error Occurred',
+							'msg' => 'No Questions for the Training',
 							'location' => site_url('employee_trainings'),
 							'type' => 'error'
 
