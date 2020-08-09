@@ -548,6 +548,12 @@ class Employees extends CI_Model
 		return $this->db->insert_id();
 	}
 
+	public function delete_employee_training($training_id){
+
+		$this->db->delete('employee_training', array('employee_training_id' => $training_id));
+		return true;
+	}
+
 	public function update_employee_training($employee_training_id, $training_data){
 		$this->db->where('employee_training.employee_training_id', $employee_training_id);
 		$this->db->update('employee_training', $training_data);
