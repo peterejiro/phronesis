@@ -30,8 +30,7 @@
                       <table class="table table-bordered table-striped table-md" id="datatable-buttons-2">
                         <thead>
                         <tr>
-                          <?php if(!empty($variational_payments)):
-                            $unconfirmed_payments = false;
+                          <?php $unconfirmed_payments = false; if(!empty($variational_payments)):
                             foreach ($variational_payments as $variational_payment):
                               if($variational_payment->variational_confirm == 0){
                                 $unconfirmed_payments = true;

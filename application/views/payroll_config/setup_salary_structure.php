@@ -40,26 +40,26 @@
                     </div>
                     <div class="form-group">
                       <label> Salary Structure Type</label>
-                      <select id="salary_structure_type" class="select2 form-control" required onchange="check_salary_structure_type()" name="salary_structure_type" style="width: 100%; min-height: 42px !important ;">
+                      <select id="salary_structure_type" class="select2 form-control" onchange="check_salary_structure_type()" name="salary_structure_type" style="width: 100%; min-height: 42px !important ;">
                         <option value="2"> -- Select -- </option>
                         <option value="0"> Personalized </option>
                         <option value="1"> Categorised </option>
                       </select>
                     </div>
-                    <div class="form-group" id="salary_structure_category">
+                    <div class="form-group" id="salary_structure_category" style="display: none">
                       <label> Salary Structure Category</label>
-                      <select id="payment_type" class="form-control" required name="salary_structure_category" style="width: 100%; height: 42px !important;;">
+                      <select id="payment_type" disabled class="select2 form-control" required name="salary_structure_category" style="width: 100%; height: 42px !important;">
                         <option disabled> -- Select -- </option>
 		                    <?php foreach ($salary_structures as $salary_structure): ?>
                           <option value="<?php echo $salary_structure->salary_structure_id ?>>"> <?php echo $salary_structure->salary_structure_category_name; ?> </option>
 		                    <?php endforeach; ?>
                       </select>
                     </div>
-                    <div id="allowances">
+                    <div id="allowances" style="display: none">
                       <div class="form-group row" id="allowance">
                         <div class="col-sm-5">
                           <label> Payment Definition</label><span style="color: red"> *</span>
-                          <select class="form-control" id="payment_definition" required name="payment_definition[]" style="width: 100%; height: 42px !important;">
+                          <select class="form-control" disabled id="payment_definition" required name="payment_definition[]" style="width: 100%; height: 42px !important;">
                             <option disabled> -- Select -- </option>
 		                        <?php foreach ($payment_definitions as $payment_definition): ?>
                               <option value="<?php echo $payment_definition->payment_definition_id ?>"> <?php echo $payment_definition->payment_definition_payment_name." (".$payment_definition->payment_definition_payment_code.")"; ?> </option>
@@ -71,7 +71,7 @@
                         </div>
                         <div class="col-sm-5">
                           <label> Amount</label><span style="color: red"> *</span>
-                          <input required name="allowance_amount[]" type="number" class="form-control"/>
+                          <input required disabled name="allowance_amount[]" type="number" class="form-control"/>
                           <div class="invalid-feedback">
                             please fill in an amount
                           </div>
@@ -154,10 +154,48 @@
     if(salary_structure_type == 1){
       document.getElementById("allowances").style.display='none';
       document.getElementById("salary_structure_category").style.display='block';
-    }
-    if(salary_structure_type == 0){
+      let elem = document.getElementById("allowances");
+      let inputs = elem.getElementsByTagName('input');
+      let selects = elem.getElementsByTagName('select');
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].setAttribute('disabled', 'disabled');
+        selects[i].setAttribute('disabled', 'disabled');
+      }
+      let elem2 = document.getElementById("salary_structure_category");
+      let selects2 = elem2.getElementsByTagName('select');
+      for (let i = 0; i < selects2.length; i++) {
+        selects2[i].removeAttribute('disabled');
+      }
+    }else if(salary_structure_type == 0){
       document.getElementById("salary_structure_category").style.display = 'none';
       document.getElementById("allowances").style.display='block';
+      let elem = document.getElementById("allowances");
+      let inputs = elem.getElementsByTagName('input');
+      let selects = elem.getElementsByTagName('select');
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].removeAttribute('disabled');
+        selects[i].removeAttribute('disabled');
+      }
+      let elem2 = document.getElementById("salary_structure_category");
+      let selects2 = elem2.getElementsByTagName('select');
+      for (let i = 0; i < selects2.length; i++) {
+        selects2[i].setAttribute('disabled', 'disabled');
+      }
+    } else {
+      document.getElementById("allowances").style.display = 'none';
+      document.getElementById("salary_structure_category").style.display = 'none';
+      let elem = document.getElementById("allowances");
+      let elem2 = document.getElementById("salary_structure_category");
+      let inputs = elem.getElementsByTagName('input');
+      let selects = elem.getElementsByTagName('select');
+      let selects2 = elem2.getElementsByTagName('select');
+      for (let i = 0; i < inputs.length; i++) {
+        inputs[i].setAttribute('disabled', 'disabled');
+        selects[i].setAttribute('disabled', 'disabled');
+      }
+      for (let i = 0; i < selects2.length; i++) {
+        selects2[i].setAttribute('disabled', 'disabled');
+      }
     }
   }
 </script>
