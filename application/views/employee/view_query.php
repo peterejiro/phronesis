@@ -122,7 +122,7 @@
 												<div class="ticket-form">
 													<form action="" id="response_form" method="post">
 														<div class="form-group">
-															<textarea class="summernote form-control" id="query_response" name="query_response" placeholder="Type a reply ..."></textarea>
+															<textarea class="form-control" id="query_response" name="query_response" placeholder="Type a reply ..."></textarea>
 															<input type="hidden" name="query_id" id="query_id" value="<?php echo $query->query_id; ?>">
 <!--															<input type="hidden" name="--><?php //echo $csrf_name;?><!--"  value="--><?php //echo $csrf_hash;?><!--" />-->
 														</div>
@@ -175,6 +175,7 @@
 				data: {query_id:query_id,query_response:query_response, query_responder_id:query_responder_id},
 				success:function(data)
 				{
+					document.getElementById('query_response').value = " ";
 					$("#query").load(location.href + " #query");
 				},
 				error:function()
