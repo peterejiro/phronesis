@@ -59,14 +59,14 @@
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6">
-                      <label>Start Date</label><span style="color: red"> *</span>
+                      <label>Appraisal Start Duration</label><span style="color: red"> *</span>
                       <input type="date" class="form-control"  name="start_date" required/>
                       <div class="invalid-feedback">
                         please fill in a start date
                       </div>
                     </div>
                     <div class="col-sm-6">
-                      <label>End Date</label><span style="color: red"> *</span>
+                      <label>Appraisal End Duration</label><span style="color: red"> *</span>
                       <input type="date" class="form-control"  name="end_date" required/>
                       <div class="invalid-feedback">
                         please fill in an end date
