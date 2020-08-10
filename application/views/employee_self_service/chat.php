@@ -76,6 +76,8 @@
 												<?php endif; ?>
 											</div>
 											<div class="card-body chat-content" id="chat_contents<?php echo $employee_details->employee_id; ?>"></div>
+
+
 											<div class="card-footer chat-form">
 												<form onsubmit="send_message(<?php echo $employee_id; ?>, <?php echo $employee_details->employee_id; ?>)">
 													<input type="text" id="message<?php echo $employee_details->employee_id; ?>" class="form-control" placeholder="Type a message">
@@ -128,8 +130,8 @@
 				data: {sender_id:sender_ids, reciever_id:reciever_ids},
 				success:function(data)
 				{
-					document.getElementById('message'+reciever_ids).value = "";
-				$('#chat_contents<?php echo $employee_details->employee_id; ?>').html(data);
+					//document.getElementById('message'+reciever_ids).value = "";
+				$('#chat_contents<?php echo $employee_details->employee_id; ?>').content(data);
 
 				},
 				error:function()
@@ -172,7 +174,7 @@ $(document).ready(function () {
 		{
 			// alert(this.error);
 
-			//console.log(this.error);
+			console.log(this.error);
 		}
 	});
 
@@ -195,7 +197,7 @@ $(document).ready(function () {
 		{
 			// alert(this.error);
 
-			//console.log(this.error);
+			console.log(this.error);
 		}
 	});
 

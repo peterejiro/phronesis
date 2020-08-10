@@ -33,6 +33,7 @@
                       <thead>
                       <tr>
                         <th>Employee Name</th>
+						  <th> Employee ID</th>
                         <th>Department</th>
                         <th>Job Role</th>
                         <th>Employment Status</th>
@@ -45,6 +46,7 @@
                           ?>
                           <tr>
                             <td><?php echo $employee->employee_last_name." ".$employee->employee_first_name." ".$employee->employee_other_name; ?></td>
+                             <td><?php echo $employee->employee_unique_id; ?> </td>
                             <td><?php echo $employee->department_name; ?></td>
                             <td><?php echo $employee->job_name; ?></td>
                             <td>
