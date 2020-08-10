@@ -62,7 +62,7 @@
                       <div class="tab-pane active p-3" id="personal-information" role="tabpanel">
                         <div class="modal-body">
                           <div class="chocolat-parent">
-                            <a href="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" class="chocolat-image" title="Passport Photo">
+                            <a href="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" class="chocolat-image" title="Click to view passport photo">
                               <figure class="figure">
                                 <img src="<?php echo base_url()."/uploads/employee_passports/".$employee->employee_passport; ?>" alt="" class="figure-img img-fluid rounded mx-auto d-block w-80 img-thumbnail">
                                 <figcaption class="figure-caption">Most Recent Passport Photograph</figcaption>
@@ -379,6 +379,8 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
+  $('title').html('View Employee - IHUMANE')
+
   $('.nxt').on('click', function () {
     moveTab('next');
   });
@@ -406,6 +408,3 @@
 </script>
 </body>
 </html>
-<script>
-  $('title').html('View Employee - IHUMANE')
-</script>
