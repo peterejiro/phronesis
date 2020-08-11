@@ -31,7 +31,8 @@
 							<div class="card-header">
 								<h4>All Users</h4>
 							</div>
-							<div class="card-body" >
+							<div class="card-body" style="height: 400px;
+	overflow-y: auto;" >
 								<ul class="list-unstyled list-unstyled-border">
 									<?php foreach ($users as $user):
 									if($user->user_type == 2 || $user->user_type == 3):
@@ -79,7 +80,7 @@
 
 
 											<div class="card-footer chat-form">
-												<form onsubmit="send_message(<?php echo $employee_id; ?>, <?php echo $employee_details->employee_id; ?>)">
+												<form onsubmit="send_message(<?php echo $employee_id; ?>, <?php echo $employee_details->employee_id; ?>)" id="<?php echo $employee_details->employee_id; ?>">
 													<input type="text" id="message<?php echo $employee_details->employee_id; ?>" class="form-control" placeholder="Type a message">
 													<button type="button" onclick="send_message(<?php echo $employee_id; ?>, <?php echo $employee_details->employee_id; ?>)" class="btn btn-primary">
 														<i class="far fa-paper-plane"></i>
@@ -117,6 +118,7 @@
 			}
 		});
 
+
 		setInterval(timestamp, 1000);
 		function timestamp() {
 			<?php foreach ($users as $user):
@@ -130,13 +132,13 @@
 				data: {sender_id:sender_ids, reciever_id:reciever_ids},
 				success:function(data)
 				{
-					//document.getElementById('message'+reciever_ids).value = "";
-				$('#chat_contents<?php echo $employee_details->employee_id; ?>').content(data);
+
+				$('#chat_contents<?php echo $employee_details->employee_id; ?>').html(data);
 
 				},
 				error:function()
 				{
-					alert(this.error);
+					//alert(this.error);
 
 				}
 			});
@@ -158,59 +160,59 @@
 	});
 
 	function send_message(sender_id, reciever_id) {
-$(document).ready(function () {
-	var message = document.getElementById('message'+reciever_id).value;
+			$(document).ready(function () {
+				var message = document.getElementById('message'+reciever_id).value;
 
-	$.ajax({
-		type: "GET",
-		url: '<?php echo site_url('send_chat'); ?>',
-		data: {sender_id:sender_id, reciever_id:reciever_id, message:message},
-		success:function(data)
-		{
-			document.getElementById('message'+reciever_id).value = "";
+				$.ajax({
+					type: "GET",
+					url: '<?php echo site_url('send_chat'); ?>',
+					data: {sender_id:sender_id, reciever_id:reciever_id, message:message},
+					success:function(data)
+					{
+						document.getElementById('message'+reciever_id).value = "";
 
-		},
-		error:function()
-		{
-			// alert(this.error);
+					},
+					error:function()
+					{
+						// alert(this.error);
 
-			console.log(this.error);
-		}
-	});
+						console.log(this.error);
+					}
+				});
 
-	<?php foreach ($users as $user):
-	if($user->user_type == 2 || $user->user_type == 3):
+				<?php foreach ($users as $user):
+				if($user->user_type == 2 || $user->user_type == 3):
 
-	$employee_details = @$CI->employees->get_employee_by_unique($user->user_username); ?>
+				$employee_details = @$CI->employees->get_employee_by_unique($user->user_username); ?>
 
-	$.ajax({
-		type: "GET",
-		url: '<?php echo site_url('get_chats'); ?>',
-		data: {sender_id:sender_id, reciever_id:reciever_id, message:message},
-		success:function(data)
-		{
-			document.getElementById('message'+reciever_id).value = "";
-			document.getElementById('chat_contents'+reciever_id).innerHTML = data;
+				$.ajax({
+					type: "GET",
+					url: '<?php echo site_url('get_chats'); ?>',
+					data: {sender_id:sender_id, reciever_id:reciever_id, message:message},
+					success:function(data)
+					{
 
-		},
-		error:function()
-		{
-			// alert(this.error);
+						document.getElementById('chat_contents'+reciever_id).innerHTML = data;
 
-			console.log(this.error);
-		}
-	});
+					},
+					error:function()
+					{
+						// alert(this.error);
 
-
-
-	<?php endif;
-	endforeach; ?>
+						console.log(this.error);
+					}
+				});
 
 
 
+				<?php endif;
+				endforeach; ?>
 
 
-})
+
+
+
+			})
 
 
 	}
