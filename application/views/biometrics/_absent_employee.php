@@ -24,7 +24,7 @@
           <p class="section-lead">You can generate a report of the employees absent on a specific date here</p>
           <div class="row">
             <div class="col-md-7">
-              <form method="post" action="<?php echo site_url('absent_employeee'); ?>" class="needs-validation" novalidate>
+              <form method="post" action="<?php echo site_url('absent_employeee'); ?>" data-persist="garlic" class="needs-validation" novalidate>
                 <div class="card card-primary">
                   <div class="card-header">
                     <h4>Absent Employee Form</h4>

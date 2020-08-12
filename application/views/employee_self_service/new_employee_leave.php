@@ -29,7 +29,7 @@
 				</div>
 				<div class="row">
 					<div class="col-12">
-						<form class="needs-validation" novalidate method="post" action="<?php echo site_url('request_new_leave'); ?>" id="leave_form">
+						<form class="needs-validation" data-persist="garlic" novalidate method="post" action="<?php echo site_url('request_new_leave'); ?>" id="leave_form">
 							<div class="card card-primary">
 								<div class="card-header">
 									<h4>New Leave Form</h4>

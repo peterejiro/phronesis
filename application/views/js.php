@@ -9,6 +9,9 @@
 		<script src="<?php echo base_url(); ?>assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/modules/moment.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/stisla.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/garlic.min.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/push_notification.js"></script>
+
 
 		<!-- JS Libraies -->
 		<script src="<?php echo base_url(); ?>assets/modules/owlcarousel2/dist/owl.carousel.min.js"></script>

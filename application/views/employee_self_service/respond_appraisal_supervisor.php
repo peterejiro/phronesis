@@ -51,7 +51,7 @@ $CI->load->model('employees');
 					</div>
 					<div class="row mt-4">
 						<div class="col-12">
-							<form method="post" action="<?php echo site_url('answer_questions_supervisor'); ?>" enctype="multipart/form-data" class="needs-validation" novalidate>
+							<form method="post" data-persist="garlic" action="<?php echo site_url('answer_questions_supervisor'); ?>" enctype="multipart/form-data" class="needs-validation" novalidate>
 								<div class="card card-primary">
 									<div class="card-header">
 										<h4>Appraisal Form</h4>

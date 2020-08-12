@@ -46,7 +46,7 @@ $CI->load->model('employees');
 					</div>
 					<div class="row mt-4">
 						<div class="col-12">
-							<form method="post" action="<?php echo site_url('answer_questions_self'); ?>" enctype="multipart/form-data" class="needs-validation" novalidate>
+							<form method="post" data-persist="garlic" action="<?php echo site_url('answer_questions_self'); ?>" enctype="multipart/form-data" class="needs-validation" novalidate>
 								<div class="card card-primary">
 									<div class="card-header">
 										<h4>Appraisal Form</h4>
@@ -56,17 +56,6 @@ $CI->load->model('employees');
 											<div class="tab-pane active p-3" id="quantitative" role="tabpanel">
 
 
-
-
-
-												<!--												--><?php //if($error != ' '): ?>
-<!--													<div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">-->
-<!--														<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
-<!--															<span aria-hidden="true">&times;</span>-->
-<!--														</button>-->
-<!--														<i class="mdi mdi-close-circle font-32"></i><strong class="pr-1">Error !</strong> --><?php //echo $error; ?><!--.-->
-<!--													</div>-->
-<!--												--><?php //endif; ?>
 												<div class="modal-body">
 
 													<?php foreach ($questions as $question):

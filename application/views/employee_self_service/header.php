@@ -1,3 +1,5 @@
+<script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/push_notification.js"></script>
 <nav id="notifications" class="navbar navbar-expand-lg main-navbar">
 	<a href="<?php echo site_url('employee_main'); ?>" class="navbar-brand sidebar-gone-hide">iHumane</a>
 	<div class="navbar-nav">
@@ -13,75 +15,9 @@
 			<li class="nav-item"><a href="#" class="nav-link">Help</a></li>
 		</ul>
 	</div>
-<!--	<form class="form-inline ml-auto">-->
-<!--		<ul class="navbar-nav">-->
-<!--			<li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>-->
-<!--		</ul>-->
-<!--		<div class="search-element">-->
-<!--			<input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">-->
-<!--			<button class="btn" type="submit"><i class="fas fa-search"></i></button>-->
-<!--			<div class="search-backdrop"></div>-->
-<!--			<div class="search-result">-->
-<!--				<div class="search-header">-->
-<!--					Histories-->
-<!--				</div>-->
-<!--				<div class="search-item">-->
-<!--					<a href="#">How to hack NASA using CSS</a>-->
-<!--					<a href="#" class="search-close"><i class="fas fa-times"></i></a>-->
-<!--				</div>-->
-<!--				<div class="search-item">-->
-<!--					<a href="#">Kodinger.com</a>-->
-<!--					<a href="#" class="search-close"><i class="fas fa-times"></i></a>-->
-<!--				</div>-->
-<!--				<div class="search-item">-->
-<!--					<a href="#">#Stisla</a>-->
-<!--					<a href="#" class="search-close"><i class="fas fa-times"></i></a>-->
-<!--				</div>-->
-<!--				<div class="search-header">-->
-<!--					Result-->
-<!--				</div>-->
-<!--				<div class="search-item">-->
-<!--					<a href="#">-->
-<!--						<img class="mr-3 rounded" width="30" src="../assets/img/products/product-3-50.png" alt="product">-->
-<!--						oPhone S9 Limited Edition-->
-<!--					</a>-->
-<!--				</div>-->
-<!--				<div class="search-item">-->
-<!--					<a href="#">-->
-<!--						<img class="mr-3 rounded" width="30" src="../assets/img/products/product-2-50.png" alt="product">-->
-<!--						Drone X2 New Gen-7-->
-<!--					</a>-->
-<!--				</div>-->
-<!--				<div class="search-item">-->
-<!--					<a href="#">-->
-<!--						<img class="mr-3 rounded" width="30" src="../assets/img/products/product-1-50.png" alt="product">-->
-<!--						Headphone Blitz-->
-<!--					</a>-->
-<!--				</div>-->
-<!--				<div class="search-header">-->
-<!--					Projects-->
-<!--				</div>-->
-<!--				<div class="search-item">-->
-<!--					<a href="#">-->
-<!--						<div class="search-icon bg-danger text-white mr-3">-->
-<!--							<i class="fas fa-code"></i>-->
-<!--						</div>-->
-<!--						Stisla Admin Template-->
-<!--					</a>-->
-<!--				</div>-->
-<!--				<div class="search-item">-->
-<!--					<a href="#">-->
-<!--						<div class="search-icon bg-primary text-white mr-3">-->
-<!--							<i class="fas fa-laptop"></i>-->
-<!--						</div>-->
-<!--						Create a new Homepage Design-->
-<!--					</a>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</form>-->
+
 	<ul class="navbar-nav navbar-right" style="margin-left: 50%;">
-		<li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+		<li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle"><i class="far fa-envelope"></i></a>
 			<div class="dropdown-menu dropdown-list dropdown-menu-right">
 				<div class="dropdown-header">Messages
 					<div class="float-right">
@@ -157,9 +93,12 @@
 <!--					</div>-->
 				</div>
 				<?php if(!empty($notifications)): ?>
+
+
 				<div class="dropdown-list-content dropdown-list-icons">
 					<?php foreach ($notifications as $notification): ?>
-					<a id="<?php echo $notification->notification_id; ?>" href="<?php echo site_url()."view_notification/".$notification->notification_id; ?>" class="dropdown-item dropdown-item-unread" onmouseover="view_notification()">
+
+					<a id="<?php echo $notification->notification_id; ?>" href="<?php echo site_url()."view_notification/".$notification->notification_id; ?>" class="dropdown-item dropdown-item-unread">
 						<div class="dropdown-item-icon bg-primary text-white">
 							<i class="fas fa-code"></i>
 						</div>
@@ -205,4 +144,38 @@
 		</li>
 	</ul>
 </nav>
+
+<script>
+	$(document).ready(function () {
+
+		setInterval(timestamp, 5000);
+		function timestamp() {
+
+			var employee_id = <?php echo $employee->employee_id; ?>;
+			$.ajax({
+				type: "POST",
+				url: '<?php echo site_url('get_notifications'); ?>',
+				data: {employee_id: employee_id},
+				success: function (data) {
+					var data = JSON.parse(data);
+					for (i = 0; i < data.length; i++) {
+						var notification_id = data[i].notification_id;
+						$.notify(data[i].notification_type, {
+							title: "iHumane",
+							icon: "https://app.ihumane.net//assets/img/ihumane-logo-1.png",
+						}).click(function () {
+							location.href = '<?php echo site_url()?>/view_notification/' + notification_id;
+						});
+					}
+
+				},
+				error: function () {
+					console.log(this.error);
+				}
+			});
+		}
+	})
+
+</script>
+
 

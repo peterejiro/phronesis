@@ -42,7 +42,7 @@
             </div>
             <div class="row mt-4">
               <div class="col-12">
-                <form method="post" action="<?php echo site_url('add_employee'); ?>" enctype="multipart/form-data" class="needs-validation" novalidate>
+                <form method="post" action="<?php echo site_url('add_employee'); ?>" data-persist="garlic" enctype="multipart/form-data" class="needs-validation" novalidate>
                   <div class="card card-primary">
                     <div class="card-header">
                       <h4>New Employee Form</h4>
