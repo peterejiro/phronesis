@@ -120,7 +120,7 @@
                       </div>
 												<?php if($query->query_status == 1):  ?>
 												<div class="ticket-form">
-													<form action="" id="response_form" method="post">
+													<form action="" data-persist="garlic" id="response_form" method="post">
 														<div class="form-group">
 															<textarea class="form-control" id="query_response" name="query_response" placeholder="Type a reply ..."></textarea>
 															<input type="hidden" name="query_id" id="query_id" value="<?php echo $query->query_id; ?>">

@@ -33,10 +33,11 @@
 											<p> Do not Attempt to Leave this Screen during the Test Time. </p>
 											<p> If the timer times out before you submit, you test would be submitted.</p>
 											<p>Should you violate any of the first 2 conditions, your test would be submitted.</p>
+											<p>Note if the company deems you failed this test, you will retake the test</p>
 										</div>
 									</div>
 									<div class="row">
-										<form action="<?php echo site_url('score_test'); ?>" id="assessment_form" method="post">
+										<form action="<?php echo site_url('score_test'); ?>" data-persist="garlic" id="assessment_form" method="post">
 											<div class="col-12 col-sm-12 col-md-4">
 												<ul class="nav nav-pills flex-column" id="myTab4" role="tablist">
 													<?php $count = 1; foreach ($questions as $question): ?>

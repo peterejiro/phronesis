@@ -46,7 +46,7 @@
           </div>
           <div class="row mt-4">
             <div class="col-12">
-              <form class="needs-validation" novalidate method="post" action="<?php echo site_url('edit_employee'); ?>" enctype="multipart/form-data">
+              <form class="needs-validation" data-persist="garlic" novalidate method="post" action="<?php echo site_url('edit_employee'); ?>" enctype="multipart/form-data">
                 <div class="card card-primary">
                   <div class="card-header">
                     <h4>Employee Details</h4>

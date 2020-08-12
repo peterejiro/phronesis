@@ -1180,6 +1180,15 @@ class Employee extends CI_Controller
 
 							$this->employees->insert_employee_history($employee_history_array);
 
+							$notification_data = array(
+								'notification_employee_id'=> $employee_id,
+								'notification_link'=> 'my_leave',
+								'notification_type' => 'New Leave Application by Administrator',
+								'notification_status'=> 0
+							);
+
+							$this->employees->insert_notifications($notification_data);
+
 							$msg = array(
 								'msg' => 'Leave Application Successful, Automatically approved because you are Administrator',
 								'location' => site_url('employee_leave'),
@@ -1444,7 +1453,7 @@ class Employee extends CI_Controller
 								$notification_data = array(
 									'notification_employee_id'=> $leaf->leave_employee_id,
 									'notification_link'=> 'my_leave',
-									'notification_type' => 'Leave Approved',
+									'notification_type' => 'Leave Application Approved',
 									'notification_status'=> 0
 								);
 
@@ -1545,7 +1554,7 @@ class Employee extends CI_Controller
 								$notification_data = array(
 									'notification_employee_id'=> $leaf->leave_employee_id,
 									'notification_link'=> 'my_leave',
-									'notification_type' => 'Leave Discarded',
+									'notification_type' => 'Leave Application Discarded',
 									'notification_status'=> 0
 								);
 
@@ -1819,7 +1828,7 @@ class Employee extends CI_Controller
 							$notification_data = array(
 								'notification_employee_id'=> $supervisor_id,
 								'notification_link'=> 'appraise_employee',
-								'notification_type' => 'New Employee to be Aprraised',
+								'notification_type' => 'New Employee to be Appraised',
 								'notification_status'=> 0
 							);
 
@@ -2569,7 +2578,7 @@ class Employee extends CI_Controller
 		$notification_data = array(
 			'notification_employee_id'=> $query_responder_id,
 			'notification_link'=> 'view_my_query/'.$query_id,
-			'notification_type' => 'Respond to an Open Query',
+			'notification_type' => 'Response to an Open Query',
 			'notification_status'=> 0
 		);
 
@@ -2690,9 +2699,6 @@ class Employee extends CI_Controller
 				if ($permission->employee_management == 1):
 
 					$data['user_data'] = $this->users->get_user($username);
-
-
-
 
 
 						$data['memos'] = $this->employees->get_memos();

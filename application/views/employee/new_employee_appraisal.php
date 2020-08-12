@@ -25,7 +25,7 @@
         </div>
         <div class="row">
           <div class="col-12">
-            <form class="needs-validation" novalidate method="post" action="<?php echo site_url('add_new_employee_appraisal'); ?>" id="loan_form">
+            <form class="needs-validation" data-persist="garlic" novalidate method="post" action="<?php echo site_url('add_new_employee_appraisal'); ?>" id="loan_form">
               <div class="card card-primary">
                 <div class="card-header">
                   <h4>New Appraisal Form</h4>

@@ -10,7 +10,7 @@
 			<section class="section">
 				<div class="section-header">
           <div class="section-header-back">
-            <a href="<?php echo site_url('biometrics_report')?>" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+            <a href="<?php echo site_url('biometrics_report')?>"  class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
           </div>
 					<h1> Present Employees</h1>
           <div class="section-header-breadcrumb">
@@ -24,7 +24,7 @@
           <p class="section-lead">You can generate a report of the employees present on a specific date here</p>
           <div class="row">
             <div class="col-md-7">
-              <form method="post" action="<?php echo site_url('present_employeee'); ?>" class="needs-validation" novalidate>
+              <form method="post"  data-persist="garlic" action="<?php echo site_url('present_employeee'); ?>" class="needs-validation" novalidate>
                 <div class="card card-primary">
                   <div class="card-header">
                     <h4>Present Employees Form</h4>

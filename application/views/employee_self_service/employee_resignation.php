@@ -26,7 +26,7 @@
 					<p class="section-lead">You can submit resignation notifications here</p>
 					<div class="row">
 						<div class="col-md-7">
-							<form method="post" action="<?php echo site_url('resignation'); ?>" class="needs-validation" novalidate id="resignation_form">
+							<form method="post" data-persist="garlic" action="<?php echo site_url('resignation'); ?>" class="needs-validation" novalidate id="resignation_form">
 								<div class="card card-primary">
 									<div class="card-header">
 										<h4>Employment Termination Form</h4>
