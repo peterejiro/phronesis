@@ -24,7 +24,7 @@
           <p class="section-lead">You can fill the form to add a new directive memo for employees or departments here</p>
           <div class="row">
             <div class="col-12">
-              <form class="needs-validation" novalidate method="post" action="<?php echo site_url('add_specific_memo'); ?>">
+              <form class="needs-validation" data-persist="garlic" novalidate method="post" action="<?php echo site_url('add_specific_memo'); ?>">
                 <div class="card card-primary">
                   <div class="card-header">
                     <h4>New Directive Memo Form</h4>

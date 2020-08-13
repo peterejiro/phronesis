@@ -24,7 +24,7 @@
           <p class="section-lead">You can terminate an employee here</p>
           <div class="row">
             <div class="col-md-7">
-              <form method="post" action="<?php echo site_url('terminate'); ?>" class="needs-validation" novalidate id="terminate_form">
+              <form method="post" data-persist="garlic" action="<?php echo site_url('terminate'); ?>" class="needs-validation" novalidate id="terminate_form">
                 <div class="card card-primary">
                   <div class="card-header">
                     <h4>Termination Form</h4>

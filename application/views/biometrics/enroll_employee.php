@@ -143,11 +143,10 @@ $CI->load->model('biometric');
 
 				{
 
-					//alert("'"+user_name+"' registration successful!");
 
 					swal({
 						title: user_name,
-						text: "Registration Successful",
+						text: "Done",
 						type: "success",
 						confirmButtonClass: 'btn btn-confirm mt-2',
 						cancelButtonClass: 'btn btn-cancel ml-2 mt-2',
@@ -196,7 +195,7 @@ $CI->load->model('biometric');
 				}
 				catch(err)
 				{
-					alert(err.message);
+					console.log(err.message);
 				}
 			}
 		});

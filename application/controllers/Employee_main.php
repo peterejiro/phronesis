@@ -2114,6 +2114,19 @@ class Employee_main extends CI_Controller
 			'chat_body' => $message,
 		);
 
+
+		$employee_n = $this->employees->get_employee($sender_id);
+		$name = $employee_n->employee_first_name." ".$employee_n->employee_last_name;
+
+		$notification_data = array(
+				'notification_employee_id'=> $reciever_id,
+				'notification_link'=> 'my_chat',
+				'notification_type' => 'New Message from '.$name,
+				'notification_status'=> 0
+		);
+
+		$this->employees->insert_notifications($notification_data);
+
 		echo $this->chats->add_chat($chat_array);
 
 
@@ -2464,6 +2477,13 @@ class Employee_main extends CI_Controller
 
 
 
+	}
+
+	public function get_notifications(){
+
+		$employee_id = $this->input->post('employee_id');
+
+		 echo json_encode($this->employees->get_notifications($employee_id));
 	}
 
 

@@ -46,7 +46,7 @@
           </div>
           <div class="row mt-4">
             <div class="col-12">
-              <form class="needs-validation" novalidate method="post" action="<?php echo site_url('edit_employee'); ?>" enctype="multipart/form-data">
+              <form class="needs-validation" data-persist="garlic" novalidate method="post" action="<?php echo site_url('edit_employee'); ?>" enctype="multipart/form-data">
                 <div class="card card-primary">
                   <div class="card-header">
                     <h4>Employee Details</h4>
@@ -238,7 +238,9 @@
                             <label> Account Number</label><span style="color: red"> *</span>
                             <input name="employee_account_number" value="<?php echo $employee->employee_account_number; ?>" type="number"
                                    class="form-control"
+
                                    oninput="this.value = this.value.slice(0, this.maxLength)"
+
                                    required/>
                             <div class="invalid-feedback">
                               please fill in an account number

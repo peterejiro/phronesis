@@ -94,7 +94,7 @@
 					<span aria-hidden="true" class="text-dark">&times;</span>
 				</button>
 			</div>
-			<form class="needs-validation" novalidate method="post" action="<?php echo site_url('add_memo'); ?>">
+			<form class="needs-validation" novalidate method="post" action="<?php echo site_url('add_memo'); ?>" enctype="multipart/form-data">
 				<div class="modal-body">
 					<div class="form-group">
 						<label>Subject</label><span style="color: red"> *</span>

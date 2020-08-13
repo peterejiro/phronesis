@@ -488,6 +488,15 @@ class Loan extends CI_Controller
 							'log_description' => "Skipped A month for A Loan"
 						);
 
+						$notification_data = array(
+							'notification_employee_id'=> $this->loans->view_loan($loan_id)->employee_id,
+							'notification_link'=> 'my_loan',
+							'notification_type' => 'Your Loan has been Skipped for a Month',
+							'notification_status'=> 0
+						);
+
+						$this->employees->insert_notifications($notification_data);
+
 						$this->logs->add_log($log_array);
 						$msg = array(
 							'msg'=> 'Update Successfully',
@@ -539,6 +548,15 @@ class Loan extends CI_Controller
 							);
 
 							$this->logs->add_log($log_array);
+
+							$notification_data = array(
+								'notification_employee_id'=> $this->loans->view_loan($loan_id)->employee_id,
+								'notification_link'=> 'my_loan',
+								'notification_type' => 'Your Loan Repayment Amount has been changed',
+								'notification_status'=> 0
+							);
+
+							$this->employees->insert_notifications($notification_data);
 
 							$msg = array(
 								'msg'=> 'Update Successfully',
@@ -615,6 +633,15 @@ class Loan extends CI_Controller
 						);
 
 						$this->logs->add_log($log_array);
+
+						$notification_data = array(
+							'notification_employee_id'=> $this->loans->view_loan($loan_id)->employee_id,
+							'notification_link'=> 'my_loan',
+							'notification_type' => 'Your Loan application has been approved',
+							'notification_status'=> 0
+						);
+
+						$this->employees->insert_notifications($notification_data);
 						$msg = array(
 							'msg'=> 'Loan Approved',
 							'location' => site_url('loans'),
@@ -697,6 +724,15 @@ class Loan extends CI_Controller
 						);
 
 						$this->logs->add_log($log_array);
+
+						$notification_data = array(
+							'notification_employee_id'=> $this->loans->view_loan($loan_id)->employee_id,
+							'notification_link'=> 'my_loan',
+							'notification_type' => 'Your Loan application was rejected',
+							'notification_status'=> 0
+						);
+
+						$this->employees->insert_notifications($notification_data);
 						$msg = array(
 							'msg'=> 'Loan Discarded',
 							'location' => site_url('loans'),
