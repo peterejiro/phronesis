@@ -552,7 +552,7 @@ class Biometrics extends CI_Controller
 			echo "$msg";
 
 		}else{
-			$time= date('Y-m-d H:i:s', time());
+			$time= date('Y-m-d H:i:s', time()+60*60);
 
 			$data['employee'] = $this->employees->get_employee($employee_id);
 			$data['login_time'] = $time;
@@ -567,6 +567,8 @@ class Biometrics extends CI_Controller
 			//echo $employee_id." login success on ".date('Y-m-d H:i:s', strtotime($time));
 
 		}
+
+
 
 	}
 
