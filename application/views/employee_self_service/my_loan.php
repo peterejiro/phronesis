@@ -130,6 +130,17 @@ $CI->load->model('employees');
 							</div>
 						</div>
 						<div class="form-group row">
+							<div class="col-sm-12">
+								<label>Reason</label><span style="color: red"> *</span>
+								<textarea class="summernote form-control" disabled readonly  name="reason" placeholder="Type a reason ..."> <?php echo $loan->loan_reason; ?></textarea>
+
+								<div class="invalid-feedback">
+									please fill in the loan amount
+								</div>
+							</div>
+
+						</div>
+						<div class="form-group row">
 							<div class="col-sm-6">
 								<label>From</label>
 								<input type="text" class="form-control"  name="employee_name" disabled value="<?php echo date("F", mktime(0, 0, 0, $loan->loan_start_month, 10))." ".$loan->loan_start_year; ?>"/>
@@ -147,6 +158,16 @@ $CI->load->model('employees');
 							<div class="col-sm-6">
 								<label>Balance</label>
 								<input type="text" class="form-control"  name="employee_name" disabled value="&#8358; <?php echo number_format($loan->loan_balance); ?>"/>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<label>Loan Repayment Amount</label>
+								<input type="text" class="form-control"  name="employee_name" disabled required value="<?php echo number_format($loan->loan_monthly_repayment); ?>"/>
+							</div>
+							<div class="col-sm-6">
+								<label>Loan Amount</label>
+								<input type="text" class="form-control"  name="employee_name" disabled required value="&#8358; <?php echo number_format($loan->loan_amount); ?>"/>
 							</div>
 						</div>
 						<div class="form-group">
@@ -171,6 +192,7 @@ endforeach; ?>
 
 <script>
 	$('title').html('My Loans - IHUMANE');
+	$('.summernote').summernote('disable');
 </script>
 
 
