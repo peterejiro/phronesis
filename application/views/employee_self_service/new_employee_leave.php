@@ -133,6 +133,33 @@
 </html>
 <script>
 	$('title').html('New Leave - IHUMANE');
+	function calcBusinessDays(dDate1, dDate2) { // input given as Date objects
+		var iWeeks, iDateDiff, iAdjust = 0;
+		if (dDate2 < dDate1) return -1; // error code if dates transposed
+		var iWeekday1 = dDate1.getDay(); // day of week
+		var iWeekday2 = dDate2.getDay();
+		iWeekday1 = (iWeekday1 == 0) ? 7 : iWeekday1; // change Sunday from 0 to 7
+		iWeekday2 = (iWeekday2 == 0) ? 7 : iWeekday2;
+		if ((iWeekday1 > 5) && (iWeekday2 > 5)) iAdjust = 1; // adjustment if both days on weekend
+		iWeekday1 = (iWeekday1 > 5) ? 5 : iWeekday1; // only count weekdays
+		iWeekday2 = (iWeekday2 > 5) ? 5 : iWeekday2;
+
+		// calculate differnece in weeks (1000mS * 60sec * 60min * 24hrs * 7 days = 604800000)
+		iWeeks = Math.floor((dDate2.getTime() - dDate1.getTime()) / 604800000)
+
+		if (iWeekday1 < iWeekday2) { //Equal to makes it reduce 5 days
+			iDateDiff = (iWeeks * 5) + (iWeekday2 - iWeekday1)
+		} else {
+			iDateDiff = ((iWeeks + 1) * 5) - (iWeekday1 - iWeekday2)
+		}
+
+		iDateDiff -= iAdjust // take into account both days on weekend
+
+		return (iDateDiff + 1); // add 1 because dates are inclusive
+	}
+
+
+
 
 	function compute_leave() {
 		let start_date = new Date(document.getElementById('start_date').value);
@@ -141,8 +168,8 @@
 		if(start_date === '' || leave_id === '' || end_date === '' ){
 			swal('Why are you here if you do not want a leave', { icon: 'error' });
 		}else{
-			let leave_day_policy = (end_date.getTime() - start_date.getTime()) / (1000 * 3600 * 24);
 
+				let leave_day_policy = calcBusinessDays(start_date, end_date)
 			var obj = JSON.parse(document.getElementById('leave_bal').value);
 
 			if(start_date < new Date()){
