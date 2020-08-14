@@ -140,6 +140,7 @@ class Loan extends CI_Controller
 				$end_month = $this->input->post('end_month');
 				$end_year = $this->input->post('end_year');
 				$amount = $this->input->post('amount');
+				$reason =$this->input->post('reason');
 				$monthly_repayment = $this->input->post('repayment_amount');
 
 				if((empty($employee_id))|| (empty($payment_definition)) || (empty($start_month)) || (empty($start_year))
@@ -162,6 +163,7 @@ class Loan extends CI_Controller
 								'loan_employee_id'=> $employee_id,
 								'loan_payment_definition_id'=>$payment_definition,
 								'loan_amount' => $amount,
+								'loan_reason' => $reason,
 								'loan_start_year'=> $start_year,
 								'loan_start_month' => $start_month,
 								'loan_end_year' => $end_year,

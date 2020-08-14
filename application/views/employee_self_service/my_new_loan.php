@@ -66,6 +66,20 @@
 												</div>
 											</div>
 										</div>
+
+										<div class="form-group row">
+											<div class="col-sm-12">
+												<label>Reason</label><span style="color: red"> *</span>
+												<textarea class="summernote form-control"  name="reason" placeholder="Type a reason ..."></textarea>
+
+												<div class="invalid-feedback">
+													please fill in the loan amount
+												</div>
+											</div>
+
+										</div>
+
+
 										<div class="form-group row">
 											<div class="col-sm-6">
 												<label>Start Year</label><span style="color: red"> *</span>
