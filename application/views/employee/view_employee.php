@@ -113,6 +113,116 @@
                               <textarea id="textarea" class="form-control" disabled name="employee_address" maxlength="225" rows="3"><?php echo $employee->employee_address ?></textarea>
                             </div>
                           </div>
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<label >State of Origin</label>
+									<select  class="select2 form-control" disabled name="employee_state_of_origin" style="width: 100%; height: 42px !important;">
+										<option value="">Select</option>
+										<option value="FCT-Abuja" <?php if($employee->employee_state == "FCT-Abuja" ): echo "selected"; endif; ?>> FCT-Abuja </option>
+										<option value="Abia State" <?php if($employee->employee_state == "Abia State" ): echo "selected"; endif; ?>> Abia State </option>
+										<option value="Adamawa State" <?php if($employee->employee_state == "Adamawa State" ): echo "selected"; endif; ?>> Adamawa State </option>
+										<option value="Akwa Ibom State" <?php if($employee->employee_state == "Akwa Ibom State" ): echo "selected"; endif; ?>> Akwa Ibom State </option>
+										<option value="Anambra State" <?php if($employee->employee_state == "Anambra State" ): echo "selected"; endif; ?>> Anambra State </option>
+										<option value="Bauchi State" <?php if($employee->employee_state == "Bauchi State" ): echo "selected"; endif; ?>> Bauchi State </option>
+										<option value="Bayelsa State" <?php if($employee->employee_state == "Bayelsa State" ): echo "selected"; endif; ?>> Bayelsa State </option>
+										<option value="Benue State" <?php if($employee->employee_state == "Benue State" ): echo "selected"; endif; ?>> Benue State </option>
+										<option value="Borno State" <?php if($employee->employee_state == "Borno State" ): echo "selected"; endif; ?>> Borno State </option>
+										<option value="Cross River State" <?php if($employee->employee_state == "Cross River State" ): echo "selected"; endif; ?>> Cross River State </option>
+										<option value="Delta State" <?php if($employee->employee_state == "Delta State"  ): echo "selected"; endif; ?>> Delta State </option>
+										<option value="Ebonyi State" <?php if($employee->employee_state == "Ebonyi State" ): echo "selected"; endif; ?>> Ebonyi State </option>
+										<option value="Edo State" <?php if($employee->employee_state == "Edo State" ): echo "selected"; endif; ?>> Edo State </option>
+										<option value="Ekiti State" <?php if($employee->employee_state == "Ekiti State" ): echo "selected"; endif; ?>> Ekiti State </option>
+										<option value="Enugu State" <?php if($employee->employee_state == "Enugu State" ): echo "selected"; endif; ?>> Enugu State </option>
+										<option value="Gombe State" <?php if($employee->employee_state == "Gombe State" ): echo "selected"; endif; ?>> Gombe State </option>
+										<option value="Imo State" <?php if($employee->employee_state == "Imo State" ): echo "selected"; endif; ?>> Imo State </option>
+										<option value="Jigawa State" <?php if($employee->employee_state == "Jigawa State" ): echo "selected"; endif; ?>> Jigawa State </option>
+										<option value="Kaduna State" <?php if($employee->employee_state == "Kaduna State" ): echo "selected"; endif; ?>> Kaduna State </option>
+										<option value="Kano State" <?php if($employee->employee_state == "Kano State" ): echo "selected"; endif; ?>> Kano State </option>
+										<option value="Katsina State" <?php if($employee->employee_state == "Katsina State" ): echo "selected"; endif; ?>> Katsina State </option>
+										<option value="Kebbi State" <?php if($employee->employee_state == "Kebbi State" ): echo "selected"; endif; ?>> Kebbi State </option>
+										<option value="Kogi State" <?php if($employee->employee_state == "Kogi State" ): echo "selected"; endif; ?>> Kogi State </option>
+										<option value="Kwara State" <?php if($employee->employee_state == "Kwara State" ): echo "selected"; endif; ?>> Kwara State </option>
+										<option value="Lagos State" <?php if($employee->employee_state == "Lagos State" ): echo "selected"; endif; ?>> Lagos State </option>
+										<option value="Nasarawa State" <?php if($employee->employee_state == "Nasarawa State" ): echo "selected"; endif; ?>> Nasarawa State </option>
+										<option value="Niger State" <?php if($employee->employee_state == "Niger State" ): echo "selected"; endif; ?>> Niger State </option>
+										<option value="Ogun State" <?php if($employee->employee_state == "Ogun State" ): echo "selected"; endif; ?>> Ogun State </option>
+										<option value="Ondo State" <?php if($employee->employee_state == "Ondo State" ): echo "selected"; endif; ?>> Ondo State </option>
+										<option value="Osun State" <?php if($employee->employee_state == "Osun State" ): echo "selected"; endif; ?>> Osun State </option>
+										<option value="Oyo State" <?php if($employee->employee_state == "Oyo State" ): echo "selected"; endif; ?>> Oyo State </option>
+										<option value="Plateau State" <?php if($employee->employee_state == "Plateau State" ): echo "selected"; endif; ?>> Plateau State </option>
+										<option value="Rivers State" <?php if($employee->employee_state == "Rivers State" ): echo "selected"; endif; ?>> Rivers State </option>
+										<option value="Sokoto State" <?php if($employee->employee_state == "Sokoto State" ): echo "selected"; endif; ?>> Sokoto State </option>
+										<option value="Taraba State" <?php if($employee->employee_state == "Taraba State" ): echo "selected"; endif; ?>> Taraba State </option>
+										<option value="Yobe State" <?php if($employee->employee_state == "Yobe State" ): echo "selected"; endif; ?>> Yobe State </option>
+										<option value="Zamfara State" <?php if($employee->employee_state == "Zamfara State" ): echo "selected"; endif; ?>> Zamfara State </option>
+
+									</select>
+								</div>
+								<div class="col-sm-6">
+									<label>LGA</label>
+									<input type="text" disabled name="employee_lga" value="<?php echo $employee->employee_lga; ?>" class="form-control">
+								</div>
+
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-4">
+									<label ">Marital Status</label>
+									<input  type="text" name="employee_marital" disabled value="<?php echo $employee->employee_marital_status; ?>" class="form-control">
+								</div>
+								<div class="col-sm-4">
+									<label>Spouse Name</label>
+									<input  type="text" name="employee_spouse_name" disabled value="<?php echo  $employee->employee_spouse_name; ?>" class="form-control">
+								</div>
+								<div class="col-sm-4">
+									<label>Spouse Phone Number</label>
+									<input  type="text" name="employee_spouse_phone_number" disabled value="<?php echo $employee->employee_spouse_phone_number; ?>" class="form-control cleave-number">
+
+
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-4">
+									<label ">Known Ailments</label>
+									<input  type="text" name="employee_ailments" disabled  value="<?php echo $employee->employee_ailments; ?>" class="form-control">
+								</div>
+								<div class="col-sm-4">
+									<label>Blood Group</label>
+									<input  type="text" name="employee_blood" disabled  value="<?php echo $employee->employee_blood; ?>" class="form-control">
+								</div>
+								<div class="col-sm-4">
+									<label>Genotype</label>
+									<input  type="text" name="employee_genotype" disabled value="<?php echo $employee->employee_genotype; ?>" class="form-control ">
+
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-sm-4">
+									<label for="phone-number">Next of Kin's Name</label>
+									<input  type="text" name="employee_next_of_kin_name" disabled value="<?php echo $employee->employee_next_of_kin_name; ?>" class="form-control">
+								</div>
+								<div class="col-sm-4">
+									<label>Next of Kin's Phone Number</label>
+									<input  type="text" name="employee_next_of_kin_phone_number" disabled value="<?php echo $employee->employee_next_of_kin_phone_number; ?>" class="form-control cleave-number">
+								</div>
+								<div class="col-sm-4">
+									<label>Next of Kin'sResidential Address</label>
+									<textarea id="textarea" class="form-control" disabled   name="employee_next_of_kin_address"  maxlength="225" rows="3"> <?php echo $employee->employee_next_of_kin_address; ?> </textarea>
+
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<label for="phone-number">Emergency Contact Name</label>
+									<input  type="text" name="employee_emergency_name" disabled value="<?php echo $employee->employee_emergency_name; ?>" class="form-control">
+								</div>
+								<div class="col-sm-6">
+									<label>Emergency Contact's Phone Number</label>
+									<input type="text" name="employee_emergency_phone" disabled value="<?php echo $employee->employee_emergency_contact; ?>" class="form-control cleave-number">
+								</div>
+
+							</div>
                           <input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
                         </div>
                         <div class="text-center">

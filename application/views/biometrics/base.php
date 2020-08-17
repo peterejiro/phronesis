@@ -67,6 +67,32 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="col-lg-6">
+							<div class="card card-large-icons">
+								<div class="card-icon bg-primary text-white">
+									<i class="fas fa-calendar-minus"></i>
+								</div>
+								<div class="card-body">
+									<h4>Clock Out - Today</h4>
+									<p>Generate report for time Employees Clocked out</p>
+									<a href="<?php echo base_url('clock_out_today'); ?>" class="card-cta">View Report <i class="fas fa-chevron-right"></i></a>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-6">
+							<div class="card card-large-icons">
+								<div class="card-icon bg-primary text-white">
+									<i class="far fa-calendar-plus"></i>
+								</div>
+								<div class="card-body">
+									<h4>Clock Out - Date</h4>
+									<p>Generate report for when employees clocked out on a given date here</p>
+									<a href="<?php echo base_url('clock_out_date'); ?>" class="card-cta">View Report <i class="fas fa-chevron-right"></i></a>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>

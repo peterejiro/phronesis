@@ -549,8 +549,12 @@ class Employees extends CI_Model
 	}
 
 	public function delete_employee_training($training_id){
-
 		$this->db->delete('employee_training', array('employee_training_id' => $training_id));
+		return true;
+	}
+
+	public function delete_work_experience($employee_id){
+		$this->db->delete('work_experience', array('employee_id' => $employee_id));
 		return true;
 	}
 

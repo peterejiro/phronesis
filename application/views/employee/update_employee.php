@@ -132,6 +132,119 @@
                               </div>
                             </div>
                           </div>
+
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<label >State of Origin</label>
+									<select  class="select2 form-control" required name="employee_state_of_origin" style="width: 100%; height: 42px !important;">
+										<option value="">Select</option>
+										<option value="FCT-Abuja" <?php if($employee->employee_state == "FCT-Abuja" ): echo "selected"; endif; ?>> FCT-Abuja </option>
+										<option value="Abia State" <?php if($employee->employee_state == "Abia State" ): echo "selected"; endif; ?>> Abia State </option>
+										<option value="Adamawa State" <?php if($employee->employee_state == "Adamawa State" ): echo "selected"; endif; ?>> Adamawa State </option>
+										<option value="Akwa Ibom State" <?php if($employee->employee_state == "Akwa Ibom State" ): echo "selected"; endif; ?>> Akwa Ibom State </option>
+										<option value="Anambra State" <?php if($employee->employee_state == "Anambra State" ): echo "selected"; endif; ?>> Anambra State </option>
+										<option value="Bauchi State" <?php if($employee->employee_state == "Bauchi State" ): echo "selected"; endif; ?>> Bauchi State </option>
+										<option value="Bayelsa State" <?php if($employee->employee_state == "Bayelsa State" ): echo "selected"; endif; ?>> Bayelsa State </option>
+										<option value="Benue State" <?php if($employee->employee_state == "Benue State" ): echo "selected"; endif; ?>> Benue State </option>
+										<option value="Borno State" <?php if($employee->employee_state == "Borno State" ): echo "selected"; endif; ?>> Borno State </option>
+										<option value="Cross River State" <?php if($employee->employee_state == "Cross River State" ): echo "selected"; endif; ?>> Cross River State </option>
+										<option value="Delta State" <?php if($employee->employee_state == "Delta State"  ): echo "selected"; endif; ?>> Delta State </option>
+										<option value="Ebonyi State" <?php if($employee->employee_state == "Ebonyi State" ): echo "selected"; endif; ?>> Ebonyi State </option>
+										<option value="Edo State" <?php if($employee->employee_state == "Edo State" ): echo "selected"; endif; ?>> Edo State </option>
+										<option value="Ekiti State" <?php if($employee->employee_state == "Ekiti State" ): echo "selected"; endif; ?>> Ekiti State </option>
+										<option value="Enugu State" <?php if($employee->employee_state == "Enugu State" ): echo "selected"; endif; ?>> Enugu State </option>
+										<option value="Gombe State" <?php if($employee->employee_state == "Gombe State" ): echo "selected"; endif; ?>> Gombe State </option>
+										<option value="Imo State" <?php if($employee->employee_state == "Imo State" ): echo "selected"; endif; ?>> Imo State </option>
+										<option value="Jigawa State" <?php if($employee->employee_state == "Jigawa State" ): echo "selected"; endif; ?>> Jigawa State </option>
+										<option value="Kaduna State" <?php if($employee->employee_state == "Kaduna State" ): echo "selected"; endif; ?>> Kaduna State </option>
+										<option value="Kano State" <?php if($employee->employee_state == "Kano State" ): echo "selected"; endif; ?>> Kano State </option>
+										<option value="Katsina State" <?php if($employee->employee_state == "Katsina State" ): echo "selected"; endif; ?>> Katsina State </option>
+										<option value="Kebbi State" <?php if($employee->employee_state == "Kebbi State" ): echo "selected"; endif; ?>> Kebbi State </option>
+										<option value="Kogi State" <?php if($employee->employee_state == "Kogi State" ): echo "selected"; endif; ?>> Kogi State </option>
+										<option value="Kwara State" <?php if($employee->employee_state == "Kwara State" ): echo "selected"; endif; ?>> Kwara State </option>
+										<option value="Lagos State" <?php if($employee->employee_state == "Lagos State" ): echo "selected"; endif; ?>> Lagos State </option>
+										<option value="Nasarawa State" <?php if($employee->employee_state == "Nasarawa State" ): echo "selected"; endif; ?>> Nasarawa State </option>
+										<option value="Niger State" <?php if($employee->employee_state == "Niger State" ): echo "selected"; endif; ?>> Niger State </option>
+										<option value="Ogun State" <?php if($employee->employee_state == "Ogun State" ): echo "selected"; endif; ?>> Ogun State </option>
+										<option value="Ondo State" <?php if($employee->employee_state == "Ondo State" ): echo "selected"; endif; ?>> Ondo State </option>
+										<option value="Osun State" <?php if($employee->employee_state == "Osun State" ): echo "selected"; endif; ?>> Osun State </option>
+										<option value="Oyo State" <?php if($employee->employee_state == "Oyo State" ): echo "selected"; endif; ?>> Oyo State </option>
+										<option value="Plateau State" <?php if($employee->employee_state == "Plateau State" ): echo "selected"; endif; ?>> Plateau State </option>
+										<option value="Rivers State" <?php if($employee->employee_state == "Rivers State" ): echo "selected"; endif; ?>> Rivers State </option>
+										<option value="Sokoto State" <?php if($employee->employee_state == "Sokoto State" ): echo "selected"; endif; ?>> Sokoto State </option>
+										<option value="Taraba State" <?php if($employee->employee_state == "Taraba State" ): echo "selected"; endif; ?>> Taraba State </option>
+										<option value="Yobe State" <?php if($employee->employee_state == "Yobe State" ): echo "selected"; endif; ?>> Yobe State </option>
+										<option value="Zamfara State" <?php if($employee->employee_state == "Zamfara State" ): echo "selected"; endif; ?>> Zamfara State </option>
+
+									</select>
+								</div>
+								<div class="col-sm-6">
+									<label>LGA</label>
+									<input type="text" name="employee_lga" value="<?php echo $employee->employee_lga; ?>" class="form-control">
+								</div>
+
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-4">
+									<label ">Marital Status</label>
+									<input  type="text" name="employee_marital" value="<?php echo $employee->employee_marital_status; ?>" class="form-control">
+								</div>
+								<div class="col-sm-4">
+									<label>Spouse Name</label>
+									<input  type="text" name="employee_spouse_name" value="<?php echo  $employee->employee_spouse_name; ?>" class="form-control">
+								</div>
+								<div class="col-sm-4">
+									<label>Spouse Phone Number</label>
+									<input  type="text" name="employee_spouse_phone_number" value="<?php echo $employee->employee_spouse_phone_number; ?>" class="form-control cleave-number">
+
+
+								</div>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-4">
+									<label ">Known Ailments</label>
+									<input  type="text" name="employee_ailments" value="<?php echo $employee->employee_ailments; ?>" class="form-control">
+								</div>
+								<div class="col-sm-4">
+									<label>Blood Group</label>
+									<input  type="text" name="employee_blood" value="<?php echo $employee->employee_blood; ?>" class="form-control">
+								</div>
+								<div class="col-sm-4">
+									<label>Genotype</label>
+									<input  type="text" name="employee_genotype" value="<?php echo $employee->employee_genotype; ?>" class="form-control ">
+
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-sm-4">
+									<label for="phone-number">Next of Kin's Name</label>
+									<input  type="text" name="employee_next_of_kin_name" value="<?php echo $employee->employee_next_of_kin_name; ?>" class="form-control">
+								</div>
+								<div class="col-sm-4">
+									<label>Next of Kin's Phone Number</label>
+									<input  type="text" name="employee_next_of_kin_phone_number" value="<?php echo $employee->employee_next_of_kin_phone_number; ?>" class="form-control cleave-number">
+								</div>
+								<div class="col-sm-4">
+									<label>Next of Kin'sResidential Address</label>
+									<textarea id="textarea" class="form-control" required name="employee_next_of_kin_address"  maxlength="225" rows="3"> <?php echo $employee->employee_next_of_kin_address; ?> </textarea>
+
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<label for="phone-number">Emergency Contact Name</label>
+									<input  type="text" name="employee_emergency_name" value="<?php echo $employee->employee_emergency_name; ?>" class="form-control">
+								</div>
+								<div class="col-sm-6">
+									<label>Emergency Contact's Phone Number</label>
+									<input type="text" name="employee_emergency_phone" value="<?php echo $employee->employee_emergency_contact; ?>" class="form-control cleave-number">
+								</div>
+
+							</div>
+
+
                           <input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
                           <input type="hidden" name="employee_id" value="<?php echo $employee->employee_id;?>"/>
                         </div>
@@ -192,12 +305,14 @@
                             </select>
                           </div>
                         </div>
-                        <div id="work_experiences">
+
+
+
                           <label>Work Experiences </label><br>
                           <?php if(empty($work_experiences)){ ?>
                             <p class="form-text text-muted">No Work Experience Found For Employee</p>
                           <?php } else { foreach ($work_experiences as $work_experience){ ?>
-                            <div id="work_experience1">
+                            <div>
                               <div class="form-group row">
                                 <div class="col-sm-12">
                                   <label>Company Name</label>
@@ -207,24 +322,55 @@
                               <div class="form-group row">
                                 <div class="col-sm-12">
                                   <label> Job Description</label>
-                                  <textarea id="textarea" class="form-control" name="job_description[]" disabled maxlength="225" rows="3"><?php echo $work_experience->job_description;  ?></textarea>
+                                  <textarea id="textarea" class="form-control" name="job_description[]"  maxlength="225" rows="3"><?php echo $work_experience->job_description;  ?></textarea>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <div class="col-sm-6">
                                   <label> Start Date</label>
-                                  <input type="date" name="experience_start_date[]" disabled value="<?php echo $work_experience->start_date;  ?>" class="form-control">
+                                  <input type="date" name="experience_start_date[]"  value="<?php echo $work_experience->start_date;  ?>" class="form-control">
                                 </div>
                                 <div class="col-sm-6">
                                   <label> End Date</label>
-                                  <input type="date" name="experience_end_date[]" disabled value="<?php echo $work_experience->end_date;  ?>" class="form-control">
+                                  <input type="date" name="experience_end_date[]"  value="<?php echo $work_experience->end_date;  ?>" class="form-control">
                                 </div>
                               </div>
                             </div>
                             <hr>
                           <?php		}
                           } ?>
-                        </div>
+						  <div id="work_experiences">
+							  <div id="work_experience1">
+								  <button type="button" onclick="delete_div(this)" class="btn btn-danger" style="margin-bottom: 12px">
+									  <i class="fas fa-minus"></i>
+								  </button>
+								  <div class="form-group row">
+									  <div class="col-sm-12">
+										  <label for="company-name">Company Name</label>
+										  <input id="company-name" type="text" class="form-control" name="company_name[]" />
+									  </div>
+								  </div>
+								  <div class="form-group row">
+									  <div class="col-sm-12">
+										  <label>Job Description</label>
+										  <textarea id="textarea" class="form-control" name="job_description[]" maxlength="225" rows="3"></textarea>
+									  </div>
+								  </div>
+								  <div class="form-group row">
+									  <div class="col-sm-6">
+										  <label for="start-date">Start Date</label>
+										  <input id="start-date" type="date" name="experience_start_date[]" class="form-control" placeholder="mm/dd/yyyy">
+									  </div>
+									  <div class="col-sm-6">
+										  <label for="end-date"> End Date:</label>
+										  <input id="end-date" type="date" name="experience_end_date[]" class="form-control" placeholder="mm/dd/yyyy">
+									  </div>
+								  </div>
+							  </div>
+							  <button id="work_experience_button" type="button" onclick="clone_div()" class="btn btn-primary">
+								  <i class="fas fa-plus"></i>
+							  </button>
+						  </div>
                         <div class="text-center">
                           <span class="text-primary prv" style="cursor: pointer" id="prv">previous</span>
                           <div class="bullet"></div>
@@ -335,10 +481,18 @@
                             <label> Employment Start Date:</label>
                             <input type="date" name="employment_start_date" value="<?php echo $employee->employee_employment_date; ?>"  required class="form-control" placeholder="mm/dd/yyyy">
                           </div>
-                          <div class="col-sm-6">
-                            <label>Employment Stop Date</label> <br>
-                            <input type="date" name="employment_stop_date" value="<?php echo $employee->employee_stop_date; ?>"  class="form-control" placeholder="mm/dd/yyyy">
-                          </div>
+							<div class="col-sm-6">
+								<label>Passport Photograph</label><span style="color: red"> *</span>
+								<div class="custom-file">
+									<input id="employee-passport" name="employee_passport" class="custom-file-input" type="file">
+									<label for="employee-passport" class="custom-file-label">Choose File</label>
+								</div>
+								<div class="invalid-feedback">
+									please upload a passport photograph image
+								</div>
+								<p class="form-text text-muted">Upload image as either gif, jpg, png or jpeg </p>
+
+							</div>
                         </div>
                         <div class="text-center">
                           <span class="text-primary prv" style="cursor: pointer" id="prv">previous</span>
@@ -413,7 +567,10 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
   $('title').html('Update Employee - IHUMANE');
-
+  $(".custom-file-input").on('change', function() {
+	  let fileName = $(this).val().split('//').pop();
+	  $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+  });
   window.onload = function(){
     let pensionable = document.getElementById('employee_pensionable').value
 
@@ -461,6 +618,68 @@
         currentTab.parent().prev().children().trigger('click');
       }
     }
+  }
+
+
+  function work_experience() {
+	  let work_experience = document.getElementById("work_experiences");
+	  let work_experience_value = document.getElementById("check_experience").value
+
+	  if (work_experience_value == 0) {
+		  work_experience.style.display = 'none';
+	  } else {
+		  work_experience.style.display = 'block';
+	  }
+
+  }
+
+  function clone_div() {
+	  let elem = document.getElementById('work_experience1');
+	  if (elem.style.display == 'none') {
+		  elem.style.display = 'block';
+	  } else {
+		  // Create a copy of it
+		  let clone = elem.cloneNode(true);
+		  // Update the ID and add a class
+		  clone.id = 'work_experience2';
+		  // document.getElementById('work_experiences').appendChild(clone);
+		  let work_experiences = document.getElementById('work_experiences');
+
+		  let work_experience_button = document.getElementById('work_experience_button');
+		  //clone.insertBefore(work_experience_button);
+		  work_experiences.insertBefore(clone, work_experience_button)
+		  // Inject it into the DOM
+		  elem.after(clone);
+	  }
+  }
+
+  function delete_div(e) {
+	  let id = e.parentElement.id;
+	  if (id == 'work_experience1') {
+		  let elem = document.getElementById('work_experience1');
+		  let inputs = elem.getElementsByTagName('input');
+		  let index;
+		  for (index = 0; index < inputs.length; ++index) {
+			  if (inputs[index].type == 'text')
+				  inputs[index].value = '';
+		  }
+		  inputs = elem.getElementsByTagName('input');
+		  for (index = 0; index < inputs.length; ++index) {
+			  if (inputs[index].type == 'date')
+				  inputs[index].value = '';
+		  }
+
+		  inputs = elem.getElementsByTagName('textarea');
+		  for (index = 0; index < inputs.length; ++index) {
+			  // if(inputs[index].type == 'textarea')
+			  inputs[index].value = '';
+		  }
+		  // var textarea = elem.getElementsByTagName('textarea');
+		  // textarea.value = '';
+		  elem.style.display = 'none';
+	  } else {
+		  e.parentElement.remove();
+	  }
   }
 </script>
 </body>
