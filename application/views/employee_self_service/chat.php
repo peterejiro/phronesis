@@ -35,7 +35,7 @@
 	overflow-y: auto;" >
 								<ul class="list-unstyled list-unstyled-border">
 									<?php foreach ($users as $user):
-									if($user->user_type == 2 || $user->user_type == 3):
+									if($user->user_type == 3):
 									//if(!empty($user->user_token)):
 									$employee_details = @$this->employees->get_employee_by_unique($user->user_username);
 									if($employee_details->employee_id !== $employee_id):
@@ -62,7 +62,7 @@
 					<div class="col-12 col-sm-6 col-lg-8">
 						<div class="content-container" style="display: none">
 							<?php foreach ($users as $user):
-								if($user->user_type == 2 || $user->user_type == 3):
+								if($user->user_type == 3):
 										$employee_details = @$CI->employees->get_employee_by_unique($user->user_username);
 										?>
 									<div id="<?php echo $employee_details->employee_id; ?>">
@@ -81,6 +81,8 @@
 
 											<div class="card-footer chat-form">
 												<form onsubmit="send_message(<?php echo $employee_id; ?>, <?php echo $employee_details->employee_id; ?>)" id="<?php echo $employee_details->employee_id; ?>">
+<!--													<textarea class="form-control" id="message--><?php //echo $employee_details->employee_id; ?><!--"  placeholder="Type a message ..."></textarea>-->
+
 													<input type="text" id="message<?php echo $employee_details->employee_id; ?>" class="form-control" placeholder="Type a message">
 													<button type="button" onclick="send_message(<?php echo $employee_id; ?>, <?php echo $employee_details->employee_id; ?>)" class="btn btn-primary">
 														<i class="far fa-paper-plane"></i>

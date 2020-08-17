@@ -33,6 +33,7 @@ class Payroll extends CI_Controller
 			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -75,6 +76,7 @@ class Payroll extends CI_Controller
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -213,6 +215,7 @@ class Payroll extends CI_Controller
 			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -316,6 +319,7 @@ class Payroll extends CI_Controller
 			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -425,6 +429,7 @@ class Payroll extends CI_Controller
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -613,6 +618,7 @@ class Payroll extends CI_Controller
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -652,6 +658,7 @@ class Payroll extends CI_Controller
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -696,6 +703,7 @@ class Payroll extends CI_Controller
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -854,6 +862,7 @@ class Payroll extends CI_Controller
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -896,6 +905,7 @@ class Payroll extends CI_Controller
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -1005,6 +1015,7 @@ class Payroll extends CI_Controller
 			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -1066,6 +1077,7 @@ class Payroll extends CI_Controller
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -1136,6 +1148,7 @@ class Payroll extends CI_Controller
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -1559,6 +1572,7 @@ class Payroll extends CI_Controller
 			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -1629,6 +1643,7 @@ class Payroll extends CI_Controller
 
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 				$data['payroll_management'] = $permission->payroll_management;
 				$data['biometrics'] = $permission->biometrics;
 				$data['user_management'] = $permission->user_management;
@@ -1785,6 +1800,7 @@ class Payroll extends CI_Controller
 
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 				$data['payroll_management'] = $permission->payroll_management;
 				$data['biometrics'] = $permission->biometrics;
 				$data['user_management'] = $permission->user_management;

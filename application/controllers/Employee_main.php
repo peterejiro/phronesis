@@ -437,6 +437,22 @@ class Employee_main extends CI_Controller
 
 						if($query == true):
 
+							$employee_history_array = array(
+									'employee_history_employee_id' => $employee_id,
+									'employee_history_details' =>'Leave Application'
+
+							);
+
+							$this->employees->insert_employee_history($employee_history_array);
+
+							$notification_data = array(
+									'notification_employee_id'=> 0,
+									'notification_link'=> 'employee_leave',
+									'notification_type' => 'New Leave Application',
+									'notification_status'=> 0
+							);
+
+							$this->employees->insert_notifications($notification_data);
 
 
 							$msg = array(
@@ -480,6 +496,15 @@ class Employee_main extends CI_Controller
 						);
 
 						$this->employees->insert_employee_history($employee_history_array);
+
+						$notification_data = array(
+								'notification_employee_id'=> 0,
+								'notification_link'=> 'employee_leave',
+								'notification_type' => 'New Leave Application',
+								'notification_status'=> 0
+						);
+
+						$this->employees->insert_notifications($notification_data);
 
 						$msg = array(
 							'msg'=> 'Leave Application Successful',
@@ -696,6 +721,15 @@ class Employee_main extends CI_Controller
 						$this->employees->update_appraisal($appraisal_id, $appraisal_data);
 						endif;
 
+					$notification_data = array(
+							'notification_employee_id'=> 0,
+							'notification_link'=> 'employee_appraisal',
+							'notification_type' => 'Supervisor Completed Appraisal',
+							'notification_status'=> 0
+					);
+
+					$this->employees->insert_notifications($notification_data);
+
 					$msg = array(
 						'msg'=> 'Appraisal Completed',
 						'location' => site_url('employee_main'),
@@ -805,6 +839,14 @@ class Employee_main extends CI_Controller
 					$this->employees->update_appraisal($appraisal_id, $appraisal_data);
 				endif;
 
+				$notification_data = array(
+						'notification_employee_id'=> 0,
+						'notification_link'=> 'employee_appraisal',
+						'notification_type' => 'Employee Completed Appraisal',
+						'notification_status'=> 0
+				);
+
+				$this->employees->insert_notifications($notification_data);
 				$msg = array(
 					'msg'=> 'Appraisal Completed',
 					'location' => site_url('employee_main'),
@@ -1263,6 +1305,15 @@ class Employee_main extends CI_Controller
 								'log_description' => "Initiated Loan Application"
 							);
 
+							$notification_data = array(
+									'notification_employee_id'=> 0,
+									'notification_link'=> 'loans',
+									'notification_type' => 'New Loan Application',
+									'notification_status'=> 0
+							);
+
+							$this->employees->insert_notifications($notification_data);
+
 							$this->logs->add_log($log_array);
 							$msg = array(
 								'msg'=> 'Loan Added Successfully',
@@ -1422,7 +1473,14 @@ class Employee_main extends CI_Controller
 
 
 						if($query == true):
+							$notification_data = array(
+									'notification_employee_id'=> 0,
+									'notification_link'=> 'terminations',
+									'notification_type' => 'New Termination Notice',
+									'notification_status'=> 0
+							);
 
+							$this->employees->insert_notifications($notification_data);
 							$msg = array(
 								'msg' => 'Employment Termination Notice Sent',
 								'location' => site_url('employee_main'),
@@ -1649,7 +1707,10 @@ class Employee_main extends CI_Controller
 			redirect('error_404');
 		else:
 
-			$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+
+
+		$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 		if($employee_id == $notification->notification_employee_id):
 
 			$notification_data = array(
@@ -1960,6 +2021,14 @@ class Employee_main extends CI_Controller
 
 				$this->employees->insert_notifications($notification_data);
 
+				$notification_data = array(
+						'notification_employee_id'=> 0,
+						'notification_link'=> 'employee_trainings',
+						'notification_type' => 'Employee Completed Training',
+						'notification_status'=> 0
+				);
+
+				$this->employees->insert_notifications($notification_data);
 				$msg = array(
 					'msg' => 'Test Complete with a score of  '.$total_score.'%',
 					'location' =>  site_url('my_trainings'),

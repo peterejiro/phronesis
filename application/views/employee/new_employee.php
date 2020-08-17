@@ -116,6 +116,118 @@
                                 </div>
                               </div>
                             </div>
+							  <div class="form-group row">
+								  <div class="col-sm-6">
+									  <label >State of Origin</label>
+									  <select  class="select2 form-control" required name="employee_state_of_origin" style="width: 100%; height: 42px !important;">
+										  <option value="">Select</option>
+										  <option value="FCT-Abuja"> FCT-Abuja </option>
+										  <option value="Abia State"> Abia State </option>
+										  <option value="Adamawa State"> Adamawa State </option>
+										  <option value="Akwa Ibom State"> Akwa Ibom State </option>
+										  <option value="Anambra State"> Anambra State </option>
+										  <option value="Bauchi State"> Bauchi State </option>
+										  <option value="Bayelsa State"> Bayelsa State </option>
+										  <option value="Benue State"> Benue State </option>
+										  <option value="Borno State"> Borno State </option>
+										  <option value="Cross River State"> Cross River State </option>
+										  <option value="Delta State"> Delta State </option>
+										  <option value="Ebonyi State"> Ebonyi State </option>
+										  <option value="Edo State"> Edo State </option>
+										  <option value="Ekiti State"> Ekiti State </option>
+										  <option value="Enugu State"> Enugu State </option>
+										  <option value="Gombe State"> Gombe State </option>
+										  <option value="Imo State"> Imo State </option>
+										  <option value="Jigawa State"> Jigawa State </option>
+										  <option value="Kaduna State"> Kaduna State </option>
+										  <option value="Kano State"> Kano State </option>
+										  <option value="Katsina State"> Katsina State </option>
+										  <option value="Kebbi State"> Kebbi State </option>
+										  <option value="Kogi State"> Kogi State </option>
+										  <option value="Kwara State"> Kwara State </option>
+										  <option value="Lagos State"> Lagos State </option>
+										  <option value="Nasarawa State"> Nasarawa State </option>
+										  <option value="Niger State"> Niger State </option>
+										  <option value="Ogun State"> Ogun State </option>
+										  <option value="Ondo State"> Ondo State </option>
+										  <option value="Osun State"> Osun State </option>
+										  <option value="Oyo State"> Oyo State </option>
+										  <option value="Plateau State"> Plateau State </option>
+										  <option value="Rivers State"> Rivers State </option>
+										  <option value="Sokoto State"> Sokoto State </option>
+										  <option value="Taraba State"> Taraba State </option>
+										  <option value="Yobe State"> Yobe State </option>
+										  <option value="Zamfara State"> Zamfara State </option>
+
+									  </select>
+								  </div>
+								  <div class="col-sm-6">
+									  <label>LGA</label>
+									  <input type="text" name="employee_lga" class="form-control">
+								  </div>
+
+							  </div>
+							  <div class="form-group row">
+								  <div class="col-sm-4">
+									  <label ">Marital Status</label>
+									  <input  type="text" name="employee_marital" class="form-control">
+								  </div>
+								  <div class="col-sm-4">
+									  <label>Spouse Name</label>
+									  <input  type="text" name="employee_spouse_name" class="form-control">
+								  </div>
+								  <div class="col-sm-4">
+									  <label>Spouse Phone Number</label>
+									  <input  type="text" name="employee_spouse_phone_number" class="form-control cleave-number">
+
+
+								  </div>
+							  </div>
+							  <div class="form-group row">
+								  <div class="col-sm-4">
+									  <label ">Known Ailments</label>
+									  <input  type="text" name="employee_ailments" class="form-control">
+								  </div>
+								  <div class="col-sm-4">
+									  <label>Blood Group</label>
+									  <input  type="text" name="employee_blood" class="form-control">
+								  </div>
+								  <div class="col-sm-4">
+									  <label>Genotype</label>
+									  <input  type="text" name="employee_genotype" class="form-control ">
+
+								  </div>
+							  </div>
+
+							  <div class="form-group row">
+								  <div class="col-sm-4">
+									  <label for="phone-number">Next of Kin's Name</label>
+									  <input  type="text" name="employee_next_of_kin_name" class="form-control">
+								  </div>
+								  <div class="col-sm-4">
+									  <label>Next of Kin's Phone Number</label>
+									  <input  type="text" name="employee_next_of_kin_phone_number" class="form-control cleave-number">
+								  </div>
+								  <div class="col-sm-4">
+									  <label>Next of Kin'sResidential Address</label>
+									  <textarea id="textarea" class="form-control" required name="employee_next_of_kin_address" maxlength="225" rows="3"></textarea>
+									  <div class="invalid-feedback">
+										  please fill in the employee's residential address
+									  </div>
+								  </div>
+							  </div>
+
+							  <div class="form-group row">
+								  <div class="col-sm-6">
+									  <label for="phone-number">Emergency Contact Name</label>
+									  <input  type="text" name="employee_emergency_name" class="form-control">
+								  </div>
+								  <div class="col-sm-6">
+									  <label>Emergency Contact's Phone Number</label>
+									  <input type="text" name="employee_emergency_phone" class="form-control cleave-number">
+								  </div>
+
+							  </div>
                             <input type="hidden" name="<?php echo $csrf_name; ?>" value="<?php echo $csrf_hash; ?>" />
                           </div>
                           <div class="text-center">
@@ -125,6 +237,13 @@
                             <p class="form-text text-muted">Please click next to ensure all required fields are complete to submit the form</p>
                           </div>
                         </div>
+
+
+
+
+
+
+
                         <div class="tab-pane p-3" id="job-information" role="tabpanel">
                           <div class="form-group row">
                             <div class="col-sm-6">

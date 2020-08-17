@@ -32,6 +32,7 @@ class Biometrics extends CI_Controller
 			if ($user_type == 1 || $user_type == 3):
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 				$data['payroll_management'] = $permission->payroll_management;
 				$data['biometrics'] = $permission->biometrics;
 				$data['user_management'] = $permission->user_management;
@@ -74,6 +75,7 @@ class Biometrics extends CI_Controller
 			if ($user_type == 1 || $user_type == 3):
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 				$data['payroll_management'] = $permission->payroll_management;
 				$data['biometrics'] = $permission->biometrics;
 				$data['user_management'] = $permission->user_management;
@@ -114,6 +116,7 @@ class Biometrics extends CI_Controller
 			if ($user_type == 1 || $user_type == 3):
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 				$data['payroll_management'] = $permission->payroll_management;
 				$data['biometrics'] = $permission->biometrics;
 				$data['user_management'] = $permission->user_management;
@@ -158,6 +161,7 @@ class Biometrics extends CI_Controller
 			if ($user_type == 1 || $user_type == 3):
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 				$data['payroll_management'] = $permission->payroll_management;
 				$data['biometrics'] = $permission->biometrics;
 				$data['user_management'] = $permission->user_management;
@@ -202,6 +206,7 @@ class Biometrics extends CI_Controller
 			if ($user_type == 1 || $user_type == 3):
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 				$data['payroll_management'] = $permission->payroll_management;
 				$data['biometrics'] = $permission->biometrics;
 				$data['user_management'] = $permission->user_management;
@@ -247,6 +252,7 @@ class Biometrics extends CI_Controller
 			if ($user_type == 1 || $user_type == 3):
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 				$data['payroll_management'] = $permission->payroll_management;
 				$data['biometrics'] = $permission->biometrics;
 				$data['user_management'] = $permission->user_management;
@@ -293,6 +299,7 @@ class Biometrics extends CI_Controller
 			if ($user_type == 1 || $user_type == 3):
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 				$data['payroll_management'] = $permission->payroll_management;
 				$data['biometrics'] = $permission->biometrics;
 				$data['user_management'] = $permission->user_management;
@@ -336,6 +343,7 @@ class Biometrics extends CI_Controller
 			if ($user_type == 1 || $user_type == 3):
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 				$data['payroll_management'] = $permission->payroll_management;
 				$data['biometrics'] = $permission->biometrics;
 				$data['user_management'] = $permission->user_management;
@@ -386,6 +394,7 @@ class Biometrics extends CI_Controller
 			if ($user_type == 1 || $user_type == 3):
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
 				$data['payroll_management'] = $permission->payroll_management;
 				$data['biometrics'] = $permission->biometrics;
 				$data['user_management'] = $permission->user_management;
@@ -402,6 +411,49 @@ class Biometrics extends CI_Controller
 					$data['csrf_hash'] = $this->security->get_csrf_hash();
 
 					$this->load->view('biometrics/clock_in', $data);
+				else:
+
+					redirect('/access_denied');
+				endif;
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function clockout()
+	{
+
+		$username = $this->session->userdata('user_username');
+
+		if (isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if ($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if ($permission->biometrics == 1):
+
+
+					$data['employees'] = $this->employees->view_employees();
+					$data['user_data'] = $this->users->get_user($username);
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$this->load->view('biometrics/clock_out', $data);
 				else:
 
 					redirect('/access_denied');
@@ -652,4 +704,272 @@ class Biometrics extends CI_Controller
 		$this->load->view('biometrics/clockin', $data);
 
 	}
+
+
+	public function clock_out(){
+		$employee_id = $this->uri->segment(2);
+
+		$finger = $this->biometric->get_employee_biometric($employee_id);
+
+
+		$time_limit_ver = "10";
+
+		echo "$employee_id;".$finger[0]->employee_biometrics_data.";SecurityKey;".$time_limit_ver.";".site_url('process_clockout').";".site_url('getac').";extraParams";
+
+
+	}
+
+	public function process_clockout(){
+		if (isset($_POST['VerPas']) && !empty($_POST['VerPas'])) {
+
+
+
+			$data 	= explode(";",$_POST['VerPas']);
+			$employee_id	= $data[0];
+			$vStamp 	= $data[1];
+			$time 		= $data[2];
+			$sn 		= $data[3];
+
+			$fingerData = $this->biometric->get_employee_biometric($employee_id);
+
+			$user_name	= $employee_id;
+			$sn = 'DX00F000388';
+			$vkey = '5960CA099F0C050F1109EB8BEADB5BFA';
+			$vc ='42319B9B191739D';
+
+
+			$salt = md5($sn.$fingerData[0]->employee_biometrics_data.$vc.$time.$employee_id.$vkey);
+
+			if (strtoupper($vStamp) == strtoupper($salt)) {
+
+				$log = array(
+					'employee_clockout_employee_id' => $employee_id
+				);
+
+				$query = $this->biometric->insert_clockout($log);
+
+				if ($query == true) {
+
+					echo site_url('messages_clockout')."/".$employee_id;
+
+				} else {
+
+					echo site_url('messages_clockout')."/a";
+
+				}
+
+			} else {
+
+				$msg = "Parameter invalid..";
+
+				echo site_url('message_clockout')."/a";
+
+			}
+		}
+
+	}
+
+
+	public function message_clockout(){
+
+		$employee_id = $this->uri->segment(2);
+		if($employee_id == 'a'){
+			$msg = "Parameter invalid..";
+
+			echo "$msg";
+
+		}else{
+			$time= date('Y-m-d H:i:s', time()+60*60);
+
+			$data['employee'] = $this->employees->get_employee($employee_id);
+			$data['login_time'] = $time;
+
+
+			$this->load->view('biometrics/clock_out_success', $data);
+
+
+			//echo $employee_id." login success on ".date('Y-m-d H:i:s', strtotime($time));
+
+		}
+
+
+
+	}
+
+	public function messages_clockout()
+	{
+
+		$msg = $this->uri->segment(2);
+
+
+		if (!empty($msg)) {
+
+			$time= date('Y-m-d H:i:s', time()+60*60);
+
+			$data['employee'] = $this->employees->get_employee($msg);
+			$data['login_time'] = $time;
+
+
+			$this->load->view('biometrics/clock_out_success', $data);
+
+		} else {
+
+			$msg = "Parameter invalid..";
+
+			echo "$msg";
+
+		}
+	}
+
+
+
+	public function clockout_attendance(){
+		$data['employees'] = $this->employees->view_employees();
+
+		$data['csrf_name'] = $this->security->get_csrf_token_name();
+		$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+		$this->load->view('biometrics/clockout', $data);
+
+	}
+
+
+	public function clock_out_today(){
+		$username = $this->session->userdata('user_username');
+
+		if (isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if ($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if ($permission->biometrics == 1):
+
+
+					$data['employees'] = $this->employees->view_employees();
+					$data['user_data'] = $this->users->get_user($username);
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$date = date('Y-m-d', time());
+
+					$data['present_employees'] = $this->biometric->check_today_clock_out($date);
+
+					$this->load->view('biometrics/today_clockout', $data);
+				else:
+
+					redirect('/access_denied');
+				endif;
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+	public function clock_out_date(){
+		$username = $this->session->userdata('user_username');
+
+		if (isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if ($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if ($permission->biometrics == 1):
+
+
+					$data['employees'] = $this->employees->view_employees();
+					$data['user_data'] = $this->users->get_user($username);
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$date = date('Y-m-d', time());
+
+					$data['present_employees'] = $this->biometric->check_today_attendance($date);
+
+					$this->load->view('biometrics/_clock_out_date', $data);
+				else:
+
+					redirect('/access_denied');
+				endif;
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+	}
+
+	public function clock_out_datee(){
+
+		$username = $this->session->userdata('user_username');
+
+		if (isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if ($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+$data['notifications'] = $this->employees->get_notifications(0);
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+
+				if ($permission->biometrics == 1):
+
+
+					$data['employees'] = $this->employees->view_employees();
+					$data['user_data'] = $this->users->get_user($username);
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+					$date  = strtotime($this->input->post('date'));
+
+					$date = date('Y-m-d', $date);
+
+					$data['present_employees'] = $this->biometric->check_today_clock_out($date);
+
+					$data['date'] = $date;
+
+					$this->load->view('biometrics/clocked_out_employee', $data);
+				else:
+
+					redirect('/access_denied');
+				endif;
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+	}
+
 }
