@@ -87,6 +87,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 									<div class="bullet"></div>
 									<a href="<?php echo site_url('clock_attendance');?>" target="_blank">Clock In</a>
+
+									<div class="bullet"></div>
+									<a href="<?php echo site_url('clockout_attendance');?>" target="_blank">Clock Out</a>
 								</div>
 							</div>
 					</div>

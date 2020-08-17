@@ -15,10 +15,10 @@
 				<div class="main-content">
 					<section class="section">
 						<div class="section-header">
-							<h1>My Information</h1>
+							<h1>My Information -> <?php echo $employee->employee_unique_id; ?></h1>
 							<div class="section-header-breadcrumb">
 								<div class="breadcrumb-item active"><a href="<?php echo site_url('employee_main'); ?>">Dashboard</a></div>
-                <div class="breadcrumb-item">My Information</div>
+                <div class="breadcrumb-item">My Information  </div>
 							</div>
 						</div>
 						<div class="section-body">
@@ -27,7 +27,7 @@
 								<div class="col-12 col-sm-12 col-lg-12">
 									<div class="card">
 										<div class="card-header">
-											<h4>Personal Information</h4>
+											<h4>Personal Information </h4>
 										</div>
 										<div class="card-body">
 											<ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">

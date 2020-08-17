@@ -194,6 +194,7 @@ $route['employee_trainings'] = 'employee/employee_trainings';
 $route['new_employee_training'] = 'employee/new_employee_training';
 $route['add_new_employee_training'] = 'employee/add_new_employee_training';
 $route['view_training_result/:num'] = 'employee/view_training_result/$1';
+$route['clear_notifications/(:any)'] = 'employee/clear_notifications/$1';
 
 
 $route['tax_rates'] = 'payroll_configuration/tax_rate';
@@ -283,6 +284,14 @@ $route['present_employee'] = 'biometrics/present_employee';
 $route['present_employeee'] = 'biometrics/present_employeee';
 $route['absent_employee'] = 'biometrics/absent_employee';
 $route['absent_employeee'] = 'biometrics/absent_employeee';
+$route['message_clockout/(:any)'] = 'biometrics/message_clockout/$1';
+$route['messages_clockout/(:any)'] = 'biometrics/messages_clockout/$1';
+$route['process_clockout'] = 'biometrics/process_clockout';
+$route['clockout_attendance'] = 'biometrics/clockout_attendance';
+$route['clock_out/:num'] = 'biometrics/clock_out/$1';
+$route['clock_out_today'] = 'biometrics/clock_out_today';
+$route['clock_out_date'] = 'biometrics/clock_out_date';
+$route['clock_out_datee'] = 'biometrics/clock_out_datee';
 
 
 
@@ -314,6 +323,7 @@ $route['my_memos'] = 'employee_main/my_memos';
 $route['my_specific_memos'] = 'employee_main/my_specific_memos';
 $route['update_notification'] = 'employee_main/update_notification';
 $route['view_notification/:num'] = 'employee_main/view_notification/$1';
+$route['view_notifications/:num'] = 'employee/view_notifications/$1';
 $route['my_trainings'] = 'employee_main/my_trainings';
 $route['begin_training/:num/:num'] = 'employee_main/begin_training/$1/$1';
 $route['start_test/:num/:num'] = 'employee_main/start_test/$1/$1';

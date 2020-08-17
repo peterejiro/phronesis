@@ -39,6 +39,11 @@ class Biometric extends CI_Model
 		$this->db->insert('employee_biometrics_login', $data);
 		return true;
 	}
+	public function insert_clockout($data){
+
+		$this->db->insert('employee_clockout', $data);
+		return true;
+	}
 
 	public function check_clock_in($employee_id, $date){
 		$this->db->select('*');
@@ -57,6 +62,28 @@ class Biometric extends CI_Model
 		$this->db->like('employee_biometrics_login.employee_biometrics_login_time', $date);
 		//$this->db->get('employee_biometrics');
 		return $this->db->get()->result();
+
+	}
+
+	public function check_today_clock_out($date){
+		$this->db->select('*');
+		$this->db->from('employee_clockout');
+		$this->db->join('employee', 'employee.employee_id = employee_clockout.employee_clockout_employee_id');
+		$this->db->like('employee_clockout.employee_clockout_time', $date);
+		//$this->db->get('employee_biometrics');
+		return $this->db->get()->result();
+
+	}
+
+
+
+	public function check_clockout($employee_id, $date){
+		$this->db->select('*');
+		$this->db->from('employee_clockout');
+		$this->db->where('employee_clockout_employee_id', $employee_id);
+		$this->db->like('employee_clockout_time', $date);
+		//$this->db->get('employee_biometrics');
+		return $this->db->get()->row();
 
 	}
 

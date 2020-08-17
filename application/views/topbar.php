@@ -135,64 +135,39 @@
 				</div>
 			</div>
 		</li>
-		<li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg"><i class="far fa-bell"></i></a>
+		<?php $count = count($notifications); ?>
+		<li  class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg <?php if ($count > 0){echo "beep"; } ?>"><i class="far fa-bell"></i></a>
 			<div class="dropdown-menu dropdown-list dropdown-menu-right">
-				<div class="dropdown-header">
-          Notifications
-					<div class="float-right">
-						<a href="#">Mark All As Read</a>
+				<div class="dropdown-header">Notifications
+					<?php if($count > 0): ?>
+										<div class="float-right">
+											<a href="<?php echo site_url('clear_notifications')."/a"?>">Mark All As Read</a>
+										</div>
+					<?php endif; ?>
+				</div>
+				<?php if(!empty($notifications)): ?>
+
+					<div class="dropdown-list-content dropdown-list-icons">
+						<?php foreach ($notifications as $notification): ?>
+
+							<a id="<?php echo $notification->notification_id; ?>" href="<?php echo site_url()."view_notifications/".$notification->notification_id; ?>" class="dropdown-item dropdown-item-unread">
+								<div class="dropdown-item-icon bg-primary text-white">
+									<i class="fas fa-code"></i>
+								</div>
+								<div class="dropdown-item-desc">
+									<?php echo $notification->notification_type; ?>
+									<div class="time text-primary"><?php echo $notification->notification_date; ?></div>
+								</div>
+							</a>
+						<?php endforeach; ?>
+
 					</div>
-				</div>
-<!--				<div class="dropdown-list-content dropdown-list-icons">-->
-<!--					<a href="#" class="dropdown-item dropdown-item-unread">-->
-<!--						<div class="dropdown-item-icon bg-primary text-white">-->
-<!--							<i class="fas fa-code"></i>-->
-<!--						</div>-->
-<!--						<div class="dropdown-item-desc">-->
-<!--							Template update is available now!-->
-<!--							<div class="time text-primary">2 Min Ago</div>-->
-<!--						</div>-->
-<!--					</a>-->
-<!--					<a href="#" class="dropdown-item">-->
-<!--						<div class="dropdown-item-icon bg-info text-white">-->
-<!--							<i class="far fa-user"></i>-->
-<!--						</div>-->
-<!--						<div class="dropdown-item-desc">-->
-<!--							<b>You</b> and <b>Dedik Sugiharto</b> are now friends-->
-<!--							<div class="time">10 Hours Ago</div>-->
-<!--						</div>-->
-<!--					</a>-->
-<!--					<a href="#" class="dropdown-item">-->
-<!--						<div class="dropdown-item-icon bg-success text-white">-->
-<!--							<i class="fas fa-check"></i>-->
-<!--						</div>-->
-<!--						<div class="dropdown-item-desc">-->
-<!--							<b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>-->
-<!--							<div class="time">12 Hours Ago</div>-->
-<!--						</div>-->
-<!--					</a>-->
-<!--					<a href="#" class="dropdown-item">-->
-<!--						<div class="dropdown-item-icon bg-danger text-white">-->
-<!--							<i class="fas fa-exclamation-triangle"></i>-->
-<!--						</div>-->
-<!--						<div class="dropdown-item-desc">-->
-<!--							Low disk space. Let's clean it!-->
-<!--							<div class="time">17 Hours Ago</div>-->
-<!--						</div>-->
-<!--					</a>-->
-<!--					<a href="#" class="dropdown-item">-->
-<!--						<div class="dropdown-item-icon bg-info text-white">-->
-<!--							<i class="fas fa-bell"></i>-->
-<!--						</div>-->
-<!--						<div class="dropdown-item-desc">-->
-<!--							Welcome to Ihumane!-->
-<!--							<div class="time">Yesterday</div>-->
-<!--						</div>-->
-<!--					</a>-->
-<!--				</div>-->
-				<div class="dropdown-footer text-center">
-					<a href="#">View All <i class="fas fa-chevron-right"></i></a>
-				</div>
+				<?php endif; ?>
+				<?php if(empty($notifications)): ?>
+					<div class="dropdown-footer text-center">
+						No Notifications
+					</div>
+				<?php endif;?>
 			</div>
 		</li>
 		<li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
@@ -219,3 +194,36 @@
 		</li>
 	</ul>
 </nav>
+<script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+
+		setInterval(timestamp, 5000);
+		function timestamp() {
+
+			var employee_id = 0;
+			$.ajax({
+				type: "POST",
+				url: '<?php echo site_url('get_notifications'); ?>',
+				data: {employee_id: employee_id},
+				success: function (data) {
+					var data = JSON.parse(data);
+					for (i = 0; i < data.length; i++) {
+						var notification_id = data[i].notification_id;
+						$.notify(data[i].notification_type, {
+							title: "iHumane",
+							icon: "https://app.ihumane.net//assets/img/ihumane-logo-1.png",
+						}).click(function () {
+							location.href = '<?php echo site_url()?>/view_notifications/' + notification_id;
+						});
+					}
+
+				},
+				error: function () {
+					console.log(this.error);
+				}
+			});
+		}
+	})
+
+</script>
