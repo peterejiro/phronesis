@@ -135,7 +135,8 @@
 				</div>
 			</div>
 		</li>
-		<?php $count = count($notifications); ?>
+		<div id="notifications">
+			<?php $count = count($notifications); ?>
 		<li  class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg <?php if ($count > 0){echo "beep"; } ?>"><i class="far fa-bell"></i></a>
 			<div class="dropdown-menu dropdown-list dropdown-menu-right">
 				<div class="dropdown-header">Notifications
@@ -170,6 +171,8 @@
 				<?php endif;?>
 			</div>
 		</li>
+		</div>
+
 		<li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
 				<img alt="image" src="<?php echo base_url() ?>/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
 				<div class="d-sm-none d-lg-inline-block">Hi, <?php echo $user_data->user_name; ?></div></a>
@@ -198,7 +201,7 @@
 <script src="<?php echo base_url(); ?>assets/bower_components/push.js/bin/push.js"></script>
 <script>
 	$(document).ready(function () {
-		Push.create('Hello World!')
+
 
 		setInterval(timestamp, 5000);
 		function timestamp() {
