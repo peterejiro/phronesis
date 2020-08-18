@@ -1,6 +1,6 @@
 <script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/push_notification.js"></script>
-<nav id="notifications" class="navbar navbar-expand-lg main-navbar">
+<nav class="navbar navbar-expand-lg main-navbar">
 	<a href="<?php echo site_url('employee_main'); ?>" class="navbar-brand sidebar-gone-hide">iHumane</a>
 	<div class="navbar-nav">
 		<a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i class="fas fa-bars"></i></a>
@@ -83,7 +83,7 @@
 				</div>
 			</div>
 		</li>
-
+		<div id="notifications">
 		<?php $count = count($notifications); ?>
 		<li  class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg <?php if ($count > 0){echo "beep"; } ?>"><i class="far fa-bell"></i></a>
 			<div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -120,7 +120,7 @@
 			</div>
 		</li>
 
-
+		</div>
 		<li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
 				<img alt="image" src="<?php echo base_url(); ?>/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
 				<div class="d-sm-none d-lg-inline-block">Hi,  <?php echo $user_data->user_name; ?></div></a>
