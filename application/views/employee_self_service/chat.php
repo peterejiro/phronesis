@@ -26,7 +26,7 @@
 					<div class="section-title">All About Chat Engagements</div>
 					<p class="section-lead">You can chat with your colleagues here</p>
 					<div class="row" id="chat-tab">
-					<div class="col-12 col-sm-6 col-lg-4" >
+					<div class="col-12 col-sm-12 col-lg-4" >
 						<div class="card">
 							<div class="card-header">
 								<h4>All Users</h4>
@@ -35,7 +35,7 @@
 	overflow-y: auto;" >
 								<ul class="list-unstyled list-unstyled-border">
 									<?php foreach ($users as $user):
-									if($user->user_type == 3):
+									if($user->user_type == 3 || $user->user_type == 2):
 									//if(!empty($user->user_token)):
 									$employee_details = @$this->employees->get_employee_by_unique($user->user_username);
 									if($employee_details->employee_id !== $employee_id):
@@ -59,14 +59,14 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-12 col-sm-6 col-lg-8">
+					<div class="col-12 col-sm-12 col-lg-8">
 						<div class="content-container" style="display: none">
 							<?php foreach ($users as $user):
-								if($user->user_type == 3):
+								if($user->user_type == 3 || $user->user_type == 2):
 										$employee_details = @$CI->employees->get_employee_by_unique($user->user_username);
 										?>
 									<div id="<?php echo $employee_details->employee_id; ?>">
-										<div class="card chat-box">
+										<div class="card chat-box" style="height: 470px">
 											<div class="card-header">
 												<h4>Chat with <?php echo $employee_details->employee_first_name." ". $employee_details->employee_last_name; ?></h4>
 												<?php if(!empty($user->user_token)): ?>

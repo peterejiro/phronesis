@@ -195,8 +195,10 @@
 	</ul>
 </nav>
 <script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/bower_components/push.js/bin/push.js"></script>
 <script>
 	$(document).ready(function () {
+		Push.create('Hello World!')
 
 		setInterval(timestamp, 5000);
 		function timestamp() {
@@ -210,12 +212,18 @@
 					var data = JSON.parse(data);
 					for (i = 0; i < data.length; i++) {
 						var notification_id = data[i].notification_id;
-						$.notify(data[i].notification_type, {
-							title: "iHumane",
+
+						Push.create("iHumane", {
+							body: data[i].notification_type,,
 							icon: "https://app.ihumane.net//assets/img/ihumane-logo-1.png",
-						}).click(function () {
+							timeout: 4000,
+							onClick: function () {
+								// window.focus();
+								// this.close();
 							location.href = '<?php echo site_url()?>/view_notifications/' + notification_id;
-						});
+							}
+						})
+
 					}
 
 				},

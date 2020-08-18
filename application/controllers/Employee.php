@@ -222,8 +222,8 @@ class Employee extends CI_Controller
 				$employee_ailments = $this->input->post('employee_ailments');
 				$employee_blood = $this->input->post('employee_blood');
 				$employee_genotype = $this->input->post('employee_genotype');
-				$employee_next_of_kin_name = $this->input->post('employee_next_kin_name');
-				$employee_next_of_kin_phone_number = $this->input->post('employee_next_kin_phone_number');
+				$employee_next_of_kin_name = $this->input->post('employee_next_of_kin_name');
+				$employee_next_of_kin_phone_number = $this->input->post('employee_next_of_kin_phone_number');
 				$employee_next_of_kin_address = $this->input->post('employee_next_of_kin_address');
 				$employee_emergency_name = $this->input->post('employee_emergency_name');
 				$employee_emergency_phone = $this->input->post('employee_emergency_phone');
@@ -616,8 +616,8 @@ class Employee extends CI_Controller
 				$employee_ailments = $this->input->post('employee_ailments');
 				$employee_blood = $this->input->post('employee_blood');
 				$employee_genotype = $this->input->post('employee_genotype');
-				$employee_next_of_kin_name = $this->input->post('employee_next_kin_name');
-				$employee_next_of_kin_phone_number = $this->input->post('employee_next_kin_phone_number');
+				$employee_next_of_kin_name = $this->input->post('employee_next_of_kin_name');
+				$employee_next_of_kin_phone_number = $this->input->post('employee_next_of_kin_phone_number');
 				$employee_next_of_kin_address = $this->input->post('employee_next_of_kin_address');
 				$employee_emergency_name = $this->input->post('employee_emergency_name');
 				$employee_emergency_phone = $this->input->post('employee_emergency_phone');
