@@ -98,14 +98,14 @@
 											<div class="form-group row">
 												<div class="col-sm-6">
 													<label>Start Date</label><span style="color: red"> *</span>
-													<input type="date" id="start_date" class="form-control"  name="start_date" required/>
+													<input type="text" id="start_date" class="form-control datepicker"  name="start_date" required/>
 													<div class="invalid-feedback">
 														please fill in a start date
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<label>End Date</label><span style="color: red"> *</span>
-													<input type="date" class="form-control" id="end_date"  name="end_date" required/>
+													<input type="text" class="form-control datepicker" id="end_date"  name="end_date" required/>
 													<div class="invalid-feedback">
 														please fill in an end date
 													</div>

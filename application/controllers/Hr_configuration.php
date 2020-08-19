@@ -14,6 +14,7 @@ class Hr_configuration extends CI_Controller
 		$this->load->model('users');
 		$this->load->model('hr_configurations');
 		$this->load->model('logs');
+		$this->load->model('employees');
 		//$data['notifications'] = $this->employees->get_notifications(0);
 
 	}
