@@ -32,7 +32,7 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label>Date</label><span style="color: red"> *</span>
-						          <input type="date" name="date" class="form-control" required>
+						          <input type="text" name="date" class="form-control datepicker" required>
                       <div class="invalid-feedback">
                         please select a date
                       </div>

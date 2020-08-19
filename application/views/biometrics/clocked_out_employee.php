@@ -48,7 +48,7 @@
                             <td><?php echo $present_employee->employee_last_name." ".$present_employee->employee_first_name." ".$present_employee->employee_other_name; ?></td>
                             <td> <?php echo $present_employee->employee_unique_id; ?></td>
                             <td><?php echo date('g:i a', strtotime($present_employee->employee_clockout_time)); ?></td>
-							              <td> <?php echo date('F j, Y', time()); ?></td>
+							              <td> <?php echo date('F j, Y', strtotime($date)); ?></td>
                           </tr>
                         <?php
                         endforeach;

@@ -319,6 +319,7 @@ class Employee_main extends CI_Controller
 				$data['user_data'] = $this->users->get_user($username);
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
 
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 				$data['notifications'] = $this->employees->get_notifications($employee_id);
@@ -1475,14 +1476,14 @@ class Employee_main extends CI_Controller
 						if($query == true):
 							$notification_data = array(
 									'notification_employee_id'=> 0,
-									'notification_link'=> 'terminations',
-									'notification_type' => 'New Termination Notice',
+									'notification_link'=> 'resignations',
+									'notification_type' => 'New Resignation Notice',
 									'notification_status'=> 0
 							);
 
 							$this->employees->insert_notifications($notification_data);
 							$msg = array(
-								'msg' => 'Employment Termination Notice Sent',
+								'msg' => 'Employment Resignation Notice Sent',
 								'location' => site_url('employee_main'),
 								'type' => 'success'
 							);
