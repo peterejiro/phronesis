@@ -36,7 +36,7 @@
 								</div>
 								<div class="card-body">
 									<div class="row">
-										<div class="col-sm-4">
+										<div class="col-sm-12 col-xl-4 col-md-4">
 											<div class="card card-hero">
 												<div class="card-header">
 													<div class="card-icon">
@@ -78,7 +78,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-sm-8">
+										<div class="col-sm-12 col-xl-8 col-md-8">
 											<div class="form-group row">
 												<input type="hidden" name="employee_id" value="<?php echo $employee->employee_id; ?>">
 												<input type="hidden" id="leave_bal" value='<?php echo json_encode($wallet_array); ?>'>
