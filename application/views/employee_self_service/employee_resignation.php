@@ -42,7 +42,7 @@
 										<div class="form-group row">
 											<div class="col-sm-4">
 												<label for="employee-start-date">Effective Date</label><span style="color: red"> *</span>
-												<input id="employee-start-date" type="date" name="resignation_effective_date" required class="form-control"  placeholder="mm/dd/yyyy">
+												<input id="employee-start-date" type="text" name="resignation_effective_date" required class="form-control datepicker"  placeholder="mm/dd/yyyy">
 												<div class="invalid-feedback">
 													please fill in an effective date
 												</div>

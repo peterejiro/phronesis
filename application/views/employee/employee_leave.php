@@ -51,8 +51,44 @@ $CI->load->model('hr_configurations');
                           <tr>
                             <td><?php echo $leave->employee_last_name." ".$leave->employee_first_name; ?></td>
                             <td><?php echo $leave->leave_name; ?></td>
-							              <td> <?php $date_diff = strtotime($leave->leave_end_date) - strtotime($leave->leave_start_date);
-							                echo round($date_diff/(60*60*24))." days"; ?>
+							              <td> <?php
+
+//											  $date_diff = strtotime($leave->leave_end_date) - strtotime($leave->leave_start_date);
+//							                echo round($date_diff/(60*60*24))." days";
+											  $start = new DateTime($leave->leave_start_date);
+											  $end = new DateTime($leave->leave_end_date);
+											  // otherwise the  end date is excluded (bug?)
+											  $end->modify('+1 day');
+
+											  $interval = $end->diff($start);
+
+											  // total days
+											  $days = $interval->days;
+
+											  // create an iterateable period of date (P1D equates to 1 day)
+											  $period = new DatePeriod($start, new DateInterval('P1D'), $end);
+
+											  // best stored as array, so you can add more than one
+											  $holidays = array('2012-09-07');
+
+											  foreach($period as $dt) {
+												  $curr = $dt->format('D');
+
+												  // substract if Saturday or Sunday
+												  if ($curr == 'Sat' || $curr == 'Sun') {
+													  $days--;
+												  }
+
+												  // (optional) for the updated question
+												  elseif (in_array($dt->format('Y-m-d'), $holidays)) {
+													  $days--;
+												  }
+											  }
+
+
+											  echo $days." days"; // 4
+
+							                ?>
                             </td>
                             <td><?php echo date('l, j F Y', strtotime($leave->leave_start_date));?></td>
                             <td><?php echo date('l, j F Y', strtotime($leave->leave_end_date));?></td>

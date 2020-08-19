@@ -99,7 +99,7 @@
                               <div class="col-sm-4">
                                 <label for="dob">Date of Birth</label>
                                 <div class="input-group">
-                                  <input id="dob" type="date" name="employee_dob" class="form-control">
+                                  <input id="dob" type="text" name="employee_dob" class="form-control datepicker">
                                 </div>
                               </div>
                             </div>
@@ -342,11 +342,11 @@
                               <div class="form-group row">
                                 <div class="col-sm-6">
                                   <label for="start-date">Start Date</label>
-                                  <input id="start-date" type="date" name="experience_start_date[]" class="form-control" placeholder="mm/dd/yyyy">
+                                  <input id="start-date" type="text" name="experience_start_date[]" class="form-control datepicker" placeholder="mm/dd/yyyy">
                                 </div>
                                 <div class="col-sm-6">
                                   <label for="end-date"> End Date:</label>
-                                  <input id="end-date" type="date" name="experience_end_date[]" class="form-control" placeholder="mm/dd/yyyy">
+                                  <input id="end-date" type="text" name="experience_end_date[]" class="form-control datepicker" placeholder="mm/dd/yyyy">
                                 </div>
                               </div>
                             </div>
@@ -471,7 +471,7 @@
                           <div class="form-group row">
                             <div class="col-sm-4">
                               <label for="employee-start-date">Employment Start Date</label><span style="color: red"> *</span>
-                              <input id="employee-start-date" type="date" name="employment_start_date" required class="form-control" placeholder="mm/dd/yyyy">
+                              <input id="employee-start-date" type="text" name="employment_start_date" required class="form-control datepicker" placeholder="mm/dd/yyyy">
                               <div class="invalid-feedback">
                                 please fill in an employment start date
                               </div>

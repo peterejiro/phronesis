@@ -199,6 +199,7 @@
 </nav>
 <script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/bower_components/push.js/bin/push.js"></script>
+
 <script>
 	$(document).ready(function () {
 
@@ -217,7 +218,7 @@
 						var notification_id = data[i].notification_id;
 
 						Push.create("iHumane", {
-							body: data[i].notification_type,,
+							body: data[i].notification_type,
 							icon: "https://app.ihumane.net//assets/img/ihumane-logo-1.png",
 							timeout: 4000,
 							onClick: function () {
