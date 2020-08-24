@@ -3,4 +3,6 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/ihumane/app.ihumane.net/
+    - export DEPLOYPATH2=/home/ihumane/idn.ihumane.net/
     - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp -R * $DEPLOYPATH2
