@@ -1456,6 +1456,8 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 				endforeach;
 
+				if($sum_taxable_income > 0):
+
 				$tax_relief = ((20/100) * $sum_taxable_income) + (200000/12);
 
 				$minimum_tax = ($minimum_tax_rate->minimum_tax_rate/100) * ($sum_taxable_income - $tax_relief);
@@ -1515,6 +1517,8 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 				$salary_array = $this->security->xss_clean($salary_array);
 				$query = $this->salaries->add_salary($salary_array);
+
+				endif;
 
 				//tax computation
 

@@ -73,6 +73,7 @@
                                 $salaries = $CI->salaries->get_employee_income($employee->employee_id, $payroll_month, $payroll_year, 0);
                                 foreach ($salaries as $salary):
                                   $_total_deduction = $salary->salary_amount;
+
                                   $total_deduction = $total_deduction + $_total_deduction;
                                 endforeach;
                                 echo number_format($total_deduction);

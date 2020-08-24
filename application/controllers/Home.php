@@ -189,6 +189,32 @@ $data['notifications'] = $this->employees->get_notifications(0);
 								redirect('home');
 								elseif($this->users->get_user($username)->user_type == 2):
 
+									$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+									$trainings =  $this->employees->get_employee_training($employee_id);
+
+									$count_training = 0;
+
+									foreach ($trainings as $training):
+										if($training->employee_training_status == 0):
+											$count_training++;
+
+										endif;
+
+									endforeach;
+
+									if($count_training > 0):
+										$notification_data = array(
+											'notification_employee_id'=> $employee_id,
+											'notification_link'=> 'my_trainings',
+											'notification_type' => 'You Have A Pending Training',
+											'notification_status'=> 0
+										);
+
+										$this->employees->insert_notifications($notification_data);
+									endif;
+
+
 									redirect('employee_main');
 								endif;
 							endif;
@@ -230,6 +256,32 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 
 									elseif($this->users->get_user($username)->user_type == 2):
+
+										$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+										$trainings =  $this->employees->get_employee_training($employee_id);
+
+										$count_training = 0;
+
+										foreach ($trainings as $training):
+											if($training->employee_training_status == 0):
+												$count_training++;
+
+											endif;
+
+										endforeach;
+
+										if($count_training > 0):
+											$notification_data = array(
+												'notification_employee_id'=> $employee_id,
+												'notification_link'=> 'my_trainings',
+												'notification_type' => 'You Have A Pending Training',
+												'notification_status'=> 0
+											);
+
+											$this->employees->insert_notifications($notification_data);
+										endif;
+
 
 										redirect('employee_main');
 									endif;
