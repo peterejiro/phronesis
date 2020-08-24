@@ -150,6 +150,7 @@
 </nav>
 <script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/bower_components/push.js/bin/push.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/jquery.playSound.js"></script>
 <script>
 	$(document).ready(function () {
 
@@ -183,6 +184,7 @@
 							location.href = '<?php echo site_url()?>/view_notifications/' + notification_id;
 							}
 						});
+						$.playSound("<?php echo base_url('assets/notification/done-for-you.mp3'); ?>");
 					}
 
 				},

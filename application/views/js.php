@@ -3,6 +3,7 @@
 		?>
 		<!-- General JS Scripts -->
 		<script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
+
 		<script src="<?php echo base_url(); ?>assets/modules/popper.js"></script>
 		<script src="<?php echo base_url(); ?>assets/modules/tooltip.js"></script>
 		<script src="<?php echo base_url(); ?>assets/modules/bootstrap/js/bootstrap.min.js"></script>
@@ -27,6 +28,7 @@
 		<script src="<?php echo base_url(); ?>assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/modules/select2/dist/js/select2.full.min.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/jquery.playSound.js"></script>
 		<?php
 			if (
 				$this->uri->segment(1) != 'edit_employee_salary_structure' &&
