@@ -247,6 +247,7 @@
 	$('title').html('Dashboard - IHUMANE');
 
 	$(document).ready(function() {
+
 		setInterval(timestamp, 1000);
 		function timestamp() {
 			$.ajax({

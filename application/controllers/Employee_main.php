@@ -112,6 +112,9 @@ class Employee_main extends CI_Controller
 
 			else:
 
+
+
+
 				$data['user_data'] = $this->users->get_user($username);
 				$data['queries'] = $this->employees->get_queries_employee($employee_id);
 				$data['notifications'] = $this->employees->get_notifications($employee_id);
@@ -122,6 +125,8 @@ class Employee_main extends CI_Controller
 
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+
 
 				$this->load->view('employee_self_service/dashboard', $data);
 
