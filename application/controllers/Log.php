@@ -14,6 +14,7 @@ class Log extends CI_Controller
 		$this->load->model('users');
 		$this->load->model('hr_configurations');
 		$this->load->model('logs');
+		$this->load->model('employees');
 
 	}
 

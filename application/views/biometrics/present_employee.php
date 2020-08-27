@@ -21,7 +21,7 @@
           </div>
 				</div>
         <div class="section-body">
-          <div class="section-title">All About Employees Present On <?php echo date('F j, Y', strtotime($date)); ?></div>
+          <div class="section-title">All About Employees Present From <?php echo date('F j, Y', strtotime($from_date))." - ".date('F j, Y', strtotime($to_date)); ?></div>
           <p class="section-lead">You can view all employees present on the given date here</p>
           <div class="row">
             <div class="col-12">
@@ -48,7 +48,7 @@
                             <td><?php echo $present_employee->employee_last_name." ".$present_employee->employee_first_name." ".$present_employee->employee_other_name; ?></td>
                             <td> <?php echo $present_employee->employee_unique_id; ?></td>
                             <td><?php echo date('g:i a', strtotime($present_employee->employee_biometrics_login_time)); ?></td>
-							              <td> <?php echo date('F j, Y', time()); ?></td>
+							              <td> <?php echo date('F j, Y', strtotime($present_employee->employee_biometrics_login_time)); ?></td>
                           </tr>
                         <?php
                         endforeach;

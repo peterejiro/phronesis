@@ -31,12 +31,20 @@
                   </div>
                   <div class="card-body">
                     <div class="form-group">
-                      <label>Date</label><span style="color: red"> *</span>
-						          <input type="text" name="date" class="form-control datepicker" required>
+                      <label>From:</label><span style="color: red"> *</span>
+						          <input type="text" name="from_date" class="form-control datepicker" required>
                       <div class="invalid-feedback">
                         please select a date
                       </div>
                     </div>
+
+					  <div class="form-group">
+						  <label>To:</label><span style="color: red"> *</span>
+						  <input type="text" name="to_date" class="form-control datepicker" required>
+						  <div class="invalid-feedback">
+							  please select a date
+						  </div>
+					  </div>
                     <input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
                   </div>
                   <div class="card-footer text-right bg-whitesmoke">
