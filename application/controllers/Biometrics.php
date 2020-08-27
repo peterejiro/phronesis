@@ -268,13 +268,18 @@ $data['notifications'] = $this->employees->get_notifications(0);
 					$data['csrf_name'] = $this->security->get_csrf_token_name();
 					$data['csrf_hash'] = $this->security->get_csrf_hash();
 
-					$date  = strtotime($this->input->post('date'));
+					$from_date  = strtotime($this->input->post('from_date'));
+					$to_date = strtotime($this->input->post('to_date'));
 
-					$date = date('Y-m-d', $date);
 
-					$data['present_employees'] = $this->biometric->check_today_attendance($date);
+					$from_date = date('Y-m-d H:i:s', $from_date);
+					$to_date = date('Y-m-d H:i:s', $to_date);
 
-					$data['date'] = $date;
+					$data['present_employees'] = $this->biometric->check_attendance($from_date, $to_date);
+
+					$data['date'] = $from_date." - ".$to_date ;
+					$data['from_date'] = $from_date;
+					$data['to_date'] = $to_date;
 
 					$this->load->view('biometrics/present_employee', $data);
 				else:
@@ -361,9 +366,17 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 					$date  = strtotime($this->input->post('date'));
 
-					$date = date('Y-m-d', $date);
+					$from_date  = strtotime($this->input->post('from_date'));
+					$to_date = strtotime($this->input->post('to_date'));
 
-					$data['present_employees'] = $this->biometric->check_today_attendance($date);
+
+					$from_date = date('Y-m-d H:i:s', $from_date);
+					$to_date = date('Y-m-d H:i:s', $to_date);
+
+					$data['from_date'] = $from_date;
+					$data['to_date'] = $to_date;
+
+					//$data['present_employees'] = $this->biometric->check_today_attendance($date);
 
 					$data['date'] = $date;
 
