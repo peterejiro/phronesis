@@ -55,11 +55,34 @@ class Biometric extends CI_Model
 
 	}
 
+	public function check_clock_in_range($employee_id, $from_date, $to_date){
+		$this->db->select('*');
+		$this->db->from('employee_biometrics_login');
+		$this->db->where('employee_biometrics_login_employee_id', $employee_id);
+		$this->db->where('employee_biometrics_login.employee_biometrics_login_time >=', $from_date);
+		$this->db->where('employee_biometrics_login.employee_biometrics_login_time <=', $to_date);
+		//$this->db->get('employee_biometrics');
+		return $this->db->get()->row();
+
+	}
+
 	public function check_today_attendance($date){
 		$this->db->select('*');
 		$this->db->from('employee_biometrics_login');
 		$this->db->join('employee', 'employee.employee_id = employee_biometrics_login.employee_biometrics_login_employee_id');
 		$this->db->like('employee_biometrics_login.employee_biometrics_login_time', $date);
+		//$this->db->get('employee_biometrics');
+		return $this->db->get()->result();
+
+	}
+
+	public function check_attendance($from_date, $to_date){
+		$this->db->select('*');
+		$this->db->from('employee_biometrics_login');
+		$this->db->join('employee', 'employee.employee_id = employee_biometrics_login.employee_biometrics_login_employee_id');
+		$this->db->where('employee_biometrics_login.employee_biometrics_login_time >=', $from_date);
+		$this->db->where('employee_biometrics_login.employee_biometrics_login_time <=', $to_date);
+		//$this->db->like('employee_biometrics_login.employee_biometrics_login_time', $date);
 		//$this->db->get('employee_biometrics');
 		return $this->db->get()->result();
 
