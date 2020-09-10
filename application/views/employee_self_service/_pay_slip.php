@@ -5,6 +5,7 @@
 	$CI->load->model('hr_configurations');
 	$CI->load->model('payroll_configurations');
 	$CI->load->model('employees');
+
 ?>
 
 <body class="layout-3">
@@ -37,6 +38,143 @@
 								</div>
 								<div class="card-body">
 									<div class="table-responsive" id="pay-slip">
+
+										<div class="row">
+											<div class="col-12 col-sm-12 col-lg-12">
+												<div class="card">
+													<div class="card-header">
+														<h4><?php echo $employee->employee_last_name." ".$employee->employee_first_name." ".$employee->employee_other_name." "; ?> Pay Slip for <?php
+															$dateObj   = DateTime::createFromFormat('!m', $month);
+														 echo $dateObj->format('F')."  ".$year; // March ?></h4>
+													</div>
+													<div class="card-body">
+														<ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
+															<li class="media">
+
+																<img alt="image" class="mr-3 rounded-circle" width="50" src="<?php echo base_url() ?>/uploads/employee_passports/<?php echo $employee->employee_passport; ?>">
+
+																<div class="media-body">
+																	<div class="media-title"><?php echo $employee->employee_last_name." ".$employee->employee_first_name." ".$employee->employee_other_name; ?></div>
+																	<div class="text-job text-muted">Name</div>
+
+																</div>
+
+
+															</li>
+
+
+															<li class="media">
+
+																<div class="media-body">
+																	<div class="media-title"><?php echo $employee->subsidiary_name; ?></div>
+																	<div class="text-job text-muted">Subsidiary</div>
+
+																</div>
+
+																<div class="media-body">
+																	<div class="media-title"><?php echo $employee->location_name; ?></div>
+																	<div class="text-job text-muted">Branch</div>
+																</div>
+
+															</li>
+
+															<li class="media">
+
+																<div class="media-body">
+																	<div class="media-title"><?php echo $employee->department_name; ?></div>
+																	<div class="text-job text-muted">Department </div>
+																</div>
+																<div class="media-body">
+																	<div class="media-title"><?php echo $employee->job_name; ?></div>
+																	<div class="text-job text-muted">Job Role </div>
+																</div>
+
+															</li>
+
+															<li class="media">
+
+																<div class="media-body">
+																	<div class="media-title"><?php echo $employee->bank_name; ?></div>
+																	<div class="text-job text-muted">Bank</div>
+
+																</div>
+
+																<div class="media-body">
+																	<div class="media-title"><?php echo $employee->employee_account_number; ?></div>
+																	<div class="text-job text-muted">Account Number</div>
+																</div>
+															</li>
+															<li class="media">
+
+																<div class="media-body">
+																	<div class="media-title"><?php if($employee->employee_hmo_id == 0){
+																			echo "N/A";
+																		} else{
+																			echo $CI->hr_configurations->view_health_insurance($employee->employee_hmo_id)->health_insurance_hmo;
+
+																		} ?></div>
+																	<div class="text-job text-muted">HMO Provider </div>
+																</div>
+																<div class="media-body">
+																	<div class="media-title"><?php if($employee->employee_hmo_id == 0){
+																			echo "N/A";
+																		} else{
+																			echo $employee->employee_hmo_number;
+
+																		} ?></div>
+																	<div class="text-job text-muted">HMO Number </div>
+																</div>
+
+															</li>
+															<li class="media">
+																<div class="media-body">
+																	<div class="media-title"><?php if($employee->employee_pensionable == 0){
+																			echo "N/A";
+																		} else{
+																			echo $CI->hr_configurations->view_pension($employee->employee_pension_id)->pension_provider;
+
+																		} ?></div>
+																	<div class="text-job text-muted">Pension Administrator </div>
+																</div>
+																<div class="media-body">
+																	<div class="media-title"><?php if($employee->employee_pensionable == 0){
+																			echo "N/A";
+																		} else{
+																			echo $employee->employee_pension_number;
+
+																		} ?></div>
+																	<div class="text-job text-muted">Pension Number </div>
+																</div>
+
+
+
+
+															</li>
+															<li class="media">
+																<div class="media-body">
+																	<div class="media-title"><?php if($employee->employee_paye_number == 0){
+																			echo "N/A";
+																		} else{
+																			echo $employee->employee_paye_number;
+
+																		} ?></div>
+																	<div class="text-job text-muted">PAYE Number </div>
+																</div>
+
+
+
+															</li>
+
+
+														</ul>
+													</div>
+												</div>
+											</div>
+
+
+										</div>
+
+
 										<table class="table table-striped table-bordered table-md">
 											<?php
 											$sn = 1;
@@ -65,7 +203,7 @@
 															<?php
 															if($payment_definition_check->payment_definition_type == 1):
 																if(empty($emolument_detail)):
-																	echo $payment_definition_check->payment_definition_payment_name.": ".number_format(0);
+																	//echo $payment_definition_check->payment_definition_payment_name.": ".number_format(0);
 																else:
 																	echo $emolument_detail->payment_definition_payment_name.": ".number_format($emolument_detail->salary_amount);
 																endif;
@@ -76,7 +214,7 @@
 															<?php
 															if($payment_definition_check->payment_definition_type == 0):
 																if(empty($emolument_detail)):
-																	echo $payment_definition_check->payment_definition_payment_name.": ".number_format(0);
+																	//echo $payment_definition_check->payment_definition_payment_name.": ".number_format(0);
 																else:
 																	echo $emolument_detail->payment_definition_payment_name.": ".number_format($emolument_detail->salary_amount);
 																endif;

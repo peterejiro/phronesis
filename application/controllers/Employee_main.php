@@ -1057,7 +1057,12 @@ class Employee_main extends CI_Controller
 						endif;
 						endforeach;
 
-
+						$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+						$data['employee'] = $this->employees->get_employee($employee_id);
+						$data['notifications'] = $this->employees->get_notifications($employee_id);
+						$data['emoluments'] = $this->salaries->view_emolument_sheet();
+						$data['month'] = $month;
+						$data['year'] = $year;
 						$data['emoluments'] = $this->salaries->view_emolument_sheet();
 
 						$this->load->view('employee_self_service/_pay_slip', $data);
@@ -1123,8 +1128,11 @@ class Employee_main extends CI_Controller
 						endforeach;
 
 						$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+						$data['employee'] = $this->employees->get_employee($employee_id);
 						$data['notifications'] = $this->employees->get_notifications($employee_id);
 						$data['emoluments'] = $this->salaries->view_emolument_sheet();
+						$data['month'] = $month;
+						$data['year'] = $year;
 
 						$this->load->view('employee_self_service/_pay_slip', $data);
 
