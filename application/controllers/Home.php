@@ -36,7 +36,8 @@ class Home extends CI_Controller
 
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+				$data['notifications'] = $this->employees->get_notifications(0);
+
 				$data['payroll_management'] = $permission->payroll_management;
 				$data['biometrics'] = $permission->biometrics;
 				$data['user_management'] = $permission->user_management;
@@ -185,7 +186,10 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 								$this->logs->add_log($log_array);
 								if($this->users->get_user($username)->user_type == 1 || $this->users->get_user($username)->user_type == 3):
-
+									$dat = array(
+										'notification_counts'=> count($this->employees->get_notifications(0)),
+									);
+									$this->session->set_userdata($dat);
 								redirect('home');
 								elseif($this->users->get_user($username)->user_type == 2):
 
@@ -213,7 +217,10 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 										$this->employees->insert_notifications($notification_data);
 									endif;
-
+									$dat = array(
+										'notification_counts'=> count($this->employees->get_notifications($employee_id)),
+									);
+									$this->session->set_userdata($dat);
 
 									redirect('employee_main');
 								endif;
@@ -252,7 +259,14 @@ $data['notifications'] = $this->employees->get_notifications(0);
 									$this->logs->add_log($log_array);
 									if($this->users->get_user($username)->user_type == 1 || $this->users->get_user($username)->user_type == 3):
 
-										redirect('home');
+										$data['notifications'] = count($this->employees->get_notifications(0));
+
+									$dat = array(
+											'notification_counts'=> count($this->employees->get_notifications(0)),
+												);
+										$this->session->set_userdata($dat);
+
+									redirect('home');
 
 
 									elseif($this->users->get_user($username)->user_type == 2):
@@ -281,6 +295,11 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 											$this->employees->insert_notifications($notification_data);
 										endif;
+
+										$dat = array(
+											'notification_counts'=> count($this->employees->get_notifications($employee_id)),
+										);
+										$this->session->set_userdata($dat);
 
 
 										redirect('employee_main');

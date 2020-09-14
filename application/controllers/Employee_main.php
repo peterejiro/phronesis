@@ -25,10 +25,7 @@ class Employee_main extends CI_Controller
 	public function index(){
 		$username = $this->session->userdata('user_username');
 
-
-
 		if(isset($username)):
-
 
 //				//$data['employees'] = $this->employees->view_employees();
 			$user_type = $this->users->get_user($username)->user_type;
@@ -118,6 +115,17 @@ class Employee_main extends CI_Controller
 				$data['user_data'] = $this->users->get_user($username);
 				$data['queries'] = $this->employees->get_queries_employee($employee_id);
 				$data['notifications'] = $this->employees->get_notifications($employee_id);
+
+
+				$data['notifications_counts'] = $this->session->userdata('notification_counts');
+
+				if( count($this->employees->get_notifications($employee_id)) > $this->session->userdata('notification_counts') ):
+					$dat = array(
+							'notification_counts'=> count($this->employees->get_notifications($employee_id)),
+					);
+					$this->session->set_userdata($dat);
+
+					endif;
 
 				$data['employee'] = $this->employees->get_employee_by_unique($username);
 				$data['memos'] = $this->employees->get_memos();
@@ -1183,6 +1191,7 @@ class Employee_main extends CI_Controller
 
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 				$data['notifications'] = $this->employees->get_notifications($employee_id);
+
 				$this->load->view('employee_self_service/my_loan', $data);
 
 
