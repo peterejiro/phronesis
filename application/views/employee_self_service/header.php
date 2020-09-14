@@ -149,6 +149,7 @@
 	</ul>
 </nav>
 <script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/modules/moment.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/bower_components/push.js/bin/push.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.playSound.js"></script>
 <script>
@@ -157,34 +158,57 @@
 		setInterval(timestamp, 5000);
 		function timestamp() {
 
+
 			var employee_id = <?php echo $employee->employee_id; ?>;
 			$.ajax({
 				type: "POST",
 				url: '<?php echo site_url('get_notifications'); ?>',
 				data: {employee_id: employee_id},
 				success: function (data) {
+
 					var data = JSON.parse(data);
-					for (i = 0; i < data.length; i++) {
-						var notification_id = data[i].notification_id;
 
-						//$.notify(data[i].notification_type, {
-						//	title: "iHumane",
-						//	icon: "https://app.ihumane.net//assets/img/ihumane-logo-1.png",
-						//}).click(function () {
-						//	location.href = '<?php //echo site_url()?>///view_notification/' + notification_id;
-						//});
+					var i = data.length - 1;
 
+					var datum = new Date(data[0].notification_date);
+
+					var now = new Date();
+
+					var seconds = moment(now).diff(moment(datum), 'seconds');
+
+					console.log(seconds);
+
+					if(seconds < 10) {
+
+						var notification_id = data[0].notification_id;
 						Push.create("iHumane", {
-									body: data[i].notification_type,
-								icon: "https://app.ihumane.net//assets/img/ihumane-logo-1.png",
-								timeout: 4000,
-								onClick: function () {
-							// window.focus();
-							// this.close();
-							location.href = '<?php echo site_url()?>/view_notifications/' + notification_id;
+							body: data[i].notification_type,
+							icon: "https://app.ihumane.net//assets/img/ihumane-logo-1.png",
+							timeout: 4000,
+							onClick: function () {
+								// window.focus();
+								// this.close();
+								location.href = '<?php echo site_url()?>/view_notifications/' + notification_id;
 							}
 						});
-						$.playSound("<?php echo base_url('assets/notification/done-for-you.mp3'); ?>");
+						$.playSound("<?php echo base_url('assets/notification/insight.mp3'); ?>");
+
+						//for (i = 0; i < data.length; i++) {
+						//	var notification_id = data[i].notification_id;
+						//
+						//
+						//	Push.create("iHumane", {
+						//		body: data[i].notification_type,
+						//		icon: "https://app.ihumane.net//assets/img/ihumane-logo-1.png",
+						//		timeout: 4000,
+						//		onClick: function () {
+						//			// window.focus();
+						//			// this.close();
+						//			location.href = '<?php //echo site_url()?>///view_notifications/' + notification_id;
+						//		}
+						//	});
+						//	$.playSound("<?php //echo base_url('assets/notification/done-for-you.mp3'); ?>//");
+						//}
 					}
 
 				},
