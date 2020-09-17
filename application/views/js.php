@@ -63,6 +63,7 @@
 		?>
 			<script src="<?php echo base_url(); ?>assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
 		<?php endif;?>
+
 		<script src="<?php echo base_url(); ?>assets/modules/printThis.js"></script>
 		<script src="<?php echo base_url(); ?>assets/modules/fullcalendar/fullcalendar.min.js"></script>
 		<script src="<?php echo base_url(); ?>/assets/modules/datatables/jquery.dataTables.min.js"></script>
