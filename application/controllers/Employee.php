@@ -3625,5 +3625,9 @@ class Employee extends CI_Controller
 		endif;
 	}
 
+	public function get_employees() {
+    	  echo json_encode($this->employees->view_employees());
+      }
+
 
 }

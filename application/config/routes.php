@@ -59,6 +59,9 @@ $route['access_denied'] = 'home/access_denied';
 $route['error_404'] = 'home/error_404';
 $route['timestamp'] = 'home/timestamp';
 
+$route['income_stats'] = 'home/get_income_statistics';
+$route['deduction_stats'] = 'home/get_deduction_statistics';
+
 $route['bank'] = 'hr_configuration/bank';
 $route['add_bank'] = 'hr_configuration/add_bank';
 $route['update_bank'] = 'hr_configuration/update_bank';
@@ -153,6 +156,7 @@ $route['edit_user'] = 'user/edit_user';
 $route['employee'] = 'employee/employee';
 $route['new_employee'] = 'employee/new_employee';
 $route['add_employee'] = 'employee/add_employee';
+$route['get_employees'] = 'employee/get_employees';
 $route['employee_upload_others'] = 'employee/employee_upload_others';
 $route['view_employee/:num'] = 'employee/view_employee/$1';
 $route['update_employee/:num'] = 'employee/update_employee/$1';

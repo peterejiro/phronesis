@@ -356,6 +356,39 @@ class Payroll_configurations extends CI_Model
 
 	}
 
+	public function get_income_payments() {
+		$this->db->select('*');
+		$this->db->from('payment_definition');
+		$this->db->where('payment_definition.payment_definition_type', 1);
+		return $this->db->get()->result();
+	}
+
+	public function get_deduction_payments() {
+		$this->db->select('*');
+		$this->db->from('payment_definition');
+		$this->db->where('payment_definition.payment_definition_type', 0);
+		return $this->db->get()->result();
+	}
+
+	public function count_personalized_employees(){
+		$this->db->select('*');
+		$this->db->from('employee');
+		$this->db->where('employee.employee_salary_structure_category', 0);
+		return $this->db->count_all_results();
+	}
+
+	public function count_categorized_employees(){
+		$this->db->select('*');
+		$this->db->from('employee');
+		$this->db->where('employee.employee_salary_structure_category !=', 0);
+		return $this->db->count_all_results();
+	}
+
+	public function count_variational_payments(){
+		return $this->db->count_all('variational_payment');
+	}
+
+
 
 
 
