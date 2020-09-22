@@ -19,7 +19,8 @@ class Home extends CI_Controller
 		$this->load->model('configurations');
 		$this->load->model('logs');
 		$this->load->model('biometric');
-
+		$this->load->model('salaries');
+		$this->load->model('loans');
 	}
 
 	public function index(){
@@ -61,6 +62,28 @@ class Home extends CI_Controller
           }
         }
         $data['online_users'] = $online_users;
+				$data['total_income_month'] = $this->get_total_income_month();
+				$data['total_deduction_month'] = $this->get_total_deduction_month();
+				$data['total_income_year'] = $this->get_total_income_year();
+				$data['total_deduction_year'] = $this->get_total_deduction_year();
+				$data['pending_loans'] = $this->loans->count_pending_loans();
+				$data['running_loans'] = $this->loans->count_running_loans();
+				$data['personalized_employees'] = $this->payroll_configurations->count_personalized_employees();
+				$data['categorized_employees'] = $this->payroll_configurations->count_categorized_employees();
+				$data['variational_payments'] = $this->payroll_configurations->count_variational_payments();
+				$data['is_payroll_routine_run'] = $this->is_payroll_routine_run();
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+				$data['pending_leaves'] = $this->employees->count_pending_leaves();
+				$data['approved_leaves'] = $this->employees->count_approved_leaves();
+				$data['finished_leaves'] = $this->employees->count_finished_leaves();
+				$data['upcoming_leaves'] = $this->employees->get_upcoming_leaves();
+				$data['open_queries'] = $this->employees->count_open_queries();
+				$data['pending_trainings'] = $this->employees->count_pending_trainings();
+				$data['running_appraisals'] = $this->employees->count_running_appraisals();
+				$data['finished_appraisals'] = $this->employees->count_finished_appraisals();
+				$data['hr_documents'] = $this->hr_configurations->view_hr_documents();
+
 				$this->load->view('index', $data);
 			elseif($this->users->get_user($username)->user_type == 2):
 
@@ -376,6 +399,99 @@ class Home extends CI_Controller
     date_default_timezone_set('Africa/Lagos');
     echo $timestamp = date('F j, Y g:i:s a');
   }
+
+	public function get_income_statistics() {
+		$income_payments = $this->payroll_configurations->get_income_payments();
+		$income_payments_id = array();
+		foreach ($income_payments as $income_payment) {
+			$income_payments_id[] = $income_payment->payment_definition_id;
+		}
+		echo $income_salaries = json_encode($this->salaries->get_salaries_by_payment_id($income_payments_id));
+	}
+
+	public function get_deduction_statistics() {
+		$deduction_payments = $this->payroll_configurations->get_deduction_payments();
+		$deduction_payments_id = array();
+		foreach ($deduction_payments as $deduction_payment) {
+			$deduction_payments_id[] = $deduction_payment->payment_definition_id;
+		}
+		echo $deduction_salaries = json_encode($this->salaries->get_salaries_by_payment_id($deduction_payments_id));
+	}
+
+	public function get_total_income_month(){
+		$income_payments = $this->payroll_configurations->get_income_payments();
+		$income_payments_id = array();
+		foreach ($income_payments as $income_payment) {
+			$income_payments_id[] = $income_payment->payment_definition_id;
+		}
+		$salaries_current_month = $this->salaries->get_salaries_current_month($income_payments_id);
+		$sum = 0;
+		foreach($salaries_current_month as $salary_current_month) {
+			$sum += $salary_current_month->salary_amount;
+		}
+		return $sum;
+	}
+
+	public function get_total_income_year(){
+		$income_payments = $this->payroll_configurations->get_income_payments();
+		$income_payments_id = array();
+		foreach ($income_payments as $income_payment) {
+			$income_payments_id[] = $income_payment->payment_definition_id;
+		}
+		$salaries_current_year = $this->salaries->get_salaries_current_year($income_payments_id);
+		$sum = 0;
+		foreach($salaries_current_year as $salary_current_year) {
+			$sum += $salary_current_year->salary_amount;
+		}
+		return $sum;
+	}
+
+	public function get_total_deduction_month(){
+		$deduction_payments = $this->payroll_configurations->get_deduction_payments();
+		$deduction_payments_id = array();
+		foreach ($deduction_payments as $deduction_payment) {
+			$deduction_payments_id[] = $deduction_payment->payment_definition_id;
+		}
+		$salaries_current_month = $this->salaries->get_salaries_current_month($deduction_payments_id);
+		$sum = 0;
+		foreach($salaries_current_month as $salary_current_month) {
+			$sum += $salary_current_month->salary_amount;
+		}
+		return $sum;
+	}
+
+	public function get_total_deduction_year(){
+		$deduction_payments = $this->payroll_configurations->get_deduction_payments();
+		$deduction_payments_id = array();
+		foreach ($deduction_payments as $deduction_payment) {
+			$deduction_payments_id[] = $deduction_payment->payment_definition_id;
+		}
+		$salaries_current_year = $this->salaries->get_salaries_current_year($deduction_payments_id);
+		$sum = 0;
+		foreach($salaries_current_year as $salary_current_year) {
+			$sum += $salary_current_year->salary_amount;
+		}
+		return $sum;
+	}
+
+	public function is_payroll_routine_run(){
+		$current_month = date('m');
+//	  $current_month = 10;
+		$current_year = date('Y');
+
+		$salaries = $this->salaries->view_salaries();
+		$check_salary = 0;
+		foreach ($salaries as $salary):
+			if(($salary->salary_pay_month == $current_month) && ($salary->salary_pay_year == $current_year)):
+				$check_salary ++;
+			endif;
+		endforeach;
+		if($check_salary > 0):
+			return true;
+		else:
+			return false;
+		endif;
+	}
 
 
 }
