@@ -55,13 +55,9 @@ class Home extends CI_Controller
 
 				$date = date('Y-m-d', time());
 				$data['present_employees'] = $this->biometric->check_today_attendance($date);
-        $online_users = $this->users->view_online_users();
-        foreach ($online_users as $key => $user) {
-          if ($user->user_token == ''){
-            unset($online_users[$key]);
-          }
-        }
-        $data['online_users'] = $online_users;
+
+				$data['online_users'] = $this->get_online_users();
+
 				$data['total_income_month'] = $this->get_total_income_month();
 				$data['total_deduction_month'] = $this->get_total_deduction_month();
 				$data['total_income_year'] = $this->get_total_income_year();
@@ -397,8 +393,18 @@ class Home extends CI_Controller
 
 	public function timestamp(){
     date_default_timezone_set('Africa/Lagos');
-    echo $timestamp = date('F j, Y g:i:s a');
+		echo $timestamp = date('D j M, Y g:i:s a');
   }
+
+	public function get_online_users() {
+		$online_users = $this->users->view_online_users();
+		foreach ($online_users as $key => $user) {
+			if ($user->user_token == '' || ((time() - $user->user_token) / 60) > 120){
+				unset($online_users[$key]);
+			}
+		}
+		return $online_users;
+	}
 
 	public function get_income_statistics() {
 		$income_payments = $this->payroll_configurations->get_income_payments();
