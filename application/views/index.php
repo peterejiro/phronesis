@@ -360,6 +360,44 @@ curl_close($curl);
               </div>
             </div>
 					<?php endif;?>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card" style="border-radius: 12px;">
+                <div class="card-body">
+                  <div class="summary">
+                    <div class="summary-info">
+                      <h4><?php echo count($present_employees)?> Employees Clocked In</h4>
+                      <div class="text-muted"><?php echo (count($employees) - count($present_employees))?> Employees Absent</div>
+                      <div class="d-block mt-2">
+                        <a href="<?php echo site_url('today_present') ?>">View Today's Attendance</a>
+                      </div>
+                    </div>
+                    <div class="summary-item">
+                      <h6>Recently Clocked In</h6>
+                      <ul class="list-unstyled list-unstyled-border">
+		                    <?php if (!empty($present_employees)): $count=0; ?>
+			                    <?php foreach($present_employees as $present_employee): if($count<=5):?>
+                            <li class="media">
+                              <a href="#">
+                                <img class="mr-3 rounded" width="50" height="50" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $present_employee->employee_passport; ?>" alt="passport">
+                              </a>
+                              <div class="media-body">
+                                <div class="media-right">
+                                  <small style="font-size: 12px;"><?php echo timespan(strtotime($present_employee->employee_biometrics_login_time), time(), 2)?> ago</small>
+                                </div>
+                                <div class="media-title"><a href="javascript:void(0)"><?php echo $present_employee->employee_first_name . " " . $present_employee->employee_last_name; ?></a></div>
+                                <div class="text-muted text-small"><a href="javascript:void(0)"><?php echo $present_employee->employee_unique_id?></a> <div class="bullet"></div> Clocked in <?php echo date('g:i:s a', strtotime($present_employee->employee_biometrics_login_time)); ?></div>
+                              </div>
+                            </li>
+			                    <?php endif; endforeach;?>
+		                    <?php endif?>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>
