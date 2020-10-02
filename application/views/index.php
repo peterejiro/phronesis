@@ -191,7 +191,7 @@ curl_close($curl);
                         <div class="alert-icon"><i class="far fa-check-circle"></i></div>
                         <div class="alert-body">
                           <div class="alert-title">Routine</div>
-                          You have run this month's Payroll Routine
+                          You have run this month's Payroll Routine. Generate report <a class="font-weight-bold font-italic" href="<?php echo site_url('emolument') ?>">here</a>
                         </div>
                       </div>
 										<?php else:?>
