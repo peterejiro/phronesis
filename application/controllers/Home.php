@@ -226,6 +226,7 @@ class Home extends CI_Controller
 								endif;
 							endif;
 						else:
+
 							$diff = $time - $user_token;
 
 							if($diff < 1800):
