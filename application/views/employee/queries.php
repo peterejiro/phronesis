@@ -61,7 +61,7 @@
                               <?php if($query->query_status == 1): ?>
                                 <div class="badge badge-warning">Opened</div>
                               <?php elseif ($query->query_status == 0):?>
-                                <div class="badge badge-success">Closed</div>
+                                <div class="badge badge-danger">Closed</div>
                               <?php endif;?>
                             </td>
                             <td class="text-center" style="width: 9px">

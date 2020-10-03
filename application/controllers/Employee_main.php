@@ -130,10 +130,14 @@ class Employee_main extends CI_Controller
 				$data['employee'] = $this->employees->get_employee_by_unique($username);
 				$data['memos'] = $this->employees->get_memos();
 				$data['specific_memos'] = $this->employees->get_my_memo($employee_id);
+				$data['appraisals'] = $this->employees->get_employee_appraisal($employee_id);
+				$data['appraisees'] = $this->employees->get_appraise_employees($employee_id);
+				$data['trainings'] = $this->employees->get_employee_training($employee_id);
 
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
 
+				$data['is_payroll_ready'] = $this->is_payroll_ready($employee_id);
 
 
 				$this->load->view('employee_self_service/dashboard', $data);
@@ -2239,28 +2243,22 @@ class Employee_main extends CI_Controller
 		foreach ($chats as $chat):
 		if($chat->chat_sender_id == $employee->employee_id && $chat->chat_reciever_id == $employee_details->employee_id): ?>
 		<div class="chat-item chat-right" style="">
-		<img src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee->employee_passport; ?>">
+		<img height="30" width="30" class="rounded" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee->employee_passport; ?>">
 			<div class="chat-details">
-			<div class="chat-text"><?php echo $chat->chat_body; ?></div>
-			<div class="chat-time"><?php echo date('F j, Y g:i a', strtotime($chat->chat_time)); ?></div>
-						</div>
+        <div class="chat-text"><?php echo $chat->chat_body; ?></div>
+        <div class="chat-time"><?php echo date('F j, Y g:i a', strtotime($chat->chat_time)); ?></div>
+      </div>
 		</div>
 	<?php
 		endif;
-		if($chat->chat_sender_id == $employee_details->employee_id && $chat->chat_reciever_id == $employee->employee_id):
-															?>
+		if($chat->chat_sender_id == $employee_details->employee_id && $chat->chat_reciever_id == $employee->employee_id):?>
 			<div class="chat-item chat-left" style="">
-
-																<img src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee_details->employee_passport; ?>">
-
-																<div class="chat-details">
-																	<div class="chat-text"><?php echo $chat->chat_body; ?></div>
-																	<div class="chat-time"><?php echo date('F j, Y g:i a', strtotime($chat->chat_time)); ?></div>
-																</div>
-
-
-
-															</div>
+        <img height="30" width="30" class="rounded" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee_details->employee_passport; ?>">
+        <div class="chat-details">
+          <div class="chat-text"><?php echo $chat->chat_body; ?></div>
+          <div class="chat-time"><?php echo date('F j, Y g:i a', strtotime($chat->chat_time)); ?></div>
+        </div>
+      </div>
 
 		<?php
 		endif;
@@ -2580,6 +2578,60 @@ class Employee_main extends CI_Controller
 		 echo json_encode($this->employees->get_notifications($employee_id));
 	}
 
+	public function is_payroll_ready($employee_id) {
+		$salaries = $this->salaries->get_employee_salary($employee_id);
+		return !empty($salaries);
+	}
+
+	public function get_income_payments() {
+		$username = $this->session->userdata('user_username');
+		if(isset($username)):
+			$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+			$income_payments = $this->payroll_configurations->get_income_payments();
+			$income_payments_ids = array();
+			foreach ($income_payments as $income_payment) {
+				$income_payments_ids[] = $income_payment->payment_definition_id;
+			}
+			if(!empty($income_payments_ids)):
+				$income = $this->salaries->get_employee_salaries_by_payment_id($employee_id, $income_payments_ids);
+				$json_response = array(
+					'success' => true,
+					'income' => $income
+				);
+				echo json_encode($json_response);
+			else:
+				$json_response = array(
+					'success' => false
+				);
+				echo json_encode($json_response);
+			endif;
+		endif;
+	}
+
+	public function get_deduction_payments() {
+		$username = $this->session->userdata('user_username');
+		if(isset($username)):
+			$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+			$deduction_payments = $this->payroll_configurations->get_deduction_payments();
+			$deduction_payments_ids = array();
+			foreach ($deduction_payments as $deduction_payment) {
+				$deduction_payments_ids[] = $deduction_payment->payment_definition_id;
+			}
+			if(!empty($deduction_payments_ids)):
+				$deductions = $this->salaries->get_employee_salaries_by_payment_id($employee_id, $deduction_payments_ids);
+				$json_response = array(
+					'success' => true,
+					'deductions' => $deductions
+				);
+				echo json_encode($json_response);
+			else:
+				$json_response = array(
+					'success' => false
+				);
+				echo json_encode($json_response);
+			endif;
+		endif;
+	}
 
 
 }

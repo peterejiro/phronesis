@@ -71,6 +71,7 @@ class Biometric extends CI_Model
 		$this->db->from('employee_biometrics_login');
 		$this->db->join('employee', 'employee.employee_id = employee_biometrics_login.employee_biometrics_login_employee_id');
 		$this->db->like('employee_biometrics_login.employee_biometrics_login_time', $date);
+		$this->db->order_by('employee_biometrics_login.employee_biometrics_login_time', 'DESC');
 		//$this->db->get('employee_biometrics');
 		return $this->db->get()->result();
 

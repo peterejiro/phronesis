@@ -11,78 +11,20 @@
 		</a>
 		<ul class="navbar-nav">
 			<li class="nav-item <?php echo $this->uri->segment(1) != 'documents' && $this->uri->segment(1) != 'view_document' ? 'active' : '' ?>"><a href="<?php echo site_url('employee_main'); ?>" class="nav-link">App</a></li>
-			<li class="nav-item <?php echo $this->uri->segment(1) == 'documents' || $this->uri->segment(1) == 'view_document' ? 'active' : '' ?>"><a href="<?php echo site_url('documents'); ?>" class="nav-link">Docs</a></li>
-			<li class="nav-item"><a href="#" class="nav-link">Help</a></li>
+			<li class="nav-item <?php echo $this->uri->segment(1) == 'documents' || $this->uri->segment(1) == 'view_document' ? 'active' : '' ?>"><a href="<?php echo site_url('documents'); ?>" class="nav-link">Documents</a></li>
+      <li class="nav-item dropdown dropdown-list-toggle">
+        <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle">Help</a>
+        <ul class="dropdown-menu dropdown-menu-sm">
+          <li class="dropdown-title">Help Center</li>
+          <li><a href="https://docs.ihumane.net/" target="_blank" class="dropdown-item">IHUMANE Documentation</a></li>
+          <li><a href="https://ihumane.net" target="_blank" class="dropdown-item">Visit Site</a></li>
+          <li><a href="mailto:support@ihumane.net" class="dropdown-item">Contact Support</a></li>
+        </ul>
+      </li>
 		</ul>
 	</div>
 
 	<ul class="navbar-nav navbar-right" style="margin-left: 50%;">
-		<li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle"><i class="far fa-envelope"></i></a>
-			<div class="dropdown-menu dropdown-list dropdown-menu-right">
-				<div class="dropdown-header">Messages
-					<div class="float-right">
-						<a href="#">Mark All As Read</a>
-					</div>
-				</div>
-<!--				<div class="dropdown-list-content dropdown-list-message">-->
-<!--					<a href="#" class="dropdown-item dropdown-item-unread">-->
-<!--						<div class="dropdown-item-avatar">-->
-<!--							<img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle">-->
-<!--							<div class="is-online"></div>-->
-<!--						</div>-->
-<!--						<div class="dropdown-item-desc">-->
-<!--							<b>Kusnaedi</b>-->
-<!--							<p>Hello, Bro!</p>-->
-<!--							<div class="time">10 Hours Ago</div>-->
-<!--						</div>-->
-<!--					</a>-->
-<!--					<a href="#" class="dropdown-item dropdown-item-unread">-->
-<!--						<div class="dropdown-item-avatar">-->
-<!--							<img alt="image" src="../assets/img/avatar/avatar-2.png" class="rounded-circle">-->
-<!--						</div>-->
-<!--						<div class="dropdown-item-desc">-->
-<!--							<b>Dedik Sugiharto</b>-->
-<!--							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>-->
-<!--							<div class="time">12 Hours Ago</div>-->
-<!--						</div>-->
-<!--					</a>-->
-<!--					<a href="#" class="dropdown-item dropdown-item-unread">-->
-<!--						<div class="dropdown-item-avatar">-->
-<!--							<img alt="image" src="../assets/img/avatar/avatar-3.png" class="rounded-circle">-->
-<!--							<div class="is-online"></div>-->
-<!--						</div>-->
-<!--						<div class="dropdown-item-desc">-->
-<!--							<b>Agung Ardiansyah</b>-->
-<!--							<p>Sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
-<!--							<div class="time">12 Hours Ago</div>-->
-<!--						</div>-->
-<!--					</a>-->
-<!--					<a href="#" class="dropdown-item">-->
-<!--						<div class="dropdown-item-avatar">-->
-<!--							<img alt="image" src="../assets/img/avatar/avatar-4.png" class="rounded-circle">-->
-<!--						</div>-->
-<!--						<div class="dropdown-item-desc">-->
-<!--							<b>Ardian Rahardiansyah</b>-->
-<!--							<p>Duis aute irure dolor in reprehenderit in voluptate velit ess</p>-->
-<!--							<div class="time">16 Hours Ago</div>-->
-<!--						</div>-->
-<!--					</a>-->
-<!--					<a href="#" class="dropdown-item">-->
-<!--						<div class="dropdown-item-avatar">-->
-<!--							<img alt="image" src="../assets/img/avatar/avatar-5.png" class="rounded-circle">-->
-<!--						</div>-->
-<!--						<div class="dropdown-item-desc">-->
-<!--							<b>Alfa Zulkarnain</b>-->
-<!--							<p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>-->
-<!--							<div class="time">Yesterday</div>-->
-<!--						</div>-->
-<!--					</a>-->
-<!--				</div>-->
-				<div class="dropdown-footer text-center">
-					<a href="#">View All <i class="fas fa-chevron-right"></i></a>
-				</div>
-			</div>
-		</li>
 		<div id="notifications">
 		<?php $count = count($notifications); ?>
 		<li  class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg <?php if ($count > 0){echo "beep"; } ?>"><i class="far fa-bell"></i></a>
@@ -95,8 +37,6 @@
 					<?php endif; ?>
 				</div>
 				<?php if(!empty($notifications)): ?>
-
-
 				<div class="dropdown-list-content dropdown-list-icons">
 					<?php foreach ($notifications as $notification): ?>
 
@@ -119,7 +59,6 @@
         <?php endif;?>
 			</div>
 		</li>
-
 		</div>
 		<li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
 				<img alt="image" src="<?php echo base_url(); ?>/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
