@@ -15,7 +15,7 @@
 				<div class="main-content">
 					<section class="section">
 						<div class="section-header">
-							<h1>My Information -> <?php echo $employee->employee_unique_id; ?></h1>
+							<h1>My Information</h1>
 							<div class="section-header-breadcrumb">
 								<div class="breadcrumb-item active"><a href="<?php echo site_url('employee_main'); ?>">Dashboard</a></div>
                 <div class="breadcrumb-item">My Information  </div>
@@ -32,7 +32,10 @@
 										<div class="card-body">
 											<ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
 												<li class="media">
-													<img alt="image" class="mr-3 rounded-circle" width="50" src="<?php echo base_url() ?>/uploads/employee_passports/<?php echo $employee->employee_passport; ?>">
+													<img alt="image" class="mr-3 rounded" width="50" height="50" src="<?php echo base_url() ?>/uploads/employee_passports/<?php echo $employee->employee_passport; ?>">
+                          <div class="media-body">
+                            <p class="media-title mt-2 font-italic">@<?php echo $employee->employee_unique_id; ?></p>
+                          </div>
 												</li>
 												<li class="media">
 

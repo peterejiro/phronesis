@@ -114,6 +114,10 @@
                         <a class="text-white" href="javascript:void(0)" data-toggle="modal" data-target="#details"><i class="text-white fa fa-ellipsis-h"></i></a>
                       </div>
                     </div>
+				          <?php else:?>
+                    <h1><?php echo date('D j')?></h1>
+                    <h4><?php echo date('F')?></h4>
+                    <h6 class="mt-2"><?php echo date('Y')?></h6>
 				          <?php endif?>
                 </div>
               </div>
@@ -190,7 +194,7 @@
                       <div class="alert-icon"><i class="far fa-check-circle"></i></div>
                       <div class="alert-body">
                         <div class="alert-title">Payslip</div>
-                        Your Payslip for <?php echo date('F')?> is ready view it <a class="font-weight-bold font-italic" href="<?php echo base_url('pay_slip') ?>">here</a>.
+                        Your Payslip for <?php echo date('F')?> is ready generate it <a class="font-weight-bold font-italic" href="<?php echo base_url('pay_slip') ?>">here</a>.
                       </div>
                     </div>
 				          <?php else:?>
@@ -198,7 +202,7 @@
                       <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
                       <div class="alert-body">
                         <div class="alert-title">Payslip</div>
-                        Your Payslip for <?php echo date('F')?> is not ready view others <a class="font-weight-bold font-italic" href="<?php echo base_url('pay_slip') ?>">here</a>.
+                        Your Payslip for <?php echo date('F')?> is not ready generate others <a class="font-weight-bold font-italic" href="<?php echo base_url('pay_slip') ?>">here</a>.
                       </div>
                     </div>
 				          <?php endif;?>

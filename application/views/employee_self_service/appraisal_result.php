@@ -204,10 +204,8 @@
 													endif;
 
 													if($overall_score > 89 && $overall_score <= 100):
-														echo "Unsatisfactory";
+														echo "Excellent";
 													endif;
-
-
 													?></td>
 												<td style="width: 9px;">
 												</td>

@@ -97,11 +97,9 @@ curl_close($curl);
                       </div>
                     </div>
 									<?php else:?>
-                    <div class="card-header" style="height: 195px; border-radius: 12px; !important;">
-                      <h1><?php echo date('D j')?></h1>
-                      <h4><?php echo date('F')?></h4>
-                      <h6 class="mt-2"><?php echo date('Y')?></h6>
-                    </div>
+                    <h1><?php echo date('D j')?></h1>
+                    <h4><?php echo date('F')?></h4>
+                    <h6 class="mt-2"><?php echo date('Y')?></h6>
 									<?php endif?>
                 </div>
               </div>

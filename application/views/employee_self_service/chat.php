@@ -43,10 +43,12 @@
 									?>
 								<li class="media">
 									<a class="link" href="#" data-rel="<?php echo $employee_details->employee_id; ?>">
-										<img alt="image" class="mr-3 rounded-circle" width="50" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee_details->employee_passport; ?>">
-										<div class="media-body">
-											<div class="mt-0 mb-1 font-weight-bold"><?php echo $employee_details->employee_first_name." ". $employee_details->employee_last_name; ?></div>
-										</div>
+                    <div class="media">
+                      <img alt="image" class="mr-3 rounded" width="30" height="30" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee_details->employee_passport; ?>">
+                      <div class="media-body">
+                        <div class="mt-0 mb-1 font-weight-bold"><?php echo $employee_details->employee_first_name." ". $employee_details->employee_last_name; ?></div>
+                      </div>
+                    </div>
 									</a>
 								</li>
 									<?php

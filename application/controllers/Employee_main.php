@@ -2243,28 +2243,22 @@ class Employee_main extends CI_Controller
 		foreach ($chats as $chat):
 		if($chat->chat_sender_id == $employee->employee_id && $chat->chat_reciever_id == $employee_details->employee_id): ?>
 		<div class="chat-item chat-right" style="">
-		<img src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee->employee_passport; ?>">
+		<img height="30" width="30" class="rounded" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee->employee_passport; ?>">
 			<div class="chat-details">
-			<div class="chat-text"><?php echo $chat->chat_body; ?></div>
-			<div class="chat-time"><?php echo date('F j, Y g:i a', strtotime($chat->chat_time)); ?></div>
-						</div>
+        <div class="chat-text"><?php echo $chat->chat_body; ?></div>
+        <div class="chat-time"><?php echo date('F j, Y g:i a', strtotime($chat->chat_time)); ?></div>
+      </div>
 		</div>
 	<?php
 		endif;
-		if($chat->chat_sender_id == $employee_details->employee_id && $chat->chat_reciever_id == $employee->employee_id):
-															?>
+		if($chat->chat_sender_id == $employee_details->employee_id && $chat->chat_reciever_id == $employee->employee_id):?>
 			<div class="chat-item chat-left" style="">
-
-																<img src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee_details->employee_passport; ?>">
-
-																<div class="chat-details">
-																	<div class="chat-text"><?php echo $chat->chat_body; ?></div>
-																	<div class="chat-time"><?php echo date('F j, Y g:i a', strtotime($chat->chat_time)); ?></div>
-																</div>
-
-
-
-															</div>
+        <img height="30" width="30" class="rounded" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee_details->employee_passport; ?>">
+        <div class="chat-details">
+          <div class="chat-text"><?php echo $chat->chat_body; ?></div>
+          <div class="chat-time"><?php echo date('F j, Y g:i a', strtotime($chat->chat_time)); ?></div>
+        </div>
+      </div>
 
 		<?php
 		endif;
