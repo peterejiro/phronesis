@@ -228,6 +228,22 @@ class Salaries extends CI_Model
 		return $this->db->get()->result();
 	}
 
+	public function get_employee_salary($employee_id){
+		$this->db->select('*');
+		$this->db->from('salary');
+		$this->db->where('salary_employee_id', $employee_id);
+		$this->db->where('salary_pay_month', date('m'));
+		$this->db->where('salary_pay_year', date('Y'));
+		return $this->db->get()->result();
+	}
 
+	public function get_employee_salaries_by_payment_id($employee_id, $payment_ids){
+		$this->db->select('*');
+		$this->db->from('salary');
+		$this->db->where('salary_employee_id', $employee_id);
+		$this->db->where_in('salary_payment_definition_id', $payment_ids);
+		$this->db->where('salary_pay_year', date('Y'));
+		return $this->db->get()->result();
+	}
 
 }

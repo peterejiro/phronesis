@@ -60,13 +60,17 @@
 														</td>
 														<td class="text-center" style="width: 9px">
 															<?php if($appraisal->employee_appraisal_self == 0 ): ?>
-
-																<a class="dropdown-item has-icon" href="<?php echo site_url('respond_appraisal_self').'/'.$appraisal->employee_appraisal_id; ?>"><i class="fas fa-file-prescription"></i>Respond</a>
+                                <div class="dropdown">
+                                  <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
+                                  <div class="dropdown-menu">
+                                    <a class="dropdown-item has-icon" href="<?php echo site_url('respond_appraisal_self').'/'.$appraisal->employee_appraisal_id; ?>"><i class="fas fa-edit"></i> Respond</a>
+                                  </div>
+                                </div>
 															<?php	else:?>
 																<div class="dropdown">
 																	<a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
 																	<div class="dropdown-menu">
-																		<a class="dropdown-item has-icon" href="<?php echo site_url('appraisal_result').'/'.$appraisal->employee_appraisal_id; ?>"><i class="fas fa-file-prescription"></i>Check Appraisal Result</a>
+																		<a class="dropdown-item has-icon" href="<?php echo site_url('appraisal_result').'/'.$appraisal->employee_appraisal_id; ?>"><i class="fas fa-file-prescription"></i> View Appraisal Result</a>
 																	</div>
 																</div>
 															<?php endif; ?>

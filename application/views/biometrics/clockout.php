@@ -4,23 +4,18 @@ $CI->load->model('biometric');
 
 ?>
 
-<body>
+<body class="layout-3">
 <div id="app">
-	<div class="main-wrapper">
+	<div class="main-wrapper container">
 		<div class="navbar-bg"></div>
-
-
 			<section class="section">
-
         <div class="section-body">
-
           <div class="row">
-			  <div class="section-title" style="color: white"> Clocking Out  For Today - <?php echo date('l, j F Y', time()) ?></div>
-
+			      <div class="section-title" style="color: white"> Clock Out Today - <?php echo date('l, j F Y', time()) ?></div>
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-
+                  <h4>All Enrolled Employees</h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -38,7 +33,7 @@ $CI->load->model('biometric');
 					              $date = date('Y-m-d', time());
 					              if(!empty($employees)):
                           foreach($employees as $employee):
-					  if($employee->employee_status == 1 || $employee->employee_status == 2):
+					                if($employee->employee_status == 1 || $employee->employee_status == 2):
 							            $check_biometrics  = $CI->biometric->get_employee_biometric($employee->employee_id);
 					                if(!empty($check_biometrics)):
                             $check_login = $CI->biometric->check_clockout($employee->employee_id, $date);
@@ -90,17 +85,17 @@ $CI->load->model('biometric');
           </div>
         </div>
       </section>
-    </div>
+		<?php include(APPPATH.'/views/footer.php'); ?>
+  </div>
   </div>
 
-<?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 </body>
 </html>
 
 <script type="text/javascript">
 
-  $('title').html('Clock In - IHUMANE');
+  $('title').html('Clock Out - IHUMANE');
 
 	function user_delete(user_id, user_name) {
 

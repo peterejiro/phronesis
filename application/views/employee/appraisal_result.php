@@ -180,49 +180,33 @@
                         <td style="width: 9px;"><?php
                           $score = ((($quantitative_score/($count_quantitative * 5)) * (20/100)) + (($qualitative_score/($count_qualitative * 5)) * (80/100)));
                           echo number_format($score * 100);  ?></td>
-
                       </tr>
-
-						<tr>
-							<td style="width: 70%">Overall Comments</td>
-							<td>	<?php
-
-								$overall_score = $score * 100;
-
-								if($overall_score > 0 && $overall_score <= 39):
-									echo "Unsatisfactory";
-								endif;
-
-								if($overall_score > 39 && $overall_score <= 59):
-									echo "Satisfactory";
-								endif;
-
-								if($overall_score > 59 && $overall_score <= 89):
-									echo "Good";
-								endif;
-
-								if($overall_score > 89 && $overall_score <= 100):
-									echo "Unsatisfactory";
-								endif;
-
-
-								?></td>
-							<td style="width: 9px;">
-							</td>
-
-						</tr>
+                      <tr>
+                        <td style="width: 70%">Overall Comments</td>
+                        <td>
+                          <?php
+			                    $overall_score = $score * 100;
+			                    if($overall_score > 0 && $overall_score <= 39):
+				                    echo "Unsatisfactory";
+			                    endif;
+			                    if($overall_score > 39 && $overall_score <= 59):
+				                    echo "Satisfactory";
+			                    endif;
+			                    if($overall_score > 59 && $overall_score <= 89):
+				                    echo "Good";
+			                    endif;
+			                    if($overall_score > 89 && $overall_score <= 100):
+				                    echo "Excellent";
+			                    endif;
+			                    ?>
+                        </td>
+                        <td style="width: 9px;">
+                        </td>
+                      </tr>
                     </table>
                   </div>
                 </div>
               </div>
-<!--							<div class="text-md-right">-->
-<!--								<div class="float-lg-left mb-lg-0 mb-3">-->
-<!--									<h3>Total Score:</h3>-->
-<!--									<h4> --><?php
-//										$score = ((($quantitative_score/($count_quantitative * 5)) * (20/100)) + (($qualitative_score/($count_qualitative * 5)) * (80/100)));
-//										echo number_format($score * 100)."%";  ?><!--</h4>-->
-<!--								</div>-->
-<!--							</div>-->
 						</div>
 						<hr>
 						<div class="text-md-right">
