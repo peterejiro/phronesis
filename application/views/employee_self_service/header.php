@@ -157,8 +157,6 @@
 
 		setInterval(timestamp, 5000);
 		function timestamp() {
-
-
 			var employee_id = <?php echo $employee->employee_id; ?>;
 			$.ajax({
 				type: "POST",
