@@ -245,6 +245,7 @@ class Employees extends CI_Model
 		$this->db->select('*');
 		$this->db->from('employee_appraisal');
 		$this->db->join('employee', 'employee.employee_id = employee_appraisal.employee_appraisal_employee_id');
+		$this->db->order_by('employee_appraisal_id', 'DESC');
 		return $this->db->get()->result();
 
 	}
@@ -285,7 +286,7 @@ class Employees extends CI_Model
 		$this->db->from('employee_appraisal');
 		$this->db->where('employee_appraisal.employee_appraisal_employee_id', $employee_id);
 		$this->db->join('employee', 'employee.employee_id = employee_appraisal.employee_appraisal_supervisor_id');
-		//$this->db->where('employee_appraisal.employee_appraisal_status', 0);
+		$this->db->order_by('employee_appraisal_id', 'DESC');
 		return $this->db->get()->result();
 
 	}
@@ -303,7 +304,7 @@ class Employees extends CI_Model
 		$this->db->from('employee_appraisal');
 		$this->db->where('employee_appraisal.employee_appraisal_supervisor_id', $employee_id);
 		$this->db->join('employee', 'employee.employee_id = employee_appraisal.employee_appraisal_employee_id');
-		//$this->db->where('employee_appraisal.employee_appraisal_status', 0);
+		$this->db->order_by('employee_appraisal_id', 'DESC');
 		return $this->db->get()->result();
 
 	}
@@ -570,6 +571,7 @@ class Employees extends CI_Model
 		$this->db->from('employee_training');
 		$this->db->join('training', 'training.training_id = employee_training.employee_training_training_id');
 		$this->db->where('employee_training.employee_training_employee_id', $employee_id);
+		$this->db->order_by('employee_training_id', 'DESC');
 		return $this->db->get()->result();
 
 	}
