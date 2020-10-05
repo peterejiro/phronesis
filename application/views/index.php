@@ -387,7 +387,7 @@ curl_close($curl);
                                 <div class="text-muted text-small"><a href="javascript:void(0)"><?php echo $present_employee->employee_unique_id?></a> <div class="bullet"></div> Clocked in <?php echo date('g:i:s a', strtotime($present_employee->employee_biometrics_login_time)); ?></div>
                               </div>
                             </li>
-			                    <?php endif; $count++; endforeach;?>t
+			                    <?php endif; $count++; endforeach;?>
 		                    <?php endif?>
                       </ul>
                     </div>
