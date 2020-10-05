@@ -43,15 +43,15 @@ curl_close($curl);
               <div class="card card-statistic-2" style="border-radius: 12px;">
                 <div class="card-stats" >
                   <div class="card-stats-title" style="border-radius: 12px; !important;">Company Overview
-                    -
-                    <div class="dropdown d-inline">
-                      <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">App Config</a>
-                      <ul class="dropdown-menu dropdown-menu-sm">
-                        <li class="dropdown-title">App Config</li>
-                        <li><a href="#" class="dropdown-item">Company Settings</a></li>
-                        <li><a href="#" class="dropdown-item">Manage Subscription</a></li>
-                      </ul>
-                    </div>
+<!--                    --->
+<!--                    <div class="dropdown d-inline">-->
+<!--                      <a class="font-weight-600 dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">App Config</a>-->
+<!--                      <ul class="dropdown-menu dropdown-menu-sm">-->
+<!--                        <li class="dropdown-title">App Config</li>-->
+<!--                        <li><a href="#" class="dropdown-item">Company Settings</a></li>-->
+<!--                        <li><a href="#" class="dropdown-item">Manage Subscription</a></li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
                   </div>
                   <div class="card-stats-items" style="border-radius: 12px;">
                     <div class="card-stats-item">
