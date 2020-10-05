@@ -7,7 +7,7 @@
 		</ul>
     <?php if($employee_management == 1):?>
 		<div class="search-element">
-			<input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="250">
+			<input class="form-control" type="search" placeholder="Search Employees" aria-label="Search" data-width="250" onkeyup="filter(this)">
 			<button class="btn" type="submit"><i class="fas fa-search"></i></button>
 			<div class="search-backdrop"></div>
 			<div class="search-result pl-2 pb-3">
