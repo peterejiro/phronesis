@@ -381,13 +381,13 @@ curl_close($curl);
                               </a>
                               <div class="media-body">
                                 <div class="media-right">
-                                  <small style="font-size: 12px;"><?php echo timespan(strtotime($present_employee->employee_biometrics_login_time), time(), 2)?> ago</small>
+                                  <small style="font-size: 12px;"><?php echo timespan(strtotime($present_employee->employee_biometrics_login_time), now('Africa/Lagos'), 2)?> ago</small>
                                 </div>
                                 <div class="media-title"><a href="javascript:void(0)"><?php echo $present_employee->employee_first_name . " " . $present_employee->employee_last_name; ?></a></div>
                                 <div class="text-muted text-small"><a href="javascript:void(0)"><?php echo $present_employee->employee_unique_id?></a> <div class="bullet"></div> Clocked in <?php echo date('g:i:s a', strtotime($present_employee->employee_biometrics_login_time)); ?></div>
                               </div>
                             </li>
-			                    <?php endif; endforeach;?>
+			                    <?php endif; $count++; endforeach;?>t
 		                    <?php endif?>
                       </ul>
                     </div>
