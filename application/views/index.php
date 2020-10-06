@@ -155,7 +155,7 @@ curl_close($curl);
                 </div>
                 <div class="row">
                   <div class="col-6">
-                    <div class="card" style="border-radius: 12px">
+                    <div class="card" style="border-radius: 12px; cursor: pointer" onclick="location.href = '<?php echo site_url('employee_salary_structure')?>'">
                       <div class="card-body text-center">
                         <h4 class="display-4 mt-2"><?php echo $personalized_employees ?></h4>
                         <h6>Personalized</h6>
@@ -164,7 +164,7 @@ curl_close($curl);
                     </div>
                   </div>
                   <div class="col-6">
-                    <div class="card" style="border-radius: 12px">
+                    <div class="card" style="border-radius: 12px; cursor: pointer" onclick="location.href = '<?php echo site_url('employee_salary_structure')?>'">
                       <div class="card-body text-center">
                         <h4 class="display-4 mt-2"><?php echo $categorized_employees ?></h4>
                         <h6>Categorized</h6>
@@ -175,7 +175,7 @@ curl_close($curl);
                 </div>
                 <div class="row">
                   <div class="col-6">
-                    <div class="card" style="border-radius: 12px">
+                    <div class="card" style="border-radius: 12px; cursor: pointer" onclick="location.href = '<?php echo site_url('variational_payment')?>'">
                       <div class="card-body text-center">
                         <h4 class="display-4 mt-2"><?php echo $variational_payments ?></h4>
                         <h6>Variational</h6>
@@ -211,7 +211,7 @@ curl_close($curl);
               <div class="col-lg-8 col-md-12 col-12 col-sm-12">
                 <div class="row">
                   <div class="col-3">
-                    <div class="card" style="border-radius: 12px">
+                    <div class="card" style="border-radius: 12px; cursor: pointer" onclick="location.href = '<?php echo site_url('employee_queries')?>'">
                       <div class="card-body text-center">
                         <h4 class="display-4 mt-2"><?php echo $open_queries ?></h4>
                         <h6>Queries</h6>
@@ -220,7 +220,7 @@ curl_close($curl);
                     </div>
                   </div>
                   <div class="col-3">
-                    <div class="card" style="border-radius: 12px">
+                    <div class="card" style="border-radius: 12px; cursor: pointer" onclick="location.href = '<?php echo site_url('employee_trainings')?>'">
                       <div class="card-body text-center">
                         <h4 class="display-4 mt-2"><?php echo $pending_trainings ?></h4>
                         <h6>Trainings</h6>
