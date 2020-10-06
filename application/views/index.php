@@ -55,15 +55,15 @@ curl_close($curl);
                   </div>
                   <div class="card-stats-items" style="border-radius: 12px;">
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count"><?php echo count($departments);?></div>
+                      <div class="card-stats-item-count" style="cursor: pointer;" onclick="location.href = '<?php echo site_url('department')?>'"><?php echo count($departments);?></div>
                       <div class="card-stats-item-label">Departments</div>
                     </div>
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count"><?php echo count($users); ?></div>
+                      <div class="card-stats-item-count" style="cursor: pointer;" onclick="location.href = '<?php echo site_url('user')?>'"><?php echo count($users); ?></div>
                       <div class="card-stats-item-label">Users</div>
                     </div>
                     <div class="card-stats-item">
-                      <div class="card-stats-item-count"><?php echo count($online_users); ?></div>
+                      <div class="card-stats-item-count" style="cursor: pointer" data-toggle="modal" data-target="#online"><?php echo count($online_users); ?></div>
                       <div class="card-stats-item-label">Online</div>
                     </div>
                   </div>
@@ -75,7 +75,7 @@ curl_close($curl);
                   <div class="card-header">
                     <h4>Total Employees</h4>
                   </div>
-                  <div class="card-body">
+                  <div class="card-body" style="cursor: pointer;" onclick="location.href = '<?php echo site_url('employee')?>'">
 										<?php echo count($employees); ?>
                   </div>
                 </div>
@@ -467,6 +467,44 @@ curl_close($curl);
             </li>
           </ul>
 				<?php endif;?>
+      </div>
+      <div class="modal-footer bg-whitesmoke">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="online" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle2">Online</h5>
+        <a type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" class="text-dark">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body p-0">
+        <div class="tickets-list">
+	        <?php foreach($online_users as $online_user):?>
+            <a href="#" class="ticket-item">
+              <div class="ticket-title">
+                <h4><?php echo $online_user->user_name?></h4>
+              </div>
+              <div class="ticket-info">
+                <div><?php echo $online_user->user_username?></div>
+                <div class="bullet"></div>
+                <?php if($online_user->user_type == 1): ?>
+                <div class="text-primary">administrator</div>
+                <?php elseif($online_user->user_type == 2):?>
+                <div class="text-info">employee</div>
+                <?php else:?>
+                <div class="text-warning">moderator</div>
+                <?php endif;?>
+              </div>
+            </a>
+	        <?php endforeach;?>
+        </div>
       </div>
       <div class="modal-footer bg-whitesmoke">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
