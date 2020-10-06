@@ -2261,7 +2261,7 @@ class Employee_main extends CI_Controller
       </div>
 
 		<?php
-		endif;
+		endif;i
 
 		endforeach;
 	}
