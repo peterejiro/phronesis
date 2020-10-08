@@ -9,6 +9,7 @@ deployment:
     - export DEPLOYPATH5=/home/ihumane/nigcomsat.ihumane.net/
     - export DEPLOYPATH6=/home/ihumane/jrbsolar.ihumane.net/
     - export DEPLOYPATH7=/home/ihumane/demo.ihumane.net/
+    - export DEPLOYPATH8=/home/ihumane/connexxiongroup.ihumane.net/
     - /bin/cp -R * $DEPLOYPATH
     - /bin/cp -R * $DEPLOYPATH2
     - /bin/cp -R * $DEPLOYPATH3
@@ -16,3 +17,4 @@ deployment:
     - /bin/cp -R * $DEPLOYPATH5
     - /bin/cp -R * $DEPLOYPATH6
     - /bin/cp -R * $DEPLOYPATH7
+    - /bin/cp -R * $DEPLOYPATH8
