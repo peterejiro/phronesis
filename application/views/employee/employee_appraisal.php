@@ -66,7 +66,19 @@
                             </td>
                             <td class="text-center" style="width: 9px">
                               <?php if($appraisal->employee_appraisal_status == 0):
-                                echo "No Actions";
+
+                               if($appraisal->employee_appraisal_supervisor == 0 || $appraisal->employee_appraisal_qualitative == 0 || $appraisal->employee_appraisal_quantitative == 0):
+                                ?>
+								   <div class="dropdown">
+									   <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
+									   <div class="dropdown-menu">
+										   <a class="dropdown-item has-icon" href="<?php echo site_url('reassign_supervisor').'/'.$appraisal->employee_appraisal_id; ?>"><i class="fa fa-eye"></i>Reassign Supervisor</a>
+									   </div>
+								   </div>
+								  <?php else:
+								   echo "No Actions";
+
+								   endif;
                               else:?>
                                 <div class="dropdown">
                                   <a href="#" data-toggle="dropdown"><i class="fas fa-ellipsis-h"></i></a>
