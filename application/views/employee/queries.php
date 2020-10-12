@@ -40,7 +40,6 @@
                     <table id="datatable-buttons" class="table table-bordered table-striped table-md">
                       <thead>
                         <tr>
-                          <th>Employee Name</th>
                           <th>Query Subject</th>
                           <th>Query Type</th>
                           <th>Query Date</th>
@@ -53,7 +52,6 @@
                         foreach($queries as $query):
                           ?>
                           <tr>
-                            <td><?php echo $employee->employee_last_name." ".$employee->employee_first_name; ?></td>
                             <td><?php echo $query->query_subject; ?></td>
                             <td><b><?php if($query->query_type == 0) { echo "Warning";} if($query->query_type == 1) { echo "Query";}?></b></td>
                             <td><?php echo date("Y-m-d", strtotime($query->query_date));?></td>
