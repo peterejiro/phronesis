@@ -683,7 +683,7 @@ class Home extends CI_Controller
 
 						);
 
-						$body = $this->load->view('emails/password_reset',$data,TRUE);
+						$body = $this->load->view('emails/new_password',$data,TRUE);
 						$this->email->message($body);
 						$this->email->send();
 						$msg = array(
