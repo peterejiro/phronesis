@@ -2135,7 +2135,8 @@ class Employee extends CI_Controller
 						$appraisal_array = array(
 
 							'employee_appraisal_supervisor_id' => $supervisor_id,
-							'employee_appraisal_status' => 0
+							'employee_appraisal_status' => 0,
+							'employee_appraisal_self' => 0
 						);
 
 				$query = $this->employees->update_appraisal($appraisal_id, $appraisal_array);
