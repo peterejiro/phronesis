@@ -461,7 +461,7 @@
 												</td>
 											</tr>
 										</table>
-										<p>Please Enter the Token Above to Reset Your Password</p>
+										<p>Please Enter the Token Above to Reset Your Password; It Expires after Exactly 10 Minutes.</p>
 
 										<p>Please if you didn't request this, kindly ignore this email and <a href="mailto:support@ihumane.net">email our customer success team</a> </p>
 
