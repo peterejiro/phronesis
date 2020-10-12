@@ -54,6 +54,9 @@ $route['404_override'] = 'home/error_404';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['login'] = 'home/auth_login';
+$route['forgot_password'] = 'home/forgot_password';
+$route['forgot_password_action'] = 'home/forgot_password_action';
+$route['reset_password'] = 'home/reset_password';
 $route['logout'] = 'home/logout';
 $route['access_denied'] = 'home/access_denied';
 $route['error_404'] = 'home/error_404';
