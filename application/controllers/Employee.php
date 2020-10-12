@@ -1775,6 +1775,8 @@ class Employee extends CI_Controller
 
 	}
 
+
+
 	public function add_new_employee_appraisal()
 	{
 		$username = $this->session->userdata('user_username');
@@ -2021,6 +2023,174 @@ class Employee extends CI_Controller
 			redirect('/login');
 		endif;
 
+
+	}
+
+	public function reassign_supervisor(){
+		$username = $this->session->userdata('user_username');
+		$appraisal_id = $this->uri->segment(2);
+		if (isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+
+			if ($user_type == 1 || $user_type == 3):
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+				$data['notifications'] = $this->employees->get_notifications(0);
+
+				if ($permission->employee_management == 1):
+
+					$questions = $this->employees->get_appraisal_questions($appraisal_id);
+
+					if(empty($questions)):
+
+						redirect('error_404');
+
+					else:
+
+						$data['user_data'] = $this->users->get_user($username);
+
+						//$data['employee'] = $this->employees->get_employee_by_unique($username);
+
+						$data['csrf_name'] = $this->security->get_csrf_token_name();
+						$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+						//$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+
+						$data['questions'] = $questions;
+						$data['employees'] = $this->employees->view_employees();
+						$data['appraisal_id'] = $appraisal_id;
+						$data['appraisal_detail'] = $this->employees->get_appraisal($appraisal_id);
+
+
+
+						//$this->load->view('employee_self_service/appraisal_result', $data);
+
+
+
+						$this->load->view('employee/reassign_supervisor', $data);
+
+					endif;
+				else:
+					redirect('/access_denied');
+				endif;
+
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
+	public function update_employee_appraisal(){
+		$username = $this->session->userdata('user_username');
+
+		if (isset($username)):
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+			$data['notifications'] = $this->employees->get_notifications(0);
+
+			if ($permission->employee_management == 1):
+
+				$method = $this->input->server('REQUEST_METHOD');
+
+				if($method == 'POST' || $method == 'Post' || $method == 'post'):
+
+				$data['user_data'] = $this->users->get_user($username);
+				//$data['appraisals'] = $this->employees->get_appraisals();
+				$employee_id = $this->input->post('employee_id');
+				$supervisor_id = $this->input->post('supervisor_id');
+				$appraisal_id  = $this->input->post('appraisal_id');
+
+
+				if ($employee_id == $supervisor_id):
+					$msg = array(
+						'msg' => 'Employee and supervisor cannot be the same',
+						'location' => site_url('employee_appraisal'),
+						'type' => 'error'
+
+					);
+					$this->load->view('swal', $msg);
+
+				else:
+
+
+
+						$appraisal_array = array(
+
+							'employee_appraisal_supervisor_id' => $supervisor_id,
+							'employee_appraisal_status' => 0
+						);
+
+				$query = $this->employees->update_appraisal($appraisal_id, $appraisal_array);
+
+
+
+						if ($query == true):
+
+
+
+							$notification_data = array(
+								'notification_employee_id'=> $employee_id,
+								'notification_link'=> 'appraisals',
+								'notification_type' => 'Appraisal Supervisor Updated',
+								'notification_status'=> 0
+							);
+
+							$this->employees->insert_notifications($notification_data);
+
+							$notification_data = array(
+								'notification_employee_id'=> $supervisor_id,
+								'notification_link'=> 'appraise_employee',
+								'notification_type' => 'New Employee to be Appraised',
+								'notification_status'=> 0
+							);
+
+							$this->employees->insert_notifications($notification_data);
+							$msg = array(
+								'msg' => 'Appraisal Supervisor Updated',
+								'location' => site_url('employee_appraisal'),
+								'type' => 'success'
+							);
+							$this->load->view('swal', $msg);
+
+						else:
+
+
+						endif;
+
+
+
+				endif;
+
+
+				else:
+					redirect('error_404');
+					endif;
+			else:
+
+				redirect('/access_denied');
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
 
 	}
 
@@ -3056,8 +3226,7 @@ class Employee extends CI_Controller
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 				$data['notifications'] = $this->employees->get_notifications(0);
-				if($permission->payroll_configuration == 1):
-
+				if($permission->employee_management == 1):
 
 					$data['user_data'] = $this->users->get_user($username);
 
