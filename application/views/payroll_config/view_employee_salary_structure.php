@@ -71,7 +71,7 @@
                         <?php else:?>
                           <p>Amount: (&#8358; <?php echo number_format($personalized_allowance->personalized_amount); $total_amount -= $personalized_allowance->personalized_amount; ?>)</p>
                         </div>
-                <small>Note, this is an <em class="text-danger">deduction</em> definition</small>
+                        <small>Note, this is an <em class="text-danger">deduction</em> definition</small>
                         <?php endif;?>
                       </div>
                     <?php endforeach; ?>

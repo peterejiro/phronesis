@@ -3796,7 +3796,36 @@ class Employee extends CI_Controller
 
 	public function get_employees() {
     	  echo json_encode($this->employees->view_employees());
-      }
+  }
 
-
+  public function employee_queries() {
+    $username = $this->session->userdata('user_username');
+    if(isset($username)):
+      $user_type = $this->users->get_user($username)->user_type;
+      if($user_type == 1 || $user_type == 3):
+        $permission = $this->users->check_permission($username);
+        $data['employee_management'] = $permission->employee_management;
+        $data['payroll_management'] = $permission->payroll_management;
+        $data['biometrics'] = $permission->biometrics;
+        $data['user_management'] = $permission->user_management;
+        $data['configuration'] = $permission->configuration;
+        $data['payroll_configuration'] = $permission->payroll_configuration;
+        $data['hr_configuration'] = $permission->hr_configuration;
+        $data['notifications'] = $this->employees->get_notifications(0);
+        if($permission->employee_management == 1):
+          $data['user_data'] = $this->users->get_user($username);
+          $data['queries'] = $this->employees->get_queries();
+          $data['csrf_name'] = $this->security->get_csrf_token_name();
+          $data['csrf_hash'] = $this->security->get_csrf_hash();
+          $this->load->view('employee/employee_queries', $data);
+        else:
+          redirect('/access_denied');
+        endif;
+      else:
+        redirect('/access_denied');
+      endif;
+    else:
+        redirect('/login');
+    endif;
+  }
 }
