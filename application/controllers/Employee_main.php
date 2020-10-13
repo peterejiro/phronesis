@@ -30,9 +30,6 @@ class Employee_main extends CI_Controller
 //				//$data['employees'] = $this->employees->view_employees();
 			$user_type = $this->users->get_user($username)->user_type;
 
-
-
-
 				if($user_type == 2 || $user_type == 3):
 
 					$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
@@ -403,6 +400,9 @@ class Employee_main extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
+			$method = $this->input->server('REQUEST_METHOD');
+
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
 
 			//$data['employees'] = $this->employees->view_employees();
 			$user_type = $this->users->get_user($username)->user_type;
@@ -542,7 +542,10 @@ class Employee_main extends CI_Controller
 				redirect('/access_denied');
 
 			endif;
+			else:
+				redirect('error_404');
 
+				endif;
 
 		else:
 			redirect('/login');
@@ -690,6 +693,9 @@ class Employee_main extends CI_Controller
 	}
 
 	public function answer_questions_supervisor(){
+		$method = $this->input->server('REQUEST_METHOD');
+
+		if($method == 'POST' || $method == 'Post' || $method == 'post'):
 
 		$appraisal_id = $this->input->post('appraisal_id');
 
@@ -758,7 +764,9 @@ class Employee_main extends CI_Controller
 					endif;
 
 		endif;
-
+		else:
+			redirect('error_404');
+			endif;
 	}
 
 	public function respond_appraisal_self(){
@@ -811,6 +819,9 @@ class Employee_main extends CI_Controller
 
 	public function answer_questions_self(){
 
+		$method = $this->input->server('REQUEST_METHOD');
+
+		if($method == 'POST' || $method == 'Post' || $method == 'post'):
 		$appraisal_id = $this->input->post('appraisal_id');
 
 		if(empty($appraisal_id)):
@@ -875,6 +886,9 @@ class Employee_main extends CI_Controller
 			endif;
 
 		endif;
+		else:
+			redirect('error_404');
+			endif;
 
 	}
 
@@ -992,7 +1006,9 @@ class Employee_main extends CI_Controller
 
 		if(isset($username)):
 
+			$method = $this->input->server('REQUEST_METHOD');
 
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
 			//$data['employees'] = $this->employees->view_employees();
 			$user_type = $this->users->get_user($username)->user_type;
 
@@ -1158,7 +1174,9 @@ class Employee_main extends CI_Controller
 				redirect('/access_denied');
 
 			endif;
-
+		else:
+			redirect('error_404');
+			endif;
 
 		else:
 			redirect('/login');
@@ -1265,7 +1283,9 @@ class Employee_main extends CI_Controller
 
 		if(isset($username)):
 
+			$method = $this->input->server('REQUEST_METHOD');
 
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
 			//$data['employees'] = $this->employees->view_employees();
 			$user_type = $this->users->get_user($username)->user_type;
 
@@ -1377,6 +1397,11 @@ class Employee_main extends CI_Controller
 
 			endif;
 
+			else:
+
+				redirect('error_404');
+				endif;
+
 
 		else:
 			redirect('/login');
@@ -1465,6 +1490,9 @@ class Employee_main extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if (isset($username)):
+			$method = $this->input->server('REQUEST_METHOD');
+
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
 			$user_type = $this->users->get_user($username)->user_type;
 
 			if ($user_type == 2 || $user_type == 3):
@@ -1530,6 +1558,9 @@ class Employee_main extends CI_Controller
 				redirect('/access_denied');
 
 			endif;
+			else:
+				redirect('error_404');
+				endif;
 		else:
 			redirect('/login');
 		endif;
@@ -2000,6 +2031,9 @@ class Employee_main extends CI_Controller
 		$username = $this->session->userdata('user_username');
 
 		if(isset($username)):
+			$method = $this->input->server('REQUEST_METHOD');
+
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
 
 			extract($_POST);
 
@@ -2074,6 +2108,11 @@ class Employee_main extends CI_Controller
 
 
 			//echo $total_score." %";
+
+			else:
+				redirect('error_404');
+
+				endif;
 
 		else:
 			redirect('/login');
@@ -2498,7 +2537,9 @@ class Employee_main extends CI_Controller
 
 		if(isset($username)):
 
+			$method = $this->input->server('REQUEST_METHOD');
 
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
 
 			$user_type = $this->users->get_user($username)->user_type;
 
@@ -2561,6 +2602,10 @@ class Employee_main extends CI_Controller
 				redirect('/access_denied');
 
 			endif;
+			else:
+
+				redirect('error_404');
+				endif;
 
 
 		else:
