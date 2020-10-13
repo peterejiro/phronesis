@@ -74,9 +74,13 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 		if(isset($username)):
 
+			$method = $this->input->server('REQUEST_METHOD');
+
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
+
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+			$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -198,6 +202,10 @@ $data['notifications'] = $this->employees->get_notifications(0);
 				redirect('/access_denied');
 
 			endif;
+
+			else:
+				redirect('error_404');
+				endif;
 		else:
 			redirect('/login');
 		endif;
@@ -215,7 +223,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+			$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -319,7 +327,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+			$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -427,9 +435,13 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 		if(isset($username)):
 
+			$method = $this->input->server('REQUEST_METHOD');
+
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
+
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+			$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -599,6 +611,12 @@ $data['notifications'] = $this->employees->get_notifications(0);
 				redirect('/access_denied');
 
 			endif;
+
+			else:
+
+				redirect('error_404');
+
+				endif;
 		else:
 			redirect('/login');
 		endif;
@@ -658,7 +676,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+			$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -701,9 +719,13 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 		if(isset($username)):
 
+			$method = $this->input->server('REQUEST_METHOD');
+
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
+
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+			$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -845,6 +867,10 @@ $data['notifications'] = $this->employees->get_notifications(0);
 				redirect('/access_denied');
 
 			endif;
+
+			else:
+				redirect('error_404');
+				endif;
 		else:
 			redirect('/login');
 		endif;
@@ -902,10 +928,13 @@ $data['notifications'] = $this->employees->get_notifications(0);
 		//$employee_id = $this->uri->segment(2);
 
 		if(isset($username)):
+			$method = $this->input->server('REQUEST_METHOD');
+
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+			$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -997,6 +1026,10 @@ $data['notifications'] = $this->employees->get_notifications(0);
 				redirect('/access_denied');
 
 			endif;
+
+			else:
+				redirect('error_404');
+				endif;
 		else:
 			redirect('/login');
 		endif;
@@ -1047,10 +1080,23 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 				endif;
 
-				$data['variational_payments'] = $this->payroll_configurations->view_variational_payments_previous_month($previous_month, $previous_year);
+				$d_v = $this->payroll_configurations->view_variational_payments_previous_month($previous_month, $previous_year);
 
+				if(!empty($d_v)):
+
+				$data['variational_payments'] = $d_v;
 				//print_r($data['variational_payments']);
 				$this->load->view('payroll_config/recall_payment', $data);
+
+				else:
+					$msg = array(
+						'msg'=> 'No month to recall',
+						'location' => site_url('new_variational_payment'),
+						'type' => 'error'
+
+					);
+					$this->load->view('swal', $msg);
+					endif;
 			else:
 				redirect('/access_denied');
 
@@ -1077,7 +1123,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+			$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
