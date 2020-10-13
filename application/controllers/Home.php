@@ -361,7 +361,7 @@ class Home extends CI_Controller
 
 		}
 
-		public function access_denied(){
+	public function access_denied(){
 			$user_username = $this->session->userdata('user_username');
 
 			if(isset($user_username)):

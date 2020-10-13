@@ -76,7 +76,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 			if($user_type == 1 || $user_type == 3):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+			$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -119,9 +119,12 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 		if(isset($username)):
 
+			$method = $this->input->server('REQUEST_METHOD');
+
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+			$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -337,6 +340,11 @@ $data['notifications'] = $this->employees->get_notifications(0);
 				redirect('/access_denied');
 
 			endif;
+
+			else:
+
+				redirect('error_404');
+				endif;
 		else:
 			redirect('/login');
 		endif;
@@ -354,7 +362,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+			$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -405,9 +413,13 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 		if(isset($username)):
 
+			$method = $this->input->server('REQUEST_METHOD');
+
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
+
 			$permission = $this->users->check_permission($username);
 			$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+			$data['notifications'] = $this->employees->get_notifications(0);
 			$data['payroll_management'] = $permission->payroll_management;
 			$data['biometrics'] = $permission->biometrics;
 			$data['user_management'] = $permission->user_management;
@@ -583,6 +595,10 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 				endif;
 
+				else:
+					redirect('error_404');
+					endif;
+
 		else:
 			redirect('/login');
 		endif;
@@ -696,7 +712,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
-$data['notifications'] = $this->employees->get_notifications(0);
+				$data['notifications'] = $this->employees->get_notifications(0);
 				$data['payroll_management'] = $permission->payroll_management;
 				$data['biometrics'] = $permission->biometrics;
 				$data['user_management'] = $permission->user_management;
