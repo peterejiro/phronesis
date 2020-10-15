@@ -4,7 +4,7 @@ require APPPATH . 'libraries/REST_Controller.php';
 
 require_once APPPATH . '/libraries/JWT.php';
 require_once APPPATH . '/libraries/SignatureInvalidException.php';
-class PaySlip extends REST_Controller
+class Payslip extends REST_Controller
 {
 
     public function __construct()
