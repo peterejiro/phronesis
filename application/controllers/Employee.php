@@ -249,7 +249,7 @@ class Employee extends CI_Controller
 				$employee_hmo_id = $this->input->post('employee_hmo_id');
 				$employee_paye_number = $this->input->post('employee_paye_number');
 
-
+			if($employee_username === $employee_unique_id):
 				$employee_data = array(
 					'employee_unique_id' => $employee_unique_id,
 					'employee_first_name' => $employee_first_name,
@@ -392,6 +392,17 @@ class Employee extends CI_Controller
 					$this->load->view('swal', $msg);
 
 				endif;
+
+				else:
+					$msg = array(
+						'msg' => 'Please Ensure Employee Unique ID is same  as Employee Login',
+						'location' => site_url('new_employee'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+					endif;
 			else:
 
 				redirect('/access_denied');
@@ -672,6 +683,23 @@ class Employee extends CI_Controller
 				else:
 					$file_data = $this->upload->data();
 					$employee_passport_name = $file_data['file_name'];
+				endif;
+
+				if(!empty($employee_others)):
+
+				$k = 0;
+				while ($k < count($employee_others)):
+					$employee_other_document_name = $employee_others[$k];
+
+					$others_array = array(
+						'other_document_employee_id' => $employee_id,
+						'other_document_name' => $employee_other_document_name
+					);
+
+					$this->employees->insert_other_document($others_array);
+					$k++;
+				endwhile;
+
 				endif;
 
 

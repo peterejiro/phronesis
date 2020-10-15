@@ -61,8 +61,8 @@
                           <div class="modal-body">
                             <div class="form-group">
                               <label for="employee-id">Employee ID</label>
-                              <input id="employee-id" type="text" class="form-control" name="employee_unique_id" required readonly value="<?php echo $unique_id; ?>" />
-                              <p class="form-text text-muted">A unique id will be generated for each new employee</p>
+                              <input id="employee-id" type="text" class="form-control" name="employee_unique_id" required value="<?php echo $unique_id; ?>" />
+                              <p class="form-text text-muted">A unique id will be generated for each new employee You have the option to enter your custom ID</p>
                             </div>
                             <div class="form-group row">
                               <div class="col-sm-4">
@@ -447,8 +447,8 @@
                           <div class="form-group row">
                             <div class="col-sm-6">
                               <label for="employee-username">Employee Username</label>
-                              <input id="employee-username" readonly name="employee_username" type="text" value="<?php echo $unique_id; ?>" class="form-control" />
-                              <p class="form-text text-muted">The employee will use these credentials to access their self-service portal</p>
+                              <input id="employee-username"  name="employee_username" type="text" value="<?php echo $unique_id; ?>" class="form-control" />
+                              <p class="form-text text-muted">The employee will use these credentials to access their self-service portal. Please Enter the employee ID</p>
                             </div>
                             <div class="col-sm-6">
                               <label for="employee-password">Employee Password</label>
