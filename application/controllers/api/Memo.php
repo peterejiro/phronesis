@@ -27,8 +27,12 @@ class Memo extends REST_Controller
         $this->db->order_by("memo_id", "desc");
         $data = $this->db->get()->result();
 
-        /* $data = $this->objectToArray($data);
-        $data = $this->StripFormatting($data, "memo_body"); */
+        $data = $this->objectToArray($data);
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['memo_date'] = $this->formatDate($data[$i]['memo_date']);
+        }
+
+        //$data = $this->StripFormatting($data, "memo_body"); */
         //$data = json_encode($data);
         //var_dump($data);
         $this->response($data, REST_Controller::HTTP_OK);
@@ -40,7 +44,11 @@ class Memo extends REST_Controller
         $employee_id = $param["id"];
         $data = $this->Employees->get_my_memo(8);
         $data = $this->objectToArray($data);
-        $data = $this->StripFormatting($data, "specific_memo_body");
+        $data = $this->objectToArray($data);
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['specific_memo_date'] = $this->formatDate($data[$i]['specific_memo_date']);
+        }
+       // $data = $this->StripFormatting($data, "specific_memo_body");
         $this->response($data, REST_Controller::HTTP_OK);
     }
 
@@ -49,7 +57,7 @@ class Memo extends REST_Controller
         $param = $this->post();
         $subject = $param["subject"];
         $details = $param["details"];
-        $date = $param["date"];
+        $date =  date('y-m-d h:i');//$param["date"];
         $data = array(
             "memo_subject" => $subject,
             "memo_body" => $details,

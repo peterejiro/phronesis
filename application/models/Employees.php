@@ -491,7 +491,10 @@ class Employees extends CI_Model
 	}
 
 	public function insert_notifications($notification_data){
+		$employee_id = $notification_data['notification_employee_id'];
+		$body = $notification_data['notification_type'];
 		$this->db->insert('notification', $notification_data);
+		$this->pushToUser($employee_id,"New Notification!",$body);
 		return true;
 	}
 
@@ -666,5 +669,90 @@ class Employees extends CI_Model
 		$this->db->order_by('query.query_id', 'DESC');
 		return $this->db->get()->result();
 	}
+
+
+
+
+
+	public function getUserToken($id){
+
+		/* $request = $this->post();
+		$id = $request["id"]; */
+		$query = $this->db->query("SELECT u.user_device_token FROM user u JOIN employee e ON u.user_username = e.employee_unique_id WHERE e.employee_id ='$id'");
+		if ($query && $query->num_rows()>0) {
+			$tokens=array();
+			$data = $this->objectToArray($query->result());
+			foreach($data as $token){
+				$tokens[] = $token["user_device_token"];
+			}
+		   //var_dump($tokens[0]);
+			return$tokens[0];
+		} else {
+		  return null;
+		}
+	}
+
+
+public function pushToUser($id, $title, $body)
+{
+	$token = $this->getUserToken($id);
+	$this->PushNotify($title, $body, $token);
+}
+   
+
+
+public function PushNotify($title, $body, $token){
+
+	$ch = curl_init("https://fcm.googleapis.com/fcm/send");
+
+
+	//Creating the notification array.
+	$notification = array('title' =>$title , 'body' => $body);
+	
+	//This array contains, the token and the notification. The 'to' attribute stores the token.
+	$arrayToSend = array('to' => $token, 'notification' => $notification);
+	
+	//Generating JSON encoded string form the above array.
+	$json = json_encode($arrayToSend);
+	$url = "https://fcm.googleapis.com/fcm/send";
+	//Setup headers:
+	$headers = array();
+	$headers[] = 'Content-Type: application/json';
+	$headers[] = 'Authorization: key=AAAAOEbzKiA:APA91bGp-eVITkQPGTsh2DXhSQPLzVxEgSLXquRs6Oy-zvGSWAkWZtaaIv_ZbUXHzEY016iekD0gEx3RItFdRdPwVbKMXAGHQ0S63OhAM0oH1bA-sVP4VIfAvFCSfi3n5BPUnLQHeQGF';
+	
+	//Setup curl, add headers and post parameters.
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+	curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);       
+	
+	curl_setopt( $ch,CURLOPT_URL, $url);
+	curl_setopt( $ch,CURLOPT_POST, true );
+	curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers);
+	curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+	curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+	$result = curl_exec($ch );
+	//print($result);
+	
+	//Send the request
+	//curl_exec($ch);
+	
+	//Close request
+	curl_close($ch);
+	}
+
+
+
+public function objectToArray($data)
+{
+    if (is_object($data)) {
+        $data = get_object_vars($data);
+    }
+
+    if (is_array($data)) {
+        return array_map(array($this, 'objectToArray'), $data);
+    }
+
+    return $data;
+}
 
 }
