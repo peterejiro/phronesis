@@ -68,7 +68,9 @@ print($result);
 
 //Close request
 curl_close($ch);
-    }
+$this->PushToAllWeb($title, 'my_memos');
+
+}
 
 
 
@@ -79,11 +81,14 @@ public function pushtouser_post()
     $id = $request["id"];
     $title = $request["title"];
     $body = $request["body"];
+    $link = $request["link"];
     $token = $this->getUserToken($id);
     if($token !=null)
     {
         $this->pushtoToken($token, $title, $body);
     }
+
+    //$this->PushNotification($id,$title,$link);
     
 }
 
@@ -136,7 +141,8 @@ curl_close($ch);
 public function pushtoadmin_post(){
      $request = $this->post();
     $title = $request["title"];
-    $body = $request["body"]; 
+    $body = $request["body"];
+    $link = $request["link"];  
     $tokens = $this->getAdminTokens();
    // var_dump($tokens);
     if ($tokens!= null && count($tokens)>0)
@@ -146,10 +152,21 @@ public function pushtoadmin_post(){
             {
                 $this->pushtoToken($token, $title, $body);
             }
-           
         }
     }
+
+   $ids =  $this->getAdminIds();
+   if ($ids!= null && count($ids)>0)
+   {
+       foreach($ids as $id){
+           if($id!= null && strlen(trim($id))> 0)
+           {
+               $this->PushNotification($id,$title,$link);
+           }
+       }
+   }
 }
+
 
 
 
@@ -189,6 +206,26 @@ public function getAdminTokens(){
 
 
 
+public function getAdminIds()
+{
+    $query = $this->db->query("SELECT e.employee_id FROM  employee e JOIN user u ON e.employee_unique_id = u.user_username JOIN permission p ON u.user_username = p.username WHERE p.employee_management ='1'");
+    if ($query) {
+        $ids=array();
+        $data = $this->objectToArray($query->result());
+        foreach($data as $id){
+            $ids[] = $id["employee_id"];
+            //print $token["user_device_token"];
+        }
+        //var_dump($tokens);
+        return $ids;
+        //return $data[0]["user_device_token"];
+        //$this->response($query->result(), REST_Controller::HTTP_OK);
+    } else {
+      return null;
+    }
+}
+
+
 
 
 public function getUserToken($id){
@@ -222,6 +259,38 @@ public function objectToArray($data)
 
     return $data;
 }
+
+
+public function PushNotification($employee_id, $message, $link)
+{
+    $notification_data = array(
+        'notification_employee_id'=> $employee_id,
+        'notification_link'=> $link,
+        'notification_type' => $message,
+        'notification_status'=> 0
+    );
+
+    $this->Employees->insert_notifications($notification_data);
+}
+
+public function PushToAllWeb($message, $link)
+{
+    $employees = $this->Employees->view_employees();
+
+	foreach ($employees as $employee){
+	$notification_data = array(
+	'notification_employee_id'=> $employee->employee_id,
+	'notification_link'=>$link, //'my_memos',
+	'notification_type' => $message,
+	'notification_status'=> 0
+    );
+    
+    $this->Employees->insert_notifications($notification_data);
+    }			
+
+}
+
+
 
 
 }
