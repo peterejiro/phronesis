@@ -21,6 +21,39 @@ class Appraisals extends REST_Controller
         
     }
 
+ 
+    public function allAppraisals_get()
+    {
+        
+        $data = $this->Employees->get_appraisals();
+        $data = $this->objectToArray($data);
+        for($i=0; $i < count($data); $i++)
+        {
+            $supervisor  =  $this->Employees->get_employee($data[$i]['employee_appraisal_supervisor_id']);
+            $data[$i]['employee_appraisal_period_from'] = date("M Y", strtotime( $data[$i]['employee_appraisal_period_from']));
+            $data[$i]['employee_appraisal_period_to'] = date("M Y", strtotime( $data[$i]['employee_appraisal_period_to']));
+            if(!is_null($supervisor) && !empty($supervisor))
+            {
+                $data[$i]["supervisor_name"] = $supervisor->employee_last_name." ".$supervisor->employee_first_name;
+            }
+           
+        }
+        //$supervisor = $this->Employees->get_employee($appraisal->employee_appraisal_supervisor_id);
+        $this->response($data, REST_Controller::HTTP_OK);
+    }
+
+
+  /*   foreach($appraisals as $appraisal):
+        ?>
+        <tr>
+          <td><?php echo $appraisal->employee_last_name." ".$appraisal->employee_first_name; ?></td>
+          <td><?php echo date("M Y", strtotime($appraisal->employee_appraisal_period_from))." - ".date("M Y", strtotime($appraisal->employee_appraisal_period_to)) ; ?></td>
+          <td>
+            <?php
+              $supervisor = $CI->employees->get_employee($appraisal->employee_appraisal_supervisor_id);
+              echo $supervisor->employee_last_name." ".$supervisor->employee_first_name;
+            ?> */
+
 
    public function  employee_appraisal_post()
     {
@@ -137,6 +170,19 @@ class Appraisals extends REST_Controller
         );
 
         $this->logs->add_log($log_array);
+    }
+
+    public function objectToArray($data)
+    {
+        if (is_object($data)) {
+            $data = get_object_vars($data);
+        }
+
+        if (is_array($data)) {
+            return array_map(array($this, 'objectToArray'), $data);
+        }
+
+        return $data;
     }
 
 }
