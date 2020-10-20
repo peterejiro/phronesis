@@ -187,7 +187,7 @@ class Memo extends REST_Controller
         $this->db->join('employee', 'query.query_employee_id = employee.employee_id');
         $data = $this->db->get()->result();
         $data = $this->objectToArray($data);
-        $data = $this->StripFormatting($data, "query_body");
+        //$data = $this->StripFormatting($data, "query_body");
         $this->response($data, REST_Controller::HTTP_OK);
     }
 
@@ -200,7 +200,7 @@ class Memo extends REST_Controller
         $this->db->where('query.query_employee_id', $employee_id);
         $data = $this->db->get()->result();
         $data = $this->objectToArray($data);
-        $data = $this->StripFormatting($data, "query_body");
+        //$data = $this->StripFormatting($data, "query_body");
         $this->response($data, REST_Controller::HTTP_OK);
     }
 
