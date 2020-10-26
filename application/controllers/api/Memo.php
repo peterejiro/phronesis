@@ -51,8 +51,6 @@ class Memo extends REST_Controller
         $this->response($data, REST_Controller::HTTP_OK);
 	}
 	
-
-
 	public function Alldirectives_get()
     {
     
