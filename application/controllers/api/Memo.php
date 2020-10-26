@@ -42,15 +42,30 @@ class Memo extends REST_Controller
     {
         $param = $this->post();
         $employee_id = $param["id"];
-        $data = $this->Employees->get_my_memo(8);
-        $data = $this->objectToArray($data);
+        $data = $this->Employees->get_my_memo($employee_id);
         $data = $this->objectToArray($data);
         for ($i = 0; $i < count($data); $i++) {
             $data[$i]['specific_memo_date'] = $this->formatDate($data[$i]['specific_memo_date']);
         }
        // $data = $this->StripFormatting($data, "specific_memo_body");
         $this->response($data, REST_Controller::HTTP_OK);
-    }
+	}
+	
+
+
+	public function Alldirectives_get()
+    {
+    
+        $data = $this->Employees->get_specific_memos();
+        $data = $this->objectToArray($data);
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['specific_memo_date'] = $this->formatDate($data[$i]['specific_memo_date']);
+        }
+       // $data = $this->StripFormatting($data, "specific_memo_body");
+        $this->response($data, REST_Controller::HTTP_OK);
+	}
+
+	
 
     public function publish_memo_post()
     {
@@ -187,7 +202,7 @@ class Memo extends REST_Controller
         $this->db->join('employee', 'query.query_employee_id = employee.employee_id');
         $data = $this->db->get()->result();
         $data = $this->objectToArray($data);
-        //$data = $this->StripFormatting($data, "query_body");
+        $data = $this->StripFormatting($data, "query_body");
         $this->response($data, REST_Controller::HTTP_OK);
     }
 
@@ -200,7 +215,7 @@ class Memo extends REST_Controller
         $this->db->where('query.query_employee_id', $employee_id);
         $data = $this->db->get()->result();
         $data = $this->objectToArray($data);
-        //$data = $this->StripFormatting($data, "query_body");
+        $data = $this->StripFormatting($data, "query_body");
         $this->response($data, REST_Controller::HTTP_OK);
     }
 
