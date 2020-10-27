@@ -116,9 +116,42 @@ class User extends REST_Controller
 
     public function Attendance_get()
     {
-        $total = $this->today_present();
-        $this->response(["result"=>$total], REST_Controller::HTTP_OK);
-    }
+		
+		$data = $this->today_present();
+		$total =  count($data);
+		$this->response(["result"=>$total], REST_Controller::HTTP_OK);
+	}
+	
+	public function employee_attendance_get()
+	{
+		$data = $this->today_present();
+		$data = $this->objectToArray($data);
+		for ($i = 0; $i < count($data); $i++) {
+			$data[$i]['employee_biometrics_login_time'] = date('h:i a', strtotime($data[$i]['employee_biometrics_login_time']));
+			$data[$i]['date'] = date('d-M-Y', strtotime($data[$i]['employee_biometrics_login_time']));
+        }
+		$this->response($data, REST_Controller::HTTP_OK);
+	}
+
+
+	public function fetchNotificatiions_post(){
+		$request  = $this->post();
+		//$request = $this->head();
+		$this->response($request,REST_Controller::HTTP_OK);
+		$employee_id = $request['id'];
+		$data = $this->employees->get_notifications($employee_id);
+		$this->response($data,REST_Controller::HTTP_OK);
+	}
+
+	public function updateNotification_post()
+	{
+		$request  = $this->post();
+		$notification_id = $request['id'];
+		$notification_data = array('notification_status'=> 1);
+		$this->employees->update_notification($notification_id, $notification_data);
+		$this->response(["status" => REST_Controller::HTTP_BAD_REQUEST],REST_Controller::HTTP_OK);
+	}
+
 
     public function Trainings_get()
     {
@@ -172,7 +205,8 @@ class User extends REST_Controller
         $this->db->where('user_username', $username);
         $query = $this->db->get();
         return $query->row();
-    }
+	}
+	
 
     public function savetoken_post()
     {
@@ -219,9 +253,6 @@ class User extends REST_Controller
 
 
 
-
-
-
     public function savepassword_post()
     {
         $request = $this->post();
@@ -236,9 +267,8 @@ class User extends REST_Controller
         } else {
             $this->response(["status" => REST_Controller::HTTP_BAD_REQUEST], REST_Controller::HTTP_BAD_REQUEST);
         }
-    }
-
-
+	}
+	
 
     public function objectToArray($data)
     {
@@ -255,10 +285,12 @@ class User extends REST_Controller
 
     public function today_present()
     {
-        $date = date('Y-m-d', time());
+		
+		//$date = date('Y-m-d', time());
+		$date = date('Y-m-d', strtotime("2020-07-22"));
         $data = $this->biometric->check_today_attendance($date);
-        $data = $this->objectToArray($data);
-        return count($data);
+		$data = $this->objectToArray($data);
+		return $data;
     }
 
     public function get_trainings(){
@@ -287,5 +319,61 @@ class User extends REST_Controller
 
         $this->logs->add_log($log_array);
     }
-    
+    public function StripFormatting($array, $key)
+    {
+        for ($i = 0; $i < count($array); $i++) {
+            $array[$i][$key] = strip_tags($array[$i][$key]);
+        }
+
+        return ($array);
+	}
+	
+
+
+
+
+
+	private function verifyToken($authHeader)
+	{
+		$secret_key = $this->privateKey();
+        $token = null;
+        //$authHeader = $this->request->getServer('HTTP_AUTHORIZATION');
+        $arr = explode(" ", $authHeader);
+        if(!isset($arr[1]))
+        {
+            $output = [
+                'message' => 'Token not Supplied',
+            ];
+            return $this->response($output, REST_Controller::HTTP_UNAUTHORIZED);
+        }
+        else{
+        $token = $arr[1];
+        }
+        if($token){
+            try {
+                $decoded = JWT::decode($token, $secret_key, array('HS256'));
+                // Access is granted.
+                if($decoded){
+                    // response true
+                    $output = [
+                        'message' => 'Access granted'
+                    ];
+                    return $this->response($output, REST_Controller::HTTP_ACCEPTED);
+                }
+                 
+         
+            } catch (\Exception $e){
+                $output = [
+                    'message' => 'Access denied',
+                    "error" => $e->getMessage()
+                ];
+                return $this->response($output, REST_Controller::HTTP_FORBIDDEN);
+            }
+	}
+}
+
+
+
+
+
 }
