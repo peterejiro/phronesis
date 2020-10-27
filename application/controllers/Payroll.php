@@ -1765,7 +1765,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 								$new_loan_balance = $loan->loan_balance + $loan_repayment_amount;
 
-								if($new_loan_balance == $loan->loan_amount):
+								if($new_loan_balance > 0):
 
 									$loan_array = array(
 										'loan_balance' => $new_loan_balance,

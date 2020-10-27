@@ -49,7 +49,7 @@ $CI->load->model('biometric');
                         foreach($employees as $employee):
                           $check_biometrics  = $CI->biometric->get_employee_biometric($employee->employee_id);
                           if(!empty($check_biometrics)):
-                            $check_login = $CI->biometric->check_clock_in($employee->employee_id, $from_date, $to_date);
+                            $check_login = $CI->biometric->check_clock_in_range($employee->employee_id, $from_date, $to_date);
                             if(empty($check_login)):?>
                               <tr>
                                 <td><?php echo $employee->employee_last_name." ".$employee->employee_first_name." ".$employee->employee_other_name; ?></td>
