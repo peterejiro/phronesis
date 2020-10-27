@@ -137,7 +137,7 @@ class User extends REST_Controller
 	public function fetchNotificatiions_post(){
 		$request  = $this->post();
 		//$request = $this->head();
-		$this->response($request,REST_Controller::HTTP_OK);
+		//$this->response($request,REST_Controller::HTTP_OK);
 		$employee_id = $request['id'];
 		$data = $this->employees->get_notifications($employee_id);
 		$this->response($data,REST_Controller::HTTP_OK);
@@ -286,8 +286,8 @@ class User extends REST_Controller
     public function today_present()
     {
 		
-		//$date = date('Y-m-d', time());
-		$date = date('Y-m-d', strtotime("2020-07-22"));
+		$date = date('Y-m-d', time());
+		//$date = date('Y-m-d', strtotime("2020-07-22"));
         $data = $this->biometric->check_today_attendance($date);
 		$data = $this->objectToArray($data);
 		return $data;
@@ -318,7 +318,8 @@ class User extends REST_Controller
         );
 
         $this->logs->add_log($log_array);
-    }
+	}
+	
     public function StripFormatting($array, $key)
     {
         for ($i = 0; $i < count($array); $i++) {
