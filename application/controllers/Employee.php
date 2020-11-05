@@ -249,7 +249,7 @@ class Employee extends CI_Controller
 				$employee_hmo_id = $this->input->post('employee_hmo_id');
 				$employee_paye_number = $this->input->post('employee_paye_number');
 
-			if($employee_username === $employee_unique_id):
+			if($employee_username == $employee_unique_id):
 				$employee_data = array(
 					'employee_unique_id' => $employee_unique_id,
 					'employee_first_name' => $employee_first_name,
@@ -359,39 +359,39 @@ class Employee extends CI_Controller
 					$i++;
 				endwhile;
 
-				if (isset($employee_id)):
-					$log_array = array(
-						'log_user_id' => $this->users->get_user($username)->user_id,
-						'log_description' => "Added New Employee"
-					);
+						if (isset($employee_id)):
+							$log_array = array(
+								'log_user_id' => $this->users->get_user($username)->user_id,
+								'log_description' => "Added New Employee"
+							);
 
-					$this->logs->add_log($log_array);
+							$this->logs->add_log($log_array);
 
-					$employee_history_array = array(
-						'employee_history_employee_id' => $employee_id,
-						'employee_history_details' => "You were Hired",
-						'employee_history_date' => $employment_start_date
-					);
+							$employee_history_array = array(
+								'employee_history_employee_id' => $employee_id,
+								'employee_history_details' => "You were Hired",
+								'employee_history_date' => $employment_start_date
+							);
 
-					$this->employees->insert_employee_history($employee_history_array);
+							$this->employees->insert_employee_history($employee_history_array);
 
-					$msg = array(
-						'msg' => 'New Employee Added Successfully',
-						'location' => site_url('employee'),
-						'type' => 'success'
+							$msg = array(
+								'msg' => 'New Employee Added Successfully',
+								'location' => site_url('employee'),
+								'type' => 'success'
 
-					);
-					$this->load->view('swal', $msg);
-				else:
-					$msg = array(
-						'msg' => 'An Error Occurred',
-						'location' => site_url('new_employee'),
-						'type' => 'success'
+							);
+							$this->load->view('swal', $msg);
+						else:
+							$msg = array(
+								'msg' => 'An Error Occurred',
+								'location' => site_url('new_employee'),
+								'type' => 'success'
 
-					);
-					$this->load->view('swal', $msg);
+							);
+							$this->load->view('swal', $msg);
 
-				endif;
+						endif;
 
 				else:
 					$msg = array(
