@@ -24,6 +24,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       -moz-appearance: textfield;
     }
     /*Note, it is still possible to increment the number when you scroll inside the number input*/
+	.lead.emoji-picker-container {
+		width: 300px;
+		display: block;
+	input {
+		width: 100%;
+		height: 50px;
+	}
   </style>
 
 	<!-- General CSS Files -->
