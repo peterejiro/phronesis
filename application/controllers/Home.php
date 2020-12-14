@@ -33,7 +33,6 @@ class Home extends CI_Controller
 		if(isset($username)):
 
 
-
 			if($this->users->get_user($username)->user_type == 1 || $this->users->get_user($username)->user_type == 3):
 
 				$permission = $this->users->check_permission($username);
