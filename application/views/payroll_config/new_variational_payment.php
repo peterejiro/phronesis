@@ -54,7 +54,8 @@
                         <select id="category" class="select2 form-control" required name="category" onchange="toogle_employee_department()" style="width: 100%; height:42px !important;">
                           <option value=""> -- Select -- </option>
                           <option value="1">  Department </option>
-                          <option value="0">  Employees  </option>
+                          <option value="2">  Individuals  </option>
+							<option value="3">  All Employees  </option>
                         </select>
                         <div class="invalid-feedback">
                           please select a category
@@ -84,14 +85,72 @@
 				                  endforeach; ?>
                         </select>
                       </div>
-                      <div class="col-sm-6">
-                        <label>Amount</label><span style="color: red"> *</span>
-                        <input name="payment_amount" type="number" class="form-control" required/>
-                        <div class="invalid-feedback">
-                          please fill in an amount
-                        </div>
-                      </div>
+
+						<div class="col-sm-6">
+							<label> Type</label><span style="color: red"> *</span>
+							<select id="type" class="select2 form-control" required name="type" onchange="toogle_amount_percent()" style="width: 100%; height:42px !important;">
+								<option value=""> -- Select -- </option>
+								<option value="1">  Amount </option>
+								<option value="2">  Percentage  </option>
+
+							</select>
+							<div class="invalid-feedback">
+								please select a type
+							</div>
+						</div>
                     </div>
+
+					  <div class="form-group row" id="amount" style="display: none">
+						  <div class="col-sm-6">
+							  <label>Amount</label><span style="color: #ff0000"> *</span>
+							  <input name="payment_amount" type="number" class="form-control" />
+							  <div class="invalid-feedback">
+								  please fill in an amount
+							  </div>
+						  </div>
+
+
+
+					  </div>
+
+					  <div class="form-group row" id="percentage" style="display: none">
+						  <div class="col-sm-6">
+							  <label>Percentage % </label><span style="color: red"> *</span>
+							  <input name="payment_percentage" type="number" value="0" step="any" class="form-control" />
+							  <div class="invalid-feedback">
+								  please fill in a percent
+							  </div>
+						  </div>
+
+						  <div class="col-sm-6">
+							  <label> Of</label><span style="color: red"> *</span>
+							  <select id="of" class="select2 form-control" required name="of" style="width: 100%; height:42px !important;">
+								  <option value="a"> All Income  </option>
+								 <?php foreach ($payment_definitions as $payment_definition):
+								 			if($payment_definition->payment_definition_variant == 0 && $payment_definition->payment_definition_type == 1):
+								 ?>
+								  <option value="<?php echo $payment_definition->payment_definition_id ?>">  <?php echo $payment_definition->payment_definition_payment_name; ?> </option>
+
+
+								  <?php endif;
+								  			endforeach;
+								  ?>
+
+							  </select>
+							  <div class="invalid-feedback">
+								  please select a type
+							  </div>
+						  </div>
+
+						  <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center" role="alert" style="margin: 10px" >
+<!--							  <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+<!--								  <span aria-hidden="true">&times;</span>-->
+<!--							  </button>-->
+							  <i class="mdi mdi-close-circle font-32"></i><strong class="pr-1">Warning !</strong>  Please ensure employees Salary Structure has been properly set before proceeding.
+						  </div>
+
+					  </div>
+
                     <div class="form-group row">
                       <div class="col-sm-6">
                         <label>Payroll Month</label>
@@ -129,15 +188,33 @@
     // document.getElementById("departments").style.display='none';
   };
   function toogle_employee_department() {
-    var value = document.getElementById('category').value;
+    let value = document.getElementById('category').value;
     console.log(value);
     if(value == 1){
       document.getElementById("employees").style.display='none';
       document.getElementById("departments").style.display='block';
-    } else if(value == 0){
+    } else if(value == 2){
       document.getElementById("employees").style.display='block';
       document.getElementById("departments").style.display='none';
-    }
+    } else if(value == 3){
+		document.getElementById("employees").style.display='none';
+		document.getElementById("departments").style.display='none';
+	}
+  }
+
+  function toogle_amount_percent() {
+	  let toggle = document.getElementById('type').value;
+	  console.log(toggle);
+	  if(toggle == 1){
+		  document.getElementById("percentage").style.display='none';
+		  document.getElementById("amount").style.display='block';
+	  } else if(toggle == 2){
+		  document.getElementById("amount").style.display='none';
+		  document.getElementById("percentage").style.display='block';
+	  } else if(toggle == 3){
+		  document.getElementById("employees").style.display='none';
+		  document.getElementById("departments").style.display='none';
+	  }
   }
 </script>
 </body>
