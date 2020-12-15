@@ -103,7 +103,7 @@
 					  <div class="form-group row" id="amount" style="display: none">
 						  <div class="col-sm-6">
 							  <label>Amount</label><span style="color: #ff0000"> *</span>
-							  <input name="payment_amount" type="number" class="form-control" required/>
+							  <input name="payment_amount" type="number" class="form-control" />
 							  <div class="invalid-feedback">
 								  please fill in an amount
 							  </div>
@@ -116,7 +116,7 @@
 					  <div class="form-group row" id="percentage" style="display: none">
 						  <div class="col-sm-6">
 							  <label>Percentage % </label><span style="color: red"> *</span>
-							  <input name="payment_percentage" type="number" value="0" step="any" class="form-control" required/>
+							  <input name="payment_percentage" type="number" value="0" step="any" class="form-control" />
 							  <div class="invalid-feedback">
 								  please fill in a percent
 							  </div>
