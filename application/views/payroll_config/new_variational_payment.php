@@ -90,7 +90,7 @@
 							<label> Type</label><span style="color: red"> *</span>
 							<select id="type" class="select2 form-control" required name="type" onchange="toogle_amount_percent()" style="width: 100%; height:42px !important;">
 								<option value=""> -- Select -- </option>
-								<option value="1">  Amount </option>
+								<option value="1">  Flat </option>
 								<option value="2">  Percentage  </option>
 
 							</select>
