@@ -29,34 +29,83 @@
 					<div class="col-12 col-sm-12 col-lg-4" >
 						<div class="card">
 							<div class="card-header">
-								<h4>All Users</h4>
+								<h4>All Users</h4> <br>
+
+									<input id="search_users" class="form-control" type="search" placeholder="Search Users" aria-label="Search" data-width="250">
+
 							</div>
-							<div class="card-body" style="height: 400px;
-	overflow-y: auto;" >
-								<ul class="list-unstyled list-unstyled-border">
+
+							<div class="card-body" style="height: 400px; overflow-y: auto;" >
+								<ul class="list-unstyled list-unstyled-border" id="user_lists">
 									<?php foreach ($users as $user):
 									if($user->user_type == 3 || $user->user_type == 2):
 									//if(!empty($user->user_token)):
 									$employee_details = @$this->employees->get_employee_by_unique($user->user_username);
 									if($employee_details->employee_id !== $employee_id):
-
+										if($employee_details->employee_status == 1 || $employee_details->employee_status == 2):
 									?>
+									<?php if(!empty($user->user_token)): ?>
+									<?php if(time() - @$user->user_token < 1800): ?>
 								<li class="media">
 									<a class="link" href="#" data-rel="<?php echo $employee_details->employee_id; ?>">
                     <div class="media">
                       <img alt="image" class="mr-3 rounded" width="30" height="30" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee_details->employee_passport; ?>">
                       <div class="media-body">
-                        <div class="mt-0 mb-1 font-weight-bold"><?php echo $employee_details->employee_first_name." ". $employee_details->employee_last_name; ?></div>
+                        <div class="mt-0 mb-1 font-weight-bold"><?php echo $employee_details->employee_first_name." ". $employee_details->employee_last_name; ?></div> <div class="text-success text-small font-600-bold"><i class="fas fa-circle"></i> Online</div>
                       </div>
                     </div>
 									</a>
 								</li>
 									<?php
-
+												endif;
+												endif;
+											endif;
 										endif;
 										//endif;
 										endif;
 										endforeach; ?>
+
+									<?php foreach ($users as $user):
+										if($user->user_type == 3 || $user->user_type == 2):
+											//if(!empty($user->user_token)):
+											$employee_details = @$this->employees->get_employee_by_unique($user->user_username);
+											if($employee_details->employee_id !== $employee_id):
+												if($employee_details->employee_status == 1 || $employee_details->employee_status == 2):
+													?>
+													<?php if(!empty($user->user_token)):
+																if(time() - @$user->user_token > 1800): ?>
+																	<li class="media">
+																		<a class="link" href="#" data-rel="<?php echo $employee_details->employee_id; ?>">
+																			<div class="media">
+																				<img alt="image" class="mr-3 rounded" width="30" height="30" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee_details->employee_passport; ?>">
+																				<div class="media-body">
+																					<div class="mt-0 mb-1 font-weight-bold"><?php echo $employee_details->employee_first_name." ". $employee_details->employee_last_name; ?></div><div class="text-small font-weight-600 text-muted"><i class="fas fa-circle"></i> Offline</div>
+																				</div>
+																			</div>
+																		</a>
+																	</li>
+																<?php
+																endif;
+														else: ?>
+
+															<li class="media">
+																<a class="link" href="#" data-rel="<?php echo $employee_details->employee_id; ?>">
+																	<div class="media">
+																		<img alt="image" class="mr-3 rounded" width="30" height="30" src="<?php echo base_url(); ?>uploads/employee_passports/<?php echo $employee_details->employee_passport; ?>">
+																		<div class="media-body">
+																			<div class="mt-0 mb-1 font-weight-bold"><?php echo $employee_details->employee_first_name." ". $employee_details->employee_last_name; ?></div> <div class="text-success text-small font-600-bold"><div class="text-small font-weight-600 text-muted"><i class="fas fa-circle"></i> Offline</div>
+																		</div>
+																	</div>
+																</a>
+															</li>
+													<?php	endif;
+													endif;
+											endif;
+											//endif;
+										endif;
+									endforeach; ?>
+
+
 								</ul>
 							</div>
 						</div>
@@ -120,6 +169,13 @@
 	$('title').html('Chat - IHUMANE')
 
 	$(document).ready(function(){
+
+		$("#search_users").on("keyup", function() {
+			var value = $(this).val().toLowerCase();
+			$("#user_lists li").filter(function() {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
 
 		$(function() {
 			// Initializes and creates emoji set from sprite sheet
@@ -205,7 +261,7 @@
 			<?php endif;
 			endforeach; ?>
 
-
+			//$("#user_lists").load(location.href + " #user_lists);
 		}
 
 
