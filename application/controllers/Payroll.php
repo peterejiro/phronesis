@@ -748,7 +748,9 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 				$department_id = $this->input->post('department_id');
 				$payment_definition = $this->input->post('payment_definition_id');
-				$amount = $this->input->post('payment_amount');
+				$type = $this->input->post('type');
+
+
 				$category = $this->input->post('category');
 
 				if(($payment_definition == 'null') or ($category == 'null')):
@@ -783,10 +785,13 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 					else:
 
-					if($category == 1):
+					if($category == 1): // departments
 
 						$employees = $this->employees->get_employees_by_department($department_id);
 						foreach ($employees as $employee):
+
+						 if($type == 1):
+							 $amount = $this->input->post('payment_amount');
 							$variational_payment = array(
 								'variational_employee_id' => $employee->employee_id,
 								'variational_payment_definition_id' => $payment_definition,
@@ -800,26 +805,459 @@ $data['notifications'] = $this->employees->get_notifications(0);
 							$variational_payment = $this->security->xss_clean($variational_payment);
 							//print_r($variational_payment);
 							$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+						endif;
+
+						if($type == 2):
+
+							$payment_percentage = $this->input->post('payment_percentage');
+							$of = $this->input->post('of');
+
+							if($employee->employee_salary_structure_category == 0):
+
+								// personalized salary structure
+
+								$employee_personalized_incomes = $this->salaries->get_personalized_income($employee->employee_id);
+
+											if($of == 'a'):
+												$total_amount = 0;
+													foreach ($employee_personalized_incomes as $employee_personalized_income):
+
+													$total_amount = $employee_personalized_income->personalized_amount + $total_amount;
+
+													endforeach;
+
+													$amount = $payment_percentage * $total_amount;
+
+														$variational_payment = array(
+															'variational_employee_id' => $employee->employee_id,
+															'variational_payment_definition_id' => $payment_definition,
+															'variational_amount' => $amount,
+															'variational_payroll_month' => $month,
+															'variational_payroll_year' => $year,
+															'variational_confirm' => 0
+
+														);
+
+														$variational_payment = $this->security->xss_clean($variational_payment);
+														//print_r($variational_payment);
+														$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+
+												else:
+
+														$total_amount = 0;
+														foreach ($employee_personalized_incomes as $employee_personalized_income):
+
+															if($employee_personalized_income->personalized_payment_definition == $of):
+
+																$total_amount = $employee_personalized_income->personalized_amount + $total_amount;
+															endif;
+
+														endforeach;
+
+														$amount = $payment_percentage * $total_amount;
+
+														$variational_payment = array(
+															'variational_employee_id' => $employee->employee_id,
+															'variational_payment_definition_id' => $payment_definition,
+															'variational_amount' => $amount,
+															'variational_payroll_month' => $month,
+															'variational_payroll_year' => $year,
+															'variational_confirm' => 0
+
+														);
+
+														$variational_payment = $this->security->xss_clean($variational_payment);
+														//print_r($variational_payment);
+														$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+											endif;
+
+
+							else:
+
+
+
+								$employee_categorised_incomes = $this->salaries->get_categorized_income($employee->employee_salary_structure_category);
+									if($of == 'a'):
+										$total_amount = 0;
+
+											foreach ($employee_categorised_incomes as $employee_categorised_income):
+
+												$total_amount = $employee_categorised_income->salary_structure_allowance_amount + $total_amount;
+
+											endforeach;
+
+										$amount = $payment_percentage * $total_amount;
+
+										$variational_payment = array(
+											'variational_employee_id' => $employee->employee_id,
+											'variational_payment_definition_id' => $payment_definition,
+											'variational_amount' => $amount,
+											'variational_payroll_month' => $month,
+											'variational_payroll_year' => $year,
+											'variational_confirm' => 0
+
+										);
+
+										$variational_payment = $this->security->xss_clean($variational_payment);
+										//print_r($variational_payment);
+										$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+									else:
+
+										foreach ($employee_categorised_incomes as $employee_categorised_income):
+											if($employee_categorised_income->payment_definition_id == $of):
+
+												$total_amount = $employee_categorised_income->salary_structure_allowance_amount + $total_amount;
+
+											endif;
+
+										endforeach;
+
+										$amount = $payment_percentage * $total_amount;
+
+										$variational_payment = array(
+											'variational_employee_id' => $employee->employee_id,
+											'variational_payment_definition_id' => $payment_definition,
+											'variational_amount' => $amount,
+											'variational_payroll_month' => $month,
+											'variational_payroll_year' => $year,
+											'variational_confirm' => 0
+
+										);
+
+										$variational_payment = $this->security->xss_clean($variational_payment);
+										//print_r($variational_payment);
+										$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+
+									endif;
+
+								endif;
+
+
+							endif;
 						endforeach;
-					else:
+					endif;
+
+
+					if($category == 2): //individuals
 
 						$employees = $this->input->post('employee_ids');
 						foreach ($employees as $employee):
-							$variational_payment = array(
-								'variational_employee_id' => $employee,
-								'variational_payment_definition_id' => $payment_definition,
-								'variational_amount' => $amount,
-								'variational_payroll_month' => $month,
-								'variational_payroll_year' => $year,
-								'variational_confirm' => 0
+							if($type == 1):
+								$amount = $this->input->post('payment_amount');
+								$variational_payment = array(
+									'variational_employee_id' => $employee,
+									'variational_payment_definition_id' => $payment_definition,
+									'variational_amount' => $amount,
+									'variational_payroll_month' => $month,
+									'variational_payroll_year' => $year,
+									'variational_confirm' => 0
 
-							);
-							$variational_payment = $this->security->xss_clean($variational_payment);
+								);
 
-							//print_r($variational_payment);
-							$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+								$variational_payment = $this->security->xss_clean($variational_payment);
+								//print_r($variational_payment);
+								$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+							endif;
+
+							if($type == 2):
+
+								$payment_percentage = $this->input->post('payment_percentage');
+								$of = $this->input->post('of');
+
+								$temp_emp = $this->employees->get_employee($employee);
+
+								if($temp_emp->employee_salary_structure_category == 0): //personalized
+
+									// personalized salary structure
+
+									$employee_personalized_incomes = $this->salaries->get_personalized_income($employee);
+
+									if($of == 'a'):
+										$total_amount = 0;
+										foreach ($employee_personalized_incomes as $employee_personalized_income):
+
+											$total_amount = $employee_personalized_income->personalized_amount + $total_amount;
+
+										endforeach;
+
+										$amount = $payment_percentage * $total_amount;
+
+										$variational_payment = array(
+											'variational_employee_id' => $employee,
+											'variational_payment_definition_id' => $payment_definition,
+											'variational_amount' => $amount,
+											'variational_payroll_month' => $month,
+											'variational_payroll_year' => $year,
+											'variational_confirm' => 0
+
+										);
+
+										$variational_payment = $this->security->xss_clean($variational_payment);
+										//print_r($variational_payment);
+										$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+
+									else:
+
+										$total_amount = 0;
+										foreach ($employee_personalized_incomes as $employee_personalized_income):
+
+											if($employee_personalized_income->personalized_payment_definition == $of):
+
+												$total_amount = $employee_personalized_income->personalized_amount + $total_amount;
+											endif;
+
+										endforeach;
+
+										$amount = $payment_percentage * $total_amount;
+
+										$variational_payment = array(
+											'variational_employee_id' => $employee,
+											'variational_payment_definition_id' => $payment_definition,
+											'variational_amount' => $amount,
+											'variational_payroll_month' => $month,
+											'variational_payroll_year' => $year,
+											'variational_confirm' => 0
+
+										);
+
+										$variational_payment = $this->security->xss_clean($variational_payment);
+										//print_r($variational_payment);
+										$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+									endif;
+
+
+								else:
+
+									$employee_categorised_incomes = $this->salaries->get_categorized_income($temp_emp->employee_salary_structure_category);
+									if($of == 'a'):
+										$total_amount = 0;
+
+										foreach ($employee_categorised_incomes as $employee_categorised_income):
+
+											$total_amount = $employee_categorised_income->salary_structure_allowance_amount + $total_amount;
+
+										endforeach;
+
+										$amount = $payment_percentage * $total_amount;
+
+										$variational_payment = array(
+											'variational_employee_id' => $employee,
+											'variational_payment_definition_id' => $payment_definition,
+											'variational_amount' => $amount,
+											'variational_payroll_month' => $month,
+											'variational_payroll_year' => $year,
+											'variational_confirm' => 0
+
+										);
+
+										$variational_payment = $this->security->xss_clean($variational_payment);
+										//print_r($variational_payment);
+										$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+									else:
+
+										foreach ($employee_categorised_incomes as $employee_categorised_income):
+											if($employee_categorised_income->payment_definition_id == $of):
+
+												$total_amount = $employee_categorised_income->salary_structure_allowance_amount + $total_amount;
+
+											endif;
+
+										endforeach;
+
+										$amount = $payment_percentage * $total_amount;
+
+										$variational_payment = array(
+											'variational_employee_id' => $employee,
+											'variational_payment_definition_id' => $payment_definition,
+											'variational_amount' => $amount,
+											'variational_payroll_month' => $month,
+											'variational_payroll_year' => $year,
+											'variational_confirm' => 0
+
+										);
+
+										$variational_payment = $this->security->xss_clean($variational_payment);
+										//print_r($variational_payment);
+										$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+
+									endif;
+
+
+
+
+
+
+
+
+								endif;
+
+
+							endif;
+
+
+
+
 						endforeach;
 					endif;
+
+						if($category == 3): // all employees
+
+							$employees = $this->employees->view_employees();
+
+							foreach ($employees as $employee):
+
+								if($employee->employee_status == 3 || $employee->employee_status == 0):
+
+
+								else:
+
+									if($type == 1):
+										$amount = $this->input->post('payment_amount');
+										$variational_payment = array(
+											'variational_employee_id' => $employee->employee_id,
+											'variational_payment_definition_id' => $payment_definition,
+											'variational_amount' => $amount,
+											'variational_payroll_month' => $month,
+											'variational_payroll_year' => $year,
+											'variational_confirm' => 0
+
+										);
+
+										$variational_payment = $this->security->xss_clean($variational_payment);
+										//print_r($variational_payment);
+										$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+									endif;
+
+									if($type == 2):
+
+										$payment_percentage = $this->input->post('payment_percentage');
+										$of = $this->input->post('of');
+
+										if($employee->employee_salary_structure_category == 0):
+
+											// personalized salary structure
+
+											$employee_personalized_incomes = $this->salaries->get_personalized_income($employee->employee_id);
+
+											if($of == 'a'):
+												$total_amount = 0;
+												foreach ($employee_personalized_incomes as $employee_personalized_income):
+
+													$total_amount = $employee_personalized_income->personalized_amount + $total_amount;
+
+												endforeach;
+
+												$amount = $payment_percentage * $total_amount;
+
+												$variational_payment = array(
+													'variational_employee_id' => $employee->employee_id,
+													'variational_payment_definition_id' => $payment_definition,
+													'variational_amount' => $amount,
+													'variational_payroll_month' => $month,
+													'variational_payroll_year' => $year,
+													'variational_confirm' => 0
+
+												);
+
+												$variational_payment = $this->security->xss_clean($variational_payment);
+												//print_r($variational_payment);
+												$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+
+											else:
+
+												$total_amount = 0;
+												foreach ($employee_personalized_incomes as $employee_personalized_income):
+
+													if($employee_personalized_income->personalized_payment_definition == $of):
+
+														$total_amount = $employee_personalized_income->personalized_amount + $total_amount;
+													endif;
+
+												endforeach;
+
+												$amount = $payment_percentage * $total_amount;
+
+												$variational_payment = array(
+													'variational_employee_id' => $employee->employee_id,
+													'variational_payment_definition_id' => $payment_definition,
+													'variational_amount' => $amount,
+													'variational_payroll_month' => $month,
+													'variational_payroll_year' => $year,
+													'variational_confirm' => 0
+
+												);
+
+												$variational_payment = $this->security->xss_clean($variational_payment);
+												//print_r($variational_payment);
+												$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+											endif;
+
+
+										else:
+
+											$employee_categorised_incomes = $this->salaries->get_categorized_income($employee->employee_salary_structure_category);
+											if($of == 'a'):
+												$total_amount = 0;
+
+												foreach ($employee_categorised_incomes as $employee_categorised_income):
+
+													$total_amount = $employee_categorised_income->salary_structure_allowance_amount + $total_amount;
+
+												endforeach;
+
+												$amount = $payment_percentage * $total_amount;
+
+												$variational_payment = array(
+													'variational_employee_id' => $employee->employee_id,
+													'variational_payment_definition_id' => $payment_definition,
+													'variational_amount' => $amount,
+													'variational_payroll_month' => $month,
+													'variational_payroll_year' => $year,
+													'variational_confirm' => 0
+
+												);
+
+												$variational_payment = $this->security->xss_clean($variational_payment);
+												//print_r($variational_payment);
+												$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+											else:
+
+												foreach ($employee_categorised_incomes as $employee_categorised_income):
+													if($employee_categorised_income->payment_definition_id == $of):
+
+														$total_amount = $employee_categorised_income->salary_structure_allowance_amount + $total_amount;
+
+													endif;
+
+												endforeach;
+
+												$amount = $payment_percentage * $total_amount;
+
+												$variational_payment = array(
+													'variational_employee_id' => $employee->employee_id,
+													'variational_payment_definition_id' => $payment_definition,
+													'variational_amount' => $amount,
+													'variational_payroll_month' => $month,
+													'variational_payroll_year' => $year,
+													'variational_confirm' => 0
+
+												);
+
+												$variational_payment = $this->security->xss_clean($variational_payment);
+												//print_r($variational_payment);
+												$query = $this->payroll_configurations->insert_variational_payment($variational_payment);
+
+											endif;
+
+
+
+										endif;
+
+
+									endif;
+						endif;
+							endforeach;
+						endif;
 
 					if($query == true):
 						$log_array = array(
