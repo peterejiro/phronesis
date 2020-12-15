@@ -874,7 +874,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 							else:
 
-
+								//categorised salary structure
 
 								$employee_categorised_incomes = $this->salaries->get_categorized_income($employee->employee_salary_structure_category);
 									if($of == 'a'):
@@ -1027,6 +1027,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 
 								else:
+									// categorised salary structure
 
 									$employee_categorised_incomes = $this->salaries->get_categorized_income($temp_emp->employee_salary_structure_category);
 									if($of == 'a'):
@@ -1194,6 +1195,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 
 										else:
+											//categorised salary structure
 
 											$employee_categorised_incomes = $this->salaries->get_categorized_income($employee->employee_salary_structure_category);
 											if($of == 'a'):
