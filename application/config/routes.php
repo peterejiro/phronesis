@@ -352,6 +352,7 @@ $route['get_deduction_payments'] = 'employee_main/get_deduction_payments';
 $route['change_password'] = 'employee_main/change_password';
 $route['change_password_'] = 'employee_main/change_password_';
 $route['get_notifications'] = 'employee_main/get_notifications';
+$route['employee_tax'] = 'payroll/employee_tax';
 
 
 
