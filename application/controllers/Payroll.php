@@ -911,7 +911,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 						if($type == 2):
 
-							$payment_percentage = $this->input->post('payment_percentage');
+							$payment_percentage = $this->input->post('payment_percentage')/100;
 							$of = $this->input->post('of');
 
 							if($employee->employee_salary_structure_category == 0):
@@ -1063,7 +1063,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 							if($type == 2):
 
-								$payment_percentage = $this->input->post('payment_percentage');
+								$payment_percentage = $this->input->post('payment_percentage')/100;
 								$of = $this->input->post('of');
 
 								$temp_emp = $this->employees->get_employee($employee);
@@ -1233,7 +1233,7 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 									if($type == 2):
 
-										$payment_percentage = $this->input->post('payment_percentage');
+										$payment_percentage = $this->input->post('payment_percentage')/100;
 										$of = $this->input->post('of');
 
 										if($employee->employee_salary_structure_category == 0):
@@ -1362,6 +1362,9 @@ $data['notifications'] = $this->employees->get_notifications(0);
 						endif;
 							endforeach;
 						endif;
+
+
+
 
 					if($query == true):
 						$log_array = array(
