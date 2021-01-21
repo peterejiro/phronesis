@@ -67,6 +67,108 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 	}
 
+
+	public function employee_tax(){
+
+		$username = $this->session->userdata('user_username');
+
+		if(isset($username)):
+			$method = $this->input->server('REQUEST_METHOD');
+
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
+
+				$employee_id = $this->input->post('employee_id');
+				$employee_tax_amount = $this->input->post('employee_tax_amount');
+
+				$employee_data = array(
+					'employee_tax_amount' => $employee_tax_amount
+				);
+
+
+
+				$query = $this->employees->update_employee($employee_id, $employee_data);
+
+
+				if ($query == true):
+					$log_array = array(
+						'log_user_id' => $this->users->get_user($username)->user_id,
+						'log_description' => "Update Employee Tax Amount"
+					);
+
+					$this->logs->add_log($log_array);
+
+					$notification_data = array(
+						'notification_employee_id'=> $employee_id,
+						'notification_link'=> 'personal_information',
+						'notification_type' => 'Tax Amount Updated',
+						'notification_status'=> 0
+					);
+
+					$this->employees->insert_notifications($notification_data);
+
+					$msg = array(
+						'msg' => 'Employee Tax Updated Successfully',
+						'location' => site_url('employee_tax'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+				else:
+					$msg = array(
+						'msg' => 'An Error Occurred',
+						'location' => site_url('employee_tax'),
+						'type' => 'success'
+
+					);
+					$this->load->view('swal', $msg);
+
+				endif;
+
+
+			else:
+
+				$user_type = $this->users->get_user($username)->user_type;
+
+				if($user_type == 1 || $user_type == 3):
+					$permission = $this->users->check_permission($username);
+					$data['employee_management'] = $permission->employee_management;
+					$data['notifications'] = $this->employees->get_notifications(0);
+					$data['payroll_management'] = $permission->payroll_management;
+					$data['biometrics'] = $permission->biometrics;
+					$data['user_management'] = $permission->user_management;
+					$data['configuration'] = $permission->configuration;
+					$data['payroll_configuration'] = $permission->payroll_configuration;
+					$data['hr_configuration'] = $permission->hr_configuration;
+
+					if($permission->payroll_management == 1):
+
+						$data['csrf_name'] = $this->security->get_csrf_token_name();
+						$data['csrf_hash'] = $this->security->get_csrf_hash();
+
+						$data['user_data'] = $this->users->get_user($username);
+						$data['employees'] = $this->employees->view_employees();
+
+						//print_r($data['employees']);
+						$this->load->view('payroll_config/employee_tax', $data);
+
+					else:
+						redirect('/access_denied');
+					endif;
+
+				else:
+
+					redirect('/access_denied');
+
+				endif;
+
+			endif;
+		else:
+			redirect('/login');
+		endif;
+
+
+	}
+
 	public function add_employee_salary_structure(){
 
 		$username = $this->session->userdata('user_username');
@@ -1925,71 +2027,90 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 
 
-				//tax computation
+				//tax computation -- start v1
 
 
-				$taxable_incomes = $this->salaries->get_taxable_incomes($employee->employee_id, $payroll_year, $payroll_month);
+//					$taxable_incomes = $this->salaries->get_taxable_incomes($employee->employee_id, $payroll_year, $payroll_month);
+//
+//					$sum_taxable_income = 0;
+//
+//					foreach ($taxable_incomes as $taxable_income):
+//
+//						if($taxable_income->payment_definition_taxable == 1):
+//
+//							$sum_taxable_income = $sum_taxable_income + $taxable_income->salary_amount;
+//
+//						endif;
+//
+//					endforeach;
+//
+//					if($sum_taxable_income > 0):
+//
+//					$tax_relief = ((20/100) * $sum_taxable_income) + (200000/12);
+//
+//					$minimum_tax = ($minimum_tax_rate->minimum_tax_rate/100) * ($sum_taxable_income - $tax_relief);
+//
+//					//if($tax_relief <= 0 or $tax_relief <= $minimum_tax):
+//
+//						//$tax_amount = $minimum_tax;
+//
+//					//else:
+//
+//						$total_tax_amount = 0;
+//						$temp_tax_amount = $sum_taxable_income - $tax_relief;
+//						$tax_rates = $this->payroll_configurations->view_tax_rates_asc();
+//
+//					foreach ($tax_rates as $tax_rate):
+//						if($sum_taxable_income > 0):
+//
+//							if($temp_tax_amount >= $tax_rate->tax_rate_band/12):
+//								$c_tax =  ($tax_rate->tax_rate_rate/100) * ($tax_rate->tax_rate_band/12);
+//							else:
+//								$c_tax = ($tax_rate->tax_rate_rate/100) * ($temp_tax_amount);
+//								$total_tax_amount = $c_tax + $total_tax_amount;
+//								break;
+//							endif;
+//
+//							$temp_tax_amount = $temp_tax_amount - ($tax_rate->tax_rate_band/12);
+//						else:
+//
+//							$c_tax = ($minimum_tax_rate->minimum_tax_rate/100) * ($sum_taxable_income - $tax_relief);
+//
+//
+//						endif;
+//
+//						$total_tax_amount = $c_tax + $total_tax_amount;
+//
+//					endforeach;
+//
+//					//endif;
+//
+//
+//					if($total_tax_amount <= $minimum_tax):
+//
+//						$total_tax_amount = $minimum_tax;
+//
+//					endif;
+//
+//					$salary_array = array(
+//
+//						'salary_employee_id' => $employee->employee_id,
+//						'salary_payment_definition_id' => $tax_payment_definition->payment_definition_id,
+//						'salary_pay_month' => $payroll_month,
+//						'salary_pay_year' => $payroll_year,
+//						'salary_amount' => $total_tax_amount,
+//						'salary_confirmed' => 0
+//
+//					);
+//
+//					$salary_array = $this->security->xss_clean($salary_array);
+//					$query = $this->salaries->add_salary($salary_array);
+//
+//					endif;
 
-				$sum_taxable_income = 0;
+				//tax computation end -- v1
 
-				foreach ($taxable_incomes as $taxable_income):
-
-					if($taxable_income->payment_definition_taxable == 1):
-
-						$sum_taxable_income = $sum_taxable_income + $taxable_income->salary_amount;
-
-					endif;
-
-				endforeach;
-
-				if($sum_taxable_income > 0):
-
-				$tax_relief = ((20/100) * $sum_taxable_income) + (200000/12);
-
-				$minimum_tax = ($minimum_tax_rate->minimum_tax_rate/100) * ($sum_taxable_income - $tax_relief);
-
-				//if($tax_relief <= 0 or $tax_relief <= $minimum_tax):
-
-					//$tax_amount = $minimum_tax;
-
-				//else:
-
-					$total_tax_amount = 0;
-					$temp_tax_amount = $sum_taxable_income - $tax_relief;
-					$tax_rates = $this->payroll_configurations->view_tax_rates_asc();
-
-				foreach ($tax_rates as $tax_rate):
-					if($sum_taxable_income > 0):
-
-						if($temp_tax_amount >= $tax_rate->tax_rate_band/12):
-							$c_tax =  ($tax_rate->tax_rate_rate/100) * ($tax_rate->tax_rate_band/12);
-						else:
-							$c_tax = ($tax_rate->tax_rate_rate/100) * ($temp_tax_amount);
-							$total_tax_amount = $c_tax + $total_tax_amount;
-							break;
-						endif;
-
-						$temp_tax_amount = $temp_tax_amount - ($tax_rate->tax_rate_band/12);
-					else:
-
-						$c_tax = ($minimum_tax_rate->minimum_tax_rate/100) * ($sum_taxable_income - $tax_relief);
-
-
-					endif;
-
-					$total_tax_amount = $c_tax + $total_tax_amount;
-
-				endforeach;
-
-				//endif;
-
-
-				if($total_tax_amount <= $minimum_tax):
-
-					$total_tax_amount = $minimum_tax;
-
-				endif;
-
+			$total_tax_amount = $employee->employee_tax_amount;
 				$salary_array = array(
 
 					'salary_employee_id' => $employee->employee_id,
@@ -2003,12 +2124,6 @@ $data['notifications'] = $this->employees->get_notifications(0);
 
 				$salary_array = $this->security->xss_clean($salary_array);
 				$query = $this->salaries->add_salary($salary_array);
-
-				endif;
-
-				//tax computation
-
-
 
 
 			endif;
