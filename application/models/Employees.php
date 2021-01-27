@@ -220,6 +220,7 @@ class Employees extends CI_Model
 		'leave_status' => 2
 		);
 		$this->db->where('employee_leave.leave_end_date', $date);
+		$this->db->or_where('employee_leave.leave_end_date >', $date);
 		$this->db->update('employee_leave', $leave_array);
 		return true;
 
