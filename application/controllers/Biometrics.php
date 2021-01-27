@@ -617,7 +617,8 @@ $data['notifications'] = $this->employees->get_notifications(0);
 			echo "$msg";
 
 		}else{
-			$time= date('Y-m-d H:i:s', time()+60*60);
+			//$time= date('Y-m-d H:i:s', time()+60*60);
+			$time = date('Y-m-d H:i:s');
 
 			$data['employee'] = $this->employees->get_employee($employee_id);
 			$data['login_time'] = $time;
@@ -792,7 +793,8 @@ $data['notifications'] = $this->employees->get_notifications(0);
 			echo "$msg";
 
 		}else{
-			$time= date('Y-m-d H:i:s', time()+60*60);
+			//$time= date('Y-m-d H:i:s', time()+60*60);
+			$time= date('Y-m-d H:i:s');
 
 			$data['employee'] = $this->employees->get_employee($employee_id);
 			$data['login_time'] = $time;
