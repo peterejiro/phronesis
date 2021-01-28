@@ -53,51 +53,54 @@
 															$year =  date('Y');
 															//$year = 2021;
 															foreach ($leaves as $leave):
-																$wallets = 	$CI->employees->get_my_leave_wallet($employee->employee_id, $leave->leave_id, $year);
+																$wallets = 	$CI->employees->get_my_leave_wallet($employee->employee_id, $leave->leave_id);
 																$used_leaves = 0;
 																foreach ($wallets as $wallet):
-																	$date_diff = strtotime($wallet->leave_end_date) - strtotime($wallet->leave_start_date);
+																	$date = DateTime::createFromFormat("Y-m-d", $wallet->leave_start_date);
+																	$y = $date->format("Y");
+
+																	if($year == $y):
+																			$date_diff = strtotime($wallet->leave_end_date) - strtotime($wallet->leave_start_date);
 
 
-																	$start = new DateTime($wallet->leave_start_date);
-																	$end = new DateTime($wallet->leave_end_date);
-																	// otherwise the  end date is excluded (bug?)
-																	$end->modify('+1 day');
+																			$start = new DateTime($wallet->leave_start_date);
+																			$end = new DateTime($wallet->leave_end_date);
+																			// otherwise the  end date is excluded (bug?)
+																			$end->modify('+1 day');
 
-																	$interval = $end->diff($start);
+																			$interval = $end->diff($start);
 
-																	// total days
-																	$days = $interval->days;
+																			// total days
+																			$days = $interval->days;
 
-																	// create an iterateable period of date (P1D equates to 1 day)
-																	$period = new DatePeriod($start, new DateInterval('P1D'), $end);
+																			// create an iterateable period of date (P1D equates to 1 day)
+																			$period = new DatePeriod($start, new DateInterval('P1D'), $end);
 
-																	// best stored as array, so you can add more than one
-																	$holidays = array('2012-09-07');
+																			// best stored as array, so you can add more than one
+																			$holidays = array('2012-09-07');
 
-																	foreach($period as $dt) {
-																		$curr = $dt->format('D');
+																						foreach($period as $dt) {
+																							$curr = $dt->format('D');
 
-																		// substract if Saturday or Sunday
-																		if ($curr == 'Sat' || $curr == 'Sun') {
-																			$days--;
-																		}
+																							// substract if Saturday or Sunday
+																							if ($curr == 'Sat' || $curr == 'Sun') {
+																								$days--;
+																							}
 
-																		// (optional) for the updated question
-																		elseif (in_array($dt->format('Y-m-d'), $holidays)) {
-																			$days--;
-																		}
-																	}
+																							// (optional) for the updated question
+																							elseif (in_array($dt->format('Y-m-d'), $holidays)) {
+																								$days--;
+																							}
+																						}
 
+																			$used_leave =  $days;
+																			$used_leaves = $used_leaves + $used_leave;
 
-
-
-
-
-
-																	$used_leave =  $days;
-																	$used_leaves = $used_leaves + $used_leave;
+																	endif;
 																endforeach;
+
+
+
 															$remaining_leave = $leave->leave_duration - $used_leaves;
 														?>
 															<div class="ticket-item">
@@ -105,7 +108,10 @@
 																	<h4><?php echo $leave->leave_name; ?></h4>
 																</div>
 																<div class="ticket-info">
-																	<div class="text-primary"><?php echo $remaining_leave." days remaining";  ?></div>
+																	<div class="text-primary"><?php echo $remaining_leave." days remaining";  ?>
+
+																	<?php //print_r($period); ?>
+																	</div>
 																</div>
 															</div>
 														<?php
