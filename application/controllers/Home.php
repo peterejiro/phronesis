@@ -30,13 +30,13 @@ class Home extends CI_Controller
 
 		foreach ($running_leaves as $running_leaf):
 
-			if($running_leaf->leave_end_date >= date('Y-m-d')):
+			if($running_leaf->leave_end_date <= date('Y-m-d')):
 
 				$array = array(
 				'leave_status' => '2'
 				);
 
-				$this->employees->update_leave($running_leaf->leave_id, $array);
+				$this->employees->update_leave($running_leaf->employee_leave_id, $array);
 
 				endif;
 
