@@ -41,6 +41,7 @@
                         <?php if(!empty($employees)):
                           $i = 1;
                           foreach($employees as $employee):
+							  if($employee->employee_status == 1 || $employee->employee_status == 2):
                             ?>
                             <tr>
                               <td class="text-center" style="width: 9px"><?php echo $i; ?></td>
@@ -72,7 +73,9 @@
                               </td>
                             </tr>
                             <?php
+
                             $i++;
+                            endif;
                           endforeach;
                         endif; ?>
                       </tbody>
