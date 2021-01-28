@@ -51,13 +51,51 @@
 															$wallet_array = array();
 															$leaves = $CI->hr_configurations->view_leaves();
 															$year =  date('Y');
-															$year = 2021;
+															//$year = 2021;
 															foreach ($leaves as $leave):
 																$wallets = 	$CI->employees->get_my_leave_wallet($employee->employee_id, $leave->leave_id, $year);
 																$used_leaves = 0;
 																foreach ($wallets as $wallet):
 																	$date_diff = strtotime($wallet->leave_end_date) - strtotime($wallet->leave_start_date);
-																	$used_leave =  round($date_diff/(60*60*24));
+
+
+																	$start = new DateTime($wallet->leave_start_date);
+																	$end = new DateTime($wallet->leave_end_date);
+																	// otherwise the  end date is excluded (bug?)
+																	$end->modify('+1 day');
+
+																	$interval = $end->diff($start);
+
+																	// total days
+																	$days = $interval->days;
+
+																	// create an iterateable period of date (P1D equates to 1 day)
+																	$period = new DatePeriod($start, new DateInterval('P1D'), $end);
+
+																	// best stored as array, so you can add more than one
+																	$holidays = array('2012-09-07');
+
+																	foreach($period as $dt) {
+																		$curr = $dt->format('D');
+
+																		// substract if Saturday or Sunday
+																		if ($curr == 'Sat' || $curr == 'Sun') {
+																			$days--;
+																		}
+
+																		// (optional) for the updated question
+																		elseif (in_array($dt->format('Y-m-d'), $holidays)) {
+																			$days--;
+																		}
+																	}
+
+
+
+
+
+
+
+																	$used_leave =  $days;
 																	$used_leaves = $used_leaves + $used_leave;
 																endforeach;
 															$remaining_leave = $leave->leave_duration - $used_leaves;
