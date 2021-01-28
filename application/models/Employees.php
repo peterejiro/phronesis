@@ -532,7 +532,7 @@ class Employees extends CI_Model
 		$this->db->from('employee_leave');
 		$this->db->where('leave_employee_id', $employee_id);
 		$this->db->where('leave_leave_type', $leave_id);
-		$this->db->where('leave_status !=', 0);
+		//$this->db->where('leave_status !=', 0);
 		$this->db->where('leave_status', 1);
 		$this->db->or_where('leave_status', 2);
 		$this->db->like('leave_start_date', $year);
@@ -612,6 +612,8 @@ class Employees extends CI_Model
 		return $this->db->count_all_results();
 	}
 
+
+
 	public function count_approved_leaves() {
 		$this->db->select('*');
 		$this->db->from('employee_leave');
@@ -634,6 +636,16 @@ class Employees extends CI_Model
 		$this->db->join('leave_type', 'leave_type.leave_id = employee_leave.leave_leave_type');
 		$this->db->order_by('employee_leave.leave_start_date', 'ASC');
 		$this->db->limit(3);
+		return $this->db->get()->result();
+	}
+
+	public function get_approved_leaves() {
+		$this->db->select('*');
+		$this->db->from('employee_leave');
+		$this->db->where('employee_leave.leave_status', 1);
+//		$this->db->join('employee', 'employee.employee_id = employee_leave.leave_employee_id');
+//		$this->db->join('leave_type', 'leave_type.leave_id = employee_leave.leave_leave_type');
+		$this->db->order_by('employee_leave.leave_start_date', 'ASC');
 		return $this->db->get()->result();
 	}
 
