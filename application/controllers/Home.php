@@ -43,7 +43,7 @@ class Home extends CI_Controller
 
 			endforeach;
 
-	 $this->employees->check_leave_end_date(date('Y-m-d'));
+	 //$this->employees->check_leave_end_date(date('Y-m-d'));
 
 		$username = $this->session->userdata('user_username');
 
