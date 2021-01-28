@@ -26,7 +26,24 @@ class Home extends CI_Controller
 
 	public function index(){
 
-	 $this->employees->check_leave_end_date(date('Y-m-d'));
+		$running_leaves = $this->employees->get_approved_leaves();
+
+		foreach ($running_leaves as $running_leaf):
+
+			if($running_leaf->leave_end_date <= date('Y-m-d')):
+
+				$array = array(
+				'leave_status' => '2'
+				);
+
+				$this->employees->update_leave($running_leaf->employee_leave_id, $array);
+
+				endif;
+
+
+			endforeach;
+
+	 //$this->employees->check_leave_end_date(date('Y-m-d'));
 
 		$username = $this->session->userdata('user_username');
 
