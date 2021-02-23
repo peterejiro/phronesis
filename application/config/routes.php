@@ -354,6 +354,9 @@ $route['change_password_'] = 'employee_main/change_password_';
 $route['get_notifications'] = 'employee_main/get_notifications';
 $route['employee_tax'] = 'payroll/employee_tax';
 
+// hr reports
+$route['hr_report'] = 'hr_report/index';
+
 
 
 
