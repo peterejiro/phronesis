@@ -1,7 +1,7 @@
 <?php
 	
 	
-	class Hr_Report extends CI_Controller
+	class Hr_report extends CI_Controller
 	{
 		public function __construct()
 		{
@@ -35,7 +35,7 @@
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 				
-				if($permission->payroll_management == 1):
+				if($permission->employee_management == 1):
 					$user_type = $this->users->get_user($username)->user_type;
 					
 					if($user_type == 1 || $user_type == 3):
@@ -75,7 +75,7 @@
 				$data['payroll_configuration'] = $permission->payroll_configuration;
 				$data['hr_configuration'] = $permission->hr_configuration;
 				
-				if($permission->payroll_management == 1):
+				if($permission->employee_management == 1):
 					$user_type = $this->users->get_user($username)->user_type;
 					
 					if($user_type == 1 || $user_type == 3):
@@ -119,8 +119,8 @@
 						$data['configuration'] = $permission->configuration;
 						$data['payroll_configuration'] = $permission->payroll_configuration;
 						$data['hr_configuration'] = $permission->hr_configuration;
-						
-						if($permission->payroll_management == 1):
+					
+					if($permission->employee_management == 1):
 							$user_type = $this->users->get_user($username)->user_type;
 							
 							if($user_type == 1 || $user_type == 3):
