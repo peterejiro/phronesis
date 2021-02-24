@@ -1,11 +1,11 @@
 
 
 <?php
-  include(APPPATH.'/views/stylesheet.php');
-  $CI =& get_instance();
-  $CI->load->model('hr_configurations');
-  $CI->load->model('payroll_configurations');
-  $CI->load->model('employees');
+include(APPPATH.'/views/stylesheet.php');
+$CI =& get_instance();
+$CI->load->model('hr_configurations');
+$CI->load->model('payroll_configurations');
+$CI->load->model('employees');
 ?>
 
 <body class="layout-3">
@@ -48,61 +48,66 @@
 												<div class="card-body p-0">
 													<div class="tickets-list">
 														<?php
-															$wallet_array = array();
-															$leaves = $CI->hr_configurations->view_leaves();
-															$year =  date('Y');
-															//$year = 2021;
-															foreach ($leaves as $leave):
-																$wallets = 	$CI->employees->get_my_leave_wallet($employee->employee_id, $leave->leave_id);
-																$used_leaves = 0;
-																foreach ($wallets as $wallet):
-																	$date = DateTime::createFromFormat("Y-m-d", $wallet->leave_start_date);
-																	$y = $date->format("Y");
+														$wallet_array = array();
+														$leaves = $CI->hr_configurations->view_leaves();
+														$year =  date('Y');
+														//$year = 2021;
+														foreach ($leaves as $leave):
+															$wallets = 	$CI->employees->get_my_leave_wallet($employee->employee_id, $leave->leave_id);
+															$used_leaves = 0;
+															foreach ($wallets as $wallet):
+																$date = DateTime::createFromFormat("Y-m-d", $wallet->leave_start_date);
+																$y = $date->format("Y");
 
-																	if($year == $y):
-																			$date_diff = strtotime($wallet->leave_end_date) - strtotime($wallet->leave_start_date);
+																if($year == $y):
 
 
-																			$start = new DateTime($wallet->leave_start_date);
-																			$end = new DateTime($wallet->leave_end_date);
-																			// otherwise the  end date is excluded (bug?)
-																			$end->modify('+1 day');
+																	$date_diff = strtotime($wallet->leave_end_date) - strtotime($wallet->leave_start_date);
 
-																			$interval = $end->diff($start);
 
-																			// total days
-																			$days = $interval->days;
+																	$start = new DateTime($wallet->leave_start_date);
+																	$end = new DateTime($wallet->leave_end_date);
+																	// otherwise the  end date is excluded (bug?)
+																	$end->modify('+1 day');
 
-																			// create an iterateable period of date (P1D equates to 1 day)
-																			$period = new DatePeriod($start, new DateInterval('P1D'), $end);
+																	$interval = $end->diff($start);
 
-																			// best stored as array, so you can add more than one
-																			$holidays = array('2012-09-07');
+																	// total days
+																	$days = $interval->days;
 
-																						foreach($period as $dt) {
-																							$curr = $dt->format('D');
+																	// create an iterateable period of date (P1D equates to 1 day)
+																	$period = new DatePeriod($start, new DateInterval('P1D'), $end);
 
-																							// substract if Saturday or Sunday
-																							if ($curr == 'Sat' || $curr == 'Sun') {
-																								$days--;
-																							}
+																	// best stored as array, so you can add more than one
+																	$holidays = array('2012-09-07');
 
-																							// (optional) for the updated question
-																							elseif (in_array($dt->format('Y-m-d'), $holidays)) {
-																								$days--;
-																							}
-																						}
+																	foreach($period as $dt) {
+																		$curr = $dt->format('D');
 
-																			$used_leave =  $days;
-																			$used_leaves = $used_leaves + $used_leave;
+																		// substract if Saturday or Sunday
+																		if ($curr == 'Sat' || $curr == 'Sun') {
+																			$days--;
+																		}
 
-																	endif;
-																endforeach;
+																		// (optional) for the updated question
+																		elseif (in_array($dt->format('Y-m-d'), $holidays)) {
+																			$days--;
+																		}
+																	}
+
+																	$used_leave =  $days;
+																	$used_leaves = $used_leaves + $used_leave;
+
+
+
+																endif;
+															endforeach;
 
 
 
 															$remaining_leave = $leave->leave_duration - $used_leaves;
-														?>
+
+															?>
 															<div class="ticket-item">
 																<div class="ticket-title">
 																	<h4><?php echo $leave->leave_name; ?></h4>
@@ -110,13 +115,13 @@
 																<div class="ticket-info">
 																	<div class="text-primary"><?php echo $remaining_leave." days remaining";  ?>
 
-																	<?php //print_r($period); ?>
+																		<?php //print_r($employee->employee_id); ?>
 																	</div>
 																</div>
 															</div>
-														<?php
+															<?php
 															$wallet_array[$leave->leave_id] = $remaining_leave;
-															endforeach;
+														endforeach;
 														?>
 													</div>
 												</div>
@@ -213,7 +218,7 @@
 			swal('Why are you here if you do not want a leave', { icon: 'error' });
 		}else{
 
-				let leave_day_policy = calcBusinessDays(start_date, end_date)
+			let leave_day_policy = calcBusinessDays(start_date, end_date)
 			var obj = JSON.parse(document.getElementById('leave_bal').value);
 
 			if(start_date < new Date()){
