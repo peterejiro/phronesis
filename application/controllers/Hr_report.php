@@ -1,7 +1,7 @@
 <?php
 	
 	
-	class Hr_Report extends CI_Controller
+	class Hr_report extends CI_Controller
 	{
 		public function __construct()
 		{
