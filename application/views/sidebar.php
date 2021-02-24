@@ -69,9 +69,20 @@
 					<li class="<?php echo $this->uri->segment(1) == 'memo'  ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('memo') ?>"> <span>Announcements</span></a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'specific_memo' || $this->uri->segment(1) == 'new_specific_memo' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('specific_memo') ?>"> <span>Directives</span></a></li>
 				</ul>
+				
+				
 			</li>
 			<?php } ?>
-
+			<?php if($employee_management == 1){  ?>
+				<li class="dropdown <?php echo $this->uri->segment(1) == 'hr_reports' || $this->uri->segment(1) == '' || $this->uri->segment(1) == ''  ? 'active' : ''; ?>">
+					<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-bell"></i> <span> Analytics </span></a>
+					<ul class="dropdown-menu">
+						<li class="<?php echo $this->uri->segment(1) == 'hr_reports'  ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo site_url('hr_report') ?>"> <span>HR Reports</span></a></li>
+					</ul>
+				
+				
+				</li>
+			<?php } ?>
 			<?php if($payroll_management == 1){  ?>
 			<li class="menu-header">Payroll System</li>
 			<li class="dropdown <?php echo

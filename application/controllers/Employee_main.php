@@ -375,7 +375,7 @@ class Employee_main extends CI_Controller
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
 				$data['employee'] = $this->employees->get_employee_by_unique($username);
-				$data['leaves'] = $this->hr_configurations->view_leaves();
+				//$data['leaves'] = $this->hr_configurations->view_leaves();
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 				$data['notifications'] = $this->employees->get_notifications($employee_id);
 				//$data['employees'] = $this->employees->view_employees();

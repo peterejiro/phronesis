@@ -21,6 +21,7 @@ class Employees extends CI_Model
 		$this->db->join('grade', 'grade.grade_id = employee.employee_grade_id');
 		$this->db->join('job_role', 'job_role.job_role_id = employee.employee_job_role_id');
 		$this->db->join('department', 'department.department_id = job_role.department_id');
+		$this->db->join('subsidiary', 'subsidiary.subsidiary_id = employee.employee_subsidiary_id');
 		$this->db->join('bank', 'bank.bank_id = employee.employee_bank_id');
 		return $this->db->get()->result();
 
@@ -217,7 +218,7 @@ class Employees extends CI_Model
 
 	public function check_leave_end_date($date){
 		$leave_array = array(
-		'leave_status' => 2
+			'leave_status' => 2
 		);
 		$this->db->where('employee_leave.leave_status', 1);
 		$this->db->where('employee_leave.leave_end_date', $date);
@@ -532,9 +533,9 @@ class Employees extends CI_Model
 		$this->db->from('employee_leave');
 		$this->db->where('leave_employee_id', $employee_id);
 		$this->db->where('leave_leave_type', $leave_id);
-		//$this->db->where('leave_status !=', 0);
-		$this->db->where('leave_status', 1);
-		$this->db->or_where('leave_status', 2);
+		$this->db->where('leave_status !=', 0);
+// 		$this->db->where('leave_status', 1);
+// 		$this->db->or_where('leave_status', 2);
 		//$this->db->like('leave_start_date', $year);
 		return $this->db->get()->result();
 
@@ -700,74 +701,74 @@ class Employees extends CI_Model
 			foreach($data as $token){
 				$tokens[] = $token["user_device_token"];
 			}
-		   //var_dump($tokens[0]);
+			//var_dump($tokens[0]);
 			return$tokens[0];
 		} else {
-		  return null;
+			return null;
 		}
 	}
 
 
-public function pushToUser($id, $title, $body)
-{
-	$token = $this->getUserToken($id);
-	$this->PushNotify($title, $body, $token);
-}
-   
-
-
-public function PushNotify($title, $body, $token){
-
-	$ch = curl_init("https://fcm.googleapis.com/fcm/send");
-
-
-	//Creating the notification array.
-	$notification = array('title' =>$title , 'body' => $body);
-	
-	//This array contains, the token and the notification. The 'to' attribute stores the token.
-	$arrayToSend = array('to' => $token, 'notification' => $notification);
-	
-	//Generating JSON encoded string form the above array.
-	$json = json_encode($arrayToSend);
-	$url = "https://fcm.googleapis.com/fcm/send";
-	//Setup headers:
-	$headers = array();
-	$headers[] = 'Content-Type: application/json';
-	$headers[] = 'Authorization: key=AAAAOEbzKiA:APA91bGp-eVITkQPGTsh2DXhSQPLzVxEgSLXquRs6Oy-zvGSWAkWZtaaIv_ZbUXHzEY016iekD0gEx3RItFdRdPwVbKMXAGHQ0S63OhAM0oH1bA-sVP4VIfAvFCSfi3n5BPUnLQHeQGF';
-	
-	//Setup curl, add headers and post parameters.
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-	curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);       
-	
-	curl_setopt( $ch,CURLOPT_URL, $url);
-	curl_setopt( $ch,CURLOPT_POST, true );
-	curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers);
-	curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
-	curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
-	$result = curl_exec($ch );
-	//print($result);
-	
-	//Send the request
-	//curl_exec($ch);
-	
-	//Close request
-	curl_close($ch);
+	public function pushToUser($id, $title, $body)
+	{
+		$token = $this->getUserToken($id);
+		$this->PushNotify($title, $body, $token);
 	}
 
 
 
-public function objectToArray($data)
-{
-    if (is_object($data)) {
-        $data = get_object_vars($data);
-    }
+	public function PushNotify($title, $body, $token){
 
-    if (is_array($data)) {
-        return array_map(array($this, 'objectToArray'), $data);
-    }
+		$ch = curl_init("https://fcm.googleapis.com/fcm/send");
 
-    return $data;
-}
+
+		//Creating the notification array.
+		$notification = array('title' =>$title , 'body' => $body);
+
+		//This array contains, the token and the notification. The 'to' attribute stores the token.
+		$arrayToSend = array('to' => $token, 'notification' => $notification);
+
+		//Generating JSON encoded string form the above array.
+		$json = json_encode($arrayToSend);
+		$url = "https://fcm.googleapis.com/fcm/send";
+		//Setup headers:
+		$headers = array();
+		$headers[] = 'Content-Type: application/json';
+		$headers[] = 'Authorization: key=AAAAOEbzKiA:APA91bGp-eVITkQPGTsh2DXhSQPLzVxEgSLXquRs6Oy-zvGSWAkWZtaaIv_ZbUXHzEY016iekD0gEx3RItFdRdPwVbKMXAGHQ0S63OhAM0oH1bA-sVP4VIfAvFCSfi3n5BPUnLQHeQGF';
+
+		//Setup curl, add headers and post parameters.
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+		curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+
+		curl_setopt( $ch,CURLOPT_URL, $url);
+		curl_setopt( $ch,CURLOPT_POST, true );
+		curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers);
+		curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+		curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+		$result = curl_exec($ch );
+		//print($result);
+
+		//Send the request
+		//curl_exec($ch);
+
+		//Close request
+		curl_close($ch);
+	}
+
+
+
+	public function objectToArray($data)
+	{
+		if (is_object($data)) {
+			$data = get_object_vars($data);
+		}
+
+		if (is_array($data)) {
+			return array_map(array($this, 'objectToArray'), $data);
+		}
+
+		return $data;
+	}
 
 }
