@@ -39,7 +39,7 @@
 								<div class="card-body">
 									<h4>Top Performers</h4>
                   <p>Performance Reports based on Appraisal</p>
-									<a href="<?php echo base_url('deduction'); ?>" class="card-cta">View Report <i class="fas fa-chevron-right"></i></a>
+									<a href="<?php echo base_url('top_performer'); ?>" class="card-cta">View Report <i class="fas fa-chevron-right"></i></a>
 								</div>
 							</div>
 						</div>
