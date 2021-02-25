@@ -65,6 +65,10 @@
 			
 			if(isset($username)):
 				
+				$method = $this->input->server('REQUEST_METHOD');
+				
+				if($method == 'GET' || $method == 'Get' || $method == 'get'):
+				
 				$permission = $this->users->check_permission($username);
 				$data['employee_management'] = $permission->employee_management;
 				$data['notifications'] = $this->employees->get_notifications(0);
@@ -80,11 +84,16 @@
 					
 					if($user_type == 1 || $user_type == 3):
 						
+						
 						$data['user_data'] = $this->users->get_user($username);
-						$data['employees'] = $this->employees->get_employee_by_salary_setup();
+						$data['subsidiarys'] = $this->hr_configurations->view_subsidiarys();
+						$data['departments'] = $this->hr_configurations->view_departments();
+						$data['roles'] = $this->hr_configurations->view_job_roles();
+						$data['csrf_name'] = $this->security->get_csrf_token_name();
+						$data['csrf_hash'] = $this->security->get_csrf_hash();
 						
 						
-						$this->load->view('hr_report/new_hire_base', $data);
+						$this->load->view('hr_report/_new_hire', $data);
 					
 					else:
 						redirect('/access_denied');
@@ -94,6 +103,100 @@
 					redirect('/access_denied');
 				
 				endif;
+				
+			endif;
+				
+				
+				
+				if($method == 'POST' || $method == 'Post' || $method == 'post'):
+					
+					$job_role = $_POST['job_role'];
+					$subsidiary = $_POST['subsidiary'];
+					$from_date = $_POST['from_date'];
+					$to_date = $_POST['to_date'];
+					//print_r($_POST);
+					
+					/*
+					 *
+					 *
+					 *
+					 * please if you have a faint knowledge as it pertains to array, you might want to think twice before attempting to alter any semi column here
+					 *
+					 *
+					 *
+					 *
+					 *
+					 */
+					$a_results = array();
+					
+					if(($job_role == 'all') && ($subsidiary == 'all')):
+						// filter by only date
+						
+						$temps = $this->hr_reports->get_top_performer_all($from_date, $to_date);
+						
+						
+					
+					endif;
+					
+					
+					if(($job_role != 'all') && ($subsidiary == 'all')):
+						
+						//filter by date and job role
+						
+						$temps = $this->hr_reports->get_top_performer_job_role($from_date, $to_date, $job_role);
+						
+						
+					
+					endif;
+					
+					
+					
+					if(($job_role == 'all') && ($subsidiary != 'all')):
+						
+						//filter by date and subsidiary
+						
+						
+						$temps = $this->hr_reports->get_top_performer_job_role($from_date, $to_date, $subsidiary);
+						
+						
+					
+					
+					endif;
+					
+					
+					if(($job_role != 'all') && ($subsidiary != 'all')):
+						
+						//filter by date, job role and subsidiary
+						
+						$temps = $this->hr_reports->get_top_performer_al($from_date, $to_date, $job_role, $subsidiary);
+					
+					
+					endif;
+				
+					$permission = $this->users->check_permission($username);
+					$data['employee_management'] = $permission->employee_management;
+					$data['notifications'] = $this->employees->get_notifications(0);
+					$data['payroll_management'] = $permission->payroll_management;
+					$data['biometrics'] = $permission->biometrics;
+					$data['user_management'] = $permission->user_management;
+					$data['configuration'] = $permission->configuration;
+					$data['payroll_configuration'] = $permission->payroll_configuration;
+					$data['hr_configuration'] = $permission->hr_configuration;
+					
+					$data['from_date'] = $from_date;
+					$data['to_date'] = $to_date;
+					$data['results'] = $temps;
+					$data['user_data'] = $this->users->get_user($username);
+					
+					
+					
+					$this->load->view('hr_report/new_hire', $data);
+				
+				
+				endif;
+			
+			
+			
 			else:
 				redirect('/login');
 			endif;
@@ -426,6 +529,211 @@
 			endif;
 			
 		}
+		
+		
+		public function retention(){
+			
+			$username = $this->session->userdata('user_username');
+			
+			if(isset($username)):
+				
+				$method = $this->input->server('REQUEST_METHOD');
+				
+				if($method == 'GET' || $method == 'Get' || $method == 'get'):
+					
+					$permission = $this->users->check_permission($username);
+					$data['employee_management'] = $permission->employee_management;
+					$data['notifications'] = $this->employees->get_notifications(0);
+					$data['payroll_management'] = $permission->payroll_management;
+					$data['biometrics'] = $permission->biometrics;
+					$data['user_management'] = $permission->user_management;
+					$data['configuration'] = $permission->configuration;
+					$data['payroll_configuration'] = $permission->payroll_configuration;
+					$data['hr_configuration'] = $permission->hr_configuration;
+					
+					if($permission->employee_management == 1):
+						$user_type = $this->users->get_user($username)->user_type;
+						
+						if($user_type == 1 || $user_type == 3):
+							
+							$data['user_data'] = $this->users->get_user($username);
+							$data['subsidiarys'] = $this->hr_configurations->view_subsidiarys();
+							$data['departments'] = $this->hr_configurations->view_departments();
+							$data['roles'] = $this->hr_configurations->view_job_roles();
+							$data['csrf_name'] = $this->security->get_csrf_token_name();
+							$data['csrf_hash'] = $this->security->get_csrf_hash();
+							
+							$data['years'] = $this->hr_reports->get_employee_year();
+							
+							
+							$this->load->view('hr_report/_retention', $data);
+						
+						else:
+							redirect('/access_denied');
+						endif;
+					else:
+						
+						redirect('/access_denied');
+					
+					endif;
+				endif;
+				
+				
+				
+				
+				$method = $this->input->server('REQUEST_METHOD');
+				
+				if($method == 'POST' || $method == 'Post' || $method == 'post'):
+					
+					$year = $_POST['year'];
+				
+					$employee_before = $this->hr_reports->employee_before_year($year);
+					
+					$employee_after = $this->hr_reports->employee_after_year($year);
+					
+					
+					
+					
+					
+					
+					$permission = $this->users->check_permission($username);
+					$data['employee_management'] = $permission->employee_management;
+					$data['notifications'] = $this->employees->get_notifications(0);
+					$data['payroll_management'] = $permission->payroll_management;
+					$data['biometrics'] = $permission->biometrics;
+					$data['user_management'] = $permission->user_management;
+					$data['configuration'] = $permission->configuration;
+					$data['payroll_configuration'] = $permission->payroll_configuration;
+					$data['hr_configuration'] = $permission->hr_configuration;
+					
+					$data['year'] = $year;
+					$data['before'] = count($employee_before);
+					$data['after'] = count($employee_after);
+					$data['user_data'] = $this->users->get_user($username);
+					
+					
+					
+					$this->load->view('hr_report/retention', $data);
+				
+				
+				endif;
+			else:
+				redirect('/login');
+			endif;
+			
+		}
+		
+		public function turn_over(){
+			
+			$username = $this->session->userdata('user_username');
+			
+			if(isset($username)):
+				
+				$method = $this->input->server('REQUEST_METHOD');
+				
+				if($method == 'GET' || $method == 'Get' || $method == 'get'):
+					
+					$permission = $this->users->check_permission($username);
+					$data['employee_management'] = $permission->employee_management;
+					$data['notifications'] = $this->employees->get_notifications(0);
+					$data['payroll_management'] = $permission->payroll_management;
+					$data['biometrics'] = $permission->biometrics;
+					$data['user_management'] = $permission->user_management;
+					$data['configuration'] = $permission->configuration;
+					$data['payroll_configuration'] = $permission->payroll_configuration;
+					$data['hr_configuration'] = $permission->hr_configuration;
+					
+					if($permission->employee_management == 1):
+						$user_type = $this->users->get_user($username)->user_type;
+						
+						if($user_type == 1 || $user_type == 3):
+							
+							$data['user_data'] = $this->users->get_user($username);
+							$data['subsidiarys'] = $this->hr_configurations->view_subsidiarys();
+							$data['departments'] = $this->hr_configurations->view_departments();
+							$data['roles'] = $this->hr_configurations->view_job_roles();
+							$data['csrf_name'] = $this->security->get_csrf_token_name();
+							$data['csrf_hash'] = $this->security->get_csrf_hash();
+							
+							$data['years'] = $this->hr_reports->get_employee_year();
+							
+							
+							$this->load->view('hr_report/_turn_over', $data);
+						
+						else:
+							redirect('/access_denied');
+						endif;
+					else:
+						
+						redirect('/access_denied');
+					
+					endif;
+				endif;
+				
+				
+				
+				
+				$method = $this->input->server('REQUEST_METHOD');
+				
+				if($method == 'POST' || $method == 'Post' || $method == 'post'):
+					
+					$year = $_POST['year'];
+					
+					$employee_before = $this->hr_reports->employee_before_year($year);
+					
+					$employee_after = $this->hr_reports->employee_exit_year($year);
+					
+					if(count($employee_before) <= 0):
+						
+						$x = 1;
+					
+					else:
+						$x = count($employee_before);
+						endif;
+					
+					if(count($employee_after) <= 0):
+						
+						$y = 1;
+					
+					else:
+						$y = count($employee_after);
+					endif;
+					
+					
+					
+					
+					$permission = $this->users->check_permission($username);
+					$data['employee_management'] = $permission->employee_management;
+					$data['notifications'] = $this->employees->get_notifications(0);
+					$data['payroll_management'] = $permission->payroll_management;
+					$data['biometrics'] = $permission->biometrics;
+					$data['user_management'] = $permission->user_management;
+					$data['configuration'] = $permission->configuration;
+					$data['payroll_configuration'] = $permission->payroll_configuration;
+					$data['hr_configuration'] = $permission->hr_configuration;
+					
+					$data['year'] = $year;
+					$data['before'] = $x;
+					
+					
+					$data['after'] = $y;
+					$data['user_data'] = $this->users->get_user($username);
+					
+					
+					
+					$this->load->view('hr_report/turn_over', $data);
+				
+				
+				endif;
+			else:
+				redirect('/login');
+			endif;
+			
+		}
+		
+		
+		
+
 		
 		
 	}

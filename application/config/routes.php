@@ -357,6 +357,9 @@ $route['employee_tax'] = 'payroll/employee_tax';
 // hr reports
 $route['hr_report'] = 'hr_report/index';
 $route['top_performer'] = 'hr_report/top_performer';
+$route['new_hire'] = 'hr_report/new_hire';
+$route['retention'] = 'hr_report/retention';
+$route['turn_over'] = 'hr_report/turn_over';
 
 
 
