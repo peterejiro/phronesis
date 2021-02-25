@@ -44,6 +44,8 @@ $(document).ready(function() {
         ],
 		"order": []
     });
+
+
     table.buttons().container().appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
 
     let table2 = $('#datatable-buttons-2').DataTable({

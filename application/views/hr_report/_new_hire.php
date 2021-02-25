@@ -12,22 +12,22 @@
 					<div class="section-header-back">
 						<a href="<?php echo site_url('hr_report')?>"  class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
 					</div>
-					<h1> Top Performing Employees</h1>
+					<h1> New Hires</h1>
 					<div class="section-header-breadcrumb">
 						<div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
 						<div class="breadcrumb-item active"><a href="<?php echo site_url('hr_report')?>">HR Reports</a></div>
-						<div class="breadcrumb-item">Top Performing Employees</div>
+						<div class="breadcrumb-item">New Hires</div>
 					</div>
 				</div>
 				<div class="section-body">
-					<div class="section-title">All About Top Performing Employees</div>
-					<p class="section-lead">You can generate a report of the all top performing employees in a department, subsidiary or your company at large</p>
+					<div class="section-title">All About New Hires</div>
+					<p class="section-lead">You can generate a report of employees hired within a particular range of date</p>
 					<div class="row">
 						<div class="col-md-7">
 							<form method="post"  data-persist="garlic" action="" class="needs-validation" novalidate>
 								<div class="card card-primary">
 									<div class="card-header">
-										<h4>Top Performing Employees Form</h4>
+										<h4>New Hires</h4>
 									</div>
 									<div class="card-body">
 										<div class="form-group">
