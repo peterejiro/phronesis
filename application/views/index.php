@@ -283,13 +283,13 @@ curl_close($curl);
                     <div class="summary">
                       <div class="summary-info">
                         <h4><?php echo $pending_leaves?> Pending Requests</h4>
-                        <div class="text-muted"><?php echo $approved_leaves?> Approved and <?php echo $finished_leaves?> Finished.</div>
+                        <div class="text-muted"><?php echo $approved_leaves?> Running and <?php echo $finished_leaves?> Finished.</div>
                         <div class="d-block mt-2">
                           <a href="<?php echo site_url('employee_leave') ?>">View Leaves</a>
                         </div>
                       </div>
                       <div class="summary-item">
-                        <h6>Upcoming Leaves</h6>
+                        <h6>Employees on Leave</h6>
                         <ul class="list-unstyled list-unstyled-border">
 													<?php if (!empty($upcoming_leaves)):?>
 														<?php foreach($upcoming_leaves as $upcoming_leave):?>
