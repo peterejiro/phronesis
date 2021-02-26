@@ -163,6 +163,8 @@ class Payroll_report extends CI_Controller
 				$employees = $this->employees->view_employees();
 
 				foreach ($employees as $employee):
+					
+					if($employee->employee_status == 1 || $employee->employee_status == 2):
 					$emolument_data = array(
 
 						'emolument_report_employee_id' => $employee->employee_id
@@ -184,6 +186,7 @@ class Payroll_report extends CI_Controller
 					$this->salaries->update_emolument($employee->employee_id, $emoluments_data);
 
 					endforeach;
+					endif;
 
 				endforeach;
 
@@ -231,6 +234,7 @@ class Payroll_report extends CI_Controller
 					$employees = $this->employees->view_employees();
 
 					foreach ($employees as $employee):
+						if($employee->employee_status == 1 || $employee->employee_status == 2):
 						$emolument_data = array(
 
 							'emolument_report_employee_id' => $employee->employee_id
@@ -252,6 +256,8 @@ class Payroll_report extends CI_Controller
 							$this->salaries->update_emolument($employee->employee_id, $emoluments_data);
 
 						endforeach;
+						
+						endif;
 
 					endforeach;
 
