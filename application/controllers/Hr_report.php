@@ -686,14 +686,14 @@
 					$x = count($employee_before);
 					$y = count($employee_after);
 					
-//					if(count($employee_before) <= 0):
-//
-//						$x = 1;
-//
-//					else:
-//						$x = count($employee_before);
-//						endif;
-//
+					if(count($employee_before) <= 0):
+
+						$x = 1;
+
+					else:
+						$x = count($employee_before);
+						endif;
+
 //					if(count($employee_after) <= 0):
 //
 //						$y = 1;
