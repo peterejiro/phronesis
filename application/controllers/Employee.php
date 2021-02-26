@@ -39,6 +39,47 @@ class Employee extends CI_Controller
 
 				if ($permission->employee_management == 1):
 					$data['notifications'] = $this->employees->get_notifications(0);
+					
+						$employees = $this->employees->view_employees();
+						
+						foreach ($employees as $employee):
+							
+							if($employee->employee_stop_date == '0000-00-00' && $employee->employee_status == 0):
+								
+								$termination = $this->employees->get_employee_termination($employee->employee_id);
+							
+								if(!empty($termination)):
+									
+									$employee_data = array(
+										'employee_stop_date' => $termination->termination_effective_date
+									);
+									 $this->employees->update_employee($employee->employee_id, $employee_data);
+									
+									else:
+									
+									$resignations = $this->employees->get_employee_resignations($employee->employee_id);
+									
+									if(!empty($resignations)):
+										foreach ($resignations as $resignation):
+											
+											if($resignation->resignation_status == 1):
+												$employee_data = array(
+													'employee_stop_date' => $resignation->resignation_effective_date
+												);
+												 $this->employees->update_employee($employee->employee_id, $employee_data);
+												endif;
+											
+											endforeach;
+									endif;
+									
+									
+									endif;
+							
+								
+								endif;
+							
+							endforeach;
+					
 
 					$data['employees'] = $this->employees->view_employees();
 					$data['user_data'] = $this->users->get_user($username);
