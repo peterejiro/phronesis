@@ -366,6 +366,13 @@ class Employees extends CI_Model
 		$this->db->where('termination.termination_employee_id', $employee_id);
 		return $this->db->get()->result();
 	}
+	
+	public function get_employee_termination($employee_id){
+		$this->db->select('*');
+		$this->db->from('termination');
+		$this->db->where('termination.termination_employee_id', $employee_id);
+		return $this->db->get()->row();
+	}
 
 	public function insert_resignation($resignation_data){
 
