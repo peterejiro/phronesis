@@ -683,22 +683,24 @@
 					
 					$employee_after = $this->hr_reports->employee_exit_year($year);
 					
-					if(count($employee_before) <= 0):
-						
-						$x = 1;
+					$x = count($employee_before);
+					$y = count($employee_after);
 					
-					else:
-						$x = count($employee_before);
-						endif;
-					
-					if(count($employee_after) <= 0):
-						
-						$y = 1;
-					
-					else:
-						$y = count($employee_after);
-					endif;
-					
+//					if(count($employee_before) <= 0):
+//
+//						$x = 1;
+//
+//					else:
+//						$x = count($employee_before);
+//						endif;
+//
+//					if(count($employee_after) <= 0):
+//
+//						$y = 1;
+//
+//					else:
+//						$y = count($employee_after);
+//					endif;
 					
 					
 					
