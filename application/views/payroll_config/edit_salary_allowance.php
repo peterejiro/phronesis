@@ -62,7 +62,7 @@
                       </div>
                       <div class="col-sm-6">
                         <label> Amount:</label><span style="color: red"> *</span>
-                        <input name="allowance_amount" type="number" required class="form-control" value="<?php echo $allowance->salary_structure_allowance_amount; ?>"/>
+                        <input name="allowance_amount" type="number" step="any" required class="form-control" value="<?php echo $allowance->salary_structure_allowance_amount; ?>"/>
                         <div class="invalid-feedback">
                           please fill in an amount
                         </div>

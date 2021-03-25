@@ -64,7 +64,7 @@
                         </div>
                         <div class="col-sm-5">
                           <label>Amount</label><span style="color: red"> *</span>
-                          <input name="allowance_amount[]" type="number" required class="form-control"/>
+                          <input name="allowance_amount[]" type="number" step="any" required class="form-control"/>
                           <div class="invalid-feedback">
                             please fill in an amount
                           </div>
