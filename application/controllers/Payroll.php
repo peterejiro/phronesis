@@ -1866,30 +1866,16 @@ $data['notifications'] = $this->employees->get_notifications(0);
 			// categorised salary structure
 			foreach ($employee_categorised_incomes as $employee_categorised_income):
 
-					if($employee_categorised_income->payment_definition_basic == 1):
+//					if($employee_categorised_income->payment_definition_basic == 1):
 
 						//compute pension
-						if($employee->employee_pensionable == 1):
-
-							$pension_amount = ($pension_rate->pension_rate/100) * $employee_categorised_income->salary_structure_allowance_amount;
-
-							$salary_array = array(
-
-								'salary_employee_id' => $employee->employee_id,
-								'salary_payment_definition_id' => $pension_payment_definition->payment_definition_id,
-								'salary_pay_month' => $payroll_month,
-								'salary_pay_year' => $payroll_year,
-								'salary_amount' => $pension_amount,
-								'salary_confirmed' => 0
-							);
-
-							$salary_array = $this->security->xss_clean($salary_array);
-							$query = $this->salaries->add_salary($salary_array);
-
-						endif;
+						
+						
+						
+						
 						//end compute pension
 
-					endif;
+//					endif;
 
 
 						$salary_array = array(
@@ -2112,6 +2098,40 @@ $data['notifications'] = $this->employees->get_notifications(0);
 //					endif;
 
 				//tax computation end -- v1
+				
+				if($employee->employee_pensionable == 1):
+					
+					
+					$taxable_incomes = $this->salaries->get_taxable_incomes($employee->employee_id, $payroll_year, $payroll_month);
+					
+					$sum_taxable_income = 0;
+					
+					foreach ($taxable_incomes as $taxable_income):
+						
+						if($taxable_income->payment_definition_taxable == 1):
+							
+							$sum_taxable_income = $sum_taxable_income + $taxable_income->salary_amount;
+						
+						endif;
+					
+					endforeach;
+					
+					$pension_amount = ($pension_rate->pension_rate/100) * $sum_taxable_income;
+					
+					$salary_array = array(
+						
+						'salary_employee_id' => $employee->employee_id,
+						'salary_payment_definition_id' => $pension_payment_definition->payment_definition_id,
+						'salary_pay_month' => $payroll_month,
+						'salary_pay_year' => $payroll_year,
+						'salary_amount' => $pension_amount,
+						'salary_confirmed' => 0
+					);
+					
+					$salary_array = $this->security->xss_clean($salary_array);
+					$query = $this->salaries->add_salary($salary_array);
+				
+				endif;
 
 			$total_tax_amount = $employee->employee_tax_amount;
 				$salary_array = array(
