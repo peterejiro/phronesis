@@ -49,7 +49,7 @@
                               <td><?php echo $employee->employee_last_name." ".$employee->employee_first_name." ".$employee->employee_other_name; ?></td>
                               <td><?php echo $employee->job_name." (".$employee->department_name.")"; ?></td>
                               <td>
-                                <?=number_format($employee->employee_tax_amount);?>
+                                <?=number_format($employee->employee_tax_amount, 2);?>
                               </td>
                               <td class="text-center" style="width: 9px">
 								  <button data-toggle="modal" data-target="#update_tax<?=$employee->employee_id; ?>" type="button" class="btn btn-icon icon-left btn-primary"><i class="fa fa-pen"></i> Update Tax Amount</button>
@@ -98,7 +98,7 @@
 							</div>
 							<div class="form-group">
 								<label>Tax Amount</label>
-								<input type="text" class="form-control" value="<?=$employee->employee_tax_amount; ?>"  name="employee_tax_amount"/>
+								<input type="number" step="any" class="form-control" value="<?=$employee->employee_tax_amount; ?>"  name="employee_tax_amount"/>
 							</div>
 							<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 							<input type="hidden" name="employee_id" value="<?=$employee->employee_id; ?>">

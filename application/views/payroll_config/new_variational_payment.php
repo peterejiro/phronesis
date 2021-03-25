@@ -103,7 +103,7 @@
 					  <div class="form-group row" id="amount" style="display: none">
 						  <div class="col-sm-6">
 							  <label>Amount</label><span style="color: #ff0000"> *</span>
-							  <input name="payment_amount" type="number" class="form-control" />
+							  <input name="payment_amount" type="number" step="any" class="form-control" />
 							  <div class="invalid-feedback">
 								  please fill in an amount
 							  </div>
