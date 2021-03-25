@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-sm-5">
                               <label>Amount</label>
-                              <input required name="allowance_amount[]" type="number" class="form-control" value="<?php echo $personalized_allowance->personalized_amount; ?>"/>
+                              <input required name="allowance_amount[]" type="number" step="any" class="form-control" value="<?php echo $personalized_allowance->personalized_amount; ?>"/>
                               <div class="invalid-feedback">
                                 please fill in an amount
                               </div>
@@ -111,7 +111,7 @@
                           </div>
                           <div class="col-sm-5">
                             <label>Amount</label>
-                            <input required name="allowance_amount[]" type="number" class="form-control"/>
+                            <input required name="allowance_amount[]" type="number" step="any" class="form-control"/>
                             <div class="invalid-feedback">
                               please fill in an amount
                             </div>
