@@ -2,5 +2,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH8=/home/ihumane/connexxiongroup.ihumane.net/
+    - export DEPLOYPATH8=/home/ihumane/virtualmedia.ihumane.net/
     - /bin/cp -R * $DEPLOYPATH8
