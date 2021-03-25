@@ -24,7 +24,7 @@
           <p class="section-lead">You can edit an employee's salary structure here</p>
           <div class="row">
             <div class="col-md-7">
-              <form method="post" action="<?php echo site_url('update_employee_salary_structure'); ?>" >
+              <form method="post" action="<?php echo site_url('update_employee_salary_structure'); ?>" class="needs-validation" novalidate>
                 <div class="card card-primary">
                   <div class="card-header">
                     <h4>Salary Structure Details</h4>
@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-sm-5">
                               <label>Amount</label>
-                              <input required name="allowance_amount[]" type="number" class="form-control" value="<?php echo $personalized_allowance->personalized_amount; ?>"/>
+                              <input required name="allowance_amount[]" type="number" step="any" class="form-control" value="<?php echo $personalized_allowance->personalized_amount; ?>"/>
                               <div class="invalid-feedback">
                                 please fill in an amount
                               </div>
