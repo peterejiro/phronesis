@@ -128,7 +128,9 @@
               <div class="card" style="border-radius: 12px;">
 				  <div class="card-header">
 					  <h4 class="d-inline">Tasks</h4>
-	
+					  <div class="card-header-action">
+						  <a href="<?php echo site_url('assigned_tasks') ?>" class="btn btn-primary">View All</a>
+					  </div>
 				  </div>
 				  <div class="card-body">
 					  <ul class="list-unstyled list-unstyled-border">
