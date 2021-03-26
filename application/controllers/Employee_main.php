@@ -137,6 +137,29 @@ class Employee_main extends CI_Controller
 
 				$data['is_payroll_ready'] = $this->is_payroll_ready($employee_id);
 				$data['employee_id'] = $employee_id;
+				$tasks = $this->employees->view_assigned_task($employee_id);
+				
+				$all_tasks = $this->employees->view_all_tasks();
+				
+				$r = array();
+				
+				$i = 0;
+				
+				foreach ($all_tasks as $all_task):
+					$participants = json_decode($all_task->task_participants);
+					if((in_array($employee_id, $participants))):
+						
+						
+						
+						$r[$i] = $all_task;
+						$i++;
+					endif;
+				
+				
+				endforeach;
+				
+				$data['tasks'] = $tasks;
+				$data['taskss'] = $r;
 
 
 				$this->load->view('employee_self_service/dashboard', $data);
