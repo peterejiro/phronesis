@@ -353,6 +353,13 @@ $route['change_password'] = 'employee_main/change_password';
 $route['change_password_'] = 'employee_main/change_password_';
 $route['get_notifications'] = 'employee_main/get_notifications';
 $route['new_task'] = 'employee_main/new_task';
+$route['my_tasks'] = 'employee_main/my_tasks';
+$route['assigned_tasks'] = 'employee_main/assigned_tasks';
+$route['view_task/:num'] = 'employee_main/view_task/$1';
+$route['new_task_response'] = 'employee_main/new_task_response';
+$route['close_task/:num'] = 'employee_main/close_task/$1';
+$route['employee_clockin'] = 'employee_main/clockin';
+$route['employee_clockout'] = 'employee_main/clockout';
 
 
 

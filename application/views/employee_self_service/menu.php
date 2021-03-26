@@ -40,7 +40,7 @@
 				<ul class="dropdown-menu">
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'new_tasks'  ? 'active':'' ?>"><a href="<?php echo base_url('new_task'); ?>" class="nav-link">New Task</a></li>
 					<li class="nav-item <?php echo $this->uri->segment(1) == 'my_tasks' ? 'active':'' ?>"><a href="<?php echo base_url('my_tasks'); ?>" class="nav-link">My Tasks</a></li>
-					<li class="nav-item <?php echo $this->uri->segment(1) == 'assign_tasks' ? 'active':'' ?>"><a href="<?php echo base_url('assign_tasks'); ?>" class="nav-link">Assign Tasks</a></li>
+					<li class="nav-item <?php echo $this->uri->segment(1) == 'assigned_tasks' ? 'active':'' ?>"><a href="<?php echo base_url('assigned_tasks'); ?>" class="nav-link">Assigned Tasks</a></li>
 					
 				
 				</ul>

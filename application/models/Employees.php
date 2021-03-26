@@ -782,5 +782,62 @@ class Employees extends CI_Model
 		$this->db->insert('tasks', $task_data);
 		return $this->db->insert_id();
 	}
-
+	
+	public function view_my_task($employee_id){
+		$this->db->select('*');
+		$this->db->from('tasks');
+		$this->db->join('employee', 'employee.employee_id = tasks.task_employee_id');
+		$this->db->where('tasks.task_supervisor_id', $employee_id);
+		$this->db->order_by('task_id', 'DESC');
+		return $this->db->get()->result();
+		
+	}
+	
+	public function view_all_tasks(){
+		$this->db->select('*');
+		$this->db->from('tasks');
+		$this->db->order_by('task_id', 'DESC');
+		return $this->db->get()->result();
+	}
+	
+	public function view_assigned_task($employee_id){
+		$this->db->select('*');
+		$this->db->from('tasks');
+		
+		$this->db->where('tasks.task_employee_id', $employee_id);
+		$this->db->order_by('task_id', 'DESC');
+		return $this->db->get()->result();
+		
+	}
+	
+	public function view_task($task_id){
+		$this->db->select('*');
+		$this->db->from('tasks');
+		$this->db->join('employee', 'employee.employee_id = tasks.task_employee_id');
+		$this->db->where('tasks.task_id', $task_id);
+		return $this->db->get()->row();
+		
+	}
+	
+	public function get_task_response($task_id){
+		$this->db->select('*');
+		$this->db->from('task_response');
+		//$this->db->join('employee', 'employee.employee_id = query_response.query_response_responder_id');
+		$this->db->where('task_response.task_response_task_id', $task_id);
+		return $this->db->get()->result();
+		
+	}
+	
+	public function insert_task_response($task_data){
+		$this->db->insert('task_response', $task_data);
+		return $this->db->insert_id();
+	}
+	
+	public function update_task($task_id, $task_data){
+		$this->db->where('tasks.task_id', $task_id);
+		$this->db->update('tasks', $task_data);
+		return true;
+	}
+	
+	
 }
