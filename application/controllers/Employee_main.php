@@ -20,6 +20,7 @@ class Employee_main extends CI_Controller
 		$this->load->model('loans');
 		$this->load->model('payroll_configurations');
 		$this->load->model('chats');
+		$this->load->model('biometric');
 	}
 
 	public function index(){
@@ -135,6 +136,7 @@ class Employee_main extends CI_Controller
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
 
 				$data['is_payroll_ready'] = $this->is_payroll_ready($employee_id);
+				$data['employee_id'] = $employee_id;
 
 
 				$this->load->view('employee_self_service/dashboard', $data);
@@ -247,7 +249,7 @@ class Employee_main extends CI_Controller
 
 					$data['user_data'] = $this->users->get_user($username);
 					$data['notifications'] = $this->employees->get_notifications($employee_id);
-
+					$data['employee_id'] = $employee_id;
 					$data['employee'] = $this->employees->get_employee_by_unique($username);
 
 					$data['csrf_name'] = $this->security->get_csrf_token_name();
@@ -296,8 +298,8 @@ class Employee_main extends CI_Controller
 				$data['notifications'] = $this->employees->get_notifications($employee_id);
 
 				$data['histories'] = $this->employees->view_employee_history($employee_id);
-
-
+				
+				$data['employee_id'] = $employee_id;
 				//$this->load->view('log/view_logs', $data);
 
 				$this->load->view('employee_self_service/employee_history', $data);
@@ -339,8 +341,8 @@ class Employee_main extends CI_Controller
 				$data['notifications'] = $this->employees->get_notifications($employee_id);
 
 				$data['leaves'] = $this->employees-> check_existing_employee_leaves($employee_id);
-
-
+				
+				$data['employee_id'] = $employee_id;
 
 				$this->load->view('employee_self_service/employee_leave',$data);
 
@@ -379,7 +381,7 @@ class Employee_main extends CI_Controller
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 				$data['notifications'] = $this->employees->get_notifications($employee_id);
 				//$data['employees'] = $this->employees->view_employees();
-
+				$data['employee_id'] = $employee_id;
 
 				$this->load->view('employee_self_service/new_employee_leave', $data);
 			elseif($user_type == 1):
@@ -576,7 +578,7 @@ class Employee_main extends CI_Controller
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 
 				$data['notifications'] = $this->employees->get_notifications($employee_id);
-
+				$data['employee_id'] = $employee_id;
 				$data['histories'] = $this->employees->view_employee_history($employee_id);
 				$data['appraisals'] = $this->employees->get_employee_appraisal($employee_id);
 
@@ -624,8 +626,8 @@ class Employee_main extends CI_Controller
 				$data['notifications'] = $this->employees->get_notifications($employee_id);
 				$data['histories'] = $this->employees->view_employee_history($employee_id);
 				$data['appraisals'] = $this->employees->get_appraise_employees($employee_id);
-
-
+				
+				$data['employee_id'] = $employee_id;
 				//$this->load->view('log/view_logs', $data);
 
 				$this->load->view('employee_self_service/appraise_employee', $data);
@@ -673,7 +675,7 @@ class Employee_main extends CI_Controller
 
 				$data['questions'] = $this->employees->get_appraisal_questions($appraisal_id);
 				$data['appraisal_id'] = $appraisal_id;
-
+				$data['employee_id'] = $employee_id;
 
 				//$this->load->view('log/view_logs', $data);
 
@@ -798,7 +800,7 @@ class Employee_main extends CI_Controller
 				$data['notifications'] = $this->employees->get_notifications($employee_id);
 				$data['questions'] = $this->employees->get_appraisal_questions($appraisal_id);
 				$data['appraisal_id'] = $appraisal_id;
-
+				$data['employee_id'] = $employee_id;
 
 				//$this->load->view('log/view_logs', $data);
 
@@ -932,7 +934,7 @@ class Employee_main extends CI_Controller
 					$data['questions'] = $questions;
 
 					$data['appraisal_id'] = $appraisal_id;
-
+					$data['employee_id'] = $employee_id;
 
 
 					$this->load->view('employee_self_service/appraisal_result', $data);
@@ -981,7 +983,7 @@ class Employee_main extends CI_Controller
 					$data['csrf_name'] = $this->security->get_csrf_token_name();
 					$data['csrf_hash'] = $this->security->get_csrf_hash();
 					$data['min_payroll_year'] = $this->salaries->view_min_payroll_year();
-
+				$data['employee_id'] = $employee_id;
 					$this->load->view('employee_self_service/pay_slip', $data);
 
 
@@ -1033,7 +1035,7 @@ class Employee_main extends CI_Controller
 					$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 					$data['notifications'] = $this->employees->get_notifications($employee_id);
 					$data['employee'] = $this->employees->get_employee_by_unique($username);
-
+					$data['employee_id'] = $employee_id;
 
 					$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 
@@ -1092,7 +1094,7 @@ class Employee_main extends CI_Controller
 						$data['month'] = $month;
 						$data['year'] = $year;
 						$data['emoluments'] = $this->salaries->view_emolument_sheet();
-
+						$data['employee_id'] = $employee_id;
 						$this->load->view('employee_self_service/_pay_slip', $data);
 
 					else:
@@ -1161,6 +1163,7 @@ class Employee_main extends CI_Controller
 						$data['emoluments'] = $this->salaries->view_emolument_sheet();
 						$data['month'] = $month;
 						$data['year'] = $year;
+						$data['employee_id'] = $employee_id;
 
 						$this->load->view('employee_self_service/_pay_slip', $data);
 
@@ -1213,7 +1216,7 @@ class Employee_main extends CI_Controller
 
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 				$data['notifications'] = $this->employees->get_notifications($employee_id);
-
+				$data['employee_id'] = $employee_id;
 				$this->load->view('employee_self_service/my_loan', $data);
 
 
@@ -1466,7 +1469,7 @@ class Employee_main extends CI_Controller
 				$data['csrf_name'] = $this->security->get_csrf_token_name();
 				$data['csrf_hash'] = $this->security->get_csrf_hash();
 				//$data['payroll'] = $this->payroll_configurations->get_payroll_month_year();
-
+						$data['employee_id'] = $employee_id;
 				$this->load->view('employee_self_service/employee_resignation', $data);
 
 				endif;
@@ -1648,7 +1651,7 @@ class Employee_main extends CI_Controller
 					$data['notifications'] = $this->employees->get_notifications($employee_id);
 					$data['csrf_name'] = $this->security->get_csrf_token_name();
 					$data['csrf_hash'] = $this->security->get_csrf_hash();
-
+					$data['employee_id'] = $employee_id;
 					$this->load->view('employee_self_service/view_query', $data);
 
 				else:
@@ -2391,7 +2394,7 @@ class Employee_main extends CI_Controller
 				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
 				$data['employee_id'] = $employee_id;
 				$data['documents'] = $this->hr_configurations->view_hr_documents();
-
+				$data['employee_id'] = $employee_id;
 				$data['notifications'] = $this->employees->get_notifications($employee_id);
 
 				//print_r($check_existing_employee_training);
@@ -2677,6 +2680,609 @@ class Employee_main extends CI_Controller
 			endif;
 		endif;
 	}
+	
+	public function new_task(){
+		
+		$username = $this->session->userdata('user_username');
+		
+		if(isset($username)):
+			$method = $this->input->server('REQUEST_METHOD');
+			
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
+				
+				$_POST['task_participants'] = json_encode($_POST['task_participants']);
+				$_POST['task_supervisor_id'] = $this->employees->get_employee_by_unique($username)->employee_id;
+			
+				$v = $this->employees->add_task($_POST);
+				
+				if($v):
+					
+					$notification_data = array(
+							'notification_employee_id'=> $_POST['task_employee_id'],
+							'notification_link'=> 'assigned_tasks',
+							'notification_type' => 'You have a new task',
+							'notification_status'=> 0
+					);
+					
+					$this->employees->insert_notifications($notification_data);
+					
+					$participants = json_decode($_POST['task_participants']);
+					foreach ($participants as $participant):
+						
+						$notification_data = array(
+								'notification_employee_id'=> $participant,
+								'notification_link'=> 'assigned_tasks',
+								'notification_type' => 'You have a new task',
+								'notification_status'=> 0
+						);
+						$this->employees->insert_notifications($notification_data);
+						
+						endforeach;
+					
+					
+					$msg = array(
+							'msg' => 'Task Assigned Successfully',
+							'location' => site_url('new_task'),
+							'type' => 'success'
+					
+					);
+					$this->load->view('swal', $msg);
+					
+					else:
+						
+						$msg = array(
+								'msg' => 'An Error Occurred',
+								'location' => site_url('new_task'),
+								'type' => 'error'
+						
+						);
+						$this->load->view('swal', $msg);
+					
+					
+					endif;
+				
+				
+				
+				
+				endif;
+			
+			if($method == 'GET' || $method == 'Get' || $method == 'get'):
+			
+				$user_type = $this->users->get_user($username)->user_type;
+				
+				
+				if($user_type == 2 || $user_type == 3):
+					
+					$data['user_data'] = $this->users->get_user($username);
+					
+					$data['employee'] = $this->employees->get_employee_by_unique($username);
+					$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+					$data['employees'] = $this->employees->view_employees();
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+					$data['employee_id'] = $employee_id;
+					$data['notifications'] = $this->employees->get_notifications($employee_id);
+					
+					
+					$this->load->view('employee_self_service/new_task', $data);
+				
+				
+				elseif($user_type == 1):
+					
+					redirect('/access_denied');
+				
+				endif;
+			
+			endif;
+		
+		
+		else:
+			redirect('/login');
+		endif;
+		
+	}
+	
+	public function my_tasks(){
+		
+		$username = $this->session->userdata('user_username');
+		
+		if(isset($username)):
+			$method = $this->input->server('REQUEST_METHOD');
+			
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
+				
+				$_POST['task_participants'] = json_encode($_POST['task_participants']);
+				$_POST['task_supervisor_id'] = $this->employees->get_employee_by_unique($username)->employee_id;
+				
+				$v = $this->employees->add_task($_POST);
+				
+				if($v):
+					
+					$notification_data = array(
+							'notification_employee_id'=> $_POST['task_employee_id'],
+							'notification_link'=> 'assigned_tasks',
+							'notification_type' => 'You have a new task',
+							'notification_status'=> 0
+					);
+					
+					$this->employees->insert_notifications($notification_data);
+					
+					$participants = json_decode($_POST['task_participants']);
+					foreach ($participants as $participant):
+						
+						$notification_data = array(
+								'notification_employee_id'=> $participant,
+								'notification_link'=> 'assigned_tasks',
+								'notification_type' => 'You have a new task',
+								'notification_status'=> 0
+						);
+						$this->employees->insert_notifications($notification_data);
+					
+					endforeach;
+					
+					
+					$msg = array(
+							'msg' => 'Task Assigned Successfully',
+							'location' => site_url('new_task'),
+							'type' => 'success'
+					
+					);
+					$this->load->view('swal', $msg);
+				
+				else:
+					
+					$msg = array(
+							'msg' => 'An Error Occurred',
+							'location' => site_url('new_task'),
+							'type' => 'error'
+					
+					);
+					$this->load->view('swal', $msg);
+				
+				
+				endif;
+			
+			
+			
+			
+			endif;
+			
+			if($method == 'GET' || $method == 'Get' || $method == 'get'):
+				
+				$user_type = $this->users->get_user($username)->user_type;
+				
+				
+				if($user_type == 2 || $user_type == 3):
+					
+					$data['user_data'] = $this->users->get_user($username);
+					
+					$data['employee'] = $this->employees->get_employee_by_unique($username);
+					$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+					$data['employees'] = $this->employees->view_employees();
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+					$data['employee_id'] = $employee_id;
+					$data['notifications'] = $this->employees->get_notifications($employee_id);
+					$data['tasks'] = $this->employees->view_my_task($employee_id);
+					
+					
+					$this->load->view('employee_self_service/my_tasks', $data);
+				
+				
+				elseif($user_type == 1):
+					
+					redirect('/access_denied');
+				
+				endif;
+			
+			endif;
+		
+		
+		else:
+			redirect('/login');
+		endif;
+	}
+	
+	public function view_task(){
+		$username = $this->session->userdata('user_username');
+		$task_id = $this->uri->segment(2);
+		if(isset($username)):
+			$method = $this->input->server('REQUEST_METHOD');
+			
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
+				
+				$_POST['task_participants'] = json_encode($_POST['task_participants']);
+				$_POST['task_supervisor_id'] = $this->employees->get_employee_by_unique($username)->employee_id;
+				
+				$v = $this->employees->add_task($_POST);
+				
+				if($v):
+					
+					$notification_data = array(
+							'notification_employee_id'=> $_POST['task_employee_id'],
+							'notification_link'=> 'assigned_tasks',
+							'notification_type' => 'You have a new task',
+							'notification_status'=> 0
+					);
+					
+					$this->employees->insert_notifications($notification_data);
+					
+					$participants = json_decode($_POST['task_participants']);
+					foreach ($participants as $participant):
+						
+						$notification_data = array(
+								'notification_employee_id'=> $participant,
+								'notification_link'=> 'assigned_tasks',
+								'notification_type' => 'You have a new task',
+								'notification_status'=> 0
+						);
+						$this->employees->insert_notifications($notification_data);
+					
+					endforeach;
+					
+					
+					$msg = array(
+							'msg' => 'Task Assigned Successfully',
+							'location' => site_url('new_task'),
+							'type' => 'success'
+					
+					);
+					$this->load->view('swal', $msg);
+				
+				else:
+					
+					$msg = array(
+							'msg' => 'An Error Occurred',
+							'location' => site_url('new_task'),
+							'type' => 'error'
+					
+					);
+					$this->load->view('swal', $msg);
+				
+				
+				endif;
+			
+			
+			
+			
+			endif;
+			
+			if($method == 'GET' || $method == 'Get' || $method == 'get'):
+				
+				$user_type = $this->users->get_user($username)->user_type;
+				
+				
+				if($user_type == 2 || $user_type == 3):
+					
+					$data['user_data'] = $this->users->get_user($username);
+					
+					$data['employee'] = $this->employees->get_employee_by_unique($username);
+					$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+					$data['employees'] = $this->employees->view_employees();
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+					$data['employee_id'] = $employee_id;
+					$data['notifications'] = $this->employees->get_notifications($employee_id);
+					
+					$task = $this->employees->view_task($task_id);
+					
+					//echo $task_id;
+					
+					if(!empty($task)):
+
+					$participants = json_decode($task->task_participants);
+						$data['responses'] = $this->employees->get_task_response($task_id);
+
+					if(($employee_id == $task->task_employee_id) || ($employee_id == $task->task_supervisor_id) ||(in_array($employee_id, $participants))):
+					$data['task'] = $this->employees->view_task($task_id);
 
 
+					$this->load->view('employee_self_service/view_task', $data);
+					else:
+
+					redirect('error_404');
+
+						//echo "i failed the or";
+					endif;
+
+					else:
+
+						redirect('error_404');
+						endif;
+				
+				
+				elseif($user_type == 1):
+					
+					redirect('/access_denied');
+				
+				endif;
+			
+			endif;
+		
+		
+		else:
+			redirect('/login');
+		endif;
+		
+	}
+	
+	public function assigned_tasks(){
+		$username = $this->session->userdata('user_username');
+		$task_id = $this->uri->segment(2);
+		if(isset($username)):
+			$method = $this->input->server('REQUEST_METHOD');
+			
+			
+			
+			if($method == 'GET' || $method == 'Get' || $method == 'get'):
+				
+				$user_type = $this->users->get_user($username)->user_type;
+				
+				
+				if($user_type == 2 || $user_type == 3):
+					
+					$data['user_data'] = $this->users->get_user($username);
+					
+					$data['employee'] = $this->employees->get_employee_by_unique($username);
+					$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+					$data['employees'] = $this->employees->view_employees();
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+					$data['employee_id'] = $employee_id;
+					$data['notifications'] = $this->employees->get_notifications($employee_id);
+					
+					$tasks = $this->employees->view_assigned_task($employee_id);
+					
+					$all_tasks = $this->employees->view_all_tasks();
+					
+					$r = array();
+					
+					$i = 0;
+					
+					foreach ($all_tasks as $all_task):
+						$participants = json_decode($all_task->task_participants);
+						if((in_array($employee_id, $participants))):
+							
+						
+						
+						$r[$i] = $all_task;
+							$i++;
+						endif;
+					
+						
+						endforeach;
+						
+						$data['tasks'] = $tasks;
+						$data['taskss'] = $r;
+					
+					
+					$this->load->view('employee_self_service/assigned_tasks', $data);
+				
+				
+				elseif($user_type == 1):
+					
+					redirect('/access_denied');
+				
+				endif;
+			
+			endif;
+		
+		
+		else:
+			redirect('/login');
+		endif;
+		
+	}
+	
+	
+	public function new_task_response()
+	{
+		
+		$task_id = $_GET['task_id'];
+		$task_response = $_GET['task_response'];
+		$task_responder_id = $_GET['task_responder_id'];
+		
+		$task = $this->employees->view_task($task_id);
+		
+		
+		$response_array = array(
+				
+				'task_response_task_id' => $task_id,
+				'task_response_employee_id' => $task_responder_id,
+				'task_response_body' => $task_response,
+				'task_response_date' => date("Y-m-d H:i:s")
+		
+		);
+		
+		
+		$participants = json_decode($task->task_participants);
+		foreach ($participants as $participant):
+			
+			$notification_data = array(
+					'notification_employee_id'=> $participant,
+					'notification_link'=> 'view_task/'.$task_id,
+					'notification_type' => 'Response to an Open task',
+					'notification_status'=> 0
+			);
+			$this->employees->insert_notifications($notification_data);
+		
+		endforeach;
+		
+		$notification_data = array(
+				'notification_employee_id'=> $task->task_supervisor_id,
+				'notification_link'=> 'view_task/'.$task_id,
+				'notification_type' => 'Response to an Open task',
+				'notification_status'=> 0
+		);
+		$this->employees->insert_notifications($notification_data);
+		
+		$notification_data = array(
+				'notification_employee_id'=> $task->task_employee_id,
+				'notification_link'=> 'view_task/'.$task_id,
+				'notification_type' => 'Response to an Open task',
+				'notification_status'=> 0
+		);
+		$this->employees->insert_notifications($notification_data);
+		
+		
+		
+		
+		
+		echo $this->employees->insert_task_response($response_array);
+		
+		
+	}
+	
+	public function close_task()
+	{
+		$task_id = $this->uri->segment(2);
+		
+		$username = $this->session->userdata('user_username');
+		
+		if (isset($username)):
+			$user_type = $this->users->get_user($username)->user_type;
+			
+			if ($user_type == 2 || $user_type == 3):
+				$data['employee'] = $this->employees->get_employee_by_unique($username);
+				$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+				$data['employees'] = $this->employees->view_employees();
+				$data['csrf_name'] = $this->security->get_csrf_token_name();
+				$data['csrf_hash'] = $this->security->get_csrf_hash();
+				$data['employee_id'] = $employee_id;
+				$data['notifications'] = $this->employees->get_notifications($employee_id);
+				
+				
+					
+					$data['user_data'] = $this->users->get_user($username);
+					
+					
+					
+					$task = $this->employees->view_task($task_id);
+					
+					
+					
+					if(!empty($task) && $task->task_status == 0):
+						
+						$task_array = array(
+								
+								'task_status' => 1
+						
+						);
+						
+						$task_array = $this->security->xss_clean($task_array);
+						$task = $this->employees->update_task($task_id, $task_array);
+						
+						if($task == true):
+							$task = $this->employees->view_task($task_id);
+							
+							$participants = json_decode($task->task_participants);
+							foreach ($participants as $participant):
+								
+								$notification_data = array(
+										'notification_employee_id'=> $participant,
+										'notification_link'=> 'view_task/'.$task_id,
+										'notification_type' => 'Task Completed',
+										'notification_status'=> 0
+								);
+								$this->employees->insert_notifications($notification_data);
+							
+							endforeach;
+							
+							$notification_data = array(
+									'notification_employee_id'=> $task->task_supervisor_id,
+									'notification_link'=> 'view_task/'.$task_id,
+									'notification_type' => 'Task Completed',
+									'notification_status'=> 0
+							);
+							$this->employees->insert_notifications($notification_data);
+							
+							$notification_data = array(
+									'notification_employee_id'=> $task->task_employee_id,
+									'notification_link'=> 'view_task/'.$task_id,
+									'notification_type' => 'Task Completed',
+									'notification_status'=> 0
+							);
+							$this->employees->insert_notifications($notification_data);
+							
+							$msg = array(
+									'msg' => 'task closed',
+									'location' => site_url('view_task').'/'.$task_id,
+									'type' => 'success'
+							);
+							$this->load->view('swal', $msg);
+						
+						
+						else:
+							redirect('error_404');
+						endif;
+					
+					
+					
+					else:
+						
+						redirect('error_404');
+					
+					endif;
+				
+			
+			###
+			else:
+				
+				redirect('/access_denied');
+			
+			endif;
+		else:
+			redirect('/login');
+		endif;
+		
+	}
+	
+	public function clockin(){
+		$method = $this->input->server('REQUEST_METHOD');
+		if($method == 'POST' || $method == 'Post' || $method == 'post'):
+			$log = array(
+					'employee_biometrics_login_employee_id' => $_POST['employee_id']
+			);
+			
+			$query = $this->biometric->insert_login($log);
+			
+			if($query == true):
+				$msg = array(
+						'msg' => 'Clocked in Successful at '.date('Y-m-d H:i:s'),
+						'location' => site_url(),
+						'type' => 'success'
+				);
+				$this->load->view('swal', $msg);
+				
+				endif;
+				
+				else:
+					redirect('error_404');
+			
+			endif;
+	}
+	
+	public function clockout(){
+		$method = $this->input->server('REQUEST_METHOD');
+		if($method == 'POST' || $method == 'Post' || $method == 'post'):
+			$log = array(
+					'employee_clockout_employee_id' => $_POST['employee_id']
+			);
+			
+			$query = $this->biometric->insert_clockout($log);
+			
+			if($query == true):
+				$msg = array(
+						'msg' => 'Clocked out Successful at '.date('Y-m-d H:i:s'),
+						'location' => site_url(),
+						'type' => 'success'
+				);
+				$this->load->view('swal', $msg);
+			
+			endif;
+		else:
+			
+			redirect('error_404');
+		endif;
+	}
 }
