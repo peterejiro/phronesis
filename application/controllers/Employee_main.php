@@ -2677,6 +2677,105 @@ class Employee_main extends CI_Controller
 			endif;
 		endif;
 	}
-
-
+	
+	public function new_task(){
+		
+		$username = $this->session->userdata('user_username');
+		
+		if(isset($username)):
+			$method = $this->input->server('REQUEST_METHOD');
+			
+			if($method == 'POST' || $method == 'Post' || $method == 'post'):
+				
+				$_POST['task_participants'] = json_encode($_POST['task_participants']);
+				$_POST['task_supervisor_id'] = $this->employees->get_employee_by_unique($username)->employee_id;
+			
+				$v = $this->employees->add_task($_POST);
+				
+				if($v):
+					
+					$notification_data = array(
+							'notification_employee_id'=> $_POST['task_employee_id'],
+							'notification_link'=> 'assigned_tasks',
+							'notification_type' => 'You have a new task',
+							'notification_status'=> 0
+					);
+					
+					$this->employees->insert_notifications($notification_data);
+					
+					$participants = json_decode($_POST['task_participants']);
+					foreach ($participants as $participant):
+						
+						$notification_data = array(
+								'notification_employee_id'=> $participant,
+								'notification_link'=> 'assigned_tasks',
+								'notification_type' => 'You have a new task',
+								'notification_status'=> 0
+						);
+						$this->employees->insert_notifications($notification_data);
+						
+						endforeach;
+					
+					
+					$msg = array(
+							'msg' => 'Task Assigned Successfully',
+							'location' => site_url('new_task'),
+							'type' => 'success'
+					
+					);
+					$this->load->view('swal', $msg);
+					
+					else:
+						
+						$msg = array(
+								'msg' => 'An Error Occurred',
+								'location' => site_url('new_task'),
+								'type' => 'error'
+						
+						);
+						$this->load->view('swal', $msg);
+					
+					
+					endif;
+				
+				
+				
+				
+				endif;
+			
+			if($method == 'GET' || $method == 'Get' || $method == 'get'):
+			
+				$user_type = $this->users->get_user($username)->user_type;
+				
+				
+				if($user_type == 2 || $user_type == 3):
+					
+					$data['user_data'] = $this->users->get_user($username);
+					
+					$data['employee'] = $this->employees->get_employee_by_unique($username);
+					$employee_id = $this->employees->get_employee_by_unique($username)->employee_id;
+					$data['employees'] = $this->employees->view_employees();
+					$data['csrf_name'] = $this->security->get_csrf_token_name();
+					$data['csrf_hash'] = $this->security->get_csrf_hash();
+					$data['employee_id'] = $employee_id;
+					$data['notifications'] = $this->employees->get_notifications($employee_id);
+					
+					
+					$this->load->view('employee_self_service/new_task', $data);
+				
+				
+				elseif($user_type == 1):
+					
+					redirect('/access_denied');
+				
+				endif;
+			
+			endif;
+		
+		
+		else:
+			redirect('/login');
+		endif;
+		
+	}
 }

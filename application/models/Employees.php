@@ -777,5 +777,10 @@ class Employees extends CI_Model
 
 		return $data;
 	}
+	
+	public function add_task($task_data){
+		$this->db->insert('tasks', $task_data);
+		return $this->db->insert_id();
+	}
 
 }
