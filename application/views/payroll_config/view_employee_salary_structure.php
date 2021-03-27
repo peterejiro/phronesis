@@ -48,11 +48,11 @@
                         <div class="d-flex w-100 justify-content-between">
                           <h5 class="mb-1"><?php echo ucwords($allowance->payment_definition_payment_name); ?></h5>
                         <?php if($allowance->payment_definition_type):?>
-                          <p>Amount: &#8358; <?php echo number_format($allowance->salary_structure_allowance_amount);  $total_amount += $allowance->salary_structure_allowance_amount; ?></p>
+                          <p>Amount: &#8358; <?php echo number_format($allowance->salary_structure_allowance_amount, 2);  $total_amount += $allowance->salary_structure_allowance_amount; ?></p>
                         </div>
                         <small>Note, this is an <em class="text-success">income</em> definition</small>
                         <?php else:?>
-                          <p>Amount: (&#8358; <?php echo number_format($allowance->salary_structure_allowance_amount);  $total_amount -= $allowance->salary_structure_allowance_amount; ?>)</p>
+                          <p>Amount: (&#8358; <?php echo number_format($allowance->salary_structure_allowance_amount, 2);  $total_amount -= $allowance->salary_structure_allowance_amount; ?>)</p>
                         </div>
                         <small>Note, this is an <em class="text-danger">deduction</em> definition</small>
                         <?php endif;?>
@@ -65,11 +65,11 @@
                         <div class="d-flex w-100 justify-content-between">
                           <h5 class="mb-1"><?php echo ucwords($personalized_allowance->payment_definition_payment_name); ?></h5>
                         <?php if($personalized_allowance->payment_definition_type):?>
-                          <p>Amount: &#8358; <?php echo number_format($personalized_allowance->personalized_amount); $total_amount += $personalized_allowance->personalized_amount; ?></p>
+                          <p>Amount: &#8358; <?php echo number_format($personalized_allowance->personalized_amount, 2); $total_amount += $personalized_allowance->personalized_amount; ?></p>
                         </div>
                         <small>Note, this is an <em class="text-success">income</em> definition</small>
                         <?php else:?>
-                          <p>Amount: (&#8358; <?php echo number_format($personalized_allowance->personalized_amount); $total_amount -= $personalized_allowance->personalized_amount; ?>)</p>
+                          <p>Amount: (&#8358; <?php echo number_format($personalized_allowance->personalized_amount, 2); $total_amount -= $personalized_allowance->personalized_amount; ?>)</p>
                         </div>
                         <small>Note, this is an <em class="text-danger">deduction</em> definition</small>
                         <?php endif;?>
@@ -79,7 +79,7 @@
                   <div class="list-group-item list-group-item-action flex-column align-items-start active">
                     <div class="d-flex w-100 justify-content-between">
                       <h5 class="mb-1">Total</h5>
-                      <p>Amount: &#8358; <?php echo number_format($total_amount);?></p>
+                      <p>Amount: &#8358; <?php echo number_format($total_amount, 2);?></p>
                     </div>
                     <small>Note, this information is sensitive</small>
                   </div>

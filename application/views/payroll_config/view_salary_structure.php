@@ -51,7 +51,7 @@
                             <td class="text-center" style="width: 9px;"><?php echo $i; ?></td>
                             <td><?php echo $allowance->payment_definition_payment_name; ?></td>
                             <td><?php echo $allowance->payment_definition_payment_code; ?></td>
-                            <td>&#8358; <?php echo number_format($allowance->salary_structure_allowance_amount); ?></td>
+                            <td>&#8358; <?php echo number_format($allowance->salary_structure_allowance_amount, 2); ?></td>
                           </tr>
 				                  <?php
 				                  $i++;
