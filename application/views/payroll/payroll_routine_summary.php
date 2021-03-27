@@ -63,7 +63,7 @@
                                   $_gross_pay = $salary->salary_amount;
                                   $gross_pay = $gross_pay + $_gross_pay;
                                 endforeach;
-                                echo number_format($gross_pay);
+                                echo number_format($gross_pay, 2);
                                 ?>
                               </td>
                               <td>
@@ -76,10 +76,10 @@
 
                                   $total_deduction = $total_deduction + $_total_deduction;
                                 endforeach;
-                                echo number_format($total_deduction);
+                                echo number_format($total_deduction, 2);
                                 ?>
                               </td>
-                              <td>&#8358; <?php echo number_format($gross_pay - $total_deduction); ?></td>
+                              <td>&#8358; <?php echo number_format($gross_pay - $total_deduction, 2); ?></td>
                             </tr>
                             <?php
                             $sn++;
