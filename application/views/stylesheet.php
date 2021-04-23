@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <meta content="IHUMANE" name="description" />
   <meta content="Connexxion Group" name="author" />
 	<title>IHUMANE</title>
-  <link rel="icon" href="<?php echo base_url(); ?>/assets/img/ihumane-logo-2.png">
+  <link rel="icon" href="<?php echo base_url(); ?>/assets/img/phronesis-logo.png">
 
   <style>
     /*Remove Arrows From Form Input Number Types*/

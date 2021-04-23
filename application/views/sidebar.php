@@ -1,10 +1,10 @@
 <div class="main-sidebar">
 	<aside id="sidebar-wrapper">
 		<div class="sidebar-brand" style="padding-top: 12px">
-			<a href="<?php echo site_url() ?>"><img src="<?php echo base_url() ?>/assets/img/ihumane-logo-1.png" alt="logo" width="100" class="mb-5 mt-2"></a>
+			<a href="<?php echo site_url() ?>"><img src="<?php echo base_url() ?>/assets/img/phronesis-logo.png" alt="logo" width="100" class="mb-5 mt-2"></a>
 		</div>
 		<div class="sidebar-brand sidebar-brand-sm" style="padding-top: 12px">
-			<a href="<?php echo site_url() ?>"><img src="<?php echo base_url() ?>/assets/img/ihumane-logo-2.png" alt="logo" width="25" class="mb-5 mt-2"></a>
+			<a href="<?php echo site_url() ?>"><img src="<?php echo base_url() ?>/assets/img/phronesis-logo.png" alt="logo" width="25" class="mb-5 mt-2"></a>
 		</div>
 		<ul class="sidebar-menu">
 			<li class="menu-header">Dashboard</li>
@@ -218,6 +218,7 @@
       $this->uri->segment(1) == 'min_tax_rate' ||
       $this->uri->segment(1) == 'pension_rate' ? 'active' : '';
       ?>">
+    
       <?php if($payroll_configuration == 1){  ?>
         <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-check"></i> <span>Payroll Config</span></a>
         <ul class="dropdown-menu">
@@ -230,8 +231,20 @@
           <li class="<?php echo $this->uri->segment(1) == 'pension_rate' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('pension_rate') ?>"> Pension Rate </a></li>
         </ul>
       <?php } ?>
+				
+				
+			
+			
 			</li>
-
+			<li>
+			<?php if($payroll_configuration == 1){  ?>
+				<a href="#" class="nav-link has-dropdown"><i class="fas fa-money-check"></i> <span>Accounting Config</span></a>
+				<ul class="dropdown-menu">
+					<li class="<?php echo $this->uri->segment(1) == 'payment_definition' || $this->uri->segment(1) == 'new_payment_definition' || $this->uri->segment(1) == 'edit_payment_definition' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('payment_definition') ?>">Chart of Accounts</a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'tax_rates' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('tax_rates') ?>">Phronesis Bank</a></li>
+							</ul>
+			<?php } ?>
+			</li>
 			<li class="dropdown <?php echo $this->uri->segment(1) == 'view_log' ? 'active' : ''?>">
 				<?php if($payroll_configuration == 1){  ?>
 				<a href="#" class="nav-link has-dropdown"><i class="fas fa-clipboard-list "></i> <span>Logs</span></a>
