@@ -39,15 +39,14 @@
 					
 					if ($permission->payroll_management == 1):
 						$data['notifications'] = $this->employees->get_notifications(0);
-						
-						
+						$data['charts'] = $this->accountings->view_coas();
 						
 						$data['employees'] = $this->employees->view_employees();
 						$data['user_data'] = $this->users->get_user($username);
 						$data['csrf_name'] = $this->security->get_csrf_token_name();
 						$data['csrf_hash'] = $this->security->get_csrf_hash();
 						
-						$this->load->view('employee/employee', $data);
+						$this->load->view('accounting/coa', $data);
 					else:
 						
 						redirect('/access_denied');

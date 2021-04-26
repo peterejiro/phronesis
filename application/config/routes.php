@@ -372,6 +372,9 @@ $route['new_hire'] = 'hr_report/new_hire';
 $route['retention'] = 'hr_report/retention';
 $route['turn_over'] = 'hr_report/turn_over';
 
+//accounting
+$route['chart_of_accounts'] = 'accounting/chart_of_accounts';
+
 
 
 
