@@ -241,7 +241,7 @@
 				<a href="#" class="nav-link has-dropdown"><i class="fas fa-money-check"></i> <span>Accounting Config</span></a>
 				<ul class="dropdown-menu">
 					<li class="<?php echo $this->uri->segment(1) == 'chart_of_accounts'  ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('chart_of_accounts') ?>">Chart of Accounts</a></li>
-					<li class="<?php echo $this->uri->segment(1) == 'tax_rates' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('tax_rates') ?>">Phronesis Bank</a></li>
+					<li class="<?php echo $this->uri->segment(1) == 'tax_rates' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('phronesis_banks') ?>">Phronesis Bank</a></li>
 							</ul>
 			<?php } ?>
 			</li>
