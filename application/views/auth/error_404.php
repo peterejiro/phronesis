@@ -41,9 +41,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="simple-footer mt-5">
-					Copyright &copy; IHumane
-				</div>
+				
 			</div>
 		</section>
 	</div>

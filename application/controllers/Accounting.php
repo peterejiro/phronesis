@@ -16,6 +16,8 @@
 			$this->load->model('users');
 			$this->load->model('employees');
 			$this->load->model('hr_configurations');
+			$this->load->model('payroll_configurations');
+			$this->load->model('salaries');
 			$this->load->model('logs');
 			$this->load->model('accountings');
 		}
@@ -80,16 +82,80 @@
 					$data['hr_configuration'] = $permission->hr_configuration;
 					
 					if ($permission->payroll_management == 1):
-						$data['notifications'] = $this->employees->get_notifications(0);
-						$data['coas'] = $this->accountings->view_coas();
-						$data['banks'] = $this->hr_configurations->view_banks();
-						$data['pbanks'] = $this->accountings->view_pbanks();
-						$data['employees'] = $this->employees->view_employees();
-						$data['user_data'] = $this->users->get_user($username);
-						$data['csrf_name'] = $this->security->get_csrf_token_name();
-						$data['csrf_hash'] = $this->security->get_csrf_hash();
 						
-						$this->load->view('accounting/bank', $data);
+						$method = $this->input->server('REQUEST_METHOD');
+						if($method == 'POST' || $method == 'Post' || $method == 'post'):
+							if($_POST['type'] == 1):
+								$pbank_data = array(
+									'bank_id' => $_POST['bank_id'],
+									'branch' => $_POST['bank_branch'],
+									'account_no' => $_POST['bank_account_number'],
+									'description' => $_POST['bank_description'],
+									'glcode' =>	$_POST['bank_gl_code']
+								
+								);
+								
+								$query = $this->accountings->add_pbank($pbank_data);
+								
+								if($query == true):
+									$msg = array(
+										'msg' => 'Bank Added Sucessfully',
+										'location' => site_url('phronesis_banks'),
+										'type' => 'success'
+									);
+									$this->load->view('swal', $msg);
+							
+								
+								endif;
+							
+							endif;
+							
+							if($_POST['type'] == 2):
+								
+								$pbank_data = array(
+									'bank_id' => $_POST['bank_id'],
+									'branch' => $_POST['bank_branch'],
+									'account_no' => $_POST['bank_account_number'],
+									'description' => $_POST['bank_description'],
+									'glcode' =>	$_POST['bank_gl_code']
+								
+								);
+								
+								$query = $this->accountings->update_pbank($_POST['pbank_id'], $pbank_data);
+								
+								if($query == true):
+									$msg = array(
+										'msg' => 'Bank Added Sucessfully',
+										'location' => site_url('phronesis_banks'),
+										'type' => 'success'
+									);
+									$this->load->view('swal', $msg);
+								
+								
+								endif;
+							
+							
+							endif;
+							
+							
+							
+					
+							
+							endif;
+						
+						
+						if($method == 'GET' || $method == 'Get' || $method == 'get'):
+							$data['notifications'] = $this->employees->get_notifications(0);
+							$data['coas'] = $this->accountings->view_coas();
+							$data['banks'] = $this->hr_configurations->view_banks();
+							$data['pbanks'] = $this->accountings->view_pbanks();
+							$data['employees'] = $this->employees->view_employees();
+							$data['user_data'] = $this->users->get_user($username);
+							$data['csrf_name'] = $this->security->get_csrf_token_name();
+							$data['csrf_hash'] = $this->security->get_csrf_hash();
+							
+							$this->load->view('accounting/bank', $data);
+						endif;
 					else:
 						
 						redirect('/access_denied');

@@ -55,6 +55,19 @@
 								</div>
 							</div>
 						</div>
+						
+						<div class="col-lg-6">
+							<div class="card card-large-icons">
+								<div class="card-icon bg-primary text-white">
+									<i class="fas fa-file-signature"></i>
+								</div>
+								<div class="card-body">
+									<h4>Payroll Journal</h4>
+									<p>Generate payroll journal for the selected month & year</p>
+									<a href="<?php echo base_url('payroll_journal'); ?>" class="card-cta">View Report <i class="fas fa-chevron-right"></i></a>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>

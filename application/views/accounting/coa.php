@@ -24,7 +24,7 @@
 								<div class="card-header">
 									<h4>All Accounts</h4>
 									<div class="card-header-action">
-										<button onclick="location.href='<?php echo site_url('new_employee');?>'" type="button" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> Add Employee</button>
+										<button onclick="location.href='<?php echo site_url('new_account');?>'" type="button" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> New Account</button>
 									</div>
 								</div>
 								<div class="card-body">

@@ -245,5 +245,14 @@ class Salaries extends CI_Model
 		$this->db->where('salary_pay_year', date('Y'));
 		return $this->db->get()->result();
 	}
+	
+	public function get_total_payment($payroll_month, $payroll_year, $payment_definition_id){
+		$this->db->select_sum('salary_amount');
+		$this->db->from('salary');
+		$this->db->where('salary.salary_pay_month', $payroll_month);
+		$this->db->where('salary.salary_pay_year', $payroll_year);
+		$this->db->where('salary.salary_payment_definition_id', $payment_definition_id);
+		return $this->db->get()->result();
+	}
 
 }

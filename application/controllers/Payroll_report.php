@@ -555,5 +555,90 @@ class Payroll_report extends CI_Controller
 			redirect('/login');
 		endif;
 	}
+	
+	public function payroll_journal(){
+		
+		$username = $this->session->userdata('user_username');
+		
+		if(isset($username)):
+			
+			$permission = $this->users->check_permission($username);
+			$data['employee_management'] = $permission->employee_management;
+			$data['notifications'] = $this->employees->get_notifications(0);
+			$data['payroll_management'] = $permission->payroll_management;
+			$data['biometrics'] = $permission->biometrics;
+			$data['user_management'] = $permission->user_management;
+			$data['configuration'] = $permission->configuration;
+			$data['payroll_configuration'] = $permission->payroll_configuration;
+			$data['hr_configuration'] = $permission->hr_configuration;
+			
+			if($permission->payroll_management == 1):
+				
+				$data['user_data'] = $this->users->get_user($username);
+				
+				
+				$user_type = $this->users->get_user($username)->user_type;
+				
+				if($user_type == 1 || $user_type == 3):
+					
+					$method = $this->input->server('REQUEST_METHOD');
+					if($method == 'GET' || $method == 'Get' || $method == 'get'):
+						
+						
+						$data['csrf_name'] = $this->security->get_csrf_token_name();
+						$data['csrf_hash'] = $this->security->get_csrf_hash();
+						$data['min_payroll_year'] = $this->salaries->view_min_payroll_year();
+						$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
+						
+						$this->load->view('payroll_report/payroll_journal', $data);
+						
+						
+						endif;
+					
+					
+					if($method == 'POST' || $method == 'Post' || $method == 'post'):
+						
+						
+						$month = $this->input->post('month');
+						$year = $this->input->post('year');
+						
+						
+						if((empty($month) || empty($year))):
+							
+							redirect('error_404');
+						
+						else:
+							
+							
+							$data['payroll_month'] = $month;
+							$data['payroll_year'] = $year;
+							
+							$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
+							
+							//print_r($data['deductions']);
+	
+							$this->load->view('payroll_report/payroll_journal_sheet', $data);
+						
+						
+						endif;
+					
+					
+					endif;
+					
+					
+				
+				else:
+					redirect('/access_denied');
+				endif;
+			
+			else:
+				
+				redirect('/access_denied');
+			
+			endif;
+		else:
+			redirect('/login');
+		endif;
+	}
 
 }

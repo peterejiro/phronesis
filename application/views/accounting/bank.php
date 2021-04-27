@@ -82,7 +82,7 @@
 							<span aria-hidden="true" class="text-dark">&times;</span>
 						</button>
 					</div>
-					<form class="needs-validation" novalidate method="post" action="<?php echo site_url('phronesis_bank'); ?>">
+					<form class="needs-validation" novalidate method="post" action="<?php echo site_url('phronesis_banks'); ?>">
 						<div class="modal-body">
 							<div class="form-group">
 								<label for="bank">Bank</label><span style="color: red"> *</span>
@@ -133,7 +133,7 @@
 									please enter a description
 								</div>
 							</div>
-							
+							<input type="hidden" name="type" value="1">
 							
 							<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 						</div>
@@ -158,7 +158,8 @@
 							</button>
 						</div>
 						
-						<form class="needs-validation" novalidate method="post" action="<?php echo site_url('phronesis_bank'); ?>">
+						<form class="needs-validation" novalidate method="post" action="<?php echo site_url('phronesis_banks'); ?>">
+							<input type="hidden" name="type" value="2">
 							<div class="modal-body">
 								<div class="form-group">
 									<label for="bank">Bank</label><span style="color: red"> *</span>
@@ -209,7 +210,7 @@
 										please enter a description
 									</div>
 								</div>
-								<input type="hidden" name="bank_id" value="<?php echo $pbank->phronesis_bank_id;?>" />
+								<input type="hidden" name="pbank_id" value="<?php echo $pbank->phronesis_bank_id;?>" />
 								
 								<input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
 							</div>
