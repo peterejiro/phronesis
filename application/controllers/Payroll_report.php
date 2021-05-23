@@ -614,7 +614,8 @@ class Payroll_report extends CI_Controller
 							$data['payroll_year'] = $year;
 							
 							$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
-							
+							$data['csrf_name'] = $this->security->get_csrf_token_name();
+							$data['csrf_hash'] = $this->security->get_csrf_hash();
 							//print_r($data['deductions']);
 	
 							$this->load->view('payroll_report/payroll_journal_sheet', $data);
@@ -638,6 +639,39 @@ class Payroll_report extends CI_Controller
 			endif;
 		else:
 			redirect('/login');
+		endif;
+	}
+	
+	public function post_journal(){
+		
+		$method = $this->input->server('REQUEST_METHOD');
+		if($method == 'POST' || $method == 'Post' || $method == 'post'):
+			
+			
+			$month = $this->input->post('month');
+			$year = $this->input->post('year');
+			
+			
+			if((empty($month) || empty($year))):
+				
+				redirect('error_404');
+			
+			else:
+				
+				
+				$data['payroll_month'] = $month;
+				$data['payroll_year'] = $year;
+				
+				$data['payment_definitions'] = $this->payroll_configurations->view_payment_definitions();
+				
+				//print_r($data['deductions']);
+				
+				$this->load->view('payroll_report/payroll_journal_sheet', $data);
+			
+			
+			endif;
+		
+		
 		endif;
 	}
 

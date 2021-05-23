@@ -84,6 +84,15 @@ class Salaries extends CI_Model
 		$this->db->update('salary', $payroll_data);
 		return true;
 	}
+	
+	public function post_payroll($payroll_month, $payroll_year, $payroll_data){
+		
+		$this->db->where('salary_pay_month', $payroll_month);
+		$this->db->where('salary_pay_year', $payroll_year);
+		$this->db->where('salary_posted', 0);
+		$this->db->update('salary', $payroll_data);
+		return true;
+	}
 
 
 	public function get_employee_income($employee_id, $payroll_month, $payroll_year, $in_de){

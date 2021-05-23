@@ -84,6 +84,36 @@
 				</li>
 			<?php } ?>
 			<?php if($payroll_management == 1){  ?>
+				
+				<li class="menu-header">Accounting Procedures</li>
+				<li class="dropdown <?php echo
+				$this->uri->segment(1) == 'employee_salary_structure' ||
+				$this->uri->segment(1) == 'view_employee_salary_structure' ||
+				$this->uri->segment(1) == 'edit_employee_salary_structure' ||
+				$this->uri->segment(1) == 'variational_payment' ||
+				$this->uri->segment(1) == 'new_variational_payment' ||
+				$this->uri->segment(1) == 'recall_month' ||
+				$this->uri->segment(1) == 'approve_variational_payment' ||
+				$this->uri->segment(1) == 'payroll_routine' ||
+				$this->uri->segment(1) == 'approve_payroll_routine' ||
+				$this->uri->segment(1) == 'payroll_report' ||
+				$this->uri->segment(1) == 'emolument' ||
+				$this->uri->segment(1) == 'emolument_report' ||
+				$this->uri->segment(1) == 'deduction' ||
+				$this->uri->segment(1) == 'deduction_report' ||
+				$this->uri->segment(1) == 'pay_order' ||
+				$this->uri->segment(1) == 'pay_order_report' ? 'active' : '';
+				?>">
+					<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-money-bill-wave"></i><span>Modules</span></a>
+					<ul class="dropdown-menu">
+						<li class="<?php echo $this->uri->segment(1) == 'employee_tax' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('employee_tax') ?>">Receivables</a></li>
+						
+						<li class="<?php echo $this->uri->segment(1) == 'employee_salary_structure' || $this->uri->segment(1) == 'view_employee_salary_structure' || $this->uri->segment(1) == 'edit_employee_salary_structure'  ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('journal_voucher') ?>">Journal Voucher </a></li>
+						
+						
+							</ul>
+				</li>
+				
 			<li class="menu-header">Payroll System</li>
 			<li class="dropdown <?php echo
       $this->uri->segment(1) == 'employee_salary_structure' ||
@@ -242,7 +272,10 @@
 				<ul class="dropdown-menu">
 					<li class="<?php echo $this->uri->segment(1) == 'chart_of_accounts'  ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('chart_of_accounts') ?>">Chart of Accounts</a></li>
 					<li class="<?php echo $this->uri->segment(1) == 'tax_rates' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('phronesis_banks') ?>">Phronesis Bank</a></li>
-							</ul>
+					
+					<li class="<?php echo $this->uri->segment(1) == 'policy_config' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('policy_config') ?>">Accounting Policy Config</a></li>
+				
+				</ul>
 			<?php } ?>
 			</li>
 			<li class="dropdown <?php echo $this->uri->segment(1) == 'view_log' ? 'active' : ''?>">

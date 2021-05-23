@@ -36,7 +36,7 @@
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
-                    <table id="datatable-buttons-2" class="table table-striped table-bordered table-md">
+                    <table  class="table table-striped table-bordered table-md">
                       <thead>
                         <tr>
                           <th>S/N</th>
@@ -119,10 +119,21 @@
 						  </tr>
                       </tbody>
                     </table>
+					  <form action="<?php echo site_url('post_journal') ?>" method="post">
+						  <input type="hidden" name="<?php echo $csrf_name;?>" value="<?php echo $csrf_hash;?>" />
+						  <input type="hidden" name="income" value="<?php echo ($total_income - $total_deduction); ?>">
+						  <input type="hidden" name="deduction_array" value='<?php echo json_encode($deduction_array); ?>'>
+						  <input type="hidden" name="narration" value="salary for <?php echo date("F", mktime(0, 0, 0, $payroll_month, 10))." ".$payroll_year; ?>">
+						  <input type="hidden" name="month" value="<?=$payroll_month ?>">
+						  <input type="hidden" name="year" value="<?=$payroll_year ?>">
+		
+						  <button class="btn btn-info btn-block" type="submit">Post To General Ledger</button>
+	
+					  </form>
                   </div>
                 </div>
-				  
-				  <?php echo json_encode($income_array). '<br>'. json_encode($deduction_array); ?>
+				 
+				 
                 <div class="card-footer text-right bg-whitesmoke">
                   <button onclick="location.href='<?php echo site_url('payroll_journal');?>'" class="btn btn-danger" type="button">Go Back</button>
                 </div>

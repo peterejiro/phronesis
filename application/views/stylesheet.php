@@ -6,9 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="UTF-8">
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <meta content="IHUMANE" name="description" />
-  <meta content="Connexxion Group" name="author" />
-	<title>IHUMANE</title>
+  <meta content="Phronesis" name="description" />
+  <meta content="Phroneis" name="author" />
+	<title>Phronesis</title>
   <link rel="icon" href="<?php echo base_url(); ?>/assets/img/phronesis-logo.png">
 
   <style>

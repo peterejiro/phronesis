@@ -16,7 +16,7 @@
 					</div>
 				</div>
 				<div class="section-body">
-					<div class="section-title">All About Managing Employees</div>
+					<div class="section-title">All About Managing Chart Of Account</div>
 					<p class="section-lead">You can Manage Chart of Account information here</p>
 					<div class="row">
 						<div class="col-12">

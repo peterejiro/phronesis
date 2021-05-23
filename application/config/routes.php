@@ -376,6 +376,10 @@ $route['turn_over'] = 'hr_report/turn_over';
 $route['chart_of_accounts'] = 'accounting/chart_of_accounts';
 $route['phronesis_banks'] = 'accounting/phronesis_banks';
 $route['payroll_journal'] = 'payroll_report/payroll_journal';
+$route['new_account'] = 'accounting/new_account';
+$route['get_parent_account'] = 'accounting/get_parent_account';
+$route['journal_voucher'] = 'accounting/journal_voucher';
+$route['post_journal'] = 'accounting/post_journal';
 
 
 
