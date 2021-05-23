@@ -48,5 +48,5 @@
 </html>
 
 <script>
-  $('title').html('Clock In Success - IHUMANE');
+  $('title').html('Clock In Success - Phronesis');
 </script>

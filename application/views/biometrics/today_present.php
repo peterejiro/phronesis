@@ -71,5 +71,5 @@
 </html>
 
 <script>
-  $('title').html('Employees Present Today - IHUMANE');
+  $('title').html('Employees Present Today - Phronesis');
 </script>

@@ -57,4 +57,13 @@
 			$this->db->insert('gls', $gl_data);
 			return true;
 		}
+		
+		public function get_credit($glcode, $from, $to){
+			$this->db->select('*');
+			$this->db->from('gls');
+			$this->db->where('created_at >=', $from);
+			$this->db->where('created_at <=', $to);
+			$this->db->where('glcode', $glcode);
+			return $this->db->get()->result();
+		}
 	}

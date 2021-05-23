@@ -57,5 +57,5 @@
 </body>
 </html>
 <script>
-	$('title').html('Clocked Out Employees - IHUMANE');
+	$('title').html('Clocked Out Employees - Phronesis');
 </script>

@@ -88,5 +88,5 @@ $CI->load->model('biometric');
 </body>
 </html>
 <script>
-  $('title').html('Employees Absent Today - IHUMANE');
+  $('title').html('Employees Absent Today - Phronesis');
 </script>

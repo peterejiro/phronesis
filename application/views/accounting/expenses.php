@@ -9,20 +9,20 @@
 		<div class="main-content">
 			<section class="section">
 				<div class="section-header">
-					<h1>Phronesis Journal Voucher</h1>
+					<h1>Phronesis Expenses</h1>
 					<div class="section-header-breadcrumb">
 						<div class="breadcrumb-item active"><a href="<?php echo base_url(); ?>">Dashboard</a></div>
-						<div class="breadcrumb-item">Phronesis Journal Voucher</div>
+						<div class="breadcrumb-item">Phronesis Expenses</div>
 					</div>
 				</div>
 				<div class="section-body">
-					<div class="section-title">All About Phronesis Journal Voucher</div>
-					<p class="section-lead">You can manage Phronesis Journal Voucher information here</p>
+					<div class="section-title">All About Phronesis Expenses</div>
+					<p class="section-lead">You can manage Phronesis Expenses information here</p>
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h4>All Phronesis Journal Voucher</h4>
+									<h4>All Phronesis Expenses</h4>
 									<div class="card-header-action">
 										<button data-toggle="modal" data-target="#add_bank" type="button" class="btn btn-icon icon-left btn-primary"><i class="fa fa-plus"></i> Add Bank</button>
 									</div>
@@ -45,7 +45,7 @@
 													<div class="col-md-6 col-sm-6 col-lg-6">
 														<div class="form-group">
 															<label for="">Entry #</label>
-															<input type="text"  name="entry_no" value="<?php echo "JV".time(); ?>" readonly placeholder="Entry #" class="form-control">
+															<input type="text"  name="entry_no" value="<?php echo "Expenses".time(); ?>" readonly placeholder="Entry #" class="form-control">
 														
 														</div>
 													</div>
@@ -55,80 +55,14 @@
 										
 										<div class="row clearfix">
 											<div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-12">
 													
 													<div class="card">
 														<div class="header">
-															<h2>Credit</h2>
+														
 														</div>
 														
 														<div class="card-body">
-															<div id="credits">
-																
-																<div id="credit1">
-																	
-																	<button style="margin-bottom: 5%" type="button" onclick="delete_div(this)"  class="btn btn-danger"><i class="fa fa-minus-square"></i></button>
-																	
-																	<div class="row">
-																		
-																		<div class="col-lg-4 col-md-4">
-																			<div class="form-group">
-																				<label  for="application_payroll_group_id"> <b> Account: </b></label>
-																				<select name="credit_account[]" id="credit_account1" class="custom-select" required>
-																					<option disabled selected>Select account</option>
-																					<?php foreach($accounts as $account) :
-																						if($account->type == 1):
-																						?>
-																						<option value="<?= $account->glcode ?>"> <?= $account->glcode ?? ''?> - <?= $account->account_name ?? ''?>  </option>
-																					<?php endif; endforeach; ?>
-																				</select>
-																			</div>
-																		</div>
-																		
-																		<div class="col-lg-4 col-md-4">
-																			<div class="form-group">
-																				<label  for="application_payroll_group_id"> <b> Credit Narration: </b></label>
-																				<input type="text" name="credit_narration[]" id="credit_narration1" class="form-control"  required placeholder="Narration">
-																			
-																			</div>
-																		</div>
-																		
-																		<div class="col-lg-4 col-md-4">
-																			<div class="form-group">
-																				<label  for="application_payroll_group_id"> <b> Credit Amount: </b></label>
-																				<input type="text" class="number form-control" id="credit_amount1" required value="0.00" placeholder="Credit Amount" onkeyup="compute_balance()"  name="credit_amount[]">
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																
-																
-																<div class="form-group" id="clone_button" style="float: right">
-																	
-																	<button type="button" onclick="clone_div_cr(this)"   class="btn btn-success"><i class="fa fa-plus-square"> </i></button>
-																
-																
-																</div>
-																
-																
-																<div class="form-group" style="margin-top: 10%">
-																	<label  for="application_payroll_group_id"> <b> Total Credit Amount: </b></label> <span id="total_credit_amount"> 0.00</span>
-																</div>
-															</div>
-														</div>
-													</div>
-												
-												</div>
-												
-												<div class="col-sm-6">
-													
-													<div class="card">
-														<div class="header">
-															<h2>Debit</h2>
-														</div>
-														
-														<div class="body">
-															
 															<div id="debits">
 																
 																<div id="debit1">
@@ -143,7 +77,7 @@
 																				<select name="debit_account[]" id="debit_account1" class="custom-select" required>
 																					<option disabled selected>Select account</option>
 																					<?php foreach($accounts as $account) :
-																						if($account->type == 1):
+																						if($account->type == 1 && $account->account_type == 5):
 																							?>
 																							<option value="<?= $account->glcode ?>"> <?= $account->glcode ?? ''?> - <?= $account->account_name ?? ''?>  </option>
 																						<?php endif; endforeach; ?>
@@ -180,11 +114,12 @@
 																	<label  for="application_payroll_group_id"> <b> Total Debit Amount: </b></label> <span id="total_debit_amount"> 0.00</span>
 																</div>
 															</div>
-														
 														</div>
 													</div>
 												
 												</div>
+												
+												
 											</div>
 										</div>
 										
@@ -194,7 +129,7 @@
 												<div class="btn-group d-flex justify-content-center">
 													
 													<a href="" class="btn btn-mini btn-danger"><i class="ti-close mr-2"></i>Cancel</a>
-													<button type="submit"  disabled class="btn btn-primary save-entry btn-mini"><i class="ti-check mr-2"> Save</i></button>
+													<button type="submit"   class="btn btn-primary save-entry btn-mini"><i class="ti-check mr-2"> Save</i></button>
 												</div>
 											</div>
 										</div>
@@ -217,7 +152,7 @@
 </body>
 </html>
 <script>
-	$('title').html('Journal Voucher - Phronesis')
+	$('title').html('Expenses - Phronesis')
 </script>
 <script>
 	let clones_id = [1];
@@ -530,23 +465,6 @@
 		let index;
 		let credit_amount = 0;
 		let debit_amount = 0;
-		for (index = 0; index < credit_inputs.length; ++index) {
-			if (credit_inputs[index].name === 'credit_amount[]') {
-				var currentVal =  credit_inputs[index].value;
-				var testDecimal = testDecimals(currentVal);
-				if (testDecimal.length > 1) {
-					//console.log("You cannot enter more than one decimal point");
-					currentVal = currentVal.slice(0, -1);
-				}
-				credit_inputs[index].value = replaceCommas(currentVal);
-				
-				credit_amount = parseFloat(credit_inputs[index].value.replace(/,/g, '')) + credit_amount;
-			}
-			
-		}
-		$("#total_credit_amount").text(credit_amount.toLocaleString());
-		
-		
 		for (index = 0; index < debit_inputs.length; ++index) {
 			if (debit_inputs[index].name === 'debit_amount[]') {
 				var cVal =  debit_inputs[index].value;
@@ -563,15 +481,8 @@
 		}
 		$("#total_debit_amount").text(debit_amount.toLocaleString());
 		
-		if(debit_amount === credit_amount){
-			$('.save-entry').attr('disabled', false);
-			
-		}
 		
-		if(debit_amount !== credit_amount){
-			
-			$('.save-entry').attr('disabled', true);
-		}
+		
 		
 		// // entered_principal = entered_principal.replace(/,/g, '');
 		// // entered_principal = parseFloat(entered_principal);
@@ -608,59 +519,59 @@
 		
 		
 		
-		$("#jvform").submit(function (e) {
-			
-			e.preventDefault();
-			
-			let credit_inputs = $("#credits").find("select, input");
-			let debit_inputs = $("#debits").find("select, input");
-			
-			let index;
-			let credit_amount = 0;
-			let debit_amount = 0;
-			for (index = 0; index < credit_inputs.length; ++index) {
-				if (credit_inputs[index].name === 'credit_amount[]') {
-					var currentVal =  credit_inputs[index].value;
-					var testDecimal = testDecimals(currentVal);
-					if (testDecimal.length > 1) {
-						//console.log("You cannot enter more than one decimal point");
-						currentVal = currentVal.slice(0, -1);
-					}
-					credit_inputs[index].value = replaceCommas(currentVal);
-					
-					credit_amount = parseFloat(credit_inputs[index].value.replace(/,/g, '')) + credit_amount;
-				}
-				
-			}
-			
-			
-			for (index = 0; index < debit_inputs.length; ++index) {
-				if (debit_inputs[index].name === 'debit_amount[]') {
-					var cVal =  debit_inputs[index].value;
-					var tDecimal = testDecimals(cVal);
-					if (tDecimal.length > 1) {
-						//console.log("You cannot enter more than one decimal point");
-						cVal = cVal.slice(0, -1);
-					}
-					debit_inputs[index].value = replaceCommas(cVal);
-					
-					debit_amount = parseFloat(debit_inputs[index].value.replace(/,/g, '')) + debit_amount;
-				}
-				
-			}
-			
-			if(debit_amount === credit_amount){
-				document.getElementById("jvform").submit();
-				
-			}
-			
-			if(debit_amount !== credit_amount){
-				
-				alert('debit and credit amount must balance');
-			}
-			
-			
-		});
+		// $("#jvform").submit(function (e) {
+		//
+		// 	e.preventDefault();
+		//
+		// 	let credit_inputs = $("#credits").find("select, input");
+		// 	let debit_inputs = $("#debits").find("select, input");
+		//
+		// 	let index;
+		// 	let credit_amount = 0;
+		// 	let debit_amount = 0;
+		// 	for (index = 0; index < credit_inputs.length; ++index) {
+		// 		if (credit_inputs[index].name === 'credit_amount[]') {
+		// 			var currentVal =  credit_inputs[index].value;
+		// 			var testDecimal = testDecimals(currentVal);
+		// 			if (testDecimal.length > 1) {
+		// 				//console.log("You cannot enter more than one decimal point");
+		// 				currentVal = currentVal.slice(0, -1);
+		// 			}
+		// 			credit_inputs[index].value = replaceCommas(currentVal);
+		//
+		// 			credit_amount = parseFloat(credit_inputs[index].value.replace(/,/g, '')) + credit_amount;
+		// 		}
+		//
+		// 	}
+		//
+		//
+		// 	for (index = 0; index < debit_inputs.length; ++index) {
+		// 		if (debit_inputs[index].name === 'debit_amount[]') {
+		// 			var cVal =  debit_inputs[index].value;
+		// 			var tDecimal = testDecimals(cVal);
+		// 			if (tDecimal.length > 1) {
+		// 				//console.log("You cannot enter more than one decimal point");
+		// 				cVal = cVal.slice(0, -1);
+		// 			}
+		// 			debit_inputs[index].value = replaceCommas(cVal);
+		//
+		// 			debit_amount = parseFloat(debit_inputs[index].value.replace(/,/g, '')) + debit_amount;
+		// 		}
+		//
+		// 	}
+		//
+		// 	if(debit_amount === credit_amount){
+		// 		document.getElementById("jvform").submit();
+		//
+		// 	}
+		//
+		// 	if(debit_amount !== credit_amount){
+		//
+		// 		alert('debit and credit amount must balance');
+		// 	}
+		//
+		//
+		// });
 		
 		
 	});

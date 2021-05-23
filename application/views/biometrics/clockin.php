@@ -95,7 +95,7 @@ $CI->load->model('biometric');
 
 <script type="text/javascript">
 
-  $('title').html('Clock In - IHUMANE');
+  $('title').html('Clock In - Phronesis');
 
 	function user_delete(user_id, user_name) {
 

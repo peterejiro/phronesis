@@ -65,5 +65,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Absent Employees - IHUMANE');
+  $('title').html('Absent Employees - Phronesis');
 </script>

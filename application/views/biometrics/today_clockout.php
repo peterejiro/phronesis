@@ -71,5 +71,5 @@
 </html>
 
 <script>
-  $('title').html('Employees Clock Out Today - IHUMANE');
+  $('title').html('Employees Clock Out Today - Phronesis');
 </script>

@@ -98,7 +98,7 @@ $CI->load->model('biometric');
 
 <script type="text/javascript">
 
-	$('title').html('Biometric Enrollment - IHUMANE');
+	$('title').html('Biometric Enrollment - Phronesis');
 
 	function user_delete(user_id, user_name) {
 

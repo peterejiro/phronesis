@@ -423,7 +423,7 @@
 	<![endif]-->
 </head>
 <body>
-<span class="preheader">Thanks for trying out iHumane. We’ve pulled together some information and resources to help you get started.</span>
+<span class="preheader">Thanks for trying out Phronesis. We’ve pulled together some information and resources to help you get started.</span>
 <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
 	<tr>
 		<td align="center">
@@ -431,7 +431,7 @@
 				<tr>
 					<td class="email-masthead">
 						<a href="https://example.com" class="f-fallback email-masthead_name">
-							iHumane
+							Phronesis
 						</a>
 					</td>
 				</tr>
@@ -463,12 +463,12 @@
 										</table>
 										<p>Please Endeavour to Change you password once you log in</p>
 
-										<p>Please if you didn't request this, kindly <a href="mailto:support@ihumane.net">email our customer success team</a> </p>
+										<p>Please if you didn't request this, kindly <a href="mailto:support@Phronesis.net">email our customer success team</a> </p>
 
-										<p>If you have any questions, feel free to <a href="mailto:support@ihumane.net">email our customer success team</a>. (We're lightning quick at replying.)</p>
+										<p>If you have any questions, feel free to <a href="mailto:support@Phronesis.net">email our customer success team</a>. (We're lightning quick at replying.)</p>
 										<p>Thanks,
-											<br>The iHumane Team</p>
-										<p><strong>P.S.</strong> If you are stuck on any operation on iHumane? Check out our <a href="https://docs.ihumane.net/">help documentation</a>. Or, just reply to this email, the iHumane support team is always ready to help!</p>
+											<br>The Phronesis Team</p>
+										<p><strong>P.S.</strong> If you are stuck on any operation on Phronesis? Check out our <a href="https://docs.Phronesis.net/">help documentation</a>. Or, just reply to this email, the Phronesis support team is always ready to help!</p>
 										<!-- Sub copy -->
 
 									</div>
@@ -482,12 +482,8 @@
 						<table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
 							<tr>
 								<td class="content-cell" align="center">
-									<p class="f-fallback sub align-center">&copy; <?php echo date('Y'); ?> iHumane. All rights reserved.</p>
-									<p class="f-fallback sub align-center">
-										Connexxion Telecoms
-										<br>2A, Iller Crescent, Off Katsina Ala Crescent.
-										<br>Maitama, FCT-Abuja, Nigeria
-									</p>
+									<p class="f-fallback sub align-center">&copy; <?php echo date('Y'); ?> Phronesis. All rights reserved.</p>
+									
 								</td>
 							</tr>
 						</table>

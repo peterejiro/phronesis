@@ -160,5 +160,5 @@
 </html>
 
 <script>
-	$('title').html('Manage Chart of Accounts - IHUMANE');
+	$('title').html('Manage Chart of Accounts - Phronesis');
 </script>

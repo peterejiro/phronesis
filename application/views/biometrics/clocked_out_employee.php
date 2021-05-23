@@ -73,5 +73,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Present Employees Sheet - IHUMANE');
+  $('title').html('Present Employees Sheet - Phronesis');
 </script>

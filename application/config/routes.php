@@ -380,6 +380,10 @@ $route['new_account'] = 'accounting/new_account';
 $route['get_parent_account'] = 'accounting/get_parent_account';
 $route['journal_voucher'] = 'accounting/journal_voucher';
 $route['post_journal'] = 'accounting/post_journal';
+$route['receivables'] = 'accounting/receivables';
+$route['expenses'] = 'accounting/expenses';
+$route['accounting_report'] = 'accounting/accounting_report';
+$route['profit_loss'] = 'accounting/profit_loss';
 
 
 

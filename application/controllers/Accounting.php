@@ -598,7 +598,7 @@
 			endif;
 		}
 		
-		public function accounting_policy_config(){
+		public function receivables(){
 			$username = $this->session->userdata('user_username');
 			
 			if (isset($username)):
@@ -617,12 +617,102 @@
 					if ($permission->payroll_management == 1):
 						
 						$method = $this->input->server('REQUEST_METHOD');
+						if($method == 'POST' || $method == 'Post' || $method == 'post'):
+							
+							$cr_total = 0;
+							$dr_total = 0;
+							//return dd($this->request->getPost('credit_amount'));
+							for($i = 0; $i<count($_POST['credit_amount']); $i++):
+								$cr_total +=  str_replace(',', '',$_POST['credit_amount'][$i]);
+							endfor;
+							
+							
+							
+							
+							
+							
+							if($cr_total ){
+							
+								for($n = 0; $n<count($_POST['credit_amount']); $n++){
+									
+									if($_POST['credit_amount'][$n] > 0):
+										$account = $this->accountings->get_coa($_POST['credit_account'][$n]);
+										$data = array(
+											'glcode' => $_POST['credit_account'][$n],
+											'posted_by'=>$username,
+											'narration' => $_POST['credit_narration'][$n],
+											'dr_amount' => 0,
+											'cr_amount' => str_replace(',', '',$_POST['credit_amount'][$n]),
+											'ref_no' => $_POST['entry_no'],
+											'bank' => $account->bank,
+											'ob' => 0,
+											'created_at' => $_POST['issue_date'],
+											'gl_transaction_date' => $_POST['issue_date']
+										);
+										
+										print_r($data);
+										
+										//$i = $this->accountings->save_gl($data);
+
+//										echo "Credit Account:".'<br>';
+//
+//										print_r($data);
+//
+//										echo '<br>';
+//										//$k = $this->jv->save($data);
+									endif;
+								}
+								
+//								if($i):
+//
+//									$data = array(
+//										'msg' => 'Action successful',
+//										'type' => 'success',
+//										'location' => base_url('receivables')
+//
+//									);
+//
+//									$this->load->view('swal', $data);
+//
+//								else:
+//									$data = array(
+//										'msg' => 'An error occurred',
+//										'type' => 'error',
+//										'location' => base_url('receivables')
+//
+//									);
+//
+//									$this->load->view('swal', $data);
+//								endif;
+							
+							}
+							else{
+								
+								
+								$data = array(
+									'msg' => 'amount must be greater than zero',
+									'type' => 'error',
+									'location' => base_url('receivables')
+								
+								);
+								
+								$this->load->view('swal', $data);
+								// return $this->response->redirect(site_url('/journal-voucher'));
+							}
 						
+						
+						
+						
+						
+						
+						
+						
+						endif;
 						
 						
 						if($method == 'GET' || $method == 'Get' || $method == 'get'):
 							$data['notifications'] = $this->employees->get_notifications(0);
-							$data['coas'] = $this->accountings->view_coas();
+							$data['accounts'] = $this->accountings->view_coas();
 							$data['banks'] = $this->hr_configurations->view_banks();
 							$data['pbanks'] = $this->accountings->view_pbanks();
 							$data['employees'] = $this->employees->view_employees();
@@ -630,7 +720,7 @@
 							$data['csrf_name'] = $this->security->get_csrf_token_name();
 							$data['csrf_hash'] = $this->security->get_csrf_hash();
 							
-							$this->load->view('accounting/policy_config', $data);
+							$this->load->view('accounting/receivables', $data);
 						endif;
 					else:
 						
@@ -645,6 +735,251 @@
 				redirect('/login');
 			endif;
 		
+		}
+		
+		public function expenses(){
+			$username = $this->session->userdata('user_username');
+			
+			if (isset($username)):
+				$user_type = $this->users->get_user($username)->user_type;
+				
+				if ($user_type == 1 || $user_type == 3):
+					$permission = $this->users->check_permission($username);
+					$data['employee_management'] = $permission->employee_management;
+					$data['payroll_management'] = $permission->payroll_management;
+					$data['biometrics'] = $permission->biometrics;
+					$data['user_management'] = $permission->user_management;
+					$data['configuration'] = $permission->configuration;
+					$data['payroll_configuration'] = $permission->payroll_configuration;
+					$data['hr_configuration'] = $permission->hr_configuration;
+					
+					if ($permission->payroll_management == 1):
+						
+						$method = $this->input->server('REQUEST_METHOD');
+						if($method == 'POST' || $method == 'Post' || $method == 'post'):
+							
+							$cr_total = 0;
+							$dr_total = 0;
+							//return dd($this->request->getPost('credit_amount'));
+							for($i = 0; $i<count($_POST['debit_amount']); $i++):
+								$dr_total += str_replace(',', '',$_POST['debit_amount'][$i]);
+							endfor;
+							
+						
+							
+							
+							
+							if($dr_total ){
+								
+								for($n = 0; $n<count($_POST['debit_amount']); $n++){
+									
+									if($_POST['debit_amount'][$n] > 0):
+										
+										$account = $this->accountings->get_coa($_POST['debit_account'][$n]);
+										$data = array(
+											'glcode' => $_POST['debit_account'][$n],
+											'posted_by'=>$username,
+											'narration' => $_POST['debit_narration'][$n],
+											'dr_amount' => str_replace(',', '',$_POST['debit_amount'][$n]),
+											'cr_amount' => 0,
+											'ref_no' => $_POST['entry_no'],
+											'bank' => $account->bank,
+											'ob' => 0,
+											'created_at' => $_POST['issue_date'],
+											'gl_transaction_date' => $_POST['issue_date']
+										
+										);
+										$k = $this->accountings->save_gl($data);
+										//$i = $this->jv->save($data);
+
+//										echo "Debit Account:".'<br>';
+//
+//										print_r($data);
+//
+//										echo '<br>';
+									endif;
+								}
+
+
+
+
+//								if($i):
+//
+//									$data = array(
+//										'msg' => 'Action successful',
+//										'type' => 'success',
+//										'location' => base_url('receivables')
+//
+//									);
+//
+//									$this->load->view('swal', $data);
+//
+//								else:
+//									$data = array(
+//										'msg' => 'An error occurred',
+//										'type' => 'error',
+//										'location' => base_url('receivables')
+//
+//									);
+//
+//									$this->load->view('swal', $data);
+//								endif;
+							
+							}
+							else{
+								
+								
+								$data = array(
+									'msg' => 'amount must be greater than zero',
+									'type' => 'error',
+									'location' => base_url('expenses')
+								
+								);
+								
+								$this->load->view('swal', $data);
+								// return $this->response->redirect(site_url('/journal-voucher'));
+							}
+						
+						
+						
+						
+						
+						
+						
+						
+						endif;
+						
+						
+						if($method == 'GET' || $method == 'Get' || $method == 'get'):
+							$data['notifications'] = $this->employees->get_notifications(0);
+							$data['accounts'] = $this->accountings->view_coas();
+							$data['banks'] = $this->hr_configurations->view_banks();
+							$data['pbanks'] = $this->accountings->view_pbanks();
+							$data['employees'] = $this->employees->view_employees();
+							$data['user_data'] = $this->users->get_user($username);
+							$data['csrf_name'] = $this->security->get_csrf_token_name();
+							$data['csrf_hash'] = $this->security->get_csrf_hash();
+							
+							$this->load->view('accounting/expenses', $data);
+						endif;
+					else:
+						
+						redirect('/access_denied');
+					endif;
+				else:
+					
+					redirect('/access_denied');
+				
+				endif;
+			else:
+				redirect('/login');
+			endif;
+			
+		}
+		
+		public function accounting_report()
+		{
+			$username = $this->session->userdata('user_username');
+			
+			if (isset($username)):
+				
+				$permission = $this->users->check_permission($username);
+				$data['employee_management'] = $permission->employee_management;
+				$data['notifications'] = $this->employees->get_notifications(0);
+				$data['payroll_management'] = $permission->payroll_management;
+				$data['biometrics'] = $permission->biometrics;
+				$data['user_management'] = $permission->user_management;
+				$data['configuration'] = $permission->configuration;
+				$data['payroll_configuration'] = $permission->payroll_configuration;
+				$data['hr_configuration'] = $permission->hr_configuration;
+				
+				if ($permission->payroll_management == 1):
+					$user_type = $this->users->get_user($username)->user_type;
+					
+					if ($user_type == 1 || $user_type == 3):
+						
+						$data['user_data'] = $this->users->get_user($username);
+						$data['employees'] = $this->employees->get_employee_by_salary_setup();
+						
+						
+						$this->load->view('accounting/base', $data);
+					
+					else:
+						redirect('/access_denied');
+					endif;
+				else:
+					
+					redirect('/access_denied');
+				
+				endif;
+			else:
+				redirect('/login');
+			endif;
+		}
+		
+		public function profit_loss(){
+			$username = $this->session->userdata('user_username');
+			
+			if (isset($username)):
+				$user_type = $this->users->get_user($username)->user_type;
+				
+				if ($user_type == 1 || $user_type == 3):
+					$permission = $this->users->check_permission($username);
+					$data['employee_management'] = $permission->employee_management;
+					$data['payroll_management'] = $permission->payroll_management;
+					$data['biometrics'] = $permission->biometrics;
+					$data['user_management'] = $permission->user_management;
+					$data['configuration'] = $permission->configuration;
+					$data['payroll_configuration'] = $permission->payroll_configuration;
+					$data['hr_configuration'] = $permission->hr_configuration;
+					
+					if ($permission->payroll_management == 1):
+						
+						$method = $this->input->server('REQUEST_METHOD');
+						if($method == 'POST' || $method == 'Post' || $method == 'post'):
+							
+							
+							$data['accounts'] = $this->accountings->view_coas();
+							$data['from'] = $_POST['from'];
+							$data['to'] = $_POST['to'];
+							$data['notifications'] = $this->employees->get_notifications(0);
+							$data['user_data'] = $this->users->get_user($username);
+							$this->load->view('accounting/profit_sheet', $data);
+						
+						
+						
+						
+						
+						
+						
+						endif;
+						
+						
+						if($method == 'GET' || $method == 'Get' || $method == 'get'):
+							$data['notifications'] = $this->employees->get_notifications(0);
+							$data['accounts'] = $this->accountings->view_coas();
+							$data['banks'] = $this->hr_configurations->view_banks();
+							$data['pbanks'] = $this->accountings->view_pbanks();
+							$data['employees'] = $this->employees->view_employees();
+							$data['user_data'] = $this->users->get_user($username);
+							$data['csrf_name'] = $this->security->get_csrf_token_name();
+							$data['csrf_hash'] = $this->security->get_csrf_hash();
+							
+							$this->load->view('accounting/profit', $data);
+						endif;
+					else:
+						
+						redirect('/access_denied');
+					endif;
+				else:
+					
+					redirect('/access_denied');
+				
+				endif;
+			else:
+				redirect('/login');
+			endif;
+			
 		}
 		
 		public function  get_parent_account(){

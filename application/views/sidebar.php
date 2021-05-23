@@ -106,12 +106,16 @@
 				?>">
 					<a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-money-bill-wave"></i><span>Modules</span></a>
 					<ul class="dropdown-menu">
-						<li class="<?php echo $this->uri->segment(1) == 'employee_tax' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('employee_tax') ?>">Receivables</a></li>
+						<li class="<?php echo $this->uri->segment(1) == 'employee_tax' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('receivables') ?>">Receivables</a></li>
+						
+						<li class="<?php echo $this->uri->segment(1) == 'employee_tax' ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('expenses') ?>">Expenses</a></li>
 						
 						<li class="<?php echo $this->uri->segment(1) == 'employee_salary_structure' || $this->uri->segment(1) == 'view_employee_salary_structure' || $this->uri->segment(1) == 'edit_employee_salary_structure'  ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('journal_voucher') ?>">Journal Voucher </a></li>
 						
-						
-							</ul>
+						<li class="<?php echo $this->uri->segment(1) == 'employee_salary_structure' || $this->uri->segment(1) == 'view_employee_salary_structure' || $this->uri->segment(1) == 'edit_employee_salary_structure'  ? 'active' : '' ?>"><a class="nav-link" href="<?php echo site_url('accounting_report') ?>">Reports </a></li>
+					
+					
+					</ul>
 				</li>
 				
 			<li class="menu-header">Payroll System</li>

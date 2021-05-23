@@ -105,5 +105,5 @@
 </html>
 
 <script>
-  $('title').html('Attendance Reports - IHUMANE');
+  $('title').html('Attendance Reports - Phronesis');
 </script>
