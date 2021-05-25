@@ -104,7 +104,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-	$('title').html('Setup Salary Structure - IHUMANE')
+	$('title').html('Setup Salary Structure - Phronesis')
 
 	window.onload = function(){
     document.getElementById("allowances").style.display='none';

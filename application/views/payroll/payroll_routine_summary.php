@@ -101,7 +101,7 @@
 </div>
 
 <script>
-  $('title').html('Payroll Routine Summary - IHUMANE')
+  $('title').html('Payroll Routine Summary - Phronesis')
 
   $( window ).on( "load", function() {
 		swal({

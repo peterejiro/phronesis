@@ -537,7 +537,7 @@
   <?php include(APPPATH . '/views/js.php'); ?>
 
   <script>
-    $('title').html('New Employee - IHUMANE');
+    $('title').html('New Employee - Phronesis');
 
     $(document).ready(function() {
       // show file names on file upload for nysc documents...

@@ -146,7 +146,7 @@
 </body>
 </html>
 <script>
-	$('title').html('New Task - IHUMANE');
+	$('title').html('New Task - Phronesis');
 </script>
 
 

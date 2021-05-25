@@ -577,7 +577,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-	$('title').html('Update Employee - IHUMANE');
+	$('title').html('Update Employee - Phronesis');
 
 	$(document).ready(function() {
 

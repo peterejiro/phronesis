@@ -140,5 +140,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Supervisor Assessment Questions - IHUMANE')
+  $('title').html('Supervisor Assessment Questions - Phronesis')
 </script>

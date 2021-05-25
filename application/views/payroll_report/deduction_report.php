@@ -106,5 +106,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Deduction Report - IHUMANE')
+  $('title').html('Deduction Report - Phronesis')
 </script>

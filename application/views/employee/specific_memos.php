@@ -84,7 +84,7 @@
 </html>
 
 <script>
-  $('title').html('Directives - IHUMANE')
+  $('title').html('Directives - Phronesis')
 </script>
 
 <?php if(!empty($memos)):

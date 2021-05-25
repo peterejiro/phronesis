@@ -88,7 +88,7 @@ $CI->load->model('employees');
 </html>
 
 <script>
-	$('title').html('My Queries - IHUMANE')
+	$('title').html('My Queries - Phronesis')
 </script>
 
 

@@ -114,7 +114,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-  $('title').html('Approve Payroll Routine - IHUMANE')
+  $('title').html('Approve Payroll Routine - Phronesis')
   $(document).ready(function () {
     $('#sa-params').click(function () {
       swal({

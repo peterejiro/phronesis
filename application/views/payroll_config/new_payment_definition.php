@@ -122,7 +122,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-	$('title').html('New Payment Definition - IHUMANE')
+	$('title').html('New Payment Definition - Phronesis')
 	window.onload = function(){};
   function check_taxable(){
     let payment_type = document.getElementById('payment_type').value;

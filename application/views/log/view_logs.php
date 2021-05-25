@@ -59,7 +59,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-	$('title').html('View Logs - IHUMANE')
+	$('title').html('View Logs - Phronesis')
   $( document ).ready(function () {
     //$(".moreBox").slice(0, 3).show();
     if ($(".activity:hidden").length != 0) {

@@ -121,5 +121,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Tax Amount - IHUMANE')
+  $('title').html('Tax Amount - Phronesis')
 </script>

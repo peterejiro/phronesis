@@ -141,7 +141,7 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 
   <script>
-		$('title').html('View Training - IHUMANE')
+		$('title').html('View Training - Phronesis')
   </script>
 </body>
 </html>

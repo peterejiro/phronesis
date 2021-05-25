@@ -151,7 +151,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-  $('title').html('Manage User - IHUMANE')
+  $('title').html('Manage User - Phronesis')
 
   function viewPassword() {
     let passwordInput = document.getElementById('password-field');

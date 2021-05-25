@@ -72,7 +72,7 @@
 </body>
 </html>
 <script>
-  $('title').html('Employee Test Result - IHUMANE');
+  $('title').html('Employee Test Result - Phronesis');
   function printDiv() {
 
 	  $("#results").printThis({

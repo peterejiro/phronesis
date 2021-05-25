@@ -131,7 +131,7 @@
 </body>
 </html>
 <script>
-	$('title').html('My Leave - IHUMANE');
+	$('title').html('My Leave - Phronesis');
 
 	$(document).ready(function() {
 		setInterval(timestamp, 1000);

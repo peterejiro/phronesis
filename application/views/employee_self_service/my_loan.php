@@ -191,7 +191,7 @@ endif;
 endforeach; ?>
 
 <script>
-	$('title').html('My Loans - IHUMANE');
+	$('title').html('My Loans - Phronesis');
 	$('.summernote').summernote('disable');
 </script>
 

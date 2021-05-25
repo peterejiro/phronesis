@@ -147,7 +147,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-  $('title').html('New Loan - IHUMANE')
+  $('title').html('New Loan - Phronesis')
 
   window.onload = function(){
     // document.getElementById("loan_button").style.display='none';

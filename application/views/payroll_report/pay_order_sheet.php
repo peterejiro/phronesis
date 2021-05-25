@@ -107,5 +107,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Pay Order Sheet - IHUMANE')
+  $('title').html('Pay Order Sheet - Phronesis')
 </script>

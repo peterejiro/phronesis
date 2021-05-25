@@ -75,5 +75,5 @@
 </body>
 </html>
 <script>
-	$('title').html('Salary Structure Allowances - IHUMANE')
+	$('title').html('Salary Structure Allowances - Phronesis')
 </script>

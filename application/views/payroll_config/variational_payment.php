@@ -84,5 +84,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Variational Payments - IHUMANE')
+  $('title').html('Variational Payments - Phronesis')
 </script>

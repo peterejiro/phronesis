@@ -103,7 +103,7 @@
 
 
 <script>
-	$('title').html('Take Training - IHUMANE')
+	$('title').html('Take Training - Phronesis')
 
 	$(document).ready(function () {
 		$('#sa-params').click(function () {

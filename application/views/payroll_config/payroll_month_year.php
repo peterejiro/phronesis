@@ -131,6 +131,6 @@
 </body>
 </html>
 <script>
-	$('title').html('Payroll Month & Year - IHUMANE')
+	$('title').html('Payroll Month & Year - Phronesis')
 </script>
 

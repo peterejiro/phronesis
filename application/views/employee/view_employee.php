@@ -489,7 +489,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-  $('title').html('View Employee - IHUMANE')
+  $('title').html('View Employee - Phronesis')
 
   $('.nxt').on('click', function () {
     moveTab('next');

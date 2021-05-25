@@ -102,7 +102,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-  $('title').html('Approve Variational Payments - IHUMANE')
+  $('title').html('Approve Variational Payments - Phronesis')
   $(document).ready(function () {
     // clicking the master checkbox, checks all the children in the table
     $('.master-check').click(function () {

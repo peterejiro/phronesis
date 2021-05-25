@@ -79,5 +79,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Payroll Reports - IHUMANE')
+  $('title').html('Payroll Reports - Phronesis')
 </script>

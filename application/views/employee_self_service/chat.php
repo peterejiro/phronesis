@@ -166,7 +166,7 @@
 
 
 <script>
-	$('title').html('Chat - IHUMANE')
+	$('title').html('Chat - Phronesis')
 
 	$(document).ready(function(){
 

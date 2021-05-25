@@ -188,7 +188,7 @@
 </body>
 </html>
 <script>
-  $('title').html('Manage Loans - IHUMANE')
+  $('title').html('Manage Loans - Phronesis')
   $('.summernote').summernote('disable');
 </script>
 

@@ -4,7 +4,7 @@
 <script src="<?php echo base_url(); ?>assets/modules/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/push_notification.js"></script>
 <nav class="navbar navbar-expand-lg main-navbar">
-	<a href="<?php echo site_url('employee_main'); ?>" class="navbar-brand sidebar-gone-hide">iHumane</a>
+	<a href="<?php echo site_url('employee_main'); ?>" class="navbar-brand sidebar-gone-hide">Phronesis</a>
 	<div class="navbar-nav">
 		<a href="#" class="nav-link sidebar-gone-show" data-toggle="sidebar"><i class="fas fa-bars"></i></a>
 	</div>
@@ -18,10 +18,10 @@
       <li class="nav-item dropdown dropdown-list-toggle">
         <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle">Help</a>
         <ul class="dropdown-menu dropdown-menu-sm">
-          <li class="dropdown-title">Help Center</li>
-          <li><a href="https://docs.ihumane.net/" target="_blank" class="dropdown-item">IHUMANE Documentation</a></li>
-          <li><a href="https://ihumane.net" target="_blank" class="dropdown-item">Visit Site</a></li>
-          <li><a href="mailto:support@ihumane.net" class="dropdown-item">Contact Support</a></li>
+<!--          <li class="dropdown-title">Help Center</li>-->
+<!--          <li><a href="https://docs.Phronesis.net/" target="_blank" class="dropdown-item">Phronesis Documentation</a></li>-->
+<!--          <li><a href="https://Phronesis.net" target="_blank" class="dropdown-item">Visit Site</a></li>-->
+<!--          <li><a href="mailto:support@Phronesis.net" class="dropdown-item">Contact Support</a></li>-->
         </ul>
 	
 		 <?php $date = date('Y-m-d', time());
@@ -149,9 +149,9 @@
 						if (seconds < 10) {
 
 							var notification_id = data[0].notification_id;
-							Push.create("iHumane", {
+							Push.create("Phronesis", {
 								body: data[i].notification_type,
-								icon: "https://app.ihumane.net//assets/img/ihumane-logo-1.png",
+								icon: "https://app.Phronesis.net//assets/img/Phronesis-logo-1.png",
 								timeout: 4000,
 								onClick: function () {
 

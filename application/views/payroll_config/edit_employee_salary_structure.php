@@ -145,7 +145,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-  $('title').html('Edit Salary Structure - IHUMANE')
+  $('title').html('Edit Salary Structure - Phronesis')
   window.onload = function() {
     let salary_structure_type = document.getElementById('salary_structure_type').value;
     console.log(salary_structure_type);

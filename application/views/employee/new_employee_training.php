@@ -97,7 +97,7 @@
 </html>
 
 <script>
-	$('title').html('New Employee Training - IHUMANE')
+	$('title').html('New Employee Training - Phronesis')
 </script>
 
 

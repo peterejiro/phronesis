@@ -194,7 +194,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-  $('title').html('Reschedule Loan - IHUMANE')
+  $('title').html('Reschedule Loan - Phronesis')
   window.onload = function(){
     // document.getElementById("skip_month").style.display='none';
     // document.getElementById("reschedule_amount").style.display='none';

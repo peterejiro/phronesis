@@ -93,5 +93,5 @@
 </html>
 
 <script>
-  $('title').html('Employee Resignations - IHUMANE')
+  $('title').html('Employee Resignations - Phronesis')
 </script>

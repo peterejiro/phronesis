@@ -109,7 +109,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-  $('title').html('Recall Variational Payment - IHUMANE')
+  $('title').html('Recall Variational Payment - Phronesis')
 
   window.onload = function(){
     document.getElementById("employees").style.display='none';

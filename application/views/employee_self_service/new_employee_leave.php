@@ -181,7 +181,7 @@ $CI->load->model('employees');
 </body>
 </html>
 <script>
-	$('title').html('New Leave - IHUMANE');
+	$('title').html('New Leave - Phronesis');
 	function calcBusinessDays(dDate1, dDate2) { // input given as Date objects
 		var iWeeks, iDateDiff, iAdjust = 0;
 		if (dDate2 < dDate1) return -1; // error code if dates transposed

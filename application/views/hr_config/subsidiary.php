@@ -134,5 +134,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Subsidiary Setup - IHUMANE')
+  $('title').html('Subsidiary Setup - Phronesis')
 </script>

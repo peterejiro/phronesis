@@ -95,7 +95,7 @@
 </body>
 </html>
 <script>
-	$('title').html('Pay Slip - IHUMANE');
+	$('title').html('Pay Slip - Phronesis');
 </script>
 
 

@@ -147,5 +147,5 @@ $CI->load->model('hr_configurations');
 </body>
 </html>
 <script>
-  $('title').html('Employee Leaves - IHUMANE')
+  $('title').html('Employee Leaves - Phronesis')
 </script>

@@ -122,7 +122,7 @@
 </body>
 </html>
 <script>
-  $('title').html('Documents Setup - IHUMANE')
+  $('title').html('Documents Setup - Phronesis')
 
   $(".custom-file-input").on('change', function() {
 	  let fileName = $(this).val().split('//').pop();

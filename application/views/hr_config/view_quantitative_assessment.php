@@ -143,5 +143,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Quanitative Assessment Questions - IHUMANE')
+  $('title').html('Quanitative Assessment Questions - Phronesis')
 </script>

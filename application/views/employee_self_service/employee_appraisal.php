@@ -98,7 +98,7 @@
 </body>
 </html>
 <script>
-	$('title').html('My Appraisals - IHUMANE');
+	$('title').html('My Appraisals - Phronesis');
 </script>
 
 

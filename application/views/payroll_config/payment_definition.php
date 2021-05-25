@@ -94,5 +94,5 @@
 </body>
 </html>
 <script>
-	$('title').html('Payment Definitions - IHUMANE')
+	$('title').html('Payment Definitions - Phronesis')
 </script>

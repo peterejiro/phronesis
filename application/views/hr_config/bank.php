@@ -143,5 +143,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Bank Setup - IHUMANE')
+  $('title').html('Bank Setup - Phronesis')
 </script>

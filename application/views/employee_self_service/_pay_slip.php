@@ -282,7 +282,7 @@
 </html>
 
 <script>
-	$('title').html('Your Pay Slip For <?php echo date("F", mktime(0, 0, 0, $payroll_month, 10))." ".$payroll_year; ?> - IHUMANE');
+	$('title').html('Your Pay Slip For <?php echo date("F", mktime(0, 0, 0, $payroll_month, 10))." ".$payroll_year; ?> - Phronesis');
 
 	window.onbeforeunload = confirmExit;
 	function confirmExit() {

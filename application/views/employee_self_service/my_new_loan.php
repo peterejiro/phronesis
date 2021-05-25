@@ -146,7 +146,7 @@
 </body>
 </html>
 <script>
-	$('title').html('New Loan - IHUMANE');
+	$('title').html('New Loan - Phronesis');
 
 	window.onload = function(){};
 	function reset_form() {

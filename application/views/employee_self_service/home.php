@@ -265,5 +265,5 @@
 </body>
 </html>
 <script>
-	$('title').html('My Information - IHUMANE');
+	$('title').html('My Information - Phronesis');
 </script>

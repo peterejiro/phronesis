@@ -222,7 +222,7 @@
 
 
 <script>
-	$('title').html('View task - IHUMANE')
+	$('title').html('View task - Phronesis')
 	
 	$(document).ready(function(){
 		setInterval(timestamp, 1000);

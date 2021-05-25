@@ -83,5 +83,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Employee Queries - IHUMANE')
+  $('title').html('Employee Queries - Phronesis')
 </script>

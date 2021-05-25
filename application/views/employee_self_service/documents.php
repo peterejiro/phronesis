@@ -80,7 +80,7 @@
 </html>
 
 <script>
-	$('title').html('Documents - IHUMANE')
+	$('title').html('Documents - Phronesis')
 </script>
 
 

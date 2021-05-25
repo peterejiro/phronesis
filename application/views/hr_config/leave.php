@@ -151,5 +151,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Leave Type Setup - IHUMANE')
+  $('title').html('Leave Type Setup - Phronesis')
 </script>

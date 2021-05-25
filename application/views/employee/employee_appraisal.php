@@ -110,5 +110,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Employee Appraisal - IHUMANE')
+  $('title').html('Employee Appraisal - Phronesis')
 </script>

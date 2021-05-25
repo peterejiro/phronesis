@@ -176,7 +176,7 @@
 
 
 <script>
-	$('title').html('View Query - IHUMANE')
+	$('title').html('View Query - Phronesis')
 
 	$(document).ready(function(){
 		setInterval(timestamp, 1000);

@@ -224,7 +224,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-	$('title').html('Appraisal Result - IHUMANE');
+	$('title').html('Appraisal Result - Phronesis');
 
 	function printDiv() {
 

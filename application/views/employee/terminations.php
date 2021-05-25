@@ -66,5 +66,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Employee Terminations - IHUMANE')
+  $('title').html('Employee Terminations - Phronesis')
 </script>

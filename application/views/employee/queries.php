@@ -93,7 +93,7 @@
 </body>
 </html>
 <script>
-  $('title').html('Employee Queries - IHUMANE');
+  $('title').html('Employee Queries - Phronesis');
 </script>
 
 <div class="modal fade bd-example-modal-lg" id="new_query" tabindex="-1" role="dialog" aria-hidden="true">

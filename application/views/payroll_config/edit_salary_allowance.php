@@ -88,5 +88,5 @@
 </body>
 </html>
 <script>
-	$('title').html('Edit Salary Allowance - IHUMANE')
+	$('title').html('Edit Salary Allowance - Phronesis')
 </script>

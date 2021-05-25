@@ -134,5 +134,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Qualification Setup - IHUMANE')
+  $('title').html('Qualification Setup - Phronesis')
 </script>

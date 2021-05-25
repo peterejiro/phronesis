@@ -92,5 +92,5 @@
 </body>
 </html>
 <script>
-	$('title').html('Top Performing Employees - IHUMANE');
+	$('title').html('Top Performing Employees - Phronesis');
 </script>

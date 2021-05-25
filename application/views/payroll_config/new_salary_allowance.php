@@ -94,7 +94,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-	$('title').html('Add Salary Allowance - IHUMANE')
+	$('title').html('Add Salary Allowance - Phronesis')
 	window.onload = function(){
     // document.getElementById("allowance").style.display='none';
   };

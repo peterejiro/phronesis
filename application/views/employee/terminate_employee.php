@@ -71,7 +71,7 @@
 </body>
 </html>
 <script>
-  $('title').html('Terminate Employee - IHUMANE')
+  $('title').html('Terminate Employee - Phronesis')
 
   $(document).ready(function () {
 

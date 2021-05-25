@@ -17,7 +17,7 @@
 				</div>
         <div class="section-body">
           <div class="section-title">All About Managing Users</div>
-          <p class="section-lead">You can manage your <b>IHUMANE</b> users here</p>
+          <p class="section-lead">You can manage your <b>Phronesis</b> users here</p>
           <div class="row">
             <div class="col-12">
               <div class="card">
@@ -175,5 +175,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Manage Users - IHUMANE')
+  $('title').html('Manage Users - Phronesis')
 </script>

@@ -107,7 +107,7 @@
 </html>
 
 <script>
-	$('title').html('Resign - IHUMANE');
+	$('title').html('Resign - Phronesis');
 
 	$(document).ready(function () {
 

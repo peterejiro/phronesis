@@ -99,7 +99,7 @@
 </body>
 </html>
 <script>
-	$('title').html('Appraise Employee - IHUMANE');
+	$('title').html('Appraise Employee - Phronesis');
 </script>
 
 

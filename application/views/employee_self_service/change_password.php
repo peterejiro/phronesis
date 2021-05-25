@@ -82,7 +82,7 @@
 </html>
 
 <script>
-	$('title').html('Change Password - IHUMANE')
+	$('title').html('Change Password - Phronesis')
 
 	document.getElementById('password_success').style.display = 'none';
 	document.getElementById('submit_button').disabled = true;

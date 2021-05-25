@@ -136,5 +136,5 @@
 </body>
 </html>
 <script>
-  $('title').html('HMO Setup - IHUMANE')
+  $('title').html('HMO Setup - Phronesis')
 </script>

@@ -249,5 +249,5 @@ endif;
 </body>
 </html>
 <script>
-	$('title').html('Training Questions - IHUMANE')
+	$('title').html('Training Questions - Phronesis')
 </script>

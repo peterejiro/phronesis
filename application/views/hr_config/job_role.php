@@ -171,5 +171,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Job Roles Setup - IHUMANE')
+  $('title').html('Job Roles Setup - Phronesis')
 </script>

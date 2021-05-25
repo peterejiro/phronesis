@@ -100,5 +100,5 @@
 </html>
 
 <script>
-  $('title').html('Manage Employees - IHUMANE');
+  $('title').html('Manage Employees - Phronesis');
 </script>

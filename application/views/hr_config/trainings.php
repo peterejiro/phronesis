@@ -79,5 +79,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Training Setup - IHUMANE')
+  $('title').html('Training Setup - Phronesis')
 </script>

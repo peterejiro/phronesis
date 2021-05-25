@@ -103,5 +103,5 @@
 </body>
 </html>
 <script>
-	$('title').html('Minimum Tax Rate - IHUMANE')
+	$('title').html('Minimum Tax Rate - Phronesis')
 </script>

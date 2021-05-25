@@ -100,7 +100,7 @@
 <?php include(APPPATH.'/views/footer.php'); ?>
 <?php include(APPPATH.'/views/js.php'); ?>
 <script>
-  $('title').html('New Directive - IHUMANE')
+  $('title').html('New Directive - Phronesis')
   window.onload = function(){
     document.getElementById("employees").style.display='none';
     document.getElementById("departments").style.display='none';

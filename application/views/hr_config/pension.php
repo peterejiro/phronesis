@@ -134,6 +134,6 @@
 </body>
 </html>
 <script>
-  $('title').html('Pension Administrator Setup - IHUMANE')
+  $('title').html('Pension Administrator Setup - Phronesis')
 </script>
 

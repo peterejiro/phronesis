@@ -251,7 +251,7 @@
 
 
 <script>
-	$('title').html('Appraisal Result - IHUMANE');
+	$('title').html('Appraisal Result - Phronesis');
 
 	function printDiv() {
 

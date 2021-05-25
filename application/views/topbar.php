@@ -77,12 +77,12 @@
       <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle">
         <i class="far fa-question-circle"></i>
       </a>
-      <ul class="dropdown-menu dropdown-menu-sm">
-        <li class="dropdown-title">Help Center</li>
-        <li><a href="https://docs.ihumane.net/" target="_blank" class="dropdown-item">IHUMANE Documentation</a></li>
-        <li><a href="https://ihumane.net" target="_blank" class="dropdown-item">Visit Site</a></li>
-        <li><a href="mailto:support@ihumane.net" class="dropdown-item">Contact Support</a></li>
-      </ul>
+<!--      <ul class="dropdown-menu dropdown-menu-sm">-->
+<!--        <li class="dropdown-title">Help Center</li>-->
+<!--        <li><a href="https://docs.Phronesis.net/" target="_blank" class="dropdown-item">Phronesis Documentation</a></li>-->
+<!--        <li><a href="https://Phronesis.net" target="_blank" class="dropdown-item">Visit Site</a></li>-->
+<!--        <li><a href="mailto:support@Phronesis.net" class="dropdown-item">Contact Support</a></li>-->
+<!--      </ul>-->
     </li>
 
 		<li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
@@ -144,9 +144,9 @@
 						if (seconds < 10) {
 
 							var notification_id = data[0].notification_id;
-							Push.create("iHumane", {
+							Push.create("Phronesis", {
 								body: data[i].notification_type,
-								icon: "https://app.ihumane.net//assets/img/ihumane-logo-1.png",
+								icon: "https://app.Phronesis.net//assets/img/Phronesis-logo-1.png",
 								timeout: 4000,
 								onClick: function () {
 									// window.focus();

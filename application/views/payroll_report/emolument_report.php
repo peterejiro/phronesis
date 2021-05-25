@@ -91,5 +91,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Emolument Report - IHUMANE')
+  $('title').html('Emolument Report - Phronesis')
 </script>

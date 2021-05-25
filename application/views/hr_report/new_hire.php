@@ -82,7 +82,7 @@
 
 <script type="text/javascript">
 	
-	$('title').html(' <?php echo $from_date ?> to <?php echo $to_date ?> - IHUMANE');
+	$('title').html(' <?php echo $from_date ?> to <?php echo $to_date ?> - Phronesis');
 
 
 </script>

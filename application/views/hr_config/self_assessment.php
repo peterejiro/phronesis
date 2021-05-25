@@ -141,5 +141,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Self-Assessment Questions - IHUMANE')
+  $('title').html('Self-Assessment Questions - Phronesis')
 </script>

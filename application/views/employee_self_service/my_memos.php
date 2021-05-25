@@ -70,7 +70,7 @@ $CI->load->model('employees');
 </body>
 </html>
 <script>
-	$('title').html('Announcements - IHUMANE')
+	$('title').html('Announcements - Phronesis')
 </script>
 
 

@@ -82,7 +82,7 @@
 </html>
 
 <script>
-  $('title').html('Announcements - IHUMANE')
+  $('title').html('Announcements - Phronesis')
 </script>
 
 <div class="modal fade bd-example-modal-lg" id="new_memo" tabindex="-1" role="dialog" aria-hidden="true">

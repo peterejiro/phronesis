@@ -516,7 +516,7 @@ curl_close($curl);
 <?php include(APPPATH . '/views/footer.php'); ?>
 <?php include('js.php'); ?>
 <script>
-  $('title').html('Dashboard - IHUMANE');
+  $('title').html('Dashboard - Phronesis');
   $(document).ready(function() {
     setInterval(timestamp, 1000);
     statistics();

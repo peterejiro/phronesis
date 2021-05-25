@@ -503,7 +503,7 @@
 </body>
 </html>
 <script>
-	$('title').html('Dashboard - IHUMANE');
+	$('title').html('Dashboard - Phronesis');
 	$(document).ready(function() {
 		setInterval(timestamp, 1000);
     statistics();

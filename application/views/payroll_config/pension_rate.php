@@ -103,6 +103,6 @@
 </body>
 </html>
 <script>
-	$('title').html('Pension Rate - IHUMANE')
+	$('title').html('Pension Rate - Phronesis')
 </script>
 

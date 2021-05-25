@@ -133,5 +133,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Location (SBU) Setup - IHUMANE')
+  $('title').html('Location (SBU) Setup - Phronesis')
 </script>

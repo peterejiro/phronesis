@@ -79,5 +79,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Quantitative Assessments - IHUMANE')
+  $('title').html('Quantitative Assessments - Phronesis')
 </script>

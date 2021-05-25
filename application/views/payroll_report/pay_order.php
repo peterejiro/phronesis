@@ -89,5 +89,5 @@
 </body>
 </html>
 <script>
-  $('title').html('Pay Order - IHUMANE')
+  $('title').html('Pay Order - Phronesis')
 </script>

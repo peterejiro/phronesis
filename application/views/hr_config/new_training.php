@@ -78,7 +78,7 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 
   <script>
-    $('title').html('New Training - IHUMANE')
+    $('title').html('New Training - Phronesis')
     $(document).ready(function() {
 
       Dropzone.autoDiscover = false;

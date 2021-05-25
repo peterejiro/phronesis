@@ -120,7 +120,7 @@
 </body>
 </html>
 <script>
-	$('title').html('My Tasks - IHUMANE');
+	$('title').html('My Tasks - Phronesis');
 </script>
 
 

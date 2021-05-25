@@ -138,7 +138,7 @@
 <?php include(APPPATH.'/views/js.php'); ?>
 
   <script>
-    $('title').html('Update Training - IHUMANE')
+    $('title').html('Update Training - Phronesis')
 
 	  // window.onload = function(){
 		//   // document.getElementById("new_material").style.display='none';

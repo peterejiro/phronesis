@@ -74,7 +74,7 @@
 </html>
 
 <script>
-	$('title').html('My Activities - IHUMANE');
+	$('title').html('My Activities - Phronesis');
 
 	$( document ).ready(function () {
 		//$(".moreBox").slice(0, 3).show();
